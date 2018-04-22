@@ -3,10 +3,98 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:CESSistemas"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+		TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+		FontFamily="{DynamicResource MaterialDesignFont}"  Title="MainWindow" WindowState="Maximized" Width="1366" Height="768" ResizeMode="NoResize" Grid.IsSharedSizeScope="True" WindowStyle="None">
+	<!--="MainWindow" Height="768" Width="1366" WindowState="Maximized" ResizeMode="NoResize" Grid.IsSharedSizeScope="True" WindowStyle="None">-->
+	<Window.Resources>
+		<Storyboard x:Key="AbrirMenu">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+				<EasingDoubleKeyFrame KeyTime="0" Value="60"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="200"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+		<Storyboard x:Key="FecharMenu">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+				<EasingDoubleKeyFrame KeyTime="0" Value="200"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="60"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+	</Window.Resources>
+	<Window.Triggers>
+		<EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btnAbrirMenu">
+			<BeginStoryboard Storyboard="{StaticResource AbrirMenu}"/>
+		</EventTrigger>
+		<EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btnFecharMenu">
+			<BeginStoryboard Storyboard="{StaticResource FecharMenu}"/>
+		</EventTrigger>
+	</Window.Triggers>
+	<Grid Background="#FFFBF7F7">
+		<Grid Height="70" VerticalAlignment="Top" Background="#FF1C9537">
+			<TextBlock Text="Texto aqui" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="28"></TextBlock>
+			<StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Right">
+				<TextBlock Text="usuario" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
+				<materialDesign:PopupBox HorizontalAlignment="Right" Margin="10" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Foreground="#FFFBF7F7">
+					<StackPanel Width="150">
+						<Button Content="Conta"/>
+						<Button Content="Configurações"/>
+						<Button Content="Sobre"/>
+						<Separator/>
+						<Button x:Name="btnLogout" Content="Logout" Click="btnLogout_Click"/>
+					</StackPanel>
+				</materialDesign:PopupBox>
+			</StackPanel>
+		</Grid>
+		<Grid x:Name="GridMenu" Width="60" HorizontalAlignment="Left" Background="#FF1C9537">
+			<StackPanel>
+				<Grid Height="150" VerticalAlignment="Top" Background="White">
+					<Button x:Name="btnFecharMenu" Width="60" Height="60" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="Collapsed" Click="btnFecharMenu_Click">
+						<materialDesign:PackIcon Foreground="#FF2FA866" Kind="ArrowLeft" Width="25" Height="25"/>
+					</Button>
+					<Button x:Name="btnAbrirMenu" Width="60" Height="60" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Right" Click="btnAbrirMenu_Click">
+						<materialDesign:PackIcon Foreground="#FF2FA866" Kind="Menu" Width="25" Height="25"/>
+					</Button>
+				</Grid>
+				<ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="White">
+					<ListViewItem Height="60">
+						<StackPanel Orientation="Horizontal">
+							<materialDesign:PackIcon Kind="ViewDashboard" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
+							<TextBlock Text="Página Principal" VerticalAlignment="Center" Margin="20 10"/>
+						</StackPanel>
+					</ListViewItem>
+					<ListViewItem Height="60">
+						<StackPanel Orientation="Horizontal">
+							<materialDesign:PackIcon Kind="Pencil" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
+							<TextBlock Text="Criar" VerticalAlignment="Center" Margin="20 10"/>
+						</StackPanel>
+					</ListViewItem>
+					<ListViewItem Height="60">
+						<StackPanel Orientation="Horizontal">
+							<materialDesign:PackIcon Kind="Ticket" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
+							<TextBlock Text="Tickets" VerticalAlignment="Center" Margin="20 10"/>
+						</StackPanel>
+					</ListViewItem>
+					<ListViewItem Height="60">
+						<StackPanel Orientation="Horizontal">
+							<materialDesign:PackIcon Kind="Message" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
+							<TextBlock Text="Mensagem" VerticalAlignment="Center" Margin="20 10"/>
+						</StackPanel>
+					</ListViewItem>
+					<ListViewItem Height="60">
+						<StackPanel Orientation="Horizontal">
+							<materialDesign:PackIcon Kind="GithubBox" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
+							<TextBlock Text="GitHub" VerticalAlignment="Center" Margin="20 10"/>
+						</StackPanel>
+					</ListViewItem>
+				</ListView>
+			</StackPanel>
+		</Grid>
     </Grid>
 </Window>
