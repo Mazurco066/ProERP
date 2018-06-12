@@ -37,7 +37,7 @@
 		</EventTrigger>
 	</Window.Triggers>
 	<Grid Background="#FFFBF7F7">
-		<Grid Height="70" VerticalAlignment="Top" Background="#FF1C9537">
+		<Grid Height="70" VerticalAlignment="Top" Background="#FF546E7A">
 			<TextBlock Text="Texto aqui" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="28"></TextBlock>
 			<StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Right">
 				<TextBlock Text="usuario" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
@@ -52,17 +52,17 @@
 				</materialDesign:PopupBox>
 			</StackPanel>
 		</Grid>
-		<Grid x:Name="GridMenu" Width="60" HorizontalAlignment="Left" Background="#FF1C9537">
+		<Grid x:Name="GridMenu" Width="60" HorizontalAlignment="Left" Background="#FF2C3A40">
 			<StackPanel>
 				<Grid Height="150" VerticalAlignment="Top" Background="White">
 					<Button x:Name="btnFecharMenu" Width="60" Height="60" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="Collapsed" Click="btnFecharMenu_Click">
-						<materialDesign:PackIcon Foreground="#FF2FA866" Kind="ArrowLeft" Width="25" Height="25"/>
+						<materialDesign:PackIcon Foreground="#FF2C3A40" Kind="ArrowLeft" Width="25" Height="25"/>
 					</Button>
 					<Button x:Name="btnAbrirMenu" Width="60" Height="60" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Right" Click="btnAbrirMenu_Click">
-						<materialDesign:PackIcon Foreground="#FF2FA866" Kind="Menu" Width="25" Height="25"/>
+						<materialDesign:PackIcon Foreground="#FF2C3A40" Kind="Menu" Width="25" Height="25"/>
 					</Button>
 				</Grid>
-				<ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="White">
+				<ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="#FF546E7A">
 					<ListViewItem Height="60">
 						<StackPanel Orientation="Horizontal">
 							<materialDesign:PackIcon Kind="ViewDashboard" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
@@ -71,26 +71,44 @@
 					</ListViewItem>
 					<ListViewItem Height="60">
 						<StackPanel Orientation="Horizontal">
-							<materialDesign:PackIcon Kind="Pencil" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
-							<TextBlock Text="Criar" VerticalAlignment="Center" Margin="20 10"/>
+							<materialDesign:PackIcon Kind="CalendarText" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
+							<TextBlock Text="Férias" VerticalAlignment="Center" Margin="20 10"/>
 						</StackPanel>
 					</ListViewItem>
 					<ListViewItem Height="60">
 						<StackPanel Orientation="Horizontal">
-							<materialDesign:PackIcon Kind="Ticket" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
-							<TextBlock Text="Tickets" VerticalAlignment="Center" Margin="20 10"/>
+							<materialDesign:PackIcon Kind="AccountCardDetails" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
+							<TextBlock Text="Cadastros" VerticalAlignment="Center" Margin="20 10"/>
 						</StackPanel>
 					</ListViewItem>
 					<ListViewItem Height="60">
 						<StackPanel Orientation="Horizontal">
-							<materialDesign:PackIcon Kind="Message" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
-							<TextBlock Text="Mensagem" VerticalAlignment="Center" Margin="20 10"/>
+							<materialDesign:PackIcon Kind="ClipboardOutline" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
+							<TextBlock Text="Relatórios" VerticalAlignment="Center" Margin="20 10"/>
 						</StackPanel>
 					</ListViewItem>
 					<ListViewItem Height="60">
 						<StackPanel Orientation="Horizontal">
-							<materialDesign:PackIcon Kind="GithubBox" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
-							<TextBlock Text="GitHub" VerticalAlignment="Center" Margin="20 10"/>
+							<materialDesign:PackIcon Kind="CalendarClock" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
+							<TextBlock Text="Eventos" VerticalAlignment="Center" Margin="20 10"/>
+						</StackPanel>
+					</ListViewItem>
+					<ListViewItem Height="60">
+						<StackPanel Orientation="Horizontal" Cursor="Hand">
+							<materialDesign:PackIcon Kind="EmailOpen" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
+							<TextBlock Text="Outlook" VerticalAlignment="Center" Margin="20 10"/>
+						</StackPanel>
+					</ListViewItem>
+					<ListViewItem Height="60">
+						<StackPanel Orientation="Horizontal" Cursor="Hand">
+							<materialDesign:PackIcon Kind="Calculator" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
+							<TextBlock Text="Calculadora" VerticalAlignment="Center" Margin="20 10"/>
+						</StackPanel>
+					</ListViewItem>
+					<ListViewItem Height="60">
+						<StackPanel Orientation="Horizontal" Cursor="Hand">
+							<materialDesign:PackIcon Kind="ExitToApp" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
+							<TextBlock Text="Sair" VerticalAlignment="Center" Margin="20 10"/>
 						</StackPanel>
 					</ListViewItem>
 				</ListView>
