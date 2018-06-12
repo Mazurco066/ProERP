@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{EBD74D80-03CC-408B-B091-D83E04DAF1DA}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>CESSistemas</RootNamespace>
-    <AssemblyName>CESSistemas</AssemblyName>
+    <RootNamespace>Promig</RootNamespace>
+    <AssemblyName>Promig</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -34,6 +34,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -41,7 +47,10 @@
       <HintPath>..\packages\MaterialDesignThemes.2.4.0.1044\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -63,8 +72,36 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Connection\CLIENTES.cs" />
+    <Compile Include="Connection\Connection.cs" />
+    <Compile Include="Connection\CONTAS_PAGAR.cs" />
+    <Compile Include="Connection\CONTAS_RECEBER.cs" />
+    <Compile Include="Connection\FORNECEDORES.cs" />
+    <Compile Include="Connection\FUNCIONARIOS.cs" />
+    <Compile Include="Connection\USUARIOS.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserControlBillsToPay.xaml.cs">
+      <DependentUpon>UserControlBillsToPay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserControlBillsToReceive.xaml.cs">
+      <DependentUpon>UserControlBillsToReceive.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserControlClient.xaml.cs">
+      <DependentUpon>UserControlClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserControlEmployes.xaml.cs">
+      <DependentUpon>UserControlEmployes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserControlMain.xaml.cs">
+      <DependentUpon>UserControlMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserControlSupplier.xaml.cs">
+      <DependentUpon>UserControlSupplier.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserControlUsers.xaml.cs">
+      <DependentUpon>UserControlUsers.xaml</DependentUpon>
     </Compile>
     <Compile Include="SplahScreen.xaml.cs">
       <DependentUpon>SplahScreen.xaml</DependentUpon>
@@ -85,6 +122,34 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Models\UserControlBillsToPay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Models\UserControlBillsToReceive.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Models\UserControlClient.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Models\UserControlEmployes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Models\UserControlMain.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Models\UserControlSupplier.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Models\UserControlUsers.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="SplahScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -118,19 +183,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Imagens\Imagens do sistema\SplashScreen.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Imagens\Imagens do sistema\giphy.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Imagens\Imagens do sistema\EditorSpell.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Imagens\Imagens do sistema\progressbar1.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Imagens\login image.png" />
+    <Folder Include="Utils\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

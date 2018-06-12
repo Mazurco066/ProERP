@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Promig
+namespace Promig.Models
 {
     /// <summary>
-    /// Lógica interna para Login.xaml
+    /// Interação lógica para UserControlSupplier.xam
     /// </summary>
-    public partial class Login : Window
+    public partial class UserControlSupplier : UserControl
     {
-        public Login()
+        public UserControlSupplier()
         {
             InitializeComponent();
         }

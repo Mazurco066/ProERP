@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Threading;
 
-namespace CESSistemas
+namespace Promig
 {
     /// <summary>
     /// Lógica interna para SplahScreen.xaml
