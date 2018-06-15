@@ -4,9 +4,40 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Promig.Models"
+			 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1306" Height="697" Background="White">
 	<Grid>
-		<Label Content="Usuarios" FontSize="40"/>
+		<Label Content="Usuarios" FontSize="40" Margin="148,42,992,599" Foreground="#FF3F51B5"/>
+		<TextBox x:Name="txtUsuario" HorizontalAlignment="Left" Height="43" Margin="148,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" materialDesign:HintAssist.Hint="Usuário" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="Gray" TabIndex="0" MaxLength="15"/>
+		<PasswordBox x:Name="txtSenha" HorizontalAlignment="Left" Margin="148,186,0,0" VerticalAlignment="Top" Width="428" Height="43" materialDesign:HintAssist.Hint="Senha" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="Gray" TabIndex="1" PasswordChar="●" MaxLength="50"/>
+		<TextBox x:Name="txtEndereco" HorizontalAlignment="Left" Height="43" Margin="148,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="428" materialDesign:HintAssist.Hint="Endereço" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="Gray" MaxLength="50" TabIndex="2"/>
+		<TextBox x:Name="txtBairro" HorizontalAlignment="Left" Height="43" Margin="148,282,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="428" materialDesign:HintAssist.Hint="Bairro" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="Gray" MaxLength="50" TabIndex="3"/>
+		<TextBox x:Name="txtCidade" HorizontalAlignment="Left" Height="43" Margin="148,330,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" materialDesign:HintAssist.Hint="Cidade" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="Gray" MaxLength="30" TabIndex="4"/>
+		<ComboBox x:Name="cbEstado" HorizontalAlignment="Left" Margin="456,333,0,0" VerticalAlignment="Top" Width="120" materialDesign:HintAssist.Hint="Estado" Style="{StaticResource MaterialDesignFloatingHintComboBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="Gray" TabIndex="5"/>
+		<TextBox x:Name="txtCpf" HorizontalAlignment="Left" Height="43" Margin="148,378,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" materialDesign:HintAssist.Hint="CPF" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="Gray" MaxLength="11" TabIndex="6"/>
+		<TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="43" Margin="340,378,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="Gray" MaxLength="30" TabIndex="7"/>
+		<ComboBox x:Name="cbTipo" HorizontalAlignment="Left" Margin="148,426,0,0" VerticalAlignment="Top" Width="194" materialDesign:HintAssist.Hint="Tipo" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintComboBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="Gray" TabIndex="8">
+			<ComboBoxItem Content="Admin"/>
+			<ComboBoxItem Content="Usuário"/>
+		</ComboBox>
+		<DataGrid x:Name="dgUsuarios" HorizontalAlignment="Left" Height="327" Margin="640,139,0,0" VerticalAlignment="Top" Width="636" AutoGenerateColumns="False" BorderBrush="{x:Null}" BorderThickness="1" SelectionChanged="dgUsuarios_SelectionChanged" MouseDoubleClick="dgUsuarios_MouseDoubleClick">
+			<DataGrid.Columns>
+				<DataGridTextColumn Binding="{Binding Path=codigo}" ClipboardContentBinding="{x:Null}" FontSize="11" Header="Código"/>
+				<DataGridTextColumn Binding="{Binding Path=nome_usuario}" ClipboardContentBinding="{x:Null}" Foreground="#FF080808" FontSize="11" Header="Usuário"/>
+				<DataGridTextColumn Binding="{Binding Path=senha}" ClipboardContentBinding="{x:Null}" FontSize="11" Header="Senha"/>
+				<DataGridTextColumn Binding="{Binding Path=endereco}" ClipboardContentBinding="{x:Null}" FontSize="11" Header="Estado"/>
+				<DataGridTextColumn Binding="{Binding Path=bairro}" ClipboardContentBinding="{x:Null}" FontSize="11" Header="Bairro"/>
+				<DataGridTextColumn Binding="{Binding Path=cidade}" ClipboardContentBinding="{x:Null}" FontSize="11" Header="Cidade"/>
+				<DataGridTextColumn Binding="{Binding Path=estado}" ClipboardContentBinding="{x:Null}" FontSize="11" Header="Estado"/>
+				<DataGridTextColumn Binding="{Binding Path=cpf}" ClipboardContentBinding="{x:Null}" FontSize="11" Header="CPF"/>
+				<DataGridTextColumn Binding="{Binding Path=email}" ClipboardContentBinding="{x:Null}" FontSize="11" Header="E-mail"/>
+				<DataGridTextColumn Binding="{Binding Path=tipo}" ClipboardContentBinding="{x:Null}" FontSize="11" Header="Tipo"/>
+			</DataGrid.Columns>
+		</DataGrid>
+		<Button x:Name="btnSalvar" Content="Salvar" HorizontalAlignment="Left" Margin="148,565,0,0" VerticalAlignment="Top" Width="376" Height="60" FontSize="20" BorderBrush="#FF3F51B5" Click="btnSlavar_Click"/>
+		<Button x:Name="btnExclur" Content="Excluir" HorizontalAlignment="Left" Margin="524,565,0,0" VerticalAlignment="Top" Width="376" Height="60" FontSize="20" BorderBrush="#FF3F51B5" Click="btnExclur_Click"/>
+		<Button x:Name="btnLimpar" Content="Limpar" HorizontalAlignment="Left" Margin="900,565,0,0" VerticalAlignment="Top" Width="376" Height="60" FontSize="20" BorderBrush="#FF3F51B5" Click="btnLimpar_Click"/>
+		<TextBox x:Name="txtCodigo" HorizontalAlignment="Left" Height="43" Margin="451,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" materialDesign:HintAssist.Hint="Código" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="Gray" TabIndex="0" MaxLength="15" IsReadOnly="True"/>
 	</Grid>
 </UserControl>

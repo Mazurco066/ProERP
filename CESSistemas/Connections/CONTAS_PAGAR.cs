@@ -1,4 +1,4 @@
-namespace Promig.Connection
+namespace Promig.Connections
 {
     using System;
     using System.Collections.Generic;
@@ -6,7 +6,7 @@ namespace Promig.Connection
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class CONTAS_RECEBER
+    public partial class CONTAS_PAGAR
     {
         [Key]
         public int codigo { get; set; }

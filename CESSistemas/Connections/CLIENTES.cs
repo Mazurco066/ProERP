@@ -1,4 +1,4 @@
-namespace Promig.Connection
+namespace Promig.Connections
 {
     using System;
     using System.Collections.Generic;

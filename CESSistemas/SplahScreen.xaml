@@ -6,19 +6,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Promig"
         mc:Ignorable="d"
-        Title="SplahScreen" Height="480" Width="720" WindowStartupLocation="CenterScreen" Grid.IsSharedSizeScope="True" WindowStyle="None" AllowsTransparency="True" Activated="Window_Activated">
-	<Window.Background>
-		<ImageBrush ImageSource="Imagens/Imagens do sistema/SplashScreen.png"/>
-	</Window.Background>
-	<Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition/>
-			<ColumnDefinition Width="0*"/>
-		</Grid.ColumnDefinitions>
+        Title="SplahScreen" Height="328" Width="843" WindowStartupLocation="CenterScreen" Grid.IsSharedSizeScope="True" WindowStyle="None" AllowsTransparency="True" Background="{x:Null}" Activated="Window_Activated">
+	<Border Height="328" Width="843" Background="#FF5088DF" CornerRadius="20,0,20,0">
+		<Grid Width="843">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition Width="0*"/>
+			</Grid.ColumnDefinitions>
 
-		<Image x:Name="image" gif:AnimationBehavior.SourceUri="Imagens/Imagens do sistema/giphy.gif" HorizontalAlignment="Left" Height="332" Margin="34,203,0,-55" VerticalAlignment="Top" Width="656" Stretch="Fill"/>
-
-		<ProgressBar x:Name="PB" HorizontalAlignment="Left" Height="3" Margin="0,445,0,0" VerticalAlignment="Top" Width="720" Background="#FF2C3A40" BorderBrush="#FF2C3A40" Foreground="#FF04F9F9" Visibility="Hidden"/>
-		<Image x:Name="image1" gif:AnimationBehavior.SourceUri="Imagens/Imagens do sistema/progressbar1.gif" HorizontalAlignment="Left" Height="50" Margin="0,420,0,0" VerticalAlignment="Top" Width="720" Stretch="Fill" Visibility="Hidden"/>
-	</Grid>
+			<ProgressBar x:Name="PB" HorizontalAlignment="Left" Height="12" Margin="0,276,-5,0" VerticalAlignment="Top" Width="848" Background="#FFF9FCFD" BorderBrush="#FF5088DF" Foreground="#FF5088DF" Visibility="Visible" Grid.ColumnSpan="2"/>
+			<Image x:Name="image" HorizontalAlignment="Left" Height="198" Margin="308,24,0,0" VerticalAlignment="Top" Width="210" Source="Images/logo.png"/>
+		</Grid>
+	</Border>
 </Window>

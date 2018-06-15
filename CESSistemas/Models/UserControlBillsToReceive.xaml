@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Promig.Models"
+			  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1306" Height="697" Background="White">
 	<Grid>
-		<Label Content="Contas a Receber" FontSize="40"/>
+		<Label Content="Contas a Receber" FontSize="40" Margin="148,42,835,587" Foreground="#FF3F51B5"/>
 	</Grid>
 </UserControl>

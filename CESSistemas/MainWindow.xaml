@@ -12,7 +12,7 @@
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
-		FontFamily="{DynamicResource MaterialDesignFont}"  Title="MainWindow" WindowState="Maximized" Width="1366" Height="768" ResizeMode="NoResize" Grid.IsSharedSizeScope="True" WindowStyle="None">
+		FontFamily="{DynamicResource MaterialDesignFont}"  Title="MainWindow" WindowState="Maximized" Width="1366" Height="768" ResizeMode="NoResize" Grid.IsSharedSizeScope="True" WindowStyle="None" Loaded="Window_Loaded">
 	<!--="MainWindow" Height="768" Width="1366" WindowState="Maximized" ResizeMode="NoResize" Grid.IsSharedSizeScope="True" WindowStyle="None">-->
 	<Window.Resources>
 		<Storyboard x:Key="AbrirMenu">
@@ -39,7 +39,7 @@
 	<Grid Background="#FFFBF7F7">
 		<Grid x:Name="GridMain" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="697" Width="1306"/>
 		<Grid Height="70" VerticalAlignment="Top" Background="#FF3F51B5">
-			<TextBlock x:Name="lblTitulo" Text="Texto aqui" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="28"></TextBlock>
+			<TextBlock x:Name="lblTitulo" Text="Texto aqui" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="28" Margin="410,20,366,24" Width="590" TextAlignment="Center"></TextBlock>
 			<StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Right">
 				<TextBlock Text="" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
 				<materialDesign:PopupBox HorizontalAlignment="Right" Margin="10" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Foreground="#FFFBF7F7">
@@ -67,49 +67,49 @@
 					<ListViewItem x:Name="Main" Height="60">
 						<StackPanel Orientation="Horizontal">
 							<materialDesign:PackIcon Kind="ViewDashboard" Width="25" Height="25" Margin="10" VerticalAlignment="Center" Foreground="#FFF7FAFB"/>
-							<TextBlock Text="Página Principal" VerticalAlignment="Center" Margin="20 10"/>
+							<TextBlock Text="Página Principal" VerticalAlignment="Center" Margin="20 10" Foreground="#FFFBFCFD"/>
 						</StackPanel>
 					</ListViewItem>
 					<ListViewItem x:Name="Client" Height="60">
 						<StackPanel Orientation="Horizontal">
 							<materialDesign:PackIcon Kind="AccountBox" Width="25" Height="25" Margin="10" VerticalAlignment="Center" Foreground="#FFF7FAFB"/>
-							<TextBlock Text="Clientes" VerticalAlignment="Center" Margin="20 10"/>
+							<TextBlock Text="Clientes" VerticalAlignment="Center" Margin="20 10" Foreground="#FFF9FAFB"/>
 						</StackPanel>
 					</ListViewItem>
 					<ListViewItem x:Name="Employes" Height="60">
 						<StackPanel Orientation="Horizontal">
 							<materialDesign:PackIcon Kind="AccountCardDetails" Width="25" Height="25" Margin="10" VerticalAlignment="Center" Foreground="#FFF7FAFB"/>
-							<TextBlock Text="Funcionários" VerticalAlignment="Center" Margin="20 10"/>
+							<TextBlock Text="Funcionários" VerticalAlignment="Center" Margin="20 10" Foreground="#FFF9FAFB"/>
 						</StackPanel>
 					</ListViewItem>
 					<ListViewItem x:Name="Supplier" Height="60">
 						<StackPanel Orientation="Horizontal">
 							<materialDesign:PackIcon Kind="Truck" Width="25" Height="25" Margin="10" VerticalAlignment="Center" Foreground="#FFF7FAFB"/>
-							<TextBlock Text="Fornecedores" VerticalAlignment="Center" Margin="20 10"/>
+							<TextBlock Text="Fornecedores" VerticalAlignment="Center" Margin="20 10" Foreground="#FFF7FAFB"/>
 						</StackPanel>
 					</ListViewItem>
 					<ListViewItem x:Name="BillsToPay" Height="60">
 						<StackPanel Orientation="Horizontal">
 							<materialDesign:PackIcon Kind="CashMultiple" Width="25" Height="25" Margin="10" VerticalAlignment="Center" Foreground="#FFF7FAFB"/>
-							<TextBlock Text="Contas a Pagar" VerticalAlignment="Center" Margin="20 10"/>
+							<TextBlock Text="Contas a Pagar" VerticalAlignment="Center" Margin="20 10" Foreground="#FFF9FCFD"/>
 						</StackPanel>
 					</ListViewItem>
 					<ListViewItem x:Name="BillsToReceive" Height="60">
 						<StackPanel Orientation="Horizontal" Cursor="Hand">
 							<materialDesign:PackIcon Kind="Cash100" Width="25" Height="25" Margin="10" VerticalAlignment="Center" Foreground="#FFF9FCFD"/>
-							<TextBlock Text="Contas a Receber" VerticalAlignment="Center" Margin="20 10"/>
+							<TextBlock Text="Contas a Receber" VerticalAlignment="Center" Margin="20 10" Foreground="#FFF3F7F9"/>
 						</StackPanel>
 					</ListViewItem>
 					<ListViewItem Height="60">
 						<StackPanel Orientation="Horizontal" Cursor="Hand">
 							<materialDesign:PackIcon Kind="cancel" Width="25" Height="25" Margin="10" VerticalAlignment="Center" Foreground="#FFF7FAFB"/>
-							<TextBlock Text="Calculadora" VerticalAlignment="Center" Margin="20 10"/>
+							<TextBlock Text="NUll" VerticalAlignment="Center" Margin="20 10" Foreground="#FFF9FAFB"/>
 						</StackPanel>
 					</ListViewItem>
 					<ListViewItem x:Name="Sair" Height="60">
 						<StackPanel Orientation="Horizontal" Cursor="Hand">
 							<materialDesign:PackIcon Kind="ExitToApp" Width="25" Height="25" Margin="10" VerticalAlignment="Center" Foreground="#FFF7FAFB"/>
-							<TextBlock Text="Sair" VerticalAlignment="Center" Margin="20 10"/>
+							<TextBlock Text="Sair" VerticalAlignment="Center" Margin="20 10" Foreground="#FFF7FAFB"/>
 						</StackPanel>
 					</ListViewItem>
 				</ListView>

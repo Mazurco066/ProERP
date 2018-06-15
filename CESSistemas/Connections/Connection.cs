@@ -1,12 +1,14 @@
-namespace Promig.Connection {
+namespace Promig.Connections {
     using System;
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
+    using Promig.Migrations;
 
     public partial class Connection : DbContext {
         public Connection()
             : base("name=Connection") {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<Connection, Configuration>());
         }
 
         public virtual DbSet<CLIENTES> CLIENTES { get; set; }

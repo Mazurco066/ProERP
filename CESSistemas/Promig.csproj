@@ -72,16 +72,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Connection\CLIENTES.cs" />
-    <Compile Include="Connection\Connection.cs" />
-    <Compile Include="Connection\CONTAS_PAGAR.cs" />
-    <Compile Include="Connection\CONTAS_RECEBER.cs" />
-    <Compile Include="Connection\FORNECEDORES.cs" />
-    <Compile Include="Connection\FUNCIONARIOS.cs" />
-    <Compile Include="Connection\USUARIOS.cs" />
+    <Compile Include="Connections\CLIENTES.cs" />
+    <Compile Include="Connections\Connection.cs" />
+    <Compile Include="Connections\CONTAS_PAGAR.cs" />
+    <Compile Include="Connections\CONTAS_RECEBER.cs" />
+    <Compile Include="Connections\FORNECEDORES.cs" />
+    <Compile Include="Connections\FUNCIONARIOS.cs" />
+    <Compile Include="Connections\USUARIOS.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\UserControlBillsToPay.xaml.cs">
       <DependentUpon>UserControlBillsToPay.xaml</DependentUpon>
     </Compile>
@@ -106,6 +107,10 @@
     <Compile Include="SplahScreen.xaml.cs">
       <DependentUpon>SplahScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\Criptografia.cs" />
+    <Compile Include="Utils\DataBaseCommand.cs" />
+    <Compile Include="Utils\Log.cs" />
+    <Compile Include="Utils\Util.cs" />
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -182,8 +187,38 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Utils\" />
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>5</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
