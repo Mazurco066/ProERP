@@ -101,19 +101,20 @@ namespace Promig.Models
                     insert();
                     conexao.SaveChanges();
                     txtCodigo.Text = usuario.codigo.ToString();
-                    MessageBox.Show("Dados salvos com sucesso!", "Agendar.Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Dados salvos com sucesso!", "Informação", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else {
                     update();
                     conexao.SaveChanges();
                     selected = false;
                     dgUsuarios.SelectedItem = null;
-                    MessageBox.Show("Dados alterados com sucesso!", "Agendar.Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Dados alterados com sucesso!", "Informação", MessageBoxButton.OK, MessageBoxImage.Information);
                     btnSalvar.Content = "Salvar";
                 }
                 limpaCampos();
                 carregaDataGrid();
             }catch(Exception ex){
+                MessageBox.Show("Erro ao salvar: " + ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
                 Log.logException(ex);
                 Log.logMessage(ex.Message);
             }
@@ -129,7 +130,28 @@ namespace Promig.Models
 
         // botao excluir
         private void btnExclur_Click(object sender, RoutedEventArgs e) {
-
+            try {
+                MessageBoxResult resultado = MessageBox.Show("Tem certeza que quer excluir o registro?", "Atenção", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (resultado.Equals(MessageBoxResult.Yes)) {
+                    conexao.USUARIOS.Attach(usuario);
+                    conexao.USUARIOS.Remove(usuario);
+                    conexao.SaveChanges();
+                    int? codigo = conexao.USUARIOS.Max(u => (int?)u.codigo);
+                    DataBaseCommand.redefinePK_autoIncremento("USUARIOS",codigo);
+                    limpaCampos();
+                    carregaDataGrid();
+                    MessageBox.Show("Dados excluidos com sucesso!", "Informação", MessageBoxButton.OK, MessageBoxImage.Information);
+                    btnSalvar.Content = "Salvar";
+                }else{
+                    limpaCampos();
+                    btnSalvar.Content = "Salvar";
+                    return;
+                }
+            }catch(Exception ex){
+                MessageBox.Show("Erro ao excluir: " + ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                Log.logException(ex);
+                Log.logMessage(ex.Message);
+            }
         }
 
         // pesquisar dados

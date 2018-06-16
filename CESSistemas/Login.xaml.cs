@@ -35,7 +35,7 @@ namespace Promig
                 Connection conexao = new Connection();
 
                 if (txtUsuario.Text.Equals(string.Empty) || txtSenha.Password.Equals(string.Empty)) {
-                    MessageBox.Show("Campo usuário ou senha vazio!");
+                    MessageBox.Show("Campo usuário ou senha vazio!","Atenção",MessageBoxButton.OK,MessageBoxImage.Warning);
                     txtUsuario.Focus();
                     return;
                 }
@@ -53,7 +53,7 @@ namespace Promig
                     Close();
                 }
                 else {
-                    MessageBox.Show("Usuário ou senha inválidos!");
+                    MessageBox.Show("Usuário ou senha inválidos!","Atenção",MessageBoxButton.OK,MessageBoxImage.Warning);
                     clearTextBox();
                 }
             }catch(Exception ex){

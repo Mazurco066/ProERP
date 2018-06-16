@@ -58,5 +58,18 @@ namespace Promig.Utils
                 access();
             }
         }
+
+        public static void redefinePK_autoIncremento(string tabela, int? valor){
+            try {
+                Connection conexao = new Connection();
+                string sql = string.Format(@"DBCC CHECKIDENT ({0}, RESEED, {1})",tabela, valor);
+                conexao.Database.ExecuteSqlCommand(sql);
+            }catch(Exception ex){
+                Log.logException(ex);
+                Log.logMessage(ex.Message);
+                throw;
+            }
+            
+        }
     }
 }

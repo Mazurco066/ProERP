@@ -122,12 +122,12 @@ namespace Promig {
             Employes.IsEnabled = false;
             BillsToPay.IsEnabled = false;
             BillsToReceive.IsEnabled = false;
-            btnUsuarios.IsEnabled = false;
+            //btnUsuarios.IsEnabled = false;
 
             Employes.Opacity = .50;
             BillsToPay.Opacity = .50;
             BillsToReceive.Opacity = .50;
-            btnUsuarios.Opacity = .50;
+            //btnUsuarios.Opacity = .50;
         }
     }
 }
