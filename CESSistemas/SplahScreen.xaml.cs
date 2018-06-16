@@ -11,7 +11,7 @@ namespace Promig
     public partial class SplahScreen : Window
     {
 
-        private const int TEMP = 10000;
+        private const int TEMP = 8000;
         public SplahScreen()
         {
             InitializeComponent();

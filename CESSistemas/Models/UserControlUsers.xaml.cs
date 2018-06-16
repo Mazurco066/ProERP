@@ -200,5 +200,19 @@ namespace Promig.Models
                 Log.logMessage(ex.Message);
             }
         }
+
+        // limpar data grid
+        private void btnLimparDataGrid_Click(object sender, RoutedEventArgs e) {
+            dgUsuarios.ItemsSource = null;
+            btnLimparDataGrid.Visibility = Visibility.Hidden;
+            btnMostrarDataGrid.Visibility = Visibility.Visible;
+        }
+
+        // mostrar data grid
+        private void btnMostrarDataGrid_Click(object sender, RoutedEventArgs e) {
+            carregaDataGrid();
+            btnMostrarDataGrid.Visibility = Visibility.Hidden;
+            btnLimparDataGrid.Visibility = Visibility.Visible;
+        }
     }
 }

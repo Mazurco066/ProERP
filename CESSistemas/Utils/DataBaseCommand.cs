@@ -59,6 +59,7 @@ namespace Promig.Utils
             }
         }
 
+        // redefinir o auto incremento de uma PK qundo algum dado for deletado
         public static void redefinePK_autoIncremento(string tabela, int? valor){
             try {
                 Connection conexao = new Connection();
