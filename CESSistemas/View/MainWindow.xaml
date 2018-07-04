@@ -44,8 +44,8 @@
 				<TextBlock Text="" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
 				<materialDesign:PopupBox HorizontalAlignment="Right" Margin="10" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Foreground="#FFFBF7F7">
 					<StackPanel Width="150">
-						<Button Content="Conta"/>
-						<Button x:Name="btnUsuarios" Content="Usuarios" Click="btnUsuarios_Click"/>
+						<Button Content="Materiais"/>
+						<Button x:Name="btnUsuarios" Content="Auditoria" Click="btnUsuarios_Click"/>
 						<Button Content="Sobre"/>
 						<Separator/>
 						<Button x:Name="btnLogout" Content="Logout" Click="btnLogout_Click"/>

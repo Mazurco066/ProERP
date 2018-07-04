@@ -97,15 +97,13 @@ namespace Promig.View {
         // operacoes ao carregar o form
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             try {
-                lblTitulo.Text = "Bem vindo! " + currentUsername;
+                lblTitulo.Text = "Bem vindo " + currentUsername + "!";
 
-                /*Connection conexao = new Connection();
-                var sql = from u in conexao.USUARIOS where u.nome_usuario == Login.usuarioLogado select u.tipo;
-                if(string.Equals(sql.FirstOrDefault(), "Admin", StringComparison.OrdinalIgnoreCase)){
+                if(currentPermission >= 1){
                     return;
                 }else{
                     esconderBotoes();
-                }*/
+                }
             }
             catch (Exception ex) {
                 Log.logException(ex);
