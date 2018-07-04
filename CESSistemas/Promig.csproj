@@ -72,50 +72,42 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Connections\CLIENTES.cs" />
-    <Compile Include="Connections\Connection.cs" />
-    <Compile Include="Connections\CONTAS_PAGAR.cs" />
-    <Compile Include="Connections\CONTAS_RECEBER.cs" />
-    <Compile Include="Connections\FORNECEDORES.cs" />
-    <Compile Include="Connections\FUNCIONARIOS.cs" />
-    <Compile Include="Connections\USUARIOS.cs" />
-    <Compile Include="Login.xaml.cs">
+    <Compile Include="Connection\Methods\Users.cs" />
+    <Compile Include="View\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\UserControlBillsToPay.xaml.cs">
+    <Compile Include="View\Components\UserControlBillsToPay.xaml.cs">
       <DependentUpon>UserControlBillsToPay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserControlBillsToReceive.xaml.cs">
+    <Compile Include="View\Components\UserControlBillsToReceive.xaml.cs">
       <DependentUpon>UserControlBillsToReceive.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserControlClient.xaml.cs">
+    <Compile Include="View\Components\UserControlClient.xaml.cs">
       <DependentUpon>UserControlClient.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserControlEmployes.xaml.cs">
+    <Compile Include="View\Components\UserControlEmployes.xaml.cs">
       <DependentUpon>UserControlEmployes.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserControlMain.xaml.cs">
+    <Compile Include="View\Components\UserControlMain.xaml.cs">
       <DependentUpon>UserControlMain.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserControlSupplier.xaml.cs">
+    <Compile Include="View\Components\UserControlSupplier.xaml.cs">
       <DependentUpon>UserControlSupplier.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserControlUsers.xaml.cs">
+    <Compile Include="View\Components\UserControlUsers.xaml.cs">
       <DependentUpon>UserControlUsers.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SplahScreen.xaml.cs">
-      <DependentUpon>SplahScreen.xaml</DependentUpon>
+    <Compile Include="SplashScreen.xaml.cs">
+      <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\Criptografia.cs" />
-    <Compile Include="Utils\DataBaseCommand.cs" />
     <Compile Include="Utils\Log.cs" />
     <Compile Include="Utils\Util.cs" />
-    <Page Include="Login.xaml">
+    <Page Include="View\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -123,39 +115,39 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Models\UserControlBillsToPay.xaml">
+    <Page Include="View\Components\UserControlBillsToPay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Models\UserControlBillsToReceive.xaml">
+    <Page Include="View\Components\UserControlBillsToReceive.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Models\UserControlClient.xaml">
+    <Page Include="View\Components\UserControlClient.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Models\UserControlEmployes.xaml">
+    <Page Include="View\Components\UserControlEmployes.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Models\UserControlMain.xaml">
+    <Page Include="View\Components\UserControlMain.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Models\UserControlSupplier.xaml">
+    <Page Include="View\Components\UserControlSupplier.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Models\UserControlUsers.xaml">
+    <Page Include="View\Components\UserControlUsers.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SplahScreen.xaml">
+    <Page Include="SplashScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -187,7 +179,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+    <Folder Include="Model\" />
+  </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">
       <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>

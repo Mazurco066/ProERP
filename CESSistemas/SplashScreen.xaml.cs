@@ -1,23 +1,16 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Threading;
-using Promig.Utils;
+using Promig.View;
 
-namespace Promig
-{
-    /// <summary>
-    /// Lógica interna para SplahScreen.xaml
-    /// </summary>
-    public partial class SplahScreen : Window
-    {
+namespace Promig {
+    
+    public partial class SplashScreen : Window {
 
         private const int TEMP = 8000;
-        public SplahScreen()
-        {
+        public SplashScreen() {
             InitializeComponent();
             //carregarprogressBar();
-            DataBaseCommand.createDataBaseEF();
-            DataBaseCommand.createUserPassword();
         }
 
         private delegate void ProgressBarDelegate();
@@ -31,10 +24,10 @@ namespace Promig
                 PB.Dispatcher.Invoke(new ProgressBarDelegate(UpdateProgress), DispatcherPriority.Background);
             }
         }
+
         private void UpdateProgress() {
             PB.Value += 1;
-        }
-
+        }   
 
         private void carregarprogressBar() {
                 criarConstrucao();
@@ -45,7 +38,11 @@ namespace Promig
                     Close();
             }
             catch (Exception a) {
-                MessageBox.Show(a.Message);
+                MessageBox.Show("Erro", 
+                                a.Message,
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error
+                );
             }
         }
 

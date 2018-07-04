@@ -1,27 +1,11 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Promig.Models;
 using System;
+using Promig.View.Components;
 using Promig.Utils;
-using Promig.Connections;
-using System.Data.Entity;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-
-namespace Promig {
-    /// <summary>
-    /// Interação lógica para MainWindow.xam
-    /// </summary>
+namespace Promig.View {
+    
     public partial class MainWindow : Window {
 
         public MainWindow() {
@@ -40,7 +24,7 @@ namespace Promig {
         private void btnLogout_Click(object sender, RoutedEventArgs e) {
             Login janela = new Login();
             janela.Show();
-            this.Close();
+            Close();
         }
 
         // abrir o menu
@@ -103,13 +87,13 @@ namespace Promig {
             try {
                 lblTitulo.Text = "Bem vindo! " + Login.usuarioLogado;
 
-                Connection conexao = new Connection();
+                /*Connection conexao = new Connection();
                 var sql = from u in conexao.USUARIOS where u.nome_usuario == Login.usuarioLogado select u.tipo;
                 if(string.Equals(sql.FirstOrDefault(), "Admin", StringComparison.OrdinalIgnoreCase)){
                     return;
                 }else{
                     esconderBotoes();
-                }
+                }*/
             }
             catch (Exception ex) {
                 Log.logException(ex);
@@ -122,12 +106,12 @@ namespace Promig {
             Employes.IsEnabled = false;
             BillsToPay.IsEnabled = false;
             BillsToReceive.IsEnabled = false;
-            //btnUsuarios.IsEnabled = false;
+            btnUsuarios.IsEnabled = false;
 
             Employes.Opacity = .50;
             BillsToPay.Opacity = .50;
             BillsToReceive.Opacity = .50;
-            //btnUsuarios.Opacity = .50;
+            btnUsuarios.Opacity = .50;
         }
     }
 }
