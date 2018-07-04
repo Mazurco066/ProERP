@@ -39,33 +39,35 @@ namespace Promig.View {
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            UserControl usc = null;
+
+            //Limpando a grid
             GridMain.Children.Clear();
 
+            //Verificando qual item foi selecionado
             switch(((ListViewItem)((ListView)sender).SelectedItem).Name){
                 case "Main":
-                    usc = new UserControlMain();
-                    GridMain.Children.Add(usc);
+                    if (!GridMain.Children.Contains(UserControlMain.GetInstance())) 
+                        GridMain.Children.Add(UserControlMain.GetInstance());
                     break;
                 case "Client":
-                    usc = new UserControlClient();
-                    GridMain.Children.Add(usc);
+                    if (!GridMain.Children.Contains(UserControlClient.GetInstance())) 
+                        GridMain.Children.Add(UserControlClient.GetInstance());              
                     break;
                 case "Employes":
-                    usc = new UserControlEmployes();
-                    GridMain.Children.Add(usc);
+                    if (!GridMain.Children.Contains(UserControlEmployes.GetInstance())) 
+                        GridMain.Children.Add(UserControlEmployes.GetInstance());
                     break;
                 case "Supplier":
-                    usc = new UserControlSupplier();
-                    GridMain.Children.Add(usc);
+                    if (!GridMain.Children.Contains(UserControlSupplier.GetInstance())) 
+                        GridMain.Children.Add(UserControlSupplier.GetInstance());
                     break;
                 case "BillsToPay":
-                    usc = new UserControlBillsToPay();
-                    GridMain.Children.Add(usc);
+                    if (!GridMain.Children.Contains(UserControlBillsToPay.GetInstance())) 
+                        GridMain.Children.Add(UserControlBillsToPay.GetInstance());
                     break;
                 case "BillsToReceive":
-                    usc = new UserControlBillsToReceive();
-                    GridMain.Children.Add(usc);
+                    if (!GridMain.Children.Contains(UserControlBillsToReceive.GetInstance())) 
+                        GridMain.Children.Add(UserControlBillsToReceive.GetInstance());
                     break;
                 case "Sair":
                     System.Environment.Exit(0);

@@ -7,10 +7,10 @@ namespace Promig.View.Components {
         #region static-instance
 
         //Definindo instancia estatica para tela
-        private UserControlSupplier _instance;
+        private static UserControlSupplier _instance;
 
         //Definindo método para recuperação da instancia
-        public UserControlSupplier GetInstance() {
+        public static UserControlSupplier GetInstance() {
             if (_instance == null) _instance = new UserControlSupplier();
             return _instance;
         }
