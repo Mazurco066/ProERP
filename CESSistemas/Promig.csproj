@@ -72,7 +72,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Connection\ConnectionFactory.cs" />
     <Compile Include="Connection\Methods\Users.cs" />
+    <Compile Include="Exceptions\NegatedAccessException.cs" />
+    <Compile Include="Exceptions\SqlCustomException.cs" />
+    <Compile Include="Model\Adress.cs" />
+    <Compile Include="Model\Employe.cs" />
+    <Compile Include="Model\Person.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="View\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -179,10 +186,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Exceptions\" />
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">
       <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>

@@ -8,10 +8,19 @@ namespace Promig.View {
     
     public partial class MainWindow : Window {
 
+        #region Header
+
+        //Definindo flags
+        public static string currentUsername;
+        public static int currentPermission;
+
+        //Definindo construtor
         public MainWindow() {
             InitializeComponent();
             initializeUserControl();
         }
+
+        #endregion Header
 
         // inicializar userControl com a tela de pagina principal
         private void initializeUserControl(){
@@ -40,34 +49,35 @@ namespace Promig.View {
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 
-            //Limpando a grid
+            //Limpando a view atual
+            UserControl usc = null;
             GridMain.Children.Clear();
 
-            //Verificando qual item foi selecionado
-            switch(((ListViewItem)((ListView)sender).SelectedItem).Name){
+            //Verificando qual tela será carregada
+            switch (((ListViewItem)((ListView)sender).SelectedItem).Name) {
                 case "Main":
-                    if (!GridMain.Children.Contains(UserControlMain.GetInstance())) 
-                        GridMain.Children.Add(UserControlMain.GetInstance());
+                    usc = new UserControlMain();
+                    GridMain.Children.Add(usc);
                     break;
                 case "Client":
-                    if (!GridMain.Children.Contains(UserControlClient.GetInstance())) 
-                        GridMain.Children.Add(UserControlClient.GetInstance());              
+                    usc = new UserControlClient();
+                    GridMain.Children.Add(usc);
                     break;
                 case "Employes":
-                    if (!GridMain.Children.Contains(UserControlEmployes.GetInstance())) 
-                        GridMain.Children.Add(UserControlEmployes.GetInstance());
+                    usc = new UserControlEmployes();
+                    GridMain.Children.Add(usc);
                     break;
                 case "Supplier":
-                    if (!GridMain.Children.Contains(UserControlSupplier.GetInstance())) 
-                        GridMain.Children.Add(UserControlSupplier.GetInstance());
+                    usc = new UserControlSupplier();
+                    GridMain.Children.Add(usc);
                     break;
                 case "BillsToPay":
-                    if (!GridMain.Children.Contains(UserControlBillsToPay.GetInstance())) 
-                        GridMain.Children.Add(UserControlBillsToPay.GetInstance());
+                    usc = new UserControlBillsToPay();
+                    GridMain.Children.Add(usc);
                     break;
                 case "BillsToReceive":
-                    if (!GridMain.Children.Contains(UserControlBillsToReceive.GetInstance())) 
-                        GridMain.Children.Add(UserControlBillsToReceive.GetInstance());
+                    usc = new UserControlBillsToReceive();
+                    GridMain.Children.Add(usc);
                     break;
                 case "Sair":
                     System.Environment.Exit(0);
@@ -87,7 +97,7 @@ namespace Promig.View {
         // operacoes ao carregar o form
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             try {
-                lblTitulo.Text = "Bem vindo! " + Login.usuarioLogado;
+                lblTitulo.Text = "Bem vindo! " + currentUsername;
 
                 /*Connection conexao = new Connection();
                 var sql = from u in conexao.USUARIOS where u.nome_usuario == Login.usuarioLogado select u.tipo;
