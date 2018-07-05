@@ -1,13 +1,13 @@
 ﻿using System.Text;
-using System.Data.SqlClient;
 using System.Windows;
+using MySql.Data.MySqlClient;
 
 namespace Promig.Connection {
 
     class ConnectionFactory {
 
         //Atributos para realização da conexão
-        private static SqlConnection conn;
+        private static MySqlConnection conn;
 
         //Atributos estaticos que correspondem a dados da conexão
         public static string DATABASE_SERVER = "localhost";
@@ -16,7 +16,7 @@ namespace Promig.Connection {
         public static string DATABASE_PASSWORD = "";
 
         //Método estático para retornar conexão com banco
-        public static SqlConnection GetConnection() {
+        public static MySqlConnection GetConnection() {
 
             //Stringbuilder para criar string de conexão
             StringBuilder connString = new StringBuilder();
@@ -33,12 +33,12 @@ namespace Promig.Connection {
                 //Verificando se ja há uma conexão instanciada
                 if (conn == null) {
 
-                    conn = new SqlConnection(connString.ToString());
+                    conn = new MySqlConnection(connString.ToString());
                 }
 
                 return conn;
             }
-            catch (SqlException) {
+            catch (MySqlException) {
 
                 //Retornando mensagem de erro em dialog de erro
                 MessageBox.Show("Erro de Conexão",

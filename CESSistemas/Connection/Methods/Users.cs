@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Windows;
 using Promig.Exceptions;
 using Promig.Model;
+using MySql.Data;
+using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace Promig.Connection.Methods {
 
@@ -12,7 +13,7 @@ namespace Promig.Connection.Methods {
         #region header
 
         //Atributo de connexão
-        private SqlConnection conn;
+        private MySqlConnection conn;
 
         //Construtor para recuperar conexão
         public Users() {
@@ -41,14 +42,14 @@ namespace Promig.Connection.Methods {
 
                 //Instanciando objetos para busca
                 List<User> results = new List<User>();
-                SqlDataReader reader;
-                SqlCommand cmd = new SqlCommand(command, conn) {
+                MySqlDataReader reader;
+                MySqlCommand cmd = new MySqlCommand(command, conn) {
                     CommandType = CommandType.Text
                 };
 
                 //Adicionando os parametros e preparando consulta
-                cmd.Parameters.Add(new SqlParameter("@username", user.GetLogin()));
-                cmd.Parameters.Add(new SqlParameter("@hash", user.GetMD5Hash()));
+                cmd.Parameters.Add(new MySqlParameter("@username", user.GetLogin()));
+                cmd.Parameters.Add(new MySqlParameter("@hash", user.GetMD5Hash()));
 
                 //Preparando comando
                 cmd.Prepare();
@@ -82,7 +83,7 @@ namespace Promig.Connection.Methods {
                 }
 
             }
-            catch (SqlException) {
+            catch (MySqlException) {
 
                 //Fechando conexão com o banco
                 conn.Close();
@@ -115,13 +116,13 @@ namespace Promig.Connection.Methods {
 
                 //Instanciando objetos para busca
                 List<Employe> results = new List<Employe>();
-                SqlDataReader reader;
-                SqlCommand cmd = new SqlCommand(command, conn) {
+                MySqlDataReader reader;
+                MySqlCommand cmd = new MySqlCommand(command, conn) {
                     CommandType = CommandType.Text
                 };
 
                 //Adicionando parametros e preparando consulta
-                cmd.Parameters.Add(new SqlParameter("@username", user.GetLogin()));
+                cmd.Parameters.Add(new MySqlParameter("@username", user.GetLogin()));
 
                 //Preparando consulta
                 cmd.Prepare();
@@ -145,14 +146,13 @@ namespace Promig.Connection.Methods {
                 return e;
 
             }
-            catch (SqlException) {
+            catch (MySqlException) {
 
                 //Retornando mensagem de erro
                 conn.Close();
                 MessageBox.Show("Erro ao se conectar com banco!");
                 return new Employe();
             }
-
         }
 
     }

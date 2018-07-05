@@ -21,7 +21,7 @@
 				<PasswordBox x:Name="txtPassword" Margin="0,10" materialDesign:HintAssist.Hint="SENHA" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="champagne &amp; Limousines" FontSize="18" Foreground="Gray" />
 			</StackPanel>
 		</Grid>
-		<Button x:Name="btnExit" Width="106" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="188,0,44,64" Content="Sair" Background="#FF1A2561" BorderBrush="#FF3F51B5" Foreground="#FFF9FAFB" />
+		<Button x:Name="btnExit" Click="btnExit_Click" Width="106" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="188,0,44,64" Content="Sair" Background="#FF1A2561" BorderBrush="#FF3F51B5" Foreground="#FFF9FAFB" />
 		<Button x:Name="btnLogon" Click="btnLogon_Click" Width="106" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="48,0,184,64" Content="Entrar" Background="#FF1A2561" BorderBrush="#FF3F51B5" Foreground="#FFF7F8F9" />
         <Image x:Name="image" HorizontalAlignment="Left" Height="101" Margin="119,31,0,0" VerticalAlignment="Top" Width="100" Source="../Images/logo.png" />
 	</Grid>

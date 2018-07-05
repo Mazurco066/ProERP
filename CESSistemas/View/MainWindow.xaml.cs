@@ -12,7 +12,8 @@ namespace Promig.View {
 
         //Definindo flags
         public static string currentUsername;
-        public static int currentPermission;
+        public static string currentPermission;
+        public static int currentId;
 
         //Definindo construtor
         public MainWindow() {
@@ -87,6 +88,7 @@ namespace Promig.View {
             }
         }
 
+        //Evento ao clicar no botão de Logs
         private void btnUsuarios_Click(object sender, RoutedEventArgs e) {
             UserControl usc = null;
             GridMain.Children.Clear();
@@ -96,18 +98,14 @@ namespace Promig.View {
 
         // operacoes ao carregar o form
         private void Window_Loaded(object sender, RoutedEventArgs e) {
-            try {
-                lblTitulo.Text = "Bem vindo " + currentUsername + "!";
+            //Definindo nome do usuário ao abrir
+            lblTitulo.Text = "Bem vindo " + currentUsername + "!";
 
-                if(currentPermission >= 1){
-                    return;
-                }else{
-                    esconderBotoes();
-                }
-            }
-            catch (Exception ex) {
-                Log.logException(ex);
-                Log.logMessage(ex.Message);
+            //Verificando permissões
+            if(currentPermission.Equals("Admin")){
+                return;
+            }else{
+                esconderBotoes();
             }
         }
 
