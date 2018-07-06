@@ -62,6 +62,6 @@
             <TextBox x:Name="usernameEdit" HorizontalAlignment="Left" Height="44" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="251" materialDesign:HintAssist.Hint="Usuário" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A" MaxLength="30" TabIndex="4"/>
             <PasswordBox x:Name="passwordEdit" materialDesign:HintAssist.Hint="Senha" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A" MaxLength="30" Margin="10,49,10,20" />
         </Grid>
-        <DatePicker Name="admissionEdit" materialDesign:HintAssist.Hint="Data Admissão" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A" HorizontalAlignment="Left" Margin="421,250,0,0" Grid.Row="1" VerticalAlignment="Top" Width="155" Height="42"/>
+        <DatePicker Name="admissionEdit" Style="{StaticResource MaterialDesignDatePicker}" materialDesign:HintAssist.Hint="Data Admissão" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A" HorizontalAlignment="Left" Margin="421,266,0,0" Grid.Row="1" VerticalAlignment="Top" Width="155" Height="26"/>
     </Grid>
 </UserControl>

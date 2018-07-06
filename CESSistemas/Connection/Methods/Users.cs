@@ -2,7 +2,6 @@
 using System.Windows;
 using Promig.Exceptions;
 using Promig.Model;
-using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Data;
 
