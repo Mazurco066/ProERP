@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using Promig.Connection.Methods;
+using Promig.Exceptions;
 using Promig.Model;
 using Promig.Utils;
 
@@ -40,6 +42,7 @@ namespace Promig.View.Components {
         //Evento ao carregar componente
         private void control_loaded(object sender, RoutedEventArgs e) {
             SetDefaults();
+            BlockFields();
             RefreshGrid();
         }
 
@@ -68,7 +71,273 @@ namespace Promig.View.Components {
             RefreshGrid();
         }
 
-        #endregion Events
+        //Evento ao clicar em algum funcionário
+        private void dgUsuarios_SelectionChanged(object sender, SelectionChangedEventArgs args) {
+            
+            //Verificando se ha seleção feita
+            if (dgUsuarios.SelectedItems.Count > 0) {
+
+                //Recuperando dados do cliente selecionado
+                Employe source = dgUsuarios.SelectedItem as Employe;
+                aux = dao.GetEmployeData(source.id);
+
+                //Preenchendo campos (Comboboxes)
+                if (aux.IsActive()) cbActive.SelectedIndex = 0; else cbActive.SelectedIndex = 1;
+                if (aux.role.Equals("none")) cbHasUser.SelectedIndex = 2;
+                else if (aux.role.Equals("User")) cbHasUser.SelectedIndex = 1;
+                else cbHasUser.SelectedIndex = 0;
+                //int index = cbState.Items.IndexOf(aux.adress.UF);
+                int index = cbState.Items.IndexOf("SP");
+                if (index != -1) cbState.SelectedIndex = index;
+
+                //Preenchendo campos (Textboxes)
+                NameEdit.Text = aux.name;
+                cpfEdit.Text = aux.cpf;
+                AdressEdit.Text = aux.adress.street;
+                NeighboorhoodEdit.Text = aux.adress.neighborhood;
+                cepEdit.Text = aux.adress.CEP;
+                NumberEdit.Text = aux.adress.number;
+                CityEdit.Text = aux.adress.city;
+                admissionEdit.Text = aux.admission;
+                RoleEdit.Text = aux.job;
+
+                //Dados de usuário
+                if (aux.user != null) {
+                    //Preenchendo dados do usuário
+                    usernameEdit.Text = aux.user.GetLogin();
+                    passwordEdit.Password = aux.user.GetPassword();
+                }
+
+                //Definindo ação como nula
+                actionIndex = -1;
+
+                //Desabiilitando campos e preenchendo com dados
+                BlockFields();
+            }
+        }
+
+        //Evento para botão adicionar
+        private void btnAdicionar_Click(object sender, RoutedEventArgs e) {
+            //Habilitando campos para inserção
+            actionIndex = 1;
+            ClearFields();
+            EnableFields();
+        }
+
+        //Evento para botão editar
+        private void btnEditar_Click(object sender, RoutedEventArgs e) {
+
+            //Verificando se ha funcionario selecionada
+            if (dgUsuarios.SelectedItems.Count > 0) {
+
+                //Desbloqueando os campos
+                actionIndex = 2;
+                EnableFields();
+            }
+            else {
+                MessageBox.Show(
+                        "Nenhum funcionário foi selecionado! Selecione um para prosseguir...",
+                        "Validação",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Warning
+                    );
+            }
+        }
+
+        //Evento para botão cancelar
+        private void btnCancelar_Click(object sender, RoutedEventArgs e) {
+
+            //Bloqueando campos e resetando transação
+            BlockFields();
+            ClearFields();
+            actionIndex = -1;
+        }
+
+        //Evento para botão salvar
+        private void btnSalvar_Click(object sender, RoutedEventArgs e) {
+
+            //Verificando qual ação sera realizada
+            switch (actionIndex) {
+
+                case 1:
+                    AddEmploye();
+                    break;
+
+                case 2:
+                    EditEmploye();
+                    break;
+
+                default:
+                    MessageBox.Show(
+                            "Nenhuma Operação Selecionada!",
+                            "Erro no preenchimento do formulário",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Warning
+                        );
+                    break;
+
+            }
+        }
+
+        #endregion
+
+        #region Data-Gathering
+
+        private void AddEmploye() {
+
+            //Verificando se campos estão preenchidos
+            if (IsValidFields()) {
+                if (Validator.IsCpf(cpfEdit.Text)) {  //Validando documentos
+                    try {
+
+                        //Recuperando dados do funcionário
+                        Employe emp = new Employe();
+                        emp.adress.street = AdressEdit.Text;
+                        emp.adress.city = CityEdit.Text;
+                        emp.adress.neighborhood = NeighboorhoodEdit.Text;
+                        emp.adress.number = NumberEdit.Text;
+                        emp.adress.UF = cbState.Items[cbState.SelectedIndex].ToString();
+                        emp.adress.CEP = cepEdit.Text;
+                        emp.name = NameEdit.Text;
+                        emp.cpf = cpfEdit.Text;
+                        emp.admission = admissionEdit.Text;
+                        emp.job = RoleEdit.Text;
+                        if (cbActive.SelectedIndex == 1) emp.Inactivate();
+                        if (cbHasUser.SelectedIndex == 2) {
+                            emp.SetRole("none");
+                            emp.SetUser(null);
+                        }
+                        else {
+                            if (cbHasUser.SelectedIndex == 1) emp.SetRole("User"); else emp.SetRole("Admin");
+                            emp.SetUser(new User(usernameEdit.Text, passwordEdit.Password));
+                        }
+
+                        //Inserindo registro no banco
+                        dao.AddEmploye(emp);
+
+                        //Registrando log de alteração
+                        Model.Log added = new Model.Log();
+                        added.employe = _employe;
+                        added.action = "Funcionário " + emp.GetName() + " foi cadastrado no sistema!";
+                        logs.Register(added);
+
+                        //Atualizando grid e limpando campos de texto
+                        RefreshGrid();
+                        ClearFields();
+                        BlockFields();
+                        actionIndex = -1;
+                        aux = null;
+
+                    }
+                    catch (DatabaseInsertException err) {
+                        //Retornando mensagem de erro para usuário
+                        MessageBox.Show(
+                        err.Message,
+                        "Erro ao gravar dados",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                    }
+                }
+                else {
+                    //Retornando mensagem de validação
+                    MessageBox.Show(
+                        "CPF Inválido",
+                        "Dados incorretos!",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Warning
+                    );
+                }
+            }
+            else {
+                //Mostrando alerta de validação
+                MessageBox.Show(
+                    "Há Campos Vazios",
+                    "Erro de Prenchimento de Formulário",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning
+                );
+            }
+
+        }
+
+        private void EditEmploye() {
+
+            //Verificando se campos estão preenchidos
+            if (IsValidFields()) {
+                if (Validator.IsCpf(cpfEdit.Text)) {  //Validando documentos
+                    try {
+
+                        //Recuperando dados do funcionário
+                        aux.adress.street = AdressEdit.Text;
+                        aux.adress.city = CityEdit.Text;
+                        aux.adress.neighborhood = NeighboorhoodEdit.Text;
+                        aux.adress.number = NumberEdit.Text;
+                        aux.adress.UF = cbState.Items[cbState.SelectedIndex].ToString();
+                        aux.adress.CEP = cepEdit.Text;
+                        aux.name = NameEdit.Text;
+                        aux.cpf = cpfEdit.Text;
+                        aux.admission = admissionEdit.Text;
+                        aux.job = RoleEdit.Text;
+                        if (cbActive.SelectedIndex == 1) aux.Inactivate();
+                        if (cbHasUser.SelectedIndex == 2) {
+                            aux.SetRole("none");
+                            aux.SetUser(null);
+                        }
+                        else {
+                            if (cbHasUser.SelectedIndex == 1) aux.SetRole("User"); else aux.SetRole("Admin");
+                            aux.SetUser(new User(usernameEdit.Text, passwordEdit.Password));
+                        }
+
+                        //Alterando registro no banco
+                        dao.EditEmploye(aux);
+
+                        //Registrando log de alteração
+                        Model.Log edited = new Model.Log();
+                        edited.employe = _employe;
+                        edited.action = "Funcionário " + aux.GetName() + " com ID = " + aux.id + " sofreu alteração no sistema!";
+                        logs.Register(edited);
+
+                        //Atualizando grid e limpando campos de texto
+                        RefreshGrid();
+                        ClearFields();
+                        BlockFields();
+                        actionIndex = -1;
+                        aux = null;
+
+                    }
+                    catch (DatabaseEditException err) {
+
+                        //Retornando mensagem de erro para usuário
+                        MessageBox.Show(
+                        err.Message,
+                        "Erro ao gravar dados",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                    }
+
+                }
+                else {
+                    //Retornando mensagem de validação
+                    MessageBox.Show(
+                        "CPF ou RG Inválido(s)",
+                        "Dados incorretos!",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Warning
+                    );
+                }
+            }
+            else {
+                //Mostrando alerta de validação
+                MessageBox.Show(
+                    "Há Campos Vazios",
+                    "Erro de Prenchimento de Formulário",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning
+                );
+            }
+        }
+
+        #endregion
 
         #region Grid-Param
 
@@ -138,7 +407,9 @@ namespace Promig.View.Components {
         }
 
         private bool IsValidFields() {
-            return !(NameEdit.Text.Equals("") ||
+            //Verificando se ha ou n usuário
+            if (cbHasUser.SelectedIndex != 2) {
+                return !(NameEdit.Text.Equals("") ||
                     cpfEdit.Text.Equals("") ||
                     AdressEdit.Text.Equals("") ||
                     NeighboorhoodEdit.Text.Equals("") ||
@@ -147,14 +418,31 @@ namespace Promig.View.Components {
                     cepEdit.Text.Equals("") ||
                     admissionEdit.Text.Equals("") ||
                     RoleEdit.Text.Equals("")
-            );
+                );
+            }
+            else {
+                return !(NameEdit.Text.Equals("") ||
+                    cpfEdit.Text.Equals("") ||
+                    AdressEdit.Text.Equals("") ||
+                    NeighboorhoodEdit.Text.Equals("") ||
+                    CityEdit.Text.Equals("") ||
+                    NumberEdit.Text.Equals("") ||
+                    cepEdit.Text.Equals("") ||
+                    admissionEdit.Text.Equals("") ||
+                    RoleEdit.Text.Equals("") ||
+                    usernameEdit.Text.Equals("") ||
+                    passwordEdit.Password.Equals("")
+                );
+            }
+            
         }
 
         private void ClearFields() {
 
             //Comboboxes
-            cbHasUser.SelectedIndex = 0;
+            cbHasUser.SelectedIndex = 2;
             cbActive.SelectedIndex = 0;
+            cbState.SelectedIndex = 0;
 
             //Campos de texto
             NameEdit.Text = null;
@@ -163,6 +451,7 @@ namespace Promig.View.Components {
             NeighboorhoodEdit.Text = null;
             NumberEdit.Text = null;
             cepEdit.Text = null;
+            CityEdit.Text = null;
             admissionEdit.Text = null;
             RoleEdit.Text = null;
             usernameEdit.Text = null;
@@ -174,6 +463,7 @@ namespace Promig.View.Components {
             //Comboboxes
             cbHasUser.IsEnabled = true;
             cbActive.IsEnabled = true;
+            cbState.IsEnabled = true;
 
             //Campos de texto
             NameEdit.IsEnabled = true;
@@ -182,6 +472,7 @@ namespace Promig.View.Components {
             NeighboorhoodEdit.IsEnabled = true;
             NumberEdit.IsEnabled = true;
             cepEdit.IsEnabled = true;
+            CityEdit.IsEnabled = true;
             admissionEdit.IsEnabled = true;
             RoleEdit.IsEnabled = true;
             usernameEdit.IsEnabled = true;
@@ -197,6 +488,7 @@ namespace Promig.View.Components {
             //Comboboxes
             cbHasUser.IsEnabled = false;
             cbActive.IsEnabled = false;
+            cbState.IsEnabled = false;
 
             //Campos de texto
             NameEdit.IsEnabled = false;
@@ -205,6 +497,7 @@ namespace Promig.View.Components {
             NeighboorhoodEdit.IsEnabled = false;
             NumberEdit.IsEnabled = false;
             cepEdit.IsEnabled = false;
+            CityEdit.IsEnabled = false;
             admissionEdit.IsEnabled = false;
             RoleEdit.IsEnabled = false;
             usernameEdit.IsEnabled = false;

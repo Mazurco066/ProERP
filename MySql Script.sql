@@ -28,7 +28,6 @@ create table if not exists funcionarios(
 	id_pessoa int not null,
 	permissao varchar(255) not null,
 	cpf varchar(11) unique not null,
-	rg varchar(9) unique not null,
 	data_admissao varchar(10),
 	funcao varchar(255),
 	CONSTRAINT PRK_ID_FUNCIONARIO PRIMARY KEY (id_funcionario),

@@ -47,7 +47,7 @@ namespace Promig.Connection.Methods
                                  "@street, @number, @neighborhood, @city, @uf, @cep);" +
                                  "insert into pessoas(id_endereco, nome_pessoa, status) values (" +
                                  "last_insert_id(), @name, @status);" +
-                                 "insert into funcionarios(id_pessoa, permissao, cpf, rg, " +
+                                 "insert into funcionarios(id_pessoa, permissao, cpf, " +
                                  "data_admissao, funcao) values (" +
                                  "last_insert_id(), @role, @cpf, @rg, " +
                                  "@admission, @job);";
@@ -72,7 +72,6 @@ namespace Promig.Connection.Methods
                 cmd.Parameters.Add(new MySqlParameter("@status", emp.IsActive()));
                 cmd.Parameters.Add(new MySqlParameter("@role", emp.GetRole()));
                 cmd.Parameters.Add(new MySqlParameter("@cpf", emp.GetCpf()));
-                cmd.Parameters.Add(new MySqlParameter("@rg", emp.GetRg()));
                 cmd.Parameters.Add(new MySqlParameter("@admission", emp.GetAdmission()));
                 cmd.Parameters.Add(new MySqlParameter("@job", emp.GetJob()));
 
@@ -123,7 +122,7 @@ namespace Promig.Connection.Methods
                                  "where id_endereco = @id_endereco;" +
                                  "update pessoas set nome_pessoa = @name, status = @status " +
                                  "where id_pessoa = @id_pessoa;" +
-                                 "update funcionarios set permissao = @role, cpf = @cpf, rg = @rg, " +
+                                 "update funcionarios set permissao = @role, cpf = @cpf, " +
                                  "data_admissao = @admission, funcao = @job " +
                                  "where id_funcionario = @id_funcionario;";
                 if (emp.GetUser() != null)
@@ -152,7 +151,6 @@ namespace Promig.Connection.Methods
                 cmd.Parameters.Add(new MySqlParameter("@status", emp.IsActive()));
                 cmd.Parameters.Add(new MySqlParameter("@role", emp.GetRole()));
                 cmd.Parameters.Add(new MySqlParameter("@cpf", emp.GetCpf()));
-                cmd.Parameters.Add(new MySqlParameter("@rg", emp.GetRg()));
                 cmd.Parameters.Add(new MySqlParameter("@admission", emp.GetAdmission()));
                 cmd.Parameters.Add(new MySqlParameter("@job", emp.GetJob()));
 
@@ -198,7 +196,7 @@ namespace Promig.Connection.Methods
                 //Definindo string de coneção
                 string command = "select f.id_funcionario, p.id_pessoa, p.nome_pessoa, " +
                                  "p.status, e.id_endereco, e.rua, e.numero, e.bairro, e.cidade, " +
-                                 "e.uf, e.cep, f.data_admissao, f.cpf, f.rg, f.funcao, f.permissao " +
+                                 "e.uf, e.cep, f.data_admissao, f.cpf, f.funcao, f.permissao " +
                                  "from enderecos e, pessoas p, funcionarios f " +
                                  "where e.id_endereco = p.id_endereco and " +
                                  "p.id_pessoa = f.id_pessoa and " +
@@ -237,7 +235,6 @@ namespace Promig.Connection.Methods
                     employe.GetAdress().SetUF((string)reader["uf"]);
                     employe.GetAdress().SetCEP((string)reader["cep"]);
                     employe.SetCpf((string)reader["cpf"]);
-                    employe.SetRg((string)reader["rg"]);
                     employe.SetRole((string)reader["permissao"]);
                     employe.SetJob((string)reader["funcao"]);
                     employe.SetAdmission((string)reader["data_admissao"]);
