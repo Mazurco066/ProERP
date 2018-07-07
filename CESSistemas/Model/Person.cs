@@ -14,7 +14,7 @@
 
         //Atributos
         private int id_person;
-        private string name;
+        public string name { get; set; }
         private Adress adress;
         private bool active;
 

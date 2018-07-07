@@ -52,9 +52,9 @@ namespace Promig.Connection.Methods {
                 };
 
                 //Adicionando os parametros ao comando
-                cmd.Parameters.Add(new MySqlParameter("@idEmp", log.GetEmploye().GetId()));
-                cmd.Parameters.Add(new MySqlParameter("@date", log.GetDate()));
-                cmd.Parameters.Add(new MySqlParameter("@action", log.GetAction()));
+                cmd.Parameters.Add(new MySqlParameter("@idEmp", log.employe.GetId()));
+                cmd.Parameters.Add(new MySqlParameter("@date", log.date));
+                cmd.Parameters.Add(new MySqlParameter("@action", log.action));
 
                 //Preparando inserção
                 cmd.Prepare();
@@ -110,11 +110,11 @@ namespace Promig.Connection.Methods {
 
                     //Adicionando log encontrado ao array de retorno
                     Log log = new Log();
-                    log.SetId((int)reader["id_log"]);
-                    log.SetDate((string)reader["log_date"]);
-                    log.SetAction((string)reader["user_action"]);
-                    log.SetEmploye(new Employe());
-                    log.GetEmploye().SetName((string)reader["nome_pessoa"]);
+                    log.id = ((int)reader["id_log"]);
+                    log.date = ((string)reader["log_date"]);
+                    log.action = ((string)reader["user_action"]);
+                    log.employe = (new Employe());
+                    log.employe.name = ((string)reader["nome_pessoa"]);
                     results.Add(log);
 
                 }
@@ -170,11 +170,11 @@ namespace Promig.Connection.Methods {
 
                     //Adicionando log encontrado ao array de retorno
                     Log log = new Log();
-                    log.SetId((int)reader["id_log"]);
-                    log.SetDate((string)reader["log_date"]);
-                    log.SetAction((string)reader["user_action"]);
-                    log.SetEmploye(new Employe());
-                    log.GetEmploye().SetName((string)reader["nome_pessoa"]);
+                    log.id = ((int)reader["id_log"]);
+                    log.date = ((string)reader["log_date"]);
+                    log.action = ((string)reader["user_action"]);
+                    log.employe = new Employe();
+                    log.employe.name = ((string)reader["nome_pessoa"]);
                     results.Add(log);
 
                 }

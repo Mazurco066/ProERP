@@ -13,10 +13,10 @@ namespace Promig.Model {
     class Log {
 
         //Attributos
-        private int id;
-        private string date;
-        private string action;
-        private Employe employe;
+        public int id { get; set; }
+        public string date { get; set; }
+        public string action { get; set; }
+        public Employe employe { get; set; }
 
         //Construtores
         public Log() {
@@ -32,47 +32,6 @@ namespace Promig.Model {
             this.id = id;
             this.date = date;
             this.action = action;
-            this.employe = employe;
-        }
-
-        //Getter/Setter
-        public int GetId() {
-
-            return id;
-        }
-
-        public void SetId(int id) {
-
-            this.id = id;
-        }
-
-        public string GetDate() {
-
-            return date;
-        }
-
-        public void SetDate(string date) {
-
-            this.date = date;
-        }
-
-        public string GetAction() {
-
-            return action;
-        }
-
-        public void SetAction(string action) {
-
-            this.action = action;
-        }
-
-        public Employe GetEmploye() {
-
-            return employe;
-        }
-
-        public void SetEmploye(Employe employe) {
-
             this.employe = employe;
         }
 

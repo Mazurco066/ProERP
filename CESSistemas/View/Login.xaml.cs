@@ -11,6 +11,7 @@ namespace Promig.View {
 
         //Definindo atributos
         private Users users;
+        private Logs logs;
 
         //Construtor
         public Login() {
@@ -19,6 +20,7 @@ namespace Promig.View {
 
             //Instanciando objetos
             users = new Users();
+            logs = new Logs();
             Clear();
         }
 
@@ -49,8 +51,12 @@ namespace Promig.View {
                     Employe employe = users.GetAssiciatedEmploye(user);
 
                     //Gerando um log de sistema
+                    Log signInRegister = new Log();
+                    signInRegister.employe = employe;
+                    signInRegister.action = "Usuário logou no sistema!";
 
                     //Registrando o log
+                    logs.Register(signInRegister);
 
                     //Limpando campos e abrindo menu
                     Clear();

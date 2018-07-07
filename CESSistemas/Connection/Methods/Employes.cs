@@ -286,7 +286,7 @@ namespace Promig.Connection.Methods
                 return employe;
 
             }
-            catch (MySqlException err) {
+            catch (MySqlException) {
 
                 //Fechando conexão e retrnando mensagem de erro
                 conn.Close();

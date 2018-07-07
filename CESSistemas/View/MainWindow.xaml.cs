@@ -89,10 +89,10 @@ namespace Promig.View {
         }
 
         //Evento ao clicar no botão de Logs
-        private void btnUsuarios_Click(object sender, RoutedEventArgs e) {
+        private void btnAuditoria_Click(object sender, RoutedEventArgs e) {
             UserControl usc = null;
             GridMain.Children.Clear();
-            usc = new UserControlUsers();
+            usc = new UserControlLogs();
             GridMain.Children.Add(usc);
         }
 
@@ -114,12 +114,12 @@ namespace Promig.View {
             Employes.IsEnabled = false;
             BillsToPay.IsEnabled = false;
             BillsToReceive.IsEnabled = false;
-            btnUsuarios.IsEnabled = false;
+            btnAuditoria.IsEnabled = false;
 
             Employes.Opacity = .50;
             BillsToPay.Opacity = .50;
             BillsToReceive.Opacity = .50;
-            btnUsuarios.Opacity = .50;
+            btnAuditoria.Opacity = .50;
         }
     }
 }

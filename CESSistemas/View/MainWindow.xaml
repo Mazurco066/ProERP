@@ -45,7 +45,7 @@
 				<materialDesign:PopupBox HorizontalAlignment="Right" Margin="10" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Foreground="#FFFBF7F7">
 					<StackPanel Width="150">
 						<Button Content="Materiais"/>
-						<Button x:Name="btnUsuarios" Content="Auditoria" Click="btnUsuarios_Click"/>
+						<Button x:Name="btnAuditoria" Content="Auditoria" Click="btnAuditoria_Click"/>
 						<Button Content="Sobre"/>
 						<Separator/>
 						<Button x:Name="btnLogout" Content="Logout" Click="btnLogout_Click"/>

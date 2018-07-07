@@ -122,6 +122,9 @@
     <Compile Include="Utils\DateBr.cs" />
     <Compile Include="Utils\Validator.cs" />
     <Compile Include="Utils\WSAdress.cs" />
+    <Compile Include="View\Components\UserControlLogs.xaml.cs">
+      <DependentUpon>UserControlLogs.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -152,6 +155,10 @@
     <Compile Include="Utils\Criptografia.cs" />
     <Compile Include="Utils\Log.cs" />
     <Compile Include="Utils\Util.cs" />
+    <Page Include="View\Components\UserControlLogs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

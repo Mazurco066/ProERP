@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
              xmlns:local="clr-namespace:Promig.View.Components"
-			  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+			 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1306" Height="697" Background="White">
     <Grid RenderTransformOrigin="0.72,0.469">
@@ -13,7 +13,7 @@
             <RowDefinition Height="83*"/>
             <RowDefinition Height="615*"/>
         </Grid.RowDefinitions>
-        <Label Content="Funcionários" FontSize="40" Margin="148,42,922,599" Foreground="#FF3F51B5" Grid.RowSpan="2"/>
+        <Label Content="Funcionários" FontSize="40" Margin="148,42,906,599" Foreground="#FF3F51B5" Grid.RowSpan="2"/>
         <TextBox 
             x:Name="txtSearch" 
             HorizontalAlignment="Left"
@@ -206,6 +206,18 @@
             Grid.Row="1" 
             VerticalAlignment="Top" 
             Width="155" Height="26"/>
-        <ComboBox Name="cbSearch" HorizontalAlignment="Left" Margin="640,57,0,0"  materialDesign:HintAssist.Hint="Parametro" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintComboBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A" TabIndex="8" Grid.Row="1" VerticalAlignment="Top" Width="92"/>
+        <ComboBox 
+            Name="cbSearch" 
+            HorizontalAlignment="Left" 
+            Margin="640,57,0,0"  
+            materialDesign:HintAssist.Hint="Parametro" 
+            Style="{StaticResource ResourceKey=MaterialDesignFloatingHintComboBox}" 
+            FontFamily="champagne &amp; Limousines" 
+            FontSize="14"
+            Foreground="#FF0A0A0A" 
+            TabIndex="8" 
+            Grid.Row="1" 
+            VerticalAlignment="Top"
+            Width="92"/>
     </Grid>
 </UserControl>
