@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using Promig.Utils;
 
 namespace Promig.View.Components {
     
@@ -29,8 +30,14 @@ namespace Promig.View.Components {
         #region Utils
 
         private void SetDefaults() {
+
+            //Definindo valor inicial de combobox
             cbActive.SelectedIndex = 0;
             cbHasUser.SelectedIndex = 0;
+            cbState.SelectedIndex = 0;
+
+            //Definindo data inicial
+            admissionEdit.Text = DateBr.GetDateBr();
         }
 
         #endregion Utils
