@@ -40,6 +40,19 @@ namespace Promig.View.Components {
             admissionEdit.Text = DateBr.GetDateBr();
         }
 
+        private bool IsValidFields() {
+            return !(NameEdit.Text.Equals("") ||
+                    cpfEdit.Text.Equals("") ||
+                    AdressEdit.Text.Equals("") ||
+                    NeighboorhoodEdit.Text.Equals("") ||
+                    CityEdit.Text.Equals("") ||
+                    NumberEdit.Text.Equals("") ||
+                    cepEdit.Text.Equals("") ||
+                    admissionEdit.Text.Equals("") ||
+                    RoleEdit.Text.Equals("");
+            );
+        }
+
         #endregion Utils
     }
 }

@@ -19,7 +19,7 @@
             HorizontalAlignment="Left"
             Width="469" 
             Height="42" 
-            Margin="754,55,0,0" 
+            Margin="754,22,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             materialDesign:HintAssist.Hint="Pesquisar" 
@@ -32,10 +32,23 @@
             HorizontalAlignment="Left" 
             Width="236" 
             Height="42" 
-            Margin="148,107,0,0" 
+            Margin="148,74,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             materialDesign:HintAssist.Hint="Nome" 
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+            FontFamily="champagne &amp; Limousines" 
+            FontSize="14" Foreground="#FF060606" 
+            TabIndex="0" MaxLength="60" Grid.Row="1"/>
+        <TextBox 
+            x:Name="RoleEdit" 
+            HorizontalAlignment="Left" 
+            Width="428" 
+            Height="42" 
+            Margin="148,268,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            materialDesign:HintAssist.Hint="Cargo" 
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF060606" 
@@ -45,7 +58,7 @@
             HorizontalAlignment="Left" 
             Width="236"
             Height="44" 
-            Margin="148,153,0,0" 
+            Margin="148,121,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             materialDesign:HintAssist.Hint="Endereço" 
@@ -57,7 +70,7 @@
             x:Name="NeighboorhoodEdit" 
             HorizontalAlignment="Left" 
             Height="44" 
-            Margin="406,153,0,0" 
+            Margin="406,121,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Width="170" 
@@ -70,7 +83,7 @@
             x:Name="CityEdit" 
             HorizontalAlignment="Left" 
             Height="44" 
-            Margin="148,201,0,0" 
+            Margin="148,170,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Width="236" 
@@ -82,7 +95,7 @@
         <ComboBox 
             x:Name="cbState" 
             HorizontalAlignment="Left"
-            Margin="406,205,0,0"
+            Margin="406,174,0,0"
             VerticalAlignment="Top" 
             Width="170" 
             materialDesign:HintAssist.Hint="Estado" 
@@ -90,15 +103,39 @@
             FontFamily="champagne &amp; Limousines"
             FontSize="14" Foreground="#FF0A0A0A" 
             TabIndex="5" Grid.Row="1">
-            <ComboBoxItem Content="Item 1"/>
-            <ComboBoxItem Content="Item 2"/>
-            <ComboBoxItem Content="Item 3"/>
+            <ComboBoxItem Content="AC"/>
+            <ComboBoxItem Content="AL"/>
+            <ComboBoxItem Content="AP"/>
+            <ComboBoxItem Content="AM"/>
+            <ComboBoxItem Content="BA"/>
+            <ComboBoxItem Content="CE"/>
+            <ComboBoxItem Content="DF"/>
+            <ComboBoxItem Content="ES"/>
+            <ComboBoxItem Content="GO"/>
+            <ComboBoxItem Content="MA"/>
+            <ComboBoxItem Content="MT"/>
+            <ComboBoxItem Content="MS"/>
+            <ComboBoxItem Content="MG"/>
+            <ComboBoxItem Content="PA"/>
+            <ComboBoxItem Content="PB"/>
+            <ComboBoxItem Content="PR"/>
+            <ComboBoxItem Content="PE"/>
+            <ComboBoxItem Content="PI"/>
+            <ComboBoxItem Content="RJ"/>
+            <ComboBoxItem Content="RN"/>
+            <ComboBoxItem Content="RS"/>
+            <ComboBoxItem Content="RO"/>
+            <ComboBoxItem Content="RR"/>
+            <ComboBoxItem Content="SC"/>
+            <ComboBoxItem Content="SP"/>
+            <ComboBoxItem Content="SE"/>
+            <ComboBoxItem Content="TO"/>
         </ComboBox>
         <TextBox 
             x:Name="NumberEdit"
             HorizontalAlignment="Left"
             Height="42"
-            Margin="148,250,0,0" 
+            Margin="148,221,0,0" 
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             Width="101"
@@ -110,9 +147,11 @@
         <wpfTool:MaskedTextBox  
             x:Name="cepEdit"
             Mask="99999-999"
+            IncludeLiteralsInValue="False"
+            IncludePromptInValue="False"
             HorizontalAlignment="Left"
             Height="44"
-            Margin="269,248,0,0" 
+            Margin="269,219,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Width="131" 
@@ -124,9 +163,11 @@
         <wpfTool:MaskedTextBox 
             x:Name="cpfEdit"
             Mask="999,999,999-99" 
+            IncludeLiteralsInValue="False"
+            IncludePromptInValue="False"
             HorizontalAlignment="Left"
             Height="44" 
-            Margin="406,102,0,0" 
+            Margin="406,72,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top"
             Width="170"
@@ -135,19 +176,21 @@
             FontFamily="champagne &amp; Limousines"
             FontSize="14" Foreground="#FF0A0A0A" 
             MaxLength="30" TabIndex="4" Grid.Row="1"/>
-        <ComboBox x:Name="cbHasUser" SelectionChanged="cbHasUser_SelectionChanged" HorizontalAlignment="Left" Margin="148,57,0,0" VerticalAlignment="Top" Width="200" materialDesign:HintAssist.Hint="Tipo" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintComboBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A" TabIndex="8" Grid.Row="1">
+        <ComboBox x:Name="cbHasUser" SelectionChanged="cbHasUser_SelectionChanged" HorizontalAlignment="Left" Margin="148,27,0,0" VerticalAlignment="Top" Width="200" materialDesign:HintAssist.Hint="Tipo" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintComboBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A" TabIndex="8" Grid.Row="1">
             <ComboBoxItem Content="Admin"/>
             <ComboBoxItem Content="Usuário"/>
             <ComboBoxItem Content="Sem Usuário"/>
         </ComboBox>
-        <ComboBox x:Name="cbActive" HorizontalAlignment="Left" Margin="376,57,0,0" VerticalAlignment="Top" Width="200" materialDesign:HintAssist.Hint="Ativo" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintComboBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A" TabIndex="8" Grid.Row="1">
+        <ComboBox x:Name="cbActive" HorizontalAlignment="Left" Margin="376,27,0,0" VerticalAlignment="Top" Width="200" materialDesign:HintAssist.Hint="Ativo" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintComboBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A" TabIndex="8" Grid.Row="1">
             <ComboBoxItem Content="Ativo"/>
             <ComboBoxItem Content="Desativado"/>
         </ComboBox>
         <DataGrid 
             x:Name="dgUsuarios" 
+            SelectionMode="Single"
+            SelectionUnit="FullRow"
             HorizontalAlignment="Left" 
-            Height="318" Margin="640,107,0,0" 
+            Height="370" Margin="640,74,0,0" 
             VerticalAlignment="Top" 
             Width="636" 
             AutoGenerateColumns="False" 
@@ -165,13 +208,13 @@
         <Button x:Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="340,483,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5" Grid.Row="1"/>
         <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="661,483,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5" Grid.Row="1"/>
         <Button x:Name="btnSalvar" Content="Salvar" HorizontalAlignment="Left" Margin="980,483,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5" Grid.Row="1"/>
-        <Button x:Name="btnRefresh" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="1223,71,33,0" Height="26" Background="{x:Null}" Grid.Row="1">
+        <Button x:Name="btnRefresh" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="1223,41,33,0" Height="26" Background="{x:Null}" Grid.Row="1">
             <materialDesign:PackIcon Foreground="#FF3F51B5" Kind="Refresh" Width="20" Height="19" RenderTransformOrigin="0.45,2.842"/>
         </Button>
         <Button x:Name="btnMostrarDataGrid" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="1223,27,0,0" Height="26" Background="{x:Null}" HorizontalAlignment="Left" Width="50" Grid.Row="1" Visibility="Hidden">
             <materialDesign:PackIcon Foreground="#FF3F51B5" Kind="EyeOff" Width="20" Height="19"/>
         </Button>
-        <Grid Name="gridUser" Background="#403F51B5" HorizontalAlignment="Left" Height="113" Margin="217,312,0,0" Grid.Row="1" VerticalAlignment="Top" Width="271">
+        <Grid Name="gridUser" Background="#403F51B5" HorizontalAlignment="Left" Height="112" Margin="214,332,0,0" Grid.Row="1" VerticalAlignment="Top" Width="270">
             <TextBox 
                 x:Name="usernameEdit" 
                 HorizontalAlignment="Left" 
@@ -202,14 +245,14 @@
             FontSize="14" 
             Foreground="#FF0A0A0A" 
             HorizontalAlignment="Left"
-            Margin="421,266,0,0" 
+            Margin="421,237,0,0" 
             Grid.Row="1" 
             VerticalAlignment="Top" 
             Width="155" Height="26"/>
         <ComboBox 
             Name="cbSearch" 
             HorizontalAlignment="Left" 
-            Margin="640,57,0,0"  
+            Margin="640,24,0,0"  
             materialDesign:HintAssist.Hint="Parametro" 
             Style="{StaticResource ResourceKey=MaterialDesignFloatingHintComboBox}" 
             FontFamily="champagne &amp; Limousines" 
