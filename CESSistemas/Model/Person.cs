@@ -13,10 +13,10 @@
         #region Attributes
 
         //Atributos
-        private int id_person;
+        public int id_person { get; set; }
         public string name { get; set; }
-        private Adress adress;
-        private bool active;
+        public Adress adress { get; set; }
+        public bool active { get; set; }
 
         #endregion Attributes
 

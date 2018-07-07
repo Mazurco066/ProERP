@@ -12,14 +12,14 @@
 
         #region Attributes
 
-        private int id;
-        private string cpf;
-        private string rg;
-        private string role;
-        private string admission;
-        private string demission;
-        private string job;
-        private User user;
+        public int id { get; set; }
+        public string cpf { get; set; }
+        public string rg { get; set; }
+        public string role { get; set; }
+        public string admission { get; set; }
+        public string demission { get; set; }
+        public string job { get; set; }
+        public User user { get; set; }
 
         #endregion Attributes
 

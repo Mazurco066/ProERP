@@ -13,13 +13,13 @@
         #region Attrib
 
         //Atributos
-        private int id;
-        private string street;
-        private string neighborhood;
-        private string number;
-        private string city;
-        private string CEP;
-        private string UF;
+        public int id { get; set; }
+        public string street { get; set; }
+        public string neighborhood { get; set; }
+        public string number { get; set; }
+        public string city { get; set; }
+        public string CEP { get; set; }
+        public string UF { get; set; }
 
         #endregion Attrib
 
