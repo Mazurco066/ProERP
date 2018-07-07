@@ -17,6 +17,7 @@
         <Label Content="Funcionários" FontSize="40" Margin="39,34,1015,595" Foreground="#FF3F51B5" Grid.RowSpan="2"/>
         <TextBox 
             x:Name="txtSearch" 
+            KeyDown="txtSearch_KeyDown"
             HorizontalAlignment="Left"
             Width="424" 
             Height="42" 
@@ -210,7 +211,7 @@
         <Button x:Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="340,483,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5" Grid.Row="1"/>
         <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="661,483,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5" Grid.Row="1"/>
         <Button x:Name="btnSalvar" Content="Salvar" HorizontalAlignment="Left" Margin="980,483,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5" Grid.Row="1"/>
-        <Button x:Name="btnRefresh" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="1223,41,33,0" Height="26" Background="{x:Null}" Grid.Row="1">
+        <Button x:Name="btnRefresh" Click="btnRefresh_Click" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="1223,41,33,0" Height="26" Background="{x:Null}" Grid.Row="1">
             <materialDesign:PackIcon Foreground="#FF3F51B5" Kind="Refresh" Width="20" Height="19" RenderTransformOrigin="0.45,2.842"/>
         </Button>
         <Button x:Name="btnMostrarDataGrid" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="1223,27,0,0" Height="26" Background="{x:Null}" HorizontalAlignment="Left" Width="50" Grid.Row="1" Visibility="Hidden">
@@ -252,7 +253,8 @@
             VerticalAlignment="Top" 
             Width="155" Height="26"/>
         <ComboBox 
-            Name="cbSearch" 
+            Name="cbSearch"
+            SelectionChanged="cbSearch_SelectionChanged"
             HorizontalAlignment="Left" 
             Margin="640,24,0,0"  
             materialDesign:HintAssist.Hint="Parametro" 

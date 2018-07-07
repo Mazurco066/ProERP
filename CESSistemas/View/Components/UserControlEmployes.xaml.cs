@@ -53,11 +53,30 @@ namespace Promig.View.Components {
             
         }
 
+        //Evento ao alternar parametro de pesquisa
+        private void cbSearch_SelectionChanged(object sender, SelectionChangedEventArgs args) {
+            RefreshGrid();
+        }
+
+        //Evento ao pesquisar na caixa de pesquisa
+        private void txtSearch_KeyDown(object sender, RoutedEventArgs e) {
+            RefreshGrid(txtSearch.Text);
+        }
+
+        //Evento para atualizar grid manualmente
+        private void btnRefresh_Click(object sender, RoutedEventArgs e) {
+            RefreshGrid();
+        }
+
         #endregion Events
 
         #region Grid-Param
 
         private void RefreshGrid() {
+
+            //Limpando campo de pesquisa
+            txtSearch.Text = null;
+
             //Filtros de busca
             switch (cbSearch.SelectedIndex) {
 
@@ -79,6 +98,28 @@ namespace Promig.View.Components {
             }
         }
 
+        private void RefreshGrid(string param) {
+
+            //Filtros de busca
+            switch (cbSearch.SelectedIndex) {
+
+                case 0: //Ativo - nome
+                    dgUsuarios.ItemsSource = dao.GetAllActiveEmployes(param);
+                    break;
+
+                case 1: //Todos - nome
+                    dgUsuarios.ItemsSource = dao.GetAllEmployes(param);
+                    break;
+
+                case 2: //Ativo - Cidade
+                    dgUsuarios.ItemsSource = dao.GetAllActiveEmployesByCity(param);
+                    break;
+
+                case 3: //Ativo - CPF
+                    dgUsuarios.ItemsSource = dao.GetAllActiveEmployesByDocument(param);
+                    break;
+            }
+        }
 
         #endregion
 
@@ -107,6 +148,71 @@ namespace Promig.View.Components {
                     admissionEdit.Text.Equals("") ||
                     RoleEdit.Text.Equals("")
             );
+        }
+
+        private void ClearFields() {
+
+            //Comboboxes
+            cbHasUser.SelectedIndex = 0;
+            cbActive.SelectedIndex = 0;
+
+            //Campos de texto
+            NameEdit.Text = null;
+            cpfEdit.Text = null;
+            AdressEdit.Text = null;
+            NeighboorhoodEdit.Text = null;
+            NumberEdit.Text = null;
+            cepEdit.Text = null;
+            admissionEdit.Text = null;
+            RoleEdit.Text = null;
+            usernameEdit.Text = null;
+            passwordEdit.Password = null;
+        }
+
+        private void EnableFields() {
+
+            //Comboboxes
+            cbHasUser.IsEnabled = true;
+            cbActive.IsEnabled = true;
+
+            //Campos de texto
+            NameEdit.IsEnabled = true;
+            cpfEdit.IsEnabled = true;
+            AdressEdit.IsEnabled = true;
+            NeighboorhoodEdit.IsEnabled = true;
+            NumberEdit.IsEnabled = true;
+            cepEdit.IsEnabled = true;
+            admissionEdit.IsEnabled = true;
+            RoleEdit.IsEnabled = true;
+            usernameEdit.IsEnabled = true;
+            passwordEdit.IsEnabled = true;
+
+            //Botões
+            btnCancelar.IsEnabled = true;
+            btnSalvar.IsEnabled = true;
+        }
+
+        private void BlockFields() {
+
+            //Comboboxes
+            cbHasUser.IsEnabled = false;
+            cbActive.IsEnabled = false;
+
+            //Campos de texto
+            NameEdit.IsEnabled = false;
+            cpfEdit.IsEnabled = false;
+            AdressEdit.IsEnabled = false;
+            NeighboorhoodEdit.IsEnabled = false;
+            NumberEdit.IsEnabled = false;
+            cepEdit.IsEnabled = false;
+            admissionEdit.IsEnabled = false;
+            RoleEdit.IsEnabled = false;
+            usernameEdit.IsEnabled = false;
+            passwordEdit.IsEnabled = false;
+
+            //Botões
+            btnCancelar.IsEnabled = false;
+            btnSalvar.IsEnabled = false;
         }
 
         #endregion 
