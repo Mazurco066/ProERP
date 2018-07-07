@@ -49,7 +49,7 @@ namespace Promig.View.Components {
                     NumberEdit.Text.Equals("") ||
                     cepEdit.Text.Equals("") ||
                     admissionEdit.Text.Equals("") ||
-                    RoleEdit.Text.Equals("");
+                    RoleEdit.Text.Equals("")
             );
         }
 
