@@ -149,6 +149,7 @@
         <wpfTool:MaskedTextBox  
             x:Name="cepEdit"
             Mask="99999-999"
+            PreviewKeyUp="cepEdit_PreviewKeyUp"
             IncludeLiteralsInValue="False"
             IncludePromptInValue="False"
             HorizontalAlignment="Left"
@@ -161,12 +162,12 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF0A0A0A" 
-            MaxLength="30" TabIndex="4" Grid.Row="1"/>
+            MaxLength="30" TabIndex="4" Grid.Row="1" HidePromptOnLeave="True"/>
         <wpfTool:MaskedTextBox 
             x:Name="cpfEdit"
             Mask="999,999,999-99" 
-            IncludeLiteralsInValue="False"
-            IncludePromptInValue="False"
+            IncludeLiteralsInValue="True"
+            IncludePromptInValue="True"
             HorizontalAlignment="Left"
             Height="44" 
             Margin="406,72,0,0" 
@@ -177,7 +178,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines"
             FontSize="14" Foreground="#FF0A0A0A" 
-            MaxLength="30" TabIndex="4" Grid.Row="1"/>
+            MaxLength="30" TabIndex="4" Grid.Row="1" HidePromptOnLeave="True"/>
         <ComboBox x:Name="cbHasUser" SelectionChanged="cbHasUser_SelectionChanged" HorizontalAlignment="Left" Margin="46,24,0,0" VerticalAlignment="Top" Width="250" materialDesign:HintAssist.Hint="Tipo" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintComboBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A" TabIndex="8" Grid.Row="1">
             <ComboBoxItem Content="Admin"/>
             <ComboBoxItem Content="Usuário"/>

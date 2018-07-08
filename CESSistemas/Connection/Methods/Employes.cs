@@ -49,7 +49,7 @@ namespace Promig.Connection.Methods
                                  "last_insert_id(), @name, @status);" +
                                  "insert into funcionarios(id_pessoa, permissao, cpf, " +
                                  "data_admissao, funcao) values (" +
-                                 "last_insert_id(), @role, @cpf, @rg, " +
+                                 "last_insert_id(), @role, @cpf, " +
                                  "@admission, @job);";
                 if (emp.GetUser() != null)
                     command += "insert into usuarios(id_funcionario, login, password) values (" +
@@ -99,10 +99,11 @@ namespace Promig.Connection.Methods
                 );
 
             }
-            catch (MySqlException) {
+            catch (MySqlException err) {
 
                 //Fechando a conexão e retornando erro ao usuário
                 conn.Close();
+                MessageBox.Show(err.Message);
                 throw new DatabaseInsertException();
             }
         }

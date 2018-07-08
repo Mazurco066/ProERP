@@ -1,6 +1,6 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using Promig.Connection.Methods;
 using Promig.Exceptions;
 using Promig.Model;
@@ -30,6 +30,7 @@ namespace Promig.View.Components {
             //Instanciando objetos
             actionIndex = -1;
             _employe = new Employe();
+            _employe.id = MainWindow.currentId;
             aux = null;
             logs = new Logs();
             dao = new Employes();
@@ -86,9 +87,14 @@ namespace Promig.View.Components {
                 if (aux.role.Equals("none")) cbHasUser.SelectedIndex = 2;
                 else if (aux.role.Equals("User")) cbHasUser.SelectedIndex = 1;
                 else cbHasUser.SelectedIndex = 0;
-                //int index = cbState.Items.IndexOf(aux.adress.UF);
-                int index = cbState.Items.IndexOf("SP");
-                if (index != -1) cbState.SelectedIndex = index;
+
+                //Recuperando Estado
+                int index = -1;
+                foreach(ComboBoxItem item in cbState.Items) {
+                    index++;
+                    if (item.Content.Equals(aux.adress.UF)) break;
+                }
+                cbState.SelectedIndex = index;
 
                 //Preenchendo campos (Textboxes)
                 NameEdit.Text = aux.name;
@@ -114,6 +120,25 @@ namespace Promig.View.Components {
                 //Desabiilitando campos e preenchendo com dados
                 BlockFields();
             }
+        }
+
+        //Evento de autopreencher cep
+        private void  cepEdit_PreviewKeyUp(object sender, KeyEventArgs e) {
+            if (e.Key == Key.Enter) {
+                string cep = cepEdit.Text.Replace("-","").Replace("_","");
+                Adress adress = WSAdress.GetAdress(cep);
+                //Recuperando dados gerais
+                AdressEdit.Text = adress.street;
+                NeighboorhoodEdit.Text = adress.neighborhood;
+                CityEdit.Text = adress.city;
+                //Recuperando Estado
+                int index = -1;
+                foreach (ComboBoxItem item in cbState.Items) {
+                    index++;
+                    if (item.Content.Equals(adress.UF)) break;
+                }
+                cbState.SelectedIndex = index;
+            }           
         }
 
         //Evento para botão adicionar
@@ -184,22 +209,22 @@ namespace Promig.View.Components {
         #region Data-Gathering
 
         private void AddEmploye() {
-
-            //Verificando se campos estão preenchidos
             if (IsValidFields()) {
-                if (Validator.IsCpf(cpfEdit.Text)) {  //Validando documentos
+                string cpf = cpfEdit.Text.Replace(".", "").Replace("-", "").Replace("_", ".");
+                string cep = cepEdit.Text.Replace("-", "").Replace("_", "");
+                if (Validator.IsCpf(cpf)) {  //Validando documento
                     try {
-
                         //Recuperando dados do funcionário
                         Employe emp = new Employe();
+                        ComboBoxItem selected = cbState.Items[cbState.SelectedIndex] as ComboBoxItem;
                         emp.adress.street = AdressEdit.Text;
                         emp.adress.city = CityEdit.Text;
                         emp.adress.neighborhood = NeighboorhoodEdit.Text;
                         emp.adress.number = NumberEdit.Text;
-                        emp.adress.UF = cbState.Items[cbState.SelectedIndex].ToString();
-                        emp.adress.CEP = cepEdit.Text;
+                        emp.adress.UF = selected.Content.ToString();
+                        emp.adress.CEP = cep;
                         emp.name = NameEdit.Text;
-                        emp.cpf = cpfEdit.Text;
+                        emp.cpf = cpf;
                         emp.admission = admissionEdit.Text;
                         emp.job = RoleEdit.Text;
                         if (cbActive.SelectedIndex == 1) emp.Inactivate();
@@ -218,7 +243,7 @@ namespace Promig.View.Components {
                         //Registrando log de alteração
                         Model.Log added = new Model.Log();
                         added.employe = _employe;
-                        added.action = "Funcionário " + emp.GetName() + " foi cadastrado no sistema!";
+                        added.action = "Funcionário " + emp.name + " foi cadastrado no sistema!";
                         logs.Register(added);
 
                         //Atualizando grid e limpando campos de texto
@@ -257,28 +282,30 @@ namespace Promig.View.Components {
                     MessageBoxImage.Warning
                 );
             }
-
         }
 
         private void EditEmploye() {
 
             //Verificando se campos estão preenchidos
             if (IsValidFields()) {
-                if (Validator.IsCpf(cpfEdit.Text)) {  //Validando documentos
+                string cpf = cpfEdit.Text.Replace(".", "").Replace("-", "").Replace("_", ".");
+                string cep = cepEdit.Text.Replace("-", "").Replace("_", "");
+                if (Validator.IsCpf(cpf)) {  //Validando documentos
                     try {
 
                         //Recuperando dados do funcionário
+                        ComboBoxItem selected = cbState.Items[cbState.SelectedIndex] as ComboBoxItem;
                         aux.adress.street = AdressEdit.Text;
                         aux.adress.city = CityEdit.Text;
                         aux.adress.neighborhood = NeighboorhoodEdit.Text;
                         aux.adress.number = NumberEdit.Text;
-                        aux.adress.UF = cbState.Items[cbState.SelectedIndex].ToString();
-                        aux.adress.CEP = cepEdit.Text;
+                        aux.adress.UF = selected.Content.ToString();
+                        aux.adress.CEP = cep;
                         aux.name = NameEdit.Text;
-                        aux.cpf = cpfEdit.Text;
+                        aux.cpf = cpf;
                         aux.admission = admissionEdit.Text;
                         aux.job = RoleEdit.Text;
-                        if (cbActive.SelectedIndex == 1) aux.Inactivate();
+                        if (cbActive.SelectedIndex == 1) aux.Inactivate(); else aux.Activate();
                         if (cbHasUser.SelectedIndex == 2) {
                             aux.SetRole("none");
                             aux.SetUser(null);
@@ -410,28 +437,28 @@ namespace Promig.View.Components {
             //Verificando se ha ou n usuário
             if (cbHasUser.SelectedIndex != 2) {
                 return !(NameEdit.Text.Equals("") ||
-                    cpfEdit.Text.Equals("") ||
-                    AdressEdit.Text.Equals("") ||
-                    NeighboorhoodEdit.Text.Equals("") ||
-                    CityEdit.Text.Equals("") ||
-                    NumberEdit.Text.Equals("") ||
-                    cepEdit.Text.Equals("") ||
-                    admissionEdit.Text.Equals("") ||
-                    RoleEdit.Text.Equals("")
+                        cpfEdit.Text.Equals("") ||
+                        AdressEdit.Text.Equals("") ||
+                        NeighboorhoodEdit.Text.Equals("") ||
+                        CityEdit.Text.Equals("") ||
+                        NumberEdit.Text.Equals("") ||
+                        cepEdit.Text.Equals("") ||
+                        admissionEdit.Text.Equals("") ||
+                        RoleEdit.Text.Equals("") ||
+                        usernameEdit.Text.Equals("") ||
+                        passwordEdit.Password.Equals("")
                 );
             }
             else {
                 return !(NameEdit.Text.Equals("") ||
-                    cpfEdit.Text.Equals("") ||
-                    AdressEdit.Text.Equals("") ||
-                    NeighboorhoodEdit.Text.Equals("") ||
-                    CityEdit.Text.Equals("") ||
-                    NumberEdit.Text.Equals("") ||
-                    cepEdit.Text.Equals("") ||
-                    admissionEdit.Text.Equals("") ||
-                    RoleEdit.Text.Equals("") ||
-                    usernameEdit.Text.Equals("") ||
-                    passwordEdit.Password.Equals("")
+                        cpfEdit.Text.Equals("") ||
+                        AdressEdit.Text.Equals("") ||
+                        NeighboorhoodEdit.Text.Equals("") ||
+                        CityEdit.Text.Equals("") ||
+                        NumberEdit.Text.Equals("") ||
+                        cepEdit.Text.Equals("") ||
+                        admissionEdit.Text.Equals("") ||
+                        RoleEdit.Text.Equals("")
                 );
             }
             

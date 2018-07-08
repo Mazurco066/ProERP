@@ -38,7 +38,6 @@
 
             //Retornando Válido ou inválido
             return cpf.EndsWith(digito);
-
         }
 
         /**

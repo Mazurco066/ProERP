@@ -52,7 +52,7 @@ namespace Promig.Connection.Methods {
                 };
 
                 //Adicionando os parametros ao comando
-                cmd.Parameters.Add(new MySqlParameter("@idEmp", log.employe.GetId()));
+                cmd.Parameters.Add(new MySqlParameter("@idEmp", log.employe.id));
                 cmd.Parameters.Add(new MySqlParameter("@date", log.date));
                 cmd.Parameters.Add(new MySqlParameter("@action", log.action));
 
