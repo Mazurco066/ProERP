@@ -229,12 +229,12 @@ namespace Promig.View.Components {
                         emp.job = RoleEdit.Text;
                         if (cbActive.SelectedIndex == 1) emp.Inactivate();
                         if (cbHasUser.SelectedIndex == 2) {
-                            emp.SetRole("none");
-                            emp.SetUser(null);
+                            emp.role = "none";
+                            emp.user = null;
                         }
                         else {
-                            if (cbHasUser.SelectedIndex == 1) emp.SetRole("User"); else emp.SetRole("Admin");
-                            emp.SetUser(new User(usernameEdit.Text, passwordEdit.Password));
+                            if (cbHasUser.SelectedIndex == 1) emp.role = "User"; else emp.role = "Admin";
+                            emp.user = new User(usernameEdit.Text, passwordEdit.Password);
                         }
 
                         //Inserindo registro no banco
@@ -307,12 +307,12 @@ namespace Promig.View.Components {
                         aux.job = RoleEdit.Text;
                         if (cbActive.SelectedIndex == 1) aux.Inactivate(); else aux.Activate();
                         if (cbHasUser.SelectedIndex == 2) {
-                            aux.SetRole("none");
-                            aux.SetUser(null);
+                            aux.role = "none";
+                            aux.user = null;
                         }
                         else {
-                            if (cbHasUser.SelectedIndex == 1) aux.SetRole("User"); else aux.SetRole("Admin");
-                            aux.SetUser(new User(usernameEdit.Text, passwordEdit.Password));
+                            if (cbHasUser.SelectedIndex == 1) aux.role = "User"; else aux.role = "Admin";
+                            aux.user = new User(usernameEdit.Text, passwordEdit.Password);
                         }
 
                         //Alterando registro no banco

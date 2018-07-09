@@ -132,9 +132,9 @@ namespace Promig.Connection.Methods {
                 //Verificando resultados
                 while (reader.Read()) {
 
-                    e.SetId((int)reader["id_funcionario"]);
-                    e.SetName((string)reader["nome_pessoa"]);
-                    e.SetRole((string)reader["permissao"]);
+                    e.id = (int)reader["id_funcionario"];
+                    e.name = (string)reader["nome_pessoa"];
+                    e.role =  (string)reader["permissao"];
                 }
 
 

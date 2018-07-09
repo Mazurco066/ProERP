@@ -42,7 +42,7 @@
         #endregion Constructors
 
         #region Getter/Setter
-
+        /*
         public int GetId() {
 
             return id;
@@ -121,30 +121,8 @@
         public void SetUser(User user) {
 
             this.user = user;
-        }
+        }*/
 
         #endregion Getter/Setter
-
-        #region Class-Methods
-
-        //Método para impressão na grid
-        public string[] ToStringArray() {
-
-            //Definindo vetor que será retornado
-            string[] _return = new string[4];
-
-            //Preenchendo dados do cliente
-            _return[0] = GetId().ToString();
-            _return[1] = GetName();
-            _return[2] = GetAdress().GetCity();
-            _return[3] = cpf;
-
-            //Retornando informações do cliente para grid
-            return _return;
-
-        }
-
-        #endregion Class-Methods
-
     }
 }

@@ -60,9 +60,9 @@ namespace Promig.View {
 
                     //Limpando campos e abrindo menu
                     Clear();
-                    MainWindow.currentUsername = employe.GetName();
-                    MainWindow.currentPermission = employe.GetRole();
-                    MainWindow.currentId = employe.GetId();
+                    MainWindow.currentUsername = employe.name;
+                    MainWindow.currentPermission = employe.role;
+                    MainWindow.currentId = employe.id;
                     MainWindow window = new MainWindow();
                     window.Show();
                     Close();

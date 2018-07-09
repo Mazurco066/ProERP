@@ -51,7 +51,7 @@ namespace Promig.Connection.Methods
                                  "data_admissao, funcao) values (" +
                                  "last_insert_id(), @role, @cpf, " +
                                  "@admission, @job);";
-                if (emp.GetUser() != null)
+                if (emp.user != null)
                     command += "insert into usuarios(id_funcionario, login, password) values (" +
                                "last_insert_id(), @username, @password);";
                 command += " COMMIT;";
@@ -62,23 +62,23 @@ namespace Promig.Connection.Methods
                 };
 
                 //Definindo parametros para inserção
-                cmd.Parameters.Add(new MySqlParameter("@street", emp.GetAdress().GetStreet()));
-                cmd.Parameters.Add(new MySqlParameter("@number", emp.GetAdress().GetNumber()));
-                cmd.Parameters.Add(new MySqlParameter("@neighborhood", emp.GetAdress().GetNeighborhood()));
-                cmd.Parameters.Add(new MySqlParameter("@city", emp.GetAdress().GetCity()));
-                cmd.Parameters.Add(new MySqlParameter("@uf", emp.GetAdress().GetUF()));
-                cmd.Parameters.Add(new MySqlParameter("@cep", emp.GetAdress().GetCEP()));
-                cmd.Parameters.Add(new MySqlParameter("@name", emp.GetName()));
+                cmd.Parameters.Add(new MySqlParameter("@street", emp.adress.street));
+                cmd.Parameters.Add(new MySqlParameter("@number", emp.adress.number));
+                cmd.Parameters.Add(new MySqlParameter("@neighborhood", emp.adress.neighborhood));
+                cmd.Parameters.Add(new MySqlParameter("@city", emp.adress.city));
+                cmd.Parameters.Add(new MySqlParameter("@uf", emp.adress.UF));
+                cmd.Parameters.Add(new MySqlParameter("@cep", emp.adress.CEP));
+                cmd.Parameters.Add(new MySqlParameter("@name", emp.name));
                 cmd.Parameters.Add(new MySqlParameter("@status", emp.IsActive()));
-                cmd.Parameters.Add(new MySqlParameter("@role", emp.GetRole()));
-                cmd.Parameters.Add(new MySqlParameter("@cpf", emp.GetCpf()));
-                cmd.Parameters.Add(new MySqlParameter("@admission", emp.GetAdmission()));
-                cmd.Parameters.Add(new MySqlParameter("@job", emp.GetJob()));
+                cmd.Parameters.Add(new MySqlParameter("@role", emp.role));
+                cmd.Parameters.Add(new MySqlParameter("@cpf", emp.cpf));
+                cmd.Parameters.Add(new MySqlParameter("@admission", emp.admission));
+                cmd.Parameters.Add(new MySqlParameter("@job", emp.job));
 
                 //Caso funsionário possuir usuário
-                if (emp.GetUser() != null) {
-                    cmd.Parameters.Add(new MySqlParameter("@username", emp.GetUser().GetLogin()));
-                    cmd.Parameters.Add(new MySqlParameter("@password", emp.GetUser().GetMD5Hash()));
+                if (emp.user != null) {
+                    cmd.Parameters.Add(new MySqlParameter("@username", emp.user.GetLogin()));
+                    cmd.Parameters.Add(new MySqlParameter("@password", emp.user.GetMD5Hash()));
                 }
 
                 //Preparando comando com os parametros
@@ -126,7 +126,7 @@ namespace Promig.Connection.Methods
                                  "update funcionarios set permissao = @role, cpf = @cpf, " +
                                  "data_admissao = @admission, funcao = @job " +
                                  "where id_funcionario = @id_funcionario;";
-                if (emp.GetUser() != null)
+                if (emp.user != null)
                     command += "replace into usuarios(id_funcionario, login, password) values (" +
                                "@id_funcionario, @username, @password);";
                 else
@@ -139,26 +139,26 @@ namespace Promig.Connection.Methods
                 };
 
                 //Definindo parametros para inserção
-                cmd.Parameters.Add(new MySqlParameter("@id_endereco", emp.GetAdress().GetId()));
-                cmd.Parameters.Add(new MySqlParameter("@id_pessoa", emp.GetIdPerson()));
-                cmd.Parameters.Add(new MySqlParameter("@id_funcionario", emp.GetId()));
-                cmd.Parameters.Add(new MySqlParameter("@street", emp.GetAdress().GetStreet()));
-                cmd.Parameters.Add(new MySqlParameter("@number", emp.GetAdress().GetNumber()));
-                cmd.Parameters.Add(new MySqlParameter("@neighborhood", emp.GetAdress().GetNeighborhood()));
-                cmd.Parameters.Add(new MySqlParameter("@city", emp.GetAdress().GetCity()));
-                cmd.Parameters.Add(new MySqlParameter("@uf", emp.GetAdress().GetUF()));
-                cmd.Parameters.Add(new MySqlParameter("@cep", emp.GetAdress().GetCEP()));
-                cmd.Parameters.Add(new MySqlParameter("@name", emp.GetName()));
+                cmd.Parameters.Add(new MySqlParameter("@id_endereco", emp.adress.id));
+                cmd.Parameters.Add(new MySqlParameter("@id_pessoa", emp.id_person));
+                cmd.Parameters.Add(new MySqlParameter("@id_funcionario", emp.id));
+                cmd.Parameters.Add(new MySqlParameter("@street", emp.adress.street));
+                cmd.Parameters.Add(new MySqlParameter("@number", emp.adress.number));
+                cmd.Parameters.Add(new MySqlParameter("@neighborhood", emp.adress.neighborhood));
+                cmd.Parameters.Add(new MySqlParameter("@city", emp.adress.city));
+                cmd.Parameters.Add(new MySqlParameter("@uf", emp.adress.UF));
+                cmd.Parameters.Add(new MySqlParameter("@cep", emp.adress.CEP));
+                cmd.Parameters.Add(new MySqlParameter("@name", emp.name));
                 cmd.Parameters.Add(new MySqlParameter("@status", emp.IsActive()));
-                cmd.Parameters.Add(new MySqlParameter("@role", emp.GetRole()));
-                cmd.Parameters.Add(new MySqlParameter("@cpf", emp.GetCpf()));
-                cmd.Parameters.Add(new MySqlParameter("@admission", emp.GetAdmission()));
-                cmd.Parameters.Add(new MySqlParameter("@job", emp.GetJob()));
+                cmd.Parameters.Add(new MySqlParameter("@role", emp.role));
+                cmd.Parameters.Add(new MySqlParameter("@cpf", emp.cpf));
+                cmd.Parameters.Add(new MySqlParameter("@admission", emp.admission));
+                cmd.Parameters.Add(new MySqlParameter("@job", emp.job));
 
                 //Caso funsionário possuir usuário
-                if (emp.GetUser() != null) {
-                    cmd.Parameters.Add(new MySqlParameter("@username", emp.GetUser().GetLogin()));
-                    cmd.Parameters.Add(new MySqlParameter("@password", emp.GetUser().GetMD5Hash()));
+                if (emp.user != null) {
+                    cmd.Parameters.Add(new MySqlParameter("@username", emp.user.GetLogin()));
+                    cmd.Parameters.Add(new MySqlParameter("@password", emp.user.GetMD5Hash()));
                 }
 
                 //Preparando comando com os parametros
@@ -225,20 +225,20 @@ namespace Promig.Connection.Methods
                 while (reader.Read()) {
 
                     //Recuperando dados do cliente
-                    employe.SetId((int)reader["id_funcionario"]);
-                    employe.SetIdPerson((int)reader["id_pessoa"]);
-                    employe.GetAdress().SetId((int)reader["id_endereco"]);
-                    employe.SetName((string)reader["nome_pessoa"]);
-                    employe.GetAdress().SetStreet((string)reader["rua"]);
-                    employe.GetAdress().SetNumber(reader["numero"].ToString());
-                    employe.GetAdress().SetNeighborhood((string)reader["bairro"]);
-                    employe.GetAdress().SetCity((string)reader["cidade"]);
-                    employe.GetAdress().SetUF((string)reader["uf"]);
-                    employe.GetAdress().SetCEP((string)reader["cep"]);
-                    employe.SetCpf((string)reader["cpf"]);
-                    employe.SetRole((string)reader["permissao"]);
-                    employe.SetJob((string)reader["funcao"]);
-                    employe.SetAdmission((string)reader["data_admissao"]);
+                    employe.id = (int)reader["id_funcionario"];
+                    employe.id_person = (int)reader["id_pessoa"];
+                    employe.adress.id = (int)reader["id_endereco"];
+                    employe.name = (string)reader["nome_pessoa"];
+                    employe.adress.street = (string)reader["rua"];
+                    employe.adress.number = reader["numero"].ToString();
+                    employe.adress.neighborhood = (string)reader["bairro"];
+                    employe.adress.city = (string)reader["cidade"];
+                    employe.adress.UF = (string)reader["uf"];
+                    employe.adress.CEP = (string)reader["cep"];
+                    employe.cpf = (string)reader["cpf"];
+                    employe.role = (string)reader["permissao"];
+                    employe.job = (string)reader["funcao"];
+                    employe.admission = (string)reader["data_admissao"];
 
                     //Booleanos
                     if (!(bool)reader["status"]) employe.Inactivate();
@@ -247,7 +247,7 @@ namespace Promig.Connection.Methods
                 reader.Close();
 
                 //Segunda query, opcionals e funcionário possuir usuário
-                if (!employe.GetRole().Equals("none")) {
+                if (!employe.role.Equals("none")) {
 
                     command = "select u.login, u.password " +
                               "from usuarios u, funcionarios f " +
@@ -272,7 +272,7 @@ namespace Promig.Connection.Methods
                         User user = new User();
                         user.SetLogin((string)reader["login"]);
                         user.SetMD5Hash((string)reader["password"]);
-                        employe.SetUser(user);
+                        employe.user = user;
                     }
 
                 }
@@ -297,8 +297,8 @@ namespace Promig.Connection.Methods
 
                 //Retornando usuário vazio
                 Employe _return = new Employe();
-                _return.SetName("");
-                _return.SetRole("none");
+                _return.name = "";
+                _return.role = "none";
                 return _return;
 
             }
@@ -341,12 +341,11 @@ namespace Promig.Connection.Methods
 
                     //Adicionando cliente encontrado ao array de retorno
                     Employe employe = new Employe();
-                    employe.SetId((int)reader["id_funcionario"]);
-                    employe.SetName((string)reader["nome_pessoa"]);
-                    employe.GetAdress().SetCity((string)reader["cidade"]);
-                    employe.SetCpf((string)reader["cpf"]);
+                    employe.id = (int)reader["id_funcionario"];
+                    employe.name = (string)reader["nome_pessoa"];
+                    employe.adress.city = (string)reader["cidade"];
+                    employe.cpf = (string)reader["cpf"];
                     results.Add(employe);
-
                 }
 
                 //Fechando conexão e retornando clientes
@@ -401,10 +400,10 @@ namespace Promig.Connection.Methods
 
                     //Adicionando cliente encontrado ao array de retorno
                     Employe employe = new Employe();
-                    employe.SetId((int)reader["id_funcionario"]);
-                    employe.SetName((string)reader["nome_pessoa"]);
-                    employe.GetAdress().SetCity((string)reader["cidade"]);
-                    employe.SetCpf((string)reader["cpf"]);
+                    employe.id = (int)reader["id_funcionario"];
+                    employe.name = (string)reader["nome_pessoa"];
+                    employe.adress.city = (string)reader["cidade"];
+                    employe.cpf = (string)reader["cpf"];
                     results.Add(employe);
 
                 }
@@ -461,10 +460,10 @@ namespace Promig.Connection.Methods
 
                     //Adicionando cliente encontrado ao array de retorno
                     Employe employe = new Employe();
-                    employe.SetId((int)reader["id_funcionario"]);
-                    employe.SetName((string)reader["nome_pessoa"]);
-                    employe.GetAdress().SetCity((string)reader["cidade"]);
-                    employe.SetCpf((string)reader["cpf"]);
+                    employe.id = (int)reader["id_funcionario"];
+                    employe.name = (string)reader["nome_pessoa"];
+                    employe.adress.city = (string)reader["cidade"];
+                    employe.cpf = (string)reader["cpf"];
                     results.Add(employe);
 
                 }
@@ -521,10 +520,10 @@ namespace Promig.Connection.Methods
 
                     //Adicionando cliente encontrado ao array de retorno
                     Employe employe = new Employe();
-                    employe.SetId((int)reader["id_funcionario"]);
-                    employe.SetName((string)reader["nome_pessoa"]);
-                    employe.GetAdress().SetCity((string)reader["cidade"]);
-                    employe.SetCpf((string)reader["cpf"]);
+                    employe.id = (int)reader["id_funcionario"];
+                    employe.name = (string)reader["nome_pessoa"];
+                    employe.adress.city = (string)reader["cidade"];
+                    employe.cpf = (string)reader["cpf"];
                     results.Add(employe);
 
                 }
