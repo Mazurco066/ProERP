@@ -54,16 +54,16 @@ namespace Promig.Connection.Methods {
                 };
 
                 //Definindo parametros para inserção
-                cmd.Parameters.Add(new MySqlParameter("@street", supplier.GetAdress().GetStreet()));
-                cmd.Parameters.Add(new MySqlParameter("@number", supplier.GetAdress().GetNumber()));
-                cmd.Parameters.Add(new MySqlParameter("@neighborhood", supplier.GetAdress().GetNeighborhood()));
-                cmd.Parameters.Add(new MySqlParameter("@city", supplier.GetAdress().GetCity()));
-                cmd.Parameters.Add(new MySqlParameter("@uf", supplier.GetAdress().GetUF()));
-                cmd.Parameters.Add(new MySqlParameter("@cep", supplier.GetAdress().GetCEP()));
-                cmd.Parameters.Add(new MySqlParameter("@name", supplier.GetName()));
-                cmd.Parameters.Add(new MySqlParameter("@cnpj", supplier.GetCnpj()));
-                cmd.Parameters.Add(new MySqlParameter("@resPhone", supplier.GetResPhone()));
-                cmd.Parameters.Add(new MySqlParameter("@cellPhone", supplier.GetCellPhone()));
+                cmd.Parameters.Add(new MySqlParameter("@street", supplier.adress.street));
+                cmd.Parameters.Add(new MySqlParameter("@number", supplier.adress.number));
+                cmd.Parameters.Add(new MySqlParameter("@neighborhood", supplier.adress.neighborhood));
+                cmd.Parameters.Add(new MySqlParameter("@city", supplier.adress.city));
+                cmd.Parameters.Add(new MySqlParameter("@uf", supplier.adress.UF));
+                cmd.Parameters.Add(new MySqlParameter("@cep", supplier.adress.CEP));
+                cmd.Parameters.Add(new MySqlParameter("@name", supplier.name));
+                cmd.Parameters.Add(new MySqlParameter("@cnpj", supplier.cnpj));
+                cmd.Parameters.Add(new MySqlParameter("@resPhone", supplier.resPhone));
+                cmd.Parameters.Add(new MySqlParameter("@cellPhone", supplier.cellPhone));
                 cmd.Parameters.Add(new MySqlParameter("@status", supplier.IsActive()));
 
                 //Preparando o comando com os parametros
@@ -115,19 +115,19 @@ namespace Promig.Connection.Methods {
                 };
 
                 //Definindo parametros para inserção
-                cmd.Parameters.Add(new MySqlParameter("@adressId", supplier.GetAdress().GetId()));
-                cmd.Parameters.Add(new MySqlParameter("@personId", supplier.GetIdPerson()));
-                cmd.Parameters.Add(new MySqlParameter("@suplierId", supplier.GetId()));
-                cmd.Parameters.Add(new MySqlParameter("@street", supplier.GetAdress().GetStreet()));
-                cmd.Parameters.Add(new MySqlParameter("@number", supplier.GetAdress().GetNumber()));
-                cmd.Parameters.Add(new MySqlParameter("@neighborhood", supplier.GetAdress().GetNeighborhood()));
-                cmd.Parameters.Add(new MySqlParameter("@city", supplier.GetAdress().GetCity()));
-                cmd.Parameters.Add(new MySqlParameter("@uf", supplier.GetAdress().GetUF()));
-                cmd.Parameters.Add(new MySqlParameter("@cep", supplier.GetAdress().GetCEP()));
-                cmd.Parameters.Add(new MySqlParameter("@name", supplier.GetName()));
-                cmd.Parameters.Add(new MySqlParameter("@cnpj", supplier.GetCnpj()));
-                cmd.Parameters.Add(new MySqlParameter("@resPhone", supplier.GetResPhone()));
-                cmd.Parameters.Add(new MySqlParameter("@cellphone", supplier.GetCellPhone()));
+                cmd.Parameters.Add(new MySqlParameter("@adressId", supplier.adress.id));
+                cmd.Parameters.Add(new MySqlParameter("@personId", supplier.id_person));
+                cmd.Parameters.Add(new MySqlParameter("@suplierId", supplier.id));
+                cmd.Parameters.Add(new MySqlParameter("@street", supplier.adress.street));
+                cmd.Parameters.Add(new MySqlParameter("@number", supplier.adress.number));
+                cmd.Parameters.Add(new MySqlParameter("@neighborhood", supplier.adress.neighborhood));
+                cmd.Parameters.Add(new MySqlParameter("@city", supplier.adress.city));
+                cmd.Parameters.Add(new MySqlParameter("@uf", supplier.adress.UF));
+                cmd.Parameters.Add(new MySqlParameter("@cep", supplier.adress.CEP));
+                cmd.Parameters.Add(new MySqlParameter("@name", supplier.name));
+                cmd.Parameters.Add(new MySqlParameter("@cnpj", supplier.cnpj));
+                cmd.Parameters.Add(new MySqlParameter("@resPhone", supplier.resPhone));
+                cmd.Parameters.Add(new MySqlParameter("@cellphone", supplier.cellPhone));
                 cmd.Parameters.Add(new MySqlParameter("@status", supplier.IsActive()));
 
                 //Preparando o comando com os parametros
@@ -192,19 +192,19 @@ namespace Promig.Connection.Methods {
                 while (reader.Read()) {
 
                     //Recuperando dados do cliente
-                    suplier.SetId((int)reader["id_fornecedor"]);
-                    suplier.SetIdPerson((int)reader["id_pessoa"]);
-                    suplier.GetAdress().SetId((int)reader["id_endereco"]);
-                    suplier.SetName((string)reader["nome_pessoa"]);
-                    suplier.GetAdress().SetStreet(reader["rua"].ToString());
-                    suplier.GetAdress().SetNumber(reader["numero"].ToString());
-                    suplier.GetAdress().SetNeighborhood((string)reader["bairro"]);
-                    suplier.GetAdress().SetCity((string)reader["cidade"]);
-                    suplier.GetAdress().SetUF((string)reader["uf"]);
-                    suplier.GetAdress().SetCEP((string)reader["cep"]);
-                    suplier.SetCnpj((string)reader["cnpj"]);
-                    suplier.SetResPhone((string)reader["tel_residencial"]);
-                    suplier.SetCellPhone((string)reader["tel_celular"]);
+                    suplier.id = (int)reader["id_fornecedor"];
+                    suplier.id_person = (int)reader["id_pessoa"];
+                    suplier.adress.id = (int)reader["id_endereco"];
+                    suplier.name = (string)reader["nome_pessoa"];
+                    suplier.adress.street = reader["rua"].ToString();
+                    suplier.adress.number = reader["numero"].ToString();
+                    suplier.adress.neighborhood = (string)reader["bairro"];
+                    suplier.adress.city = (string)reader["cidade"];
+                    suplier.adress.UF = (string)reader["uf"];
+                    suplier.adress.CEP = (string)reader["cep"];
+                    suplier.cnpj = (string)reader["cnpj"];
+                    suplier.resPhone = (string)reader["tel_residencial"];
+                    suplier.cellPhone = (string)reader["tel_celular"];
 
                     //Booleanos
                     if (!(bool)reader["status"]) suplier.Inactivate();
@@ -270,10 +270,10 @@ namespace Promig.Connection.Methods {
 
                     //Adicionando cliente encontrado ao array de retorno
                     Supplier supplier = new Supplier();
-                    supplier.SetId((int)reader["id_fornecedor"]);
-                    supplier.SetName((string)reader["nome_pessoa"]);
-                    supplier.GetAdress().SetCity((string)reader["cidade"]);
-                    supplier.SetCnpj((string)reader["cnpj"]);
+                    supplier.id = (int)reader["id_fornecedor"];
+                    supplier.name = (string)reader["nome_pessoa"];
+                    supplier.adress.city = (string)reader["cidade"];
+                    supplier.cnpj = (string)reader["cnpj"];
                     results.Add(supplier);
                 }
 
@@ -329,10 +329,10 @@ namespace Promig.Connection.Methods {
 
                     //Adicionando cliente encontrado ao array de retorno
                     Supplier supplier = new Supplier();
-                    supplier.SetId((int)reader["id_fornecedor"]);
-                    supplier.SetName((string)reader["nome_pessoa"]);
-                    supplier.GetAdress().SetCity((string)reader["cidade"]);
-                    supplier.SetCnpj((string)reader["cnpj"]);
+                    supplier.id = (int)reader["id_fornecedor"];
+                    supplier.name = (string)reader["nome_pessoa"];
+                    supplier.adress.city = (string)reader["cidade"];
+                    supplier.cnpj = (string)reader["cnpj"];
                     results.Add(supplier);
 
                 }
@@ -389,10 +389,10 @@ namespace Promig.Connection.Methods {
 
                     //Adicionando cliente encontrado ao array de retorno
                     Supplier supplier = new Supplier();
-                    supplier.SetId((int)reader["id_fornecedor"]);
-                    supplier.SetName((string)reader["nome_pessoa"]);
-                    supplier.GetAdress().SetCity((string)reader["cidade"]);
-                    supplier.SetCnpj((string)reader["cnpj"]);
+                    supplier.id = (int)reader["id_fornecedor"];
+                    supplier.name = (string)reader["nome_pessoa"];
+                    supplier.adress.city = (string)reader["cidade"];
+                    supplier.cnpj = (string)reader["cnpj"];
                     results.Add(supplier);
 
                 }
@@ -425,7 +425,7 @@ namespace Promig.Connection.Methods {
                                  " where p.id_pessoa = f.id_pessoa and" +
                                  " p.id_endereco = e.id_endereco and" +
                                  " p.status = @status and" +
-                                 " c.cpf_cnpj LIKE @param;";
+                                 " f.cnpj LIKE @param;";
 
                 //Definindo objetos para recuperação de dados
                 List<Supplier> results = new List<Supplier>();
@@ -450,10 +450,10 @@ namespace Promig.Connection.Methods {
 
                     //Adicionando cliente encontrado ao array de retorno
                     Supplier supplier = new Supplier();
-                    supplier.SetId((int)reader["id_fornecedor"]);
-                    supplier.SetName((string)reader["nome_pessoa"]);
-                    supplier.GetAdress().SetCity((string)reader["cidade"]);
-                    supplier.SetCnpj((string)reader["cnpj"]);
+                    supplier.id = (int)reader["id_fornecedor"];
+                    supplier.name = (string)reader["nome_pessoa"];
+                    supplier.adress.city = (string)reader["cidade"];
+                    supplier.cnpj = (string)reader["cnpj"];
                     results.Add(supplier);
 
                 }
@@ -463,10 +463,11 @@ namespace Promig.Connection.Methods {
                 return results;
 
             }
-            catch (MySqlException) {
+            catch (MySqlException err) {
 
                 //Fechando conexão e retornando erro
                 conn.Close();
+                MessageBox.Show(err.Message);
                 throw new DatabaseAccessException();
             }
 

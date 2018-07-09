@@ -373,47 +373,70 @@ namespace Promig.View.Components {
             //Limpando campo de pesquisa
             txtSearch.Text = null;
 
-            //Filtros de busca
-            switch (cbSearch.SelectedIndex) {
+            try {
 
-                case 0: //Ativo - nome
-                    dgUsuarios.ItemsSource = dao.GetAllActiveEmployes(txtSearch.Text);
-                    break;
+                //Filtros de busca
+                switch (cbSearch.SelectedIndex) {
 
-                case 1: //Todos - nome
-                    dgUsuarios.ItemsSource = dao.GetAllEmployes(txtSearch.Text);
-                    break;
+                    case 0: //Ativo - nome
+                        dgUsuarios.ItemsSource = dao.GetAllActiveEmployes(txtSearch.Text);
+                        break;
 
-                case 2: //Ativo - Cidade
-                    dgUsuarios.ItemsSource = dao.GetAllActiveEmployesByCity(txtSearch.Text);
-                    break;
+                    case 1: //Todos - nome
+                        dgUsuarios.ItemsSource = dao.GetAllEmployes(txtSearch.Text);
+                        break;
 
-                case 3: //Ativo - CPF
-                    dgUsuarios.ItemsSource = dao.GetAllActiveEmployesByDocument(txtSearch.Text);
-                    break;
+                    case 2: //Ativo - Cidade
+                        dgUsuarios.ItemsSource = dao.GetAllActiveEmployesByCity(txtSearch.Text);
+                        break;
+
+                    case 3: //Ativo - CPF
+                        dgUsuarios.ItemsSource = dao.GetAllActiveEmployesByDocument(txtSearch.Text);
+                        break;
+                }
+
+            }
+            catch (DatabaseAccessException err) {
+                MessageBox.Show(
+                    err.Message,            
+                    "Problemas ao acessar o banco!",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
             }
         }
 
         private void RefreshGrid(string param) {
 
-            //Filtros de busca
-            switch (cbSearch.SelectedIndex) {
+            try {
 
-                case 0: //Ativo - nome
-                    dgUsuarios.ItemsSource = dao.GetAllActiveEmployes(param);
-                    break;
+                //Filtros de busca
+                switch (cbSearch.SelectedIndex) {
 
-                case 1: //Todos - nome
-                    dgUsuarios.ItemsSource = dao.GetAllEmployes(param);
-                    break;
+                    case 0: //Ativo - nome
+                        dgUsuarios.ItemsSource = dao.GetAllActiveEmployes(param);
+                        break;
 
-                case 2: //Ativo - Cidade
-                    dgUsuarios.ItemsSource = dao.GetAllActiveEmployesByCity(param);
-                    break;
+                    case 1: //Todos - nome
+                        dgUsuarios.ItemsSource = dao.GetAllEmployes(param);
+                        break;
 
-                case 3: //Ativo - CPF
-                    dgUsuarios.ItemsSource = dao.GetAllActiveEmployesByDocument(param);
-                    break;
+                    case 2: //Ativo - Cidade
+                        dgUsuarios.ItemsSource = dao.GetAllActiveEmployesByCity(param);
+                        break;
+
+                    case 3: //Ativo - CPF
+                        dgUsuarios.ItemsSource = dao.GetAllActiveEmployesByDocument(param);
+                        break;
+                }
+            }
+            catch(DatabaseAccessException err) {
+                MessageBox.Show(
+                    err.Message,
+                    "Problemas ao acessar o banco!",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
             }
         }
 

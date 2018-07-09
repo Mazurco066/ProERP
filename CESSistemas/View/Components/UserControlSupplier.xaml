@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:Promig.View.Components"
 			  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             Loaded="control_loaded"
              d:DesignHeight="450" d:DesignWidth="1306" Height="697" Background="White">
     <Grid RenderTransformOrigin="0.72,0.469">
         <Grid.RowDefinitions>
@@ -16,6 +17,7 @@
         <Label Content="Fornecedores" FontSize="40" Margin="39,34,1015,595" Foreground="#FF3F51B5" Grid.RowSpan="2"/>
         <TextBox 
             x:Name="txtSearch" 
+            KeyDown="txtSearch_KeyDown"
             HorizontalAlignment="Left"
             Width="424" 
             Height="42" 
@@ -35,20 +37,7 @@
             Margin="46,74,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
-            materialDesign:HintAssist.Hint="Nome" 
-            Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-            FontFamily="champagne &amp; Limousines" 
-            FontSize="14" Foreground="#FF060606" 
-            TabIndex="0" MaxLength="60" Grid.Row="1"/>
-        <TextBox 
-            x:Name="RoleEdit" 
-            HorizontalAlignment="Left" 
-            Width="530" 
-            Height="42" 
-            Margin="46,268,0,0" 
-            TextWrapping="Wrap" 
-            VerticalAlignment="Top" 
-            materialDesign:HintAssist.Hint="Cargo" 
+            materialDesign:HintAssist.Hint="Razão Social" 
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF060606" 
@@ -138,7 +127,7 @@
             Margin="46,221,0,0" 
             TextWrapping="Wrap"
             VerticalAlignment="Top"
-            Width="150"
+            Width="260"
             materialDesign:HintAssist.Hint="Número" 
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             FontFamily="champagne &amp; Limousines"
@@ -151,18 +140,18 @@
             IncludePromptInValue="False"
             HorizontalAlignment="Left"
             Height="44"
-            Margin="216,219,0,0" 
+            Margin="331,219,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
-            Width="184" 
+            Width="245" 
             materialDesign:HintAssist.Hint="CEP" 
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF0A0A0A" 
             MaxLength="30" TabIndex="4" Grid.Row="1" HidePromptOnLeave="True"/>
         <wpfTool:MaskedTextBox 
-            x:Name="cpfEdit"
-            Mask="999,999,999-99" 
+            x:Name="cnpjEdit"
+            Mask="99,999,999/9999-99" 
             IncludeLiteralsInValue="True"
             IncludePromptInValue="True"
             HorizontalAlignment="Left"
@@ -176,17 +165,12 @@
             FontFamily="champagne &amp; Limousines"
             FontSize="14" Foreground="#FF0A0A0A" 
             MaxLength="30" TabIndex="4" Grid.Row="1" HidePromptOnLeave="True"/>
-        <ComboBox x:Name="cbHasUser" HorizontalAlignment="Left" Margin="46,24,0,0" VerticalAlignment="Top" Width="250" materialDesign:HintAssist.Hint="Tipo" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintComboBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A" TabIndex="8" Grid.Row="1">
-            <ComboBoxItem Content="Admin"/>
-            <ComboBoxItem Content="Usuário"/>
-            <ComboBoxItem Content="Sem Usuário"/>
-        </ComboBox>
-        <ComboBox x:Name="cbActive" HorizontalAlignment="Left" Margin="326,24,0,0" VerticalAlignment="Top" Width="245" materialDesign:HintAssist.Hint="Ativo" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintComboBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A" TabIndex="8" Grid.Row="1">
+        <ComboBox x:Name="cbActive" HorizontalAlignment="Left" Margin="46,24,0,0" VerticalAlignment="Top" Width="245" materialDesign:HintAssist.Hint="Ativo" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintComboBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A" TabIndex="8" Grid.Row="1">
             <ComboBoxItem Content="Ativo"/>
             <ComboBoxItem Content="Desativado"/>
         </ComboBox>
         <DataGrid 
-            x:Name="dgUsuarios"
+            x:Name="dgSuppliers"
             IsReadOnly="True"
             SelectionMode="Single"
             SelectionUnit="FullRow"
@@ -200,35 +184,24 @@
             Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Código" Binding="{Binding id}" FontSize="11" />
-                <DataGridTextColumn Header="Nome" Width="300" Binding="{Binding name}"  FontSize="11" />
+                <DataGridTextColumn Header="Razão Social" Width="300" Binding="{Binding name}"  FontSize="11" />
                 <DataGridTextColumn Header="Cidade" Width="150" Binding="{Binding adress.city}"  FontSize="11" />
-                <DataGridTextColumn Header="CPF" Binding="{Binding cpf}"  FontSize="11" />
+                <DataGridTextColumn Header="CNPJ" Binding="{Binding cnpj}"  FontSize="11" />
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btnAdicionar" Content="Adicionar" HorizontalAlignment="Left" Margin="46,483,0,0" VerticalAlignment="Top" Width="268" Height="60" FontSize="20" BorderBrush="#FF3F51B5" Grid.Row="1"/>
         <Button x:Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="340,483,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5" Grid.Row="1"/>
         <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="661,483,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5" Grid.Row="1"/>
         <Button x:Name="btnSalvar" Content="Salvar" HorizontalAlignment="Left" Margin="980,483,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5" Grid.Row="1"/>
-        <Button x:Name="btnRefresh" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="1223,41,33,0" Height="26" Background="{x:Null}" Grid.Row="1">
+        <Button x:Name="btnRefresh" Click="btnRefresh_Click" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="1223,41,33,0" Height="26" Background="{x:Null}" Grid.Row="1">
             <materialDesign:PackIcon Foreground="#FF3F51B5" Kind="Refresh" Width="20" Height="19" RenderTransformOrigin="0.45,2.842"/>
         </Button>
         <Button x:Name="btnMostrarDataGrid" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="1223,27,0,0" Height="26" Background="{x:Null}" HorizontalAlignment="Left" Width="50" Grid.Row="1" Visibility="Hidden">
             <materialDesign:PackIcon Foreground="#FF3F51B5" Kind="EyeOff" Width="20" Height="19"/>
         </Button>
-        <DatePicker 
-            Name="admissionEdit" 
-            Style="{StaticResource MaterialDesignDatePicker}" 
-            materialDesign:HintAssist.Hint="Data Admissão" 
-            FontFamily="champagne &amp; Limousines" 
-            FontSize="14" 
-            Foreground="#FF0A0A0A" 
-            HorizontalAlignment="Left"
-            Margin="421,237,0,0" 
-            Grid.Row="1" 
-            VerticalAlignment="Top" 
-            Width="155" Height="26"/>
         <ComboBox 
             Name="cbSearch"
+            SelectionChanged="cbSearch_SelectionChanged"
             HorizontalAlignment="Left" 
             Margin="640,24,0,0"  
             materialDesign:HintAssist.Hint="Parametro" 
@@ -243,7 +216,39 @@
             <ComboBoxItem Content="Por: Ativos (Nome)" />
             <ComboBoxItem Content="Por: Todos (Nome)" />
             <ComboBoxItem Content="Por: Ativos (Cidade)" />
-            <ComboBoxItem Content="Por: Ativos (CPF)" />
+            <ComboBoxItem Content="Por: Ativos (CNPJ)" />
         </ComboBox>
+        <wpfTool:MaskedTextBox  
+            x:Name="phone1Edit"
+            Mask="(99) 9999-9999"
+            IncludeLiteralsInValue="False"
+            IncludePromptInValue="False"
+            HorizontalAlignment="Left"
+            Height="44"
+            Margin="46,268,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Width="260" 
+            materialDesign:HintAssist.Hint="Telefone Residencial" 
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            FontFamily="champagne &amp; Limousines" 
+            FontSize="14" Foreground="#FF0A0A0A" 
+            MaxLength="30" TabIndex="4" Grid.Row="1" HidePromptOnLeave="True"/>
+        <wpfTool:MaskedTextBox  
+            x:Name="phone2Edit"
+            Mask="(99) 99999-9999"
+            IncludeLiteralsInValue="False"
+            IncludePromptInValue="False"
+            HorizontalAlignment="Left"
+            Height="44"
+            Margin="331,268,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Width="245" 
+            materialDesign:HintAssist.Hint="Telefone Celular" 
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            FontFamily="champagne &amp; Limousines" 
+            FontSize="14" Foreground="#FF0A0A0A" 
+            MaxLength="30" TabIndex="4" Grid.Row="1" HidePromptOnLeave="True"/>
     </Grid>
 </UserControl>
