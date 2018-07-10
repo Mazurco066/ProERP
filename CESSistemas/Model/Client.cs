@@ -13,13 +13,13 @@
         #region Attrib
 
         //Atributos
-        private int id;
-        private string docNumber;
-        private string residenceNumber;
-        private string cellNumber;
-        private string stateId;
-        private string description;
-        private bool physical;
+        public int id { get; set; }
+        public string docNumber { get; set; }
+        public string residenceNumber { get; set; }
+        public string cellNumber { get; set; }
+        public string stateId { get; set; }
+        public string description { get; set; }
+        public bool physical { get; set; }
 
         #endregion Attrib
 

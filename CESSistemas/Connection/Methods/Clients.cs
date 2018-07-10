@@ -15,7 +15,7 @@ namespace Promig.Connection.Methods {
      |      os dados relacionados a clientes do sistema do banco de dados.
      |
      */
-    class ClientDAO {
+    class Clients {
 
         #region header
 
@@ -23,7 +23,7 @@ namespace Promig.Connection.Methods {
         private MySqlConnection conn;
 
         //Construtor
-        public ClientDAO() {
+        public Clients() {
 
             //Instanciando objeto de conexão
             conn = ConnectionFactory.GetConnection();
