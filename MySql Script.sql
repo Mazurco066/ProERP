@@ -2,8 +2,6 @@
 create database if not exists promig;
 use promig;
 
-select * from clientes;
-
 /* Criando as tabelas */
 create table if not exists enderecos(
 	id_endereco int not null auto_increment,
@@ -35,9 +33,6 @@ create table if not exists funcionarios(
 	CONSTRAINT PRK_ID_FUNCIONARIO PRIMARY KEY (id_funcionario),
 	CONSTRAINT FRK_ID_FUNCIONARIO FOREIGN KEY (id_pessoa) REFERENCES pessoas(id_pessoa)
 );
-
-select * from enderecos;
-select * from funcionarios;
 
 create table if not exists clientes(
 	id_cliente int not null auto_increment,
