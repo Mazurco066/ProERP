@@ -78,6 +78,10 @@ namespace Promig.View {
                     usc = new UserControlBillsToReceive();
                     GridMain.Children.Add(usc);
                     break;
+                case "Estimate":
+                    usc = new UserControlEstimate();
+                    GridMain.Children.Add(usc);
+                    break;
                 case "Sair":
                     System.Environment.Exit(0);
                     break;

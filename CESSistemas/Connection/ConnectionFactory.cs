@@ -12,8 +12,8 @@ namespace Promig.Connection {
         //Atributos estaticos que correspondem a dados da conexão
         public static string DATABASE_SERVER = "localhost";
         public static string DATABASE_NAME = "promig";
-        public static string DATABASE_USER = "root";
-        public static string DATABASE_PASSWORD = "";
+        public static string DATABASE_USER = "promig_user";
+        public static string DATABASE_PASSWORD = "promig_erp";
 
         //Definindo nome das tabelas
         public static string TABLE_USERS = "usuarios";
