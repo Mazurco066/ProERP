@@ -41,65 +41,6 @@
         #region Getter-Setter
 
         //Getter/Setter
-        public int GetId() {
-
-            return id;
-        }
-
-        public void SetId(int id) {
-
-            this.id = id;
-        }
-
-        public void SetDocNumber(string docNumber) {
-
-            this.docNumber = docNumber;
-        }
-
-        public string GetDocNumber() {
-
-            return docNumber;
-        }
-
-        public void SetResidenceNumber(string residenceNumber) {
-
-            this.residenceNumber = residenceNumber;
-        }
-
-        public string GetResidenceNumber() {
-
-            return residenceNumber;
-        }
-
-        public void SetCellNumber(string cellNumber) {
-
-            this.cellNumber = cellNumber;
-        }
-
-        public string GetCellNumber() {
-
-            return cellNumber;
-        }
-
-        public void SetStateId(string stateId) {
-
-            this.stateId = stateId;
-        }
-
-        public string GetStateId() {
-
-            return stateId;
-        }
-
-        public void SetDescription(string description) {
-
-            this.description = description;
-        }
-
-        public string GetDescription() {
-
-            return description;
-        }
 
         public bool IsPhysical() {
 
@@ -112,28 +53,5 @@
         }
 
         #endregion Getter-Setter
-
-        #region Class-Methods
-
-        //Método para impressão na grid
-        public string[] ToStringArray() {
-
-            //Definindo vetor que será retornado
-            string[] _return = new string[5];
-
-            //Preenchendo dados do cliente
-            _return[0] = GetId().ToString();
-            _return[1] = GetName();
-            _return[2] = GetAdress().GetCity();
-            _return[3] = docNumber;
-            _return[4] = residenceNumber;
-
-            //Retornando informações do cliente para grid
-            return _return;
-
-        }
-
-        #endregion Class-Methods
-
     }
 }

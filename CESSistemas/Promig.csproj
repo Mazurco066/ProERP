@@ -146,9 +146,6 @@
     <Compile Include="View\Components\UserControlSupplier.xaml.cs">
       <DependentUpon>UserControlSupplier.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Components\UserControlUsers.xaml.cs">
-      <DependentUpon>UserControlUsers.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
@@ -196,10 +193,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Components\UserControlSupplier.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Components\UserControlUsers.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

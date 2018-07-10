@@ -457,15 +457,20 @@ namespace Promig.View.Components {
         }
 
         private bool IsValidFields() {
-            //Verificando se ha ou n usuário
+
+            //Recuperando valores mascarados
+            string doc = cpfEdit.Text.Replace(".", "").Replace("-", "").Replace("_", ".").Replace(" ", "");
+            string cep = cepEdit.Text.Replace("-", "").Replace("_", "").Replace(" ", "");
+
+            //Validando
             if (cbHasUser.SelectedIndex != 2) {
                 return !(NameEdit.Text.Equals("") ||
-                        cpfEdit.Text.Equals("") ||
+                        doc.Equals("") ||
                         AdressEdit.Text.Equals("") ||
                         NeighboorhoodEdit.Text.Equals("") ||
                         CityEdit.Text.Equals("") ||
                         NumberEdit.Text.Equals("") ||
-                        cepEdit.Text.Equals("") ||
+                        cep.Equals("") ||
                         admissionEdit.Text.Equals("") ||
                         RoleEdit.Text.Equals("") ||
                         usernameEdit.Text.Equals("") ||
@@ -474,12 +479,12 @@ namespace Promig.View.Components {
             }
             else {
                 return !(NameEdit.Text.Equals("") ||
-                        cpfEdit.Text.Equals("") ||
+                        doc.Equals("") ||
                         AdressEdit.Text.Equals("") ||
                         NeighboorhoodEdit.Text.Equals("") ||
                         CityEdit.Text.Equals("") ||
                         NumberEdit.Text.Equals("") ||
-                        cepEdit.Text.Equals("") ||
+                        cep.Equals("") ||
                         admissionEdit.Text.Equals("") ||
                         RoleEdit.Text.Equals("")
                 );

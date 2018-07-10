@@ -58,18 +58,18 @@ namespace Promig.Connection.Methods {
                 };
 
                 //Definindo parametros para inserção
-                cmd.Parameters.Add(new MySqlParameter("@street", client.GetAdress().GetStreet()));
-                cmd.Parameters.Add(new MySqlParameter("@number", client.GetAdress().GetNumber()));
-                cmd.Parameters.Add(new MySqlParameter("@neighborhood", client.GetAdress().GetNeighborhood()));
-                cmd.Parameters.Add(new MySqlParameter("@city", client.GetAdress().GetCity()));
-                cmd.Parameters.Add(new MySqlParameter("@uf", client.GetAdress().GetUF()));
-                cmd.Parameters.Add(new MySqlParameter("@cep", client.GetAdress().GetCEP()));
-                cmd.Parameters.Add(new MySqlParameter("@name", client.GetName()));
-                cmd.Parameters.Add(new MySqlParameter("@document", client.GetDocNumber()));
-                cmd.Parameters.Add(new MySqlParameter("@residence", client.GetResidenceNumber()));
-                cmd.Parameters.Add(new MySqlParameter("@cellphone", client.GetCellNumber()));
-                cmd.Parameters.Add(new MySqlParameter("@description", client.GetDescription()));
-                cmd.Parameters.Add(new MySqlParameter("@state_id", client.GetStateId()));
+                cmd.Parameters.Add(new MySqlParameter("@street", client.adress.street));
+                cmd.Parameters.Add(new MySqlParameter("@number", client.adress.number));
+                cmd.Parameters.Add(new MySqlParameter("@neighborhood", client.adress.neighborhood));
+                cmd.Parameters.Add(new MySqlParameter("@city", client.adress.city));
+                cmd.Parameters.Add(new MySqlParameter("@uf", client.adress.UF));
+                cmd.Parameters.Add(new MySqlParameter("@cep", client.adress.CEP));
+                cmd.Parameters.Add(new MySqlParameter("@name", client.name));
+                cmd.Parameters.Add(new MySqlParameter("@document", client.docNumber));
+                cmd.Parameters.Add(new MySqlParameter("@residence", client.residenceNumber));
+                cmd.Parameters.Add(new MySqlParameter("@cellphone", client.cellNumber));
+                cmd.Parameters.Add(new MySqlParameter("@description", client.description));
+                cmd.Parameters.Add(new MySqlParameter("@state_id", client.stateId));
                 cmd.Parameters.Add(new MySqlParameter("@status", client.IsActive()));
                 cmd.Parameters.Add(new MySqlParameter("@type", client.IsPhysical()));
 
@@ -127,21 +127,21 @@ namespace Promig.Connection.Methods {
                 };
 
                 //Definindo e adicioando parametros
-                cmd.Parameters.Add(new MySqlParameter("@id_endereco", client.GetAdress().GetId()));
-                cmd.Parameters.Add(new MySqlParameter("@id_pessoa", client.GetIdPerson()));
-                cmd.Parameters.Add(new MySqlParameter("@id_cliente", client.GetId()));
-                cmd.Parameters.Add(new MySqlParameter("@street", client.GetAdress().GetStreet()));
-                cmd.Parameters.Add(new MySqlParameter("@number", client.GetAdress().GetNumber()));
-                cmd.Parameters.Add(new MySqlParameter("@neighborhood", client.GetAdress().GetNeighborhood()));
-                cmd.Parameters.Add(new MySqlParameter("@city", client.GetAdress().GetCity()));
-                cmd.Parameters.Add(new MySqlParameter("@uf", client.GetAdress().GetUF()));
-                cmd.Parameters.Add(new MySqlParameter("@cep", client.GetAdress().GetCEP()));
-                cmd.Parameters.Add(new MySqlParameter("@name", client.GetName()));
-                cmd.Parameters.Add(new MySqlParameter("@document", client.GetDocNumber()));
-                cmd.Parameters.Add(new MySqlParameter("@residence", client.GetResidenceNumber()));
-                cmd.Parameters.Add(new MySqlParameter("@cellphone", client.GetCellNumber()));
-                cmd.Parameters.Add(new MySqlParameter("@description", client.GetDescription()));
-                cmd.Parameters.Add(new MySqlParameter("@state_id", client.GetStateId()));
+                cmd.Parameters.Add(new MySqlParameter("@id_endereco", client.adress.id));
+                cmd.Parameters.Add(new MySqlParameter("@id_pessoa", client.id_person));
+                cmd.Parameters.Add(new MySqlParameter("@id_cliente", client.id));
+                cmd.Parameters.Add(new MySqlParameter("@street", client.adress.street));
+                cmd.Parameters.Add(new MySqlParameter("@number", client.adress.number));
+                cmd.Parameters.Add(new MySqlParameter("@neighborhood", client.adress.neighborhood));
+                cmd.Parameters.Add(new MySqlParameter("@city", client.adress.city));
+                cmd.Parameters.Add(new MySqlParameter("@uf", client.adress.UF));
+                cmd.Parameters.Add(new MySqlParameter("@cep", client.adress.CEP));
+                cmd.Parameters.Add(new MySqlParameter("@name", client.name));
+                cmd.Parameters.Add(new MySqlParameter("@document", client.docNumber));
+                cmd.Parameters.Add(new MySqlParameter("@residence", client.residenceNumber));
+                cmd.Parameters.Add(new MySqlParameter("@cellphone", client.cellNumber));
+                cmd.Parameters.Add(new MySqlParameter("@description", client.description));
+                cmd.Parameters.Add(new MySqlParameter("@state_id", client.stateId));
                 cmd.Parameters.Add(new MySqlParameter("@status", client.IsActive()));
                 cmd.Parameters.Add(new MySqlParameter("@type", client.IsPhysical()));
 
@@ -213,26 +213,25 @@ namespace Promig.Connection.Methods {
                 while (reader.Read()) {
 
                     //Recuperando dados do cliente
-                    client.SetId((int)reader["id_cliente"]);
-                    client.SetIdPerson((int)reader["id_pessoa"]);
-                    client.GetAdress().SetId((int)reader["id_endereco"]);
-                    client.SetName((string)reader["nome_pessoa"]);
-                    client.GetAdress().SetStreet((string)reader["rua"]);
-                    client.GetAdress().SetNumber(reader["numero"].ToString());
-                    client.GetAdress().SetNeighborhood((string)reader["bairro"]);
-                    client.GetAdress().SetCity((string)reader["cidade"]);
-                    client.GetAdress().SetUF((string)reader["uf"]);
-                    client.GetAdress().SetCEP((string)reader["cep"]);
-                    client.SetDocNumber((string)reader["cpf_cnpj"]);
-                    client.SetDescription((string)reader["contato"]);
-                    client.SetResidenceNumber((string)reader["telefone_residencial"]);
-                    client.SetCellNumber((string)reader["telefone_celular"]);
-                    client.SetStateId((string)reader["inscricao_estadual"]);
+                    client.id = (int)reader["id_cliente"];
+                    client.id_person = (int)reader["id_pessoa"];
+                    client.adress.id = (int)reader["id_endereco"];
+                    client.name = (string)reader["nome_pessoa"];
+                    client.adress.street = (string)reader["rua"];
+                    client.adress.number = reader["numero"].ToString();
+                    client.adress.neighborhood = (string)reader["bairro"];
+                    client.adress.city = (string)reader["cidade"];
+                    client.adress.UF = (string)reader["uf"];
+                    client.adress.CEP = (string)reader["cep"];
+                    client.docNumber = (string)reader["cpf_cnpj"];
+                    client.description = (string)reader["contato"];
+                    client.residenceNumber = (string)reader["telefone_residencial"];
+                    client.cellNumber = (string)reader["telefone_celular"];
+                    client.stateId = (string)reader["inscricao_estadual"];
 
                     //Booleanos
                     client.SetPhysical((bool)reader["fisico"]);
                     if (!(bool)reader["status"]) client.Inactivate();
-
                 }
 
                 //Fechando conexão
@@ -253,9 +252,7 @@ namespace Promig.Connection.Methods {
                     MessageBoxImage.Error
                 );
                 return new Client();
-
             }
-
         }
 
         //Método para recuperar todos clientes
@@ -296,11 +293,11 @@ namespace Promig.Connection.Methods {
 
                     //Adicionando cliente encontrado ao array de retorno
                     Client client = new Client();
-                    client.SetId((int)reader["id_cliente"]);
-                    client.SetName((string)reader["nome_pessoa"]);
-                    client.GetAdress().SetCity((string)reader["cidade"]);
-                    client.SetDocNumber((string)reader["cpf_cnpj"]);
-                    client.SetResidenceNumber((string)reader["telefone_residencial"]);
+                    client.id = (int)reader["id_cliente"];
+                    client.name = (string)reader["nome_pessoa"];
+                    client.adress.city = (string)reader["cidade"];
+                    client.docNumber = (string)reader["cpf_cnpj"];
+                    client.residenceNumber = (string)reader["telefone_residencial"];
                     results.Add(client);
 
                 }
@@ -361,11 +358,11 @@ namespace Promig.Connection.Methods {
 
                     //Adicionando cliente encontrado ao array de retorno
                     Client client = new Client();
-                    client.SetId((int)reader["id_cliente"]);
-                    client.SetName((string)reader["nome_pessoa"]);
-                    client.GetAdress().SetCity((string)reader["cidade"]);
-                    client.SetDocNumber((string)reader["cpf_cnpj"]);
-                    client.SetResidenceNumber((string)reader["telefone_residencial"]);
+                    client.id = (int)reader["id_cliente"];
+                    client.name = (string)reader["nome_pessoa"];
+                    client.adress.city = (string)reader["cidade"];
+                    client.docNumber = (string)reader["cpf_cnpj"];
+                    client.residenceNumber = (string)reader["telefone_residencial"];
                     results.Add(client);
 
                 }
@@ -426,11 +423,11 @@ namespace Promig.Connection.Methods {
 
                     //Adicionando cliente encontrado ao array de retorno
                     Client client = new Client();
-                    client.SetId((int)reader["id_cliente"]);
-                    client.SetName((string)reader["nome_pessoa"]);
-                    client.GetAdress().SetCity((string)reader["cidade"]);
-                    client.SetDocNumber((string)reader["cpf_cnpj"]);
-                    client.SetResidenceNumber((string)reader["telefone_residencial"]);
+                    client.id = (int)reader["id_cliente"];
+                    client.name = (string)reader["nome_pessoa"];
+                    client.adress.city = (string)reader["cidade"];
+                    client.docNumber = (string)reader["cpf_cnpj"];
+                    client.residenceNumber = (string)reader["telefone_residencial"];
                     results.Add(client);
 
                 }
@@ -491,11 +488,11 @@ namespace Promig.Connection.Methods {
 
                     //Adicionando cliente encontrado ao array de retorno
                     Client client = new Client();
-                    client.SetId((int)reader["id_cliente"]);
-                    client.SetName((string)reader["nome_pessoa"]);
-                    client.GetAdress().SetCity((string)reader["cidade"]);
-                    client.SetDocNumber((string)reader["cpf_cnpj"]);
-                    client.SetResidenceNumber((string)reader["telefone_residencial"]);
+                    client.id = (int)reader["id_cliente"];
+                    client.name = (string)reader["nome_pessoa"];
+                    client.adress.city = (string)reader["cidade"];
+                    client.docNumber = (string)reader["cpf_cnpj"];
+                    client.residenceNumber = (string)reader["telefone_residencial"];
                     results.Add(client);
 
                 }

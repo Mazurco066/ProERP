@@ -238,7 +238,7 @@ namespace Promig.View.Components {
                 else {
                     //Retornando mensagem de validação
                     MessageBox.Show(
-                        "CPF Inválido",
+                        "CNPJ Inválido",
                         "Dados incorretos!",
                         MessageBoxButton.OK,
                         MessageBoxImage.Warning
@@ -310,7 +310,7 @@ namespace Promig.View.Components {
                 else {
                     //Retornando mensagem de validação
                     MessageBox.Show(
-                        "CPF ou RG Inválido(s)",
+                        "CNPJ Inválido(s)",
                         "Dados incorretos!",
                         MessageBoxButton.OK,
                         MessageBoxImage.Warning
@@ -416,15 +416,17 @@ namespace Promig.View.Components {
         }
 
         private bool IsValidFields() {
-            //Verificando se ha ou n usuário
+            string doc = cnpjEdit.Text.Replace(".", "").Replace("-", "").Replace("_", "").Replace("/", "").Replace(" ", "");
+            string cep = cepEdit.Text.Replace("-", "").Replace("_", "").Replace(" ", "");
+            string phone = phone1Edit.Text.Replace("(", "").Replace(")", "").Replace("-", "").Replace("_", "").Replace(" ", "");
             return !(NameEdit.Text.Equals("") ||
-                    cnpjEdit.Text.Equals("") ||
+                    doc.Equals("") ||
                     AdressEdit.Text.Equals("") ||
                     NeighboorhoodEdit.Text.Equals("") ||
                     CityEdit.Text.Equals("") ||
                     NumberEdit.Text.Equals("") ||
-                    cepEdit.Text.Equals("") ||
-                    phone1Edit.Text.Equals("")
+                    cep.Equals("") ||
+                    phone.Equals("")
             );
         }
 
