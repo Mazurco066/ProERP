@@ -138,6 +138,13 @@ namespace Promig.View.Components {
             }
         }
 
+        private void numberEdit_KeyDown(object sender, KeyEventArgs e) {
+            KeyConverter kv = new KeyConverter();
+            if ((char.IsNumber((string)kv.ConvertTo(e.Key, typeof(string)), 0) == false)) {
+                e.Handled = true;
+            }
+        }
+
         //Evento para botão adicionar
         private void btnAdicionar_Click(object sender, RoutedEventArgs e) {
             //Habilitando campos para inserção

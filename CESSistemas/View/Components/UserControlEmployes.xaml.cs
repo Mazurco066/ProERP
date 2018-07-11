@@ -122,6 +122,14 @@ namespace Promig.View.Components {
             }
         }
 
+        //Evento para bloquear números
+        private void numberEdit_KeyDown(object sender, KeyEventArgs e) {
+            KeyConverter kv = new KeyConverter();
+            if ((char.IsNumber((string)kv.ConvertTo(e.Key, typeof(string)), 0) == false)) {
+                e.Handled = true;
+            }
+        }
+
         //Evento de autopreencher cep
         private void  cepEdit_PreviewKeyUp(object sender, KeyEventArgs e) {
             if (e.Key == Key.Enter) {

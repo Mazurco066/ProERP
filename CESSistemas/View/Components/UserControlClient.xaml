@@ -122,6 +122,7 @@
         </ComboBox>
         <TextBox 
             x:Name="NumberEdit"
+            KeyDown="numberEdit_KeyDown"
             HorizontalAlignment="Left"
             Height="42"
             Margin="46,221,0,0" 

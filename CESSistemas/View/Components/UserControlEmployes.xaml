@@ -135,6 +135,7 @@
         </ComboBox>
         <TextBox 
             x:Name="NumberEdit"
+            KeyDown="numberEdit_KeyDown"
             HorizontalAlignment="Left"
             Height="42"
             Margin="46,221,0,0" 
@@ -145,7 +146,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             FontFamily="champagne &amp; Limousines"
             FontSize="14" Foreground="#FF0A0A0A" 
-            MaxLength="3" TabIndex="7" Grid.Row="1"/>
+            MaxLength="4" TabIndex="7" Grid.Row="1"/>
         <wpfTool:MaskedTextBox  
             x:Name="cepEdit"
             Mask="99999-999"
