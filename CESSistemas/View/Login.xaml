@@ -18,7 +18,7 @@
 			<Label Content="Login" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5" Foreground="#FF3F51B5" FontSize="18"/>
 			<StackPanel VerticalAlignment="Center" Margin="15">
 				<TextBox x:Name="txtUser" Margin="0,10" materialDesign:HintAssist.Hint="USUÁRIO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="champagne &amp; Limousines" FontSize="18" Foreground="Gray"/>
-				<PasswordBox x:Name="txtPassword" Margin="0,10" materialDesign:HintAssist.Hint="SENHA" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="champagne &amp; Limousines" FontSize="18" Foreground="Gray" />
+				<PasswordBox x:Name="txtPassword" PreviewKeyUp="txtPassword_PreviewKeyUp" Margin="0,10" materialDesign:HintAssist.Hint="SENHA" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="champagne &amp; Limousines" FontSize="18" Foreground="Gray" />
 			</StackPanel>
 		</Grid>
 		<Button x:Name="btnExit" Click="btnExit_Click" Width="106" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="188,0,44,64" Content="Sair" Background="#FF1A2561" BorderBrush="#FF3F51B5" Foreground="#FFF9FAFB" />

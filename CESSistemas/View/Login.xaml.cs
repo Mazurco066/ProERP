@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 using Promig.Connection.Methods;
 using Promig.Exceptions;
 using Promig.Model;
@@ -85,8 +86,68 @@ namespace Promig.View {
             }
         }
 
-        //Evento para o botão sair
-        private void btnExit_Click(object sender, RoutedEventArgs e) { App.Current.Shutdown(); }
+        //Evento para enter
+        private void txtPassword_PreviewKeyUp(object sender, KeyEventArgs e) {
+
+            if (e.Key == Key.Enter) {
+
+                if (!IsValidFields()) {
+                    MessageBox.Show("Validação",
+                                    "Há campos vazios!",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Warning
+                    );
+                }
+                else {
+
+                    //Recuperando usuário
+                    User user = new User(txtUser.Text, txtPassword.Password);
+
+                    //Realizando uma tentativa de login
+                    try {
+                        users.ValidateLogin(user);
+
+                        //Recuperando funcionário que logou
+                        Employe employe = users.GetAssiciatedEmploye(user);
+
+                        //Gerando um log de sistema
+                        Log signInRegister = new Log();
+                        signInRegister.employe = employe;
+                        signInRegister.action = "Usuário logou no sistema!";
+
+                        //Registrando o log
+                        logs.Register(signInRegister);
+
+                        //Limpando campos e abrindo menu
+                        Clear();
+                        MainWindow.currentUsername = employe.name;
+                        MainWindow.currentPermission = employe.role;
+                        MainWindow.currentId = employe.id;
+                        MainWindow window = new MainWindow();
+                        window.Show();
+                        Close();
+                    }
+                    catch (NegatedAcessException err) {
+                        MessageBox.Show(err.Message,
+                                        "Autenticação",
+                                        MessageBoxButton.OK,
+                                        MessageBoxImage.Error
+                        );
+                    }
+                    catch (SqlCustomException err) {
+                        MessageBox.Show(err.Message,
+                                        "Erro",
+                                        MessageBoxButton.OK,
+                                        MessageBoxImage.Error
+                        );
+                    }
+
+                }
+            }
+        }
+
+                //Evento para o botão sair
+                private void btnExit_Click(object sender, RoutedEventArgs e) { App.Current.Shutdown(); }
 
         #endregion Events
 
