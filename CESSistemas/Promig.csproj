@@ -152,7 +152,7 @@
     <Compile Include="SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utils\Criptografia.cs" />
+    <Compile Include="Utils\Crypt.cs" />
     <Compile Include="Utils\Log.cs" />
     <Compile Include="Utils\Util.cs" />
     <Page Include="View\Components\UserControlEstimate.xaml">

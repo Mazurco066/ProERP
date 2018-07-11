@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Promig.Utils
 {
-    class Criptografia
+    class Crypt
     {
 
         /// <summary>     

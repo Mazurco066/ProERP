@@ -48,7 +48,7 @@ namespace Promig.Connection.Methods {
 
                 //Adicionando os parametros e preparando consulta
                 cmd.Parameters.Add(new MySqlParameter("@username", user.GetLogin()));
-                cmd.Parameters.Add(new MySqlParameter("@hash", user.GetMD5Hash()));
+                cmd.Parameters.Add(new MySqlParameter("@hash", user.GetEncryptedCode()));
 
                 //Preparando comando
                 cmd.Prepare();

@@ -84,7 +84,7 @@ update pessoas set id_endereco = 1 where id_pessoa = 1;
 insert into funcionarios(permissao, cpf, rg, data_admissao, id_pessoa, funcao)
 values('Admin','43662474883', '557606329', '14/03/2018', 1, 'Pika das Galaxias');
 insert into usuarios(login, password, id_funcionario)
-values('admin', 'Z+W5Cf4n8F0=', 1);
+values('admin', 'eKkqAeJvo3t60TtipgWMjg==', 1);
 
 /* Para ver todos os dados de uma tabela */
 select * from pessoas;

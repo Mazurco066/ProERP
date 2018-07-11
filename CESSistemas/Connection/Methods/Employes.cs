@@ -78,7 +78,7 @@ namespace Promig.Connection.Methods
                 //Caso funsionário possuir usuário
                 if (emp.user != null) {
                     cmd.Parameters.Add(new MySqlParameter("@username", emp.user.GetLogin()));
-                    cmd.Parameters.Add(new MySqlParameter("@password", emp.user.GetMD5Hash()));
+                    cmd.Parameters.Add(new MySqlParameter("@password", emp.user.GetEncryptedCode()));
                 }
 
                 //Preparando comando com os parametros
@@ -158,7 +158,7 @@ namespace Promig.Connection.Methods
                 //Caso funsionário possuir usuário
                 if (emp.user != null) {
                     cmd.Parameters.Add(new MySqlParameter("@username", emp.user.GetLogin()));
-                    cmd.Parameters.Add(new MySqlParameter("@password", emp.user.GetMD5Hash()));
+                    cmd.Parameters.Add(new MySqlParameter("@password", emp.user.GetEncryptedCode()));
                 }
 
                 //Preparando comando com os parametros
@@ -271,7 +271,7 @@ namespace Promig.Connection.Methods
 
                         User user = new User();
                         user.SetLogin((string)reader["login"]);
-                        user.SetMD5Hash((string)reader["password"]);
+                        user.SetEncryptedCode((string)reader["password"]);
                         employe.user = user;
                     }
 
