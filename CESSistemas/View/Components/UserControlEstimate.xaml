@@ -8,6 +8,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1306" Height="697" Background="White">
     <Grid>
-            
+        <Label Content="Orçamentos" FontSize="40" Margin="39,34,1015,595" Foreground="#FF3F51B5" Grid.RowSpan="2"/>
     </Grid>
 </UserControl>
