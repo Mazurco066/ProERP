@@ -118,7 +118,7 @@
     <Compile Include="Model\Person.cs" />
     <Compile Include="Model\Supplier.cs" />
     <Compile Include="Model\User.cs" />
-    <Compile Include="Utils\DatabaseCreator.cs" />
+    <Compile Include="Utils\Database.cs" />
     <Compile Include="Utils\DateBr.cs" />
     <Compile Include="Utils\Validator.cs" />
     <Compile Include="Utils\WSAdress.cs" />
