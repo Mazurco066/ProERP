@@ -44,7 +44,8 @@
 				<TextBlock Text="" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
 				<materialDesign:PopupBox HorizontalAlignment="Right" Margin="10" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Foreground="#FFFBF7F7">
 					<StackPanel Width="150">
-						<Button Content="Materiais"/>
+                        <Button x:Name="btnMaps" Content="Mapas" />
+                        <Button Content="Materiais"/>
 						<Button x:Name="btnAuditoria" Content="Auditoria" Click="btnAuditoria_Click"/>
 						<Button Content="Sobre"/>
 						<Separator/>
