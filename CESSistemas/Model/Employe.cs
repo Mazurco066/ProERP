@@ -28,8 +28,8 @@
         public Employe() {
 
             this.id = -1;
-            base.SetIdPerson(-1);
-            base.SetName("model");
+            base.id_person = -1;
+            base.name = "model";
             this.role = "User";
             this.cpf = "";
             this.rg = "";

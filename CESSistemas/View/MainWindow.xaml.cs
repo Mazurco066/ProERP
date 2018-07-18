@@ -101,7 +101,7 @@ namespace Promig.View {
         // operacoes ao carregar o form
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             //Definindo nome do usuário ao abrir
-            lblTitulo.Text = "Bem vindo " + currentUsername + "!";
+            lblTitulo.Text = $"Bem vindo {currentUsername}!";
 
             //Verificando permissões
             if(currentPermission.Equals("Admin")){

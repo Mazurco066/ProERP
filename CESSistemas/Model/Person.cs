@@ -34,36 +34,7 @@
 
         #region Getter-Setter
 
-        //Getter/Setter
-        public int GetIdPerson() {
-
-            return id_person;
-        }
-
-        public void SetIdPerson(int id) {
-
-            this.id_person = id;
-        }
-
-        public string GetName() {
-
-            return name;
-        }
-
-        public void SetName(string name) {
-
-            this.name = name;
-        }
-
-        public Adress GetAdress() {
-
-            return this.adress;
-        }
-
-        public void SetAdress(Adress adress) {
-
-            this.adress = adress;
-        }
+        //Boolean Control
 
         public void Activate() {
 

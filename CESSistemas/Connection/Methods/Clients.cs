@@ -42,15 +42,15 @@ namespace Promig.Connection.Methods {
                 conn.Open();
 
                 //Definindo comando para inserção
-                string command = "BEGIN; insert into enderecos" +
-                                 "(rua, numero, bairro, cidade, uf, cep) values (" +
-                                 "@street, @number, @neighborhood, @city, @uf, @cep);" +
-                                 "insert into pessoas(id_endereco, nome_pessoa, status) values (" +
-                                 "last_insert_id(), @name, @status);" +
-                                 "insert into clientes(id_pessoa, fisico, cpf_cnpj, telefone_residencial, " +
-                                 "telefone_celular, contato, inscricao_estadual) values (" +
-                                 "last_insert_id(), @type, @document, @residence, " +
-                                 "@cellphone, @description, @state_id); COMMIT;";
+                string command = $"BEGIN; insert into {Refs.TABLE_ADRESS}" +
+                                 $"(rua, numero, bairro, cidade, uf, cep) values (" +
+                                 $"@street, @number, @neighborhood, @city, @uf, @cep);" +
+                                 $"insert into {Refs.TABLE_PEOPLE}(id_endereco, nome_pessoa, status) values (" +
+                                 $"last_insert_id(), @name, @status);" +
+                                 $"insert into {Refs.TABLE_CLIENTS}(id_pessoa, fisico, cpf_cnpj, telefone_residencial, " +
+                                 $"telefone_celular, contato, inscricao_estadual) values (" +
+                                 $"last_insert_id(), @type, @document, @residence, " +
+                                 $"@cellphone, @description, @state_id); COMMIT;";
 
                 //Definindo objetos para inserção dos dados
                 MySqlCommand cmd = new MySqlCommand(command, conn) {
@@ -110,16 +110,16 @@ namespace Promig.Connection.Methods {
                 conn.Open();
 
                 //Definindo comando para atualização
-                string command = "BEGIN; update enderecos set " +
-                                 "rua = @street, numero = @number, bairro = @neighborhood," +
-                                 "cidade = @city, uf = @uf, cep = @cep " +
-                                 "where id_endereco = @id_endereco;" +
-                                 "update pessoas set nome_pessoa = @name, status = @status " +
-                                 "where id_pessoa = @id_pessoa;" +
-                                 "update clientes set fisico = @type, cpf_cnpj = @document, " +
-                                 "telefone_residencial = @residence, telefone_celular = @cellphone, " +
-                                 "contato = @description, inscricao_estadual = @state_id " +
-                                 "where id_cliente = @id_cliente; COMMIT;";
+                string command = $"BEGIN; update {Refs.TABLE_ADRESS} set " +
+                                 $"rua = @street, numero = @number, bairro = @neighborhood," +
+                                 $"cidade = @city, uf = @uf, cep = @cep " +
+                                 $"where id_endereco = @id_endereco;" +
+                                 $"update {Refs.TABLE_PEOPLE} set nome_pessoa = @name, status = @status " +
+                                 $"where id_pessoa = @id_pessoa;" +
+                                 $"update {Refs.TABLE_CLIENTS} set fisico = @type, cpf_cnpj = @document, " +
+                                 $"telefone_residencial = @residence, telefone_celular = @cellphone, " +
+                                 $"contato = @description, inscricao_estadual = @state_id " +
+                                 $"where id_cliente = @id_cliente; COMMIT;";
 
                 //Definindo objetos para inserção dos dados
                 MySqlCommand cmd = new MySqlCommand(command, conn) {
@@ -182,14 +182,14 @@ namespace Promig.Connection.Methods {
                 conn.Open();
 
                 //Definindo string de coneção
-                string command = "select c.id_cliente, p.id_pessoa, p.nome_pessoa, " +
-                                 "p.status, e.id_endereco, e.rua, e.numero, e.bairro, e.cidade, " +
-                                 "e.uf, e.cep, c.fisico, c.cpf_cnpj, c.telefone_residencial, " +
-                                 "c.telefone_celular, c.contato, c.inscricao_estadual " +
-                                 "from enderecos e, pessoas p, clientes c " +
-                                 "where e.id_endereco = p.id_endereco and " +
-                                 "p.id_pessoa = c.id_pessoa and " +
-                                 "c.id_cliente = @id";
+                string command = $"select c.id_cliente, p.id_pessoa, p.nome_pessoa, " +
+                                 $"p.status, e.id_endereco, e.rua, e.numero, e.bairro, e.cidade, " +
+                                 $"e.uf, e.cep, c.fisico, c.cpf_cnpj, c.telefone_residencial, " +
+                                 $"c.telefone_celular, c.contato, c.inscricao_estadual " +
+                                 $"from {Refs.TABLE_ADRESS} e, {Refs.TABLE_PEOPLE} p, {Refs.TABLE_CLIENTS} c " +
+                                 $"where e.id_endereco = p.id_endereco and " +
+                                 $"p.id_pessoa = c.id_pessoa and " +
+                                 $"c.id_cliente = @id";
 
                 //Definindo parametros
                 MySqlParameter clientId = new MySqlParameter("@id", MySqlDbType.Int64);
@@ -264,11 +264,11 @@ namespace Promig.Connection.Methods {
                 conn.Open();
 
                 //Definindo comando da consulta
-                string command = "select c.id_cliente, p.nome_pessoa, e.cidade, c.cpf_cnpj, c.telefone_residencial" +
-                                 " from pessoas p, clientes c, enderecos e" +
-                                 " where p.id_pessoa = c.id_pessoa and" +
-                                 " p.id_endereco = e.id_endereco and" +
-                                 " p.nome_pessoa LIKE @param;";
+                string command = $"select c.id_cliente, p.nome_pessoa, e.cidade, c.cpf_cnpj, c.telefone_residencial" +
+                                 $" from {Refs.TABLE_PEOPLE} p, {Refs.TABLE_CLIENTS} c, {Refs.TABLE_ADRESS} e" +
+                                 $" where p.id_pessoa = c.id_pessoa and" +
+                                 $" p.id_endereco = e.id_endereco and" +
+                                 $" p.nome_pessoa LIKE @param;";
 
                 //Definindo objetos para recuperação de dados
                 List<Client> results = new List<Client>();
@@ -325,12 +325,12 @@ namespace Promig.Connection.Methods {
                 conn.Open();
 
                 //Definindo comando da consulta
-                string command = "select c.id_cliente, p.nome_pessoa, e.cidade, c.cpf_cnpj, c.telefone_residencial" +
-                                 " from pessoas p, clientes c, enderecos e" +
-                                 " where p.id_pessoa = c.id_pessoa and" +
-                                 " p.id_endereco = e.id_endereco and" +
-                                 " p.status = @status and" +
-                                 " p.nome_pessoa LIKE @param;";
+                string command = $"select c.id_cliente, p.nome_pessoa, e.cidade, c.cpf_cnpj, c.telefone_residencial" +
+                                 $" from {Refs.TABLE_PEOPLE} p, {Refs.TABLE_CLIENTS} c, {Refs.TABLE_ADRESS} e" +
+                                 $" where p.id_pessoa = c.id_pessoa and" +
+                                 $" p.id_endereco = e.id_endereco and" +
+                                 $" p.status = @status and" +
+                                 $" p.nome_pessoa LIKE @param;";
 
                 //Definindo parametros da consulta
                 MySqlParameter status = new MySqlParameter("@status", MySqlDbType.Bit);
@@ -390,12 +390,12 @@ namespace Promig.Connection.Methods {
                 conn.Open();
 
                 //Definindo comando da consulta
-                string command = "select c.id_cliente, p.nome_pessoa, e.cidade, c.cpf_cnpj, c.telefone_residencial" +
-                                 " from pessoas p, clientes c, enderecos e" +
-                                 " where p.id_pessoa = c.id_pessoa and" +
-                                 " p.id_endereco = e.id_endereco and" +
-                                 " p.status = @status and" +
-                                 " e.cidade LIKE @param;";
+                string command = $"select c.id_cliente, p.nome_pessoa, e.cidade, c.cpf_cnpj, c.telefone_residencial" +
+                                 $" from {Refs.TABLE_PEOPLE} p, {Refs.TABLE_CLIENTS} c, {Refs.TABLE_ADRESS} e" +
+                                 $" where p.id_pessoa = c.id_pessoa and" +
+                                 $" p.id_endereco = e.id_endereco and" +
+                                 $" p.status = @status and" +
+                                 $" e.cidade LIKE @param;";
 
                 //Definindo parametros da consulta
                 MySqlParameter status = new MySqlParameter("@status", MySqlDbType.Bit);
@@ -455,12 +455,12 @@ namespace Promig.Connection.Methods {
                 conn.Open();
 
                 //Definindo comando da consulta
-                string command = "select c.id_cliente, p.nome_pessoa, e.cidade, c.cpf_cnpj, c.telefone_residencial" +
-                                 " from pessoas p, clientes c, enderecos e" +
-                                 " where p.id_pessoa = c.id_pessoa and" +
-                                 " p.id_endereco = e.id_endereco and" +
-                                 " p.status = @status and" +
-                                 " c.cpf_cnpj LIKE @param;";
+                string command = $"select c.id_cliente, p.nome_pessoa, e.cidade, c.cpf_cnpj, c.telefone_residencial" +
+                                 $" from {Refs.TABLE_PEOPLE} p, {Refs.TABLE_CLIENTS} c, {Refs.TABLE_ADRESS} e" +
+                                 $" where p.id_pessoa = c.id_pessoa and" +
+                                 $" p.id_endereco = e.id_endereco and" +
+                                 $" p.status = @status and" +
+                                 $" c.cpf_cnpj LIKE @param;";
 
                 //Definindo parametros da consulta
                 MySqlParameter status = new MySqlParameter("@status", MySqlDbType.Bit);

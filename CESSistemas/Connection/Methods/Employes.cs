@@ -42,19 +42,19 @@ namespace Promig.Connection.Methods
                 conn.Open();
 
                 //Definindo comando para inserção
-                string command = "BEGIN; insert into enderecos" +
-                                 "(rua, numero, bairro, cidade, uf, cep) values (" +
-                                 "@street, @number, @neighborhood, @city, @uf, @cep);" +
-                                 "insert into pessoas(id_endereco, nome_pessoa, status) values (" +
-                                 "last_insert_id(), @name, @status);" +
-                                 "insert into funcionarios(id_pessoa, permissao, cpf, " +
-                                 "data_admissao, funcao) values (" +
-                                 "last_insert_id(), @role, @cpf, " +
-                                 "@admission, @job);";
+                string command = $"BEGIN; insert into {Refs.TABLE_ADRESS}" +
+                                 $"(rua, numero, bairro, cidade, uf, cep) values (" +
+                                 $"@street, @number, @neighborhood, @city, @uf, @cep);" +
+                                 $"insert into {Refs.TABLE_PEOPLE}(id_endereco, nome_pessoa, status) values (" +
+                                 $"last_insert_id(), @name, @status);" +
+                                 $"insert into {Refs.TABLE_EMPLOYES}(id_pessoa, permissao, cpf, " +
+                                 $"data_admissao, funcao) values (" +
+                                 $"last_insert_id(), @role, @cpf, " +
+                                 $"@admission, @job);";
                 if (emp.user != null)
-                    command += "insert into usuarios(id_funcionario, login, password) values (" +
-                               "last_insert_id(), @username, @password);";
-                command += " COMMIT;";
+                    command += $"insert into {Refs.TABLE_USERS}(id_funcionario, login, password) values (" +
+                               $"last_insert_id(), @username, @password);";
+                command += $" COMMIT;";
 
                 //Definindo objetos para inserção dos dados
                 MySqlCommand cmd = new MySqlCommand(command, conn) {
@@ -117,21 +117,21 @@ namespace Promig.Connection.Methods
                 conn.Open();
 
                 //Definindo comando para inserção
-                string command = "BEGIN; update enderecos set " +
-                                 "rua = @street, numero = @number, bairro = @neighborhood," +
-                                 "cidade = @city, uf = @uf, cep = @cep " +
-                                 "where id_endereco = @id_endereco;" +
-                                 "update pessoas set nome_pessoa = @name, status = @status " +
-                                 "where id_pessoa = @id_pessoa;" +
-                                 "update funcionarios set permissao = @role, cpf = @cpf, " +
-                                 "data_admissao = @admission, funcao = @job " +
-                                 "where id_funcionario = @id_funcionario;";
+                string command = $"BEGIN; update {Refs.TABLE_ADRESS} set " +
+                                 $"rua = @street, numero = @number, bairro = @neighborhood," +
+                                 $"cidade = @city, uf = @uf, cep = @cep " +
+                                 $"where id_endereco = @id_endereco;" +
+                                 $"update {Refs.TABLE_PEOPLE} set nome_pessoa = @name, status = @status " +
+                                 $"where id_pessoa = @id_pessoa;" +
+                                 $"update {Refs.TABLE_EMPLOYES} set permissao = @role, cpf = @cpf, " +
+                                 $"data_admissao = @admission, funcao = @job " +
+                                 $"where id_funcionario = @id_funcionario;";
                 if (emp.user != null)
-                    command += "replace into usuarios(id_funcionario, login, password) values (" +
-                               "@id_funcionario, @username, @password);";
+                    command += $"replace into {Refs.TABLE_USERS}(id_funcionario, login, password) values (" +
+                               $"@id_funcionario, @username, @password);";
                 else
-                    command += "delete from usuarios where id_funcionario = @id_funcionario;";
-                command += " COMMIT;";
+                    command += $"delete from {Refs.TABLE_USERS} where id_funcionario = @id_funcionario;";
+                command += $" COMMIT;";
 
                 //Definindo objetos para inserção dos dados
                 MySqlCommand cmd = new MySqlCommand(command, conn) {
@@ -195,13 +195,13 @@ namespace Promig.Connection.Methods
                 conn.Open();
 
                 //Definindo string de coneção
-                string command = "select f.id_funcionario, p.id_pessoa, p.nome_pessoa, " +
-                                 "p.status, e.id_endereco, e.rua, e.numero, e.bairro, e.cidade, " +
-                                 "e.uf, e.cep, f.data_admissao, f.cpf, f.funcao, f.permissao " +
-                                 "from enderecos e, pessoas p, funcionarios f " +
-                                 "where e.id_endereco = p.id_endereco and " +
-                                 "p.id_pessoa = f.id_pessoa and " +
-                                 "f.id_funcionario = @id";
+                string command = $"select f.id_funcionario, p.id_pessoa, p.nome_pessoa, " +
+                                 $"p.status, e.id_endereco, e.rua, e.numero, e.bairro, e.cidade, " +
+                                 $"e.uf, e.cep, f.data_admissao, f.cpf, f.funcao, f.permissao " +
+                                 $"from {Refs.TABLE_ADRESS} e, {Refs.TABLE_PEOPLE} p, {Refs.TABLE_EMPLOYES} f " +
+                                 $"where e.id_endereco = p.id_endereco and " +
+                                 $"p.id_pessoa = f.id_pessoa and " +
+                                 $"f.id_funcionario = @id";
 
                 //Definindo comando e resultados
                 MySqlDataReader reader;
@@ -249,10 +249,10 @@ namespace Promig.Connection.Methods
                 //Segunda query, opcionals e funcionário possuir usuário
                 if (!employe.role.Equals("none")) {
 
-                    command = "select u.login, u.password " +
-                              "from usuarios u, funcionarios f " +
-                              "where u.id_funcionario = f.id_funcionario " +
-                              "and f.id_funcionario = @id;";
+                    command = $"select u.login, u.password " +
+                              $"from {Refs.TABLE_USERS} u, {Refs.TABLE_EMPLOYES} f " +
+                              $"where u.id_funcionario = f.id_funcionario " +
+                              $"and f.id_funcionario = @id;";
 
                     //Definindo novo comando
                     cmd = new MySqlCommand(command, conn) {
@@ -314,11 +314,11 @@ namespace Promig.Connection.Methods
                 conn.Open();
 
                 //Definindo comando da consulta
-                string command = "select f.id_funcionario, p.nome_pessoa, e.cidade, f.cpf" +
-                                 " from pessoas p, funcionarios f, enderecos e" +
-                                 " where p.id_pessoa = f.id_pessoa and" +
-                                 " p.id_endereco = e.id_endereco and" +
-                                 " p.nome_pessoa LIKE @param;";
+                string command = $"select f.id_funcionario, p.nome_pessoa, e.cidade, f.cpf" +
+                                 $" from {Refs.TABLE_PEOPLE} p, {Refs.TABLE_EMPLOYES} f, {Refs.TABLE_ADRESS} e" +
+                                 $" where p.id_pessoa = f.id_pessoa and" +
+                                 $" p.id_endereco = e.id_endereco and" +
+                                 $" p.nome_pessoa LIKE @param;";
 
                 //Definindo objetos para recuperação de dados
                 List<Employe> results = new List<Employe>();
@@ -371,12 +371,12 @@ namespace Promig.Connection.Methods
                 conn.Open();
 
                 //Definindo comando da consulta
-                string command = "select f.id_funcionario, p.nome_pessoa, e.cidade, f.cpf" +
-                                 " from pessoas p, funcionarios f, enderecos e" +
-                                 " where p.id_pessoa = f.id_pessoa and" +
-                                 " p.id_endereco = e.id_endereco and" +
-                                 " p.status = @status and" +
-                                 " p.nome_pessoa LIKE @param;";
+                string command = $"select f.id_funcionario, p.nome_pessoa, e.cidade, f.cpf" +
+                                 $" from {Refs.TABLE_PEOPLE} p, {Refs.TABLE_EMPLOYES} f, {Refs.TABLE_ADRESS} e" +
+                                 $" where p.id_pessoa = f.id_pessoa and" +
+                                 $" p.id_endereco = e.id_endereco and" +
+                                 $" p.status = @status and" +
+                                 $" p.nome_pessoa LIKE @param;";
 
                 //Definindo objetos para recuperação de dados
                 List<Employe> results = new List<Employe>();
@@ -431,12 +431,12 @@ namespace Promig.Connection.Methods
                 conn.Open();
 
                 //Definindo comando da consulta
-                string command = "select f.id_funcionario, p.nome_pessoa, e.cidade, f.cpf" +
-                                 " from pessoas p, funcionarios f, enderecos e" +
-                                 " where p.id_pessoa = f.id_pessoa and" +
-                                 " p.id_endereco = e.id_endereco and" +
-                                 " p.status = @status and" +
-                                 " e.cidade LIKE @param;";
+                string command = $"select f.id_funcionario, p.nome_pessoa, e.cidade, f.cpf" +
+                                 $" from {Refs.TABLE_PEOPLE} p, {Refs.TABLE_EMPLOYES} f, {Refs.TABLE_ADRESS} e" +
+                                 $" where p.id_pessoa = f.id_pessoa and" +
+                                 $" p.id_endereco = e.id_endereco and" +
+                                 $" p.status = @status and" +
+                                 $" e.cidade LIKE @param;";
 
                 //Definindo objetos para recuperação de dados
                 List<Employe> results = new List<Employe>();
@@ -491,12 +491,12 @@ namespace Promig.Connection.Methods
                 conn.Open();
 
                 //Definindo comando da consulta
-                string command = "select f.id_funcionario, p.nome_pessoa, e.cidade, f.cpf" +
-                                 " from pessoas p, funcionarios f, enderecos e" +
-                                 " where p.id_pessoa = f.id_pessoa and" +
-                                 " p.id_endereco = e.id_endereco and" +
-                                 " p.status = @status and" +
-                                 " f.cpf LIKE @param;";
+                string command = $"select f.id_funcionario, p.nome_pessoa, e.cidade, f.cpf" +
+                                 $" from {Refs.TABLE_PEOPLE} p, {Refs.TABLE_EMPLOYES} f, {Refs.TABLE_ADRESS} e" +
+                                 $" where p.id_pessoa = f.id_pessoa and" +
+                                 $" p.id_endereco = e.id_endereco and" +
+                                 $" p.status = @status and" +
+                                 $" f.cpf LIKE @param;";
 
                 //Definindo objetos para recuperação de dados
                 List<Employe> results = new List<Employe>();

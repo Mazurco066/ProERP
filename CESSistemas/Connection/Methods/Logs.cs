@@ -42,7 +42,7 @@ namespace Promig.Connection.Methods {
 
                 //Definindo string de inserção
                 StringBuilder command = new StringBuilder();
-                command.Append("INSERT INTO ").Append(ConnectionFactory.TABLE_LOGS);
+                command.Append("INSERT INTO ").Append(Refs.TABLE_LOGS);
                 command.Append("(id_funcionario, log_date, user_action) ");
                 command.Append("VALUES(@idEmp, @date, @action);");
 
@@ -84,10 +84,11 @@ namespace Promig.Connection.Methods {
                 conn.Open();
 
                 //Definindo comando de ecuperação dos dados
-                string command = "select l.*, p.nome_pessoa from" +
-                " pessoas p, funcionarios f, log l where p.id_pessoa = f.id_pessoa" +
-                " and l.id_funcionario = f.id_funcionario and l.log_date = @date" +
-                " order by l.log_date desc;";
+                string command = $"select l.*, p.nome_pessoa from" +
+                                 $" {Refs.TABLE_PEOPLE} p, {Refs.TABLE_EMPLOYES} f, {Refs.TABLE_LOGS} l" +
+                                 $" where p.id_pessoa = f.id_pessoa" +
+                                 $" and l.id_funcionario = f.id_funcionario and l.log_date = @date" +
+                                 $" order by l.log_date desc;";
 
                 //Definindo objetos para recuperação de dados
                 List<Log> results = new List<Log>();
@@ -143,11 +144,12 @@ namespace Promig.Connection.Methods {
                 conn.Open();
 
                 //Definindo comando de ecuperação dos dados
-                string command = "select l.*, p.nome_pessoa from" +
-                " pessoas p, funcionarios f, log l where p.id_pessoa = f.id_pessoa" +
-                " and l.id_funcionario = f.id_funcionario and l.log_date = @date" +
-                " and l.user_action LIKE @action order by l.log_date desc;";
-
+                string command = $"select l.*, p.nome_pessoa from" +
+                                 $" {Refs.TABLE_PEOPLE} p, {Refs.TABLE_EMPLOYES} f, {Refs.TABLE_LOGS} l" +
+                                 $" where p.id_pessoa = f.id_pessoa" +
+                                 $" and l.id_funcionario = f.id_funcionario and l.log_date = @date" +
+                                 $" and l.user_action LIKE @action order by l.log_date desc;";
+                 
                 //Definindo objetos para recuperaçãod e dados
                 List<Log> results = new List<Log>();
                 MySqlDataReader reader;

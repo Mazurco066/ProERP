@@ -106,6 +106,7 @@
     <Compile Include="Connection\Methods\Logs.cs" />
     <Compile Include="Connection\Methods\Suppliers.cs" />
     <Compile Include="Connection\Methods\Users.cs" />
+    <Compile Include="Connection\Refs.cs" />
     <Compile Include="Exceptions\DatabaseAccessException.cs" />
     <Compile Include="Exceptions\DatabaseEditException.cs" />
     <Compile Include="Exceptions\DatabaseInsertException.cs" />

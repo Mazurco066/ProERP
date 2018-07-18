@@ -34,10 +34,10 @@ namespace Promig.Connection.Methods {
                 conn.Open();
 
                 //Definindo comando sql de consulta que sera executado
-                string command = "select * from usuarios u, funcionarios f, pessoas p " +
-                                 "where f.id_funcionario = u.id_funcionario and " +
-                                 "f.id_pessoa = p.id_pessoa and u.login = @username and" +
-                                 " u.password = @hash and p.status = true;";
+                string command = $"select * from {Refs.TABLE_USERS} u, {Refs.TABLE_EMPLOYES} f, {Refs.TABLE_PEOPLE} p " +
+                                 $"where f.id_funcionario = u.id_funcionario and " +
+                                 $"f.id_pessoa = p.id_pessoa and u.login = @username and" +
+                                 $" u.password = @hash and p.status = true;";
 
                 //Instanciando objetos para busca
                 List<User> results = new List<User>();
@@ -107,11 +107,11 @@ namespace Promig.Connection.Methods {
                 Employe e = new Employe();
 
                 //Definindo comando da consulta
-                string command = "select f.id_funcionario, f.permissao, p.nome_pessoa " +
-                                 "from usuarios u, funcionarios f, pessoas p where " +
-                                 "u.id_funcionario = f.id_funcionario and " +
-                                 "f.id_pessoa = p.id_pessoa and " +
-                                 "u.login = @username;";
+                string command = $"select f.id_funcionario, f.permissao, p.nome_pessoa " +
+                                 $"from {Refs.TABLE_USERS} u, {Refs.TABLE_EMPLOYES} f, {Refs.TABLE_PEOPLE} p where " +
+                                 $"u.id_funcionario = f.id_funcionario and " +
+                                 $"f.id_pessoa = p.id_pessoa and " +
+                                 $"u.login = @username;";
 
                 //Instanciando objetos para busca
                 List<Employe> results = new List<Employe>();

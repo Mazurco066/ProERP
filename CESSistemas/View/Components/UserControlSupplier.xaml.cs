@@ -223,7 +223,7 @@ namespace Promig.View.Components {
                         //Registrando log de alteração
                         Model.Log added = new Model.Log();
                         added.employe = _employe;
-                        added.action = "Fornecedor " + sup.name + " foi cadastrado no sistema!";
+                        added.action = $"Fornecedor {sup.name} foi cadastrado no sistema!";
                         logs.Register(added);
 
                         //Atualizando grid e limpando campos de texto
@@ -293,7 +293,7 @@ namespace Promig.View.Components {
                         //Registrando log de alteração
                         Model.Log edited = new Model.Log();
                         edited.employe = _employe;
-                        edited.action = "Fornecedor " + aux.GetName() + " com ID = " + aux.id + " sofreu alteração no sistema!";
+                        edited.action = $"Fornecedor {aux.name} com ID = {aux.id} sofreu alteração no sistema!";
                         logs.Register(edited);
 
                         //Atualizando grid e limpando campos de texto

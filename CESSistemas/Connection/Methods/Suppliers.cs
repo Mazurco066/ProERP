@@ -40,13 +40,13 @@ namespace Promig.Connection.Methods {
                 conn.Open();
 
                 //Definindo comando para inserção
-                string command = "BEGIN; insert into enderecos(rua, numero, bairro, cidade, uf, cep) " +
-                                 "values (@street, @number, @neighborhood, @city, @uf, @cep);" +
-                                 "insert into pessoas(id_endereco, nome_pessoa, status) " +
-                                 "values (last_insert_id(), @name, @status);" +
-                                 "insert into fornecedores(id_pessoa, cnpj, tel_residencial, tel_celular) " +
-                                 "values (last_insert_id(), @cnpj, @resPhone, @cellPhone);" +
-                                 "COMMIT;";
+                string command = $"BEGIN; insert into {Refs.TABLE_ADRESS}(rua, numero, bairro, cidade, uf, cep) " +
+                                 $"values (@street, @number, @neighborhood, @city, @uf, @cep);" +
+                                 $"insert into {Refs.TABLE_PEOPLE}(id_endereco, nome_pessoa, status) " +
+                                 $"values (last_insert_id(), @name, @status);" +
+                                 $"insert into {Refs.TABLE_SUPPLIERS}(id_pessoa, cnpj, tel_residencial, tel_celular) " +
+                                 $"values (last_insert_id(), @cnpj, @resPhone, @cellPhone);" +
+                                 $"COMMIT;";
 
                 //Definindo objetos para inserção dos dados
                 MySqlCommand cmd = new MySqlCommand(command, conn) {
@@ -99,15 +99,15 @@ namespace Promig.Connection.Methods {
                 conn.Open();
 
                 //Definindo comando para atualização
-                string command = "BEGIN; update enderecos set " +
-                                 "rua = @street, numero = @number, bairro = @neighborhood," +
-                                 "cidade = @city, uf = @uf, cep = @cep " +
-                                 "where id_endereco = @adressId;" +
-                                 "update pessoas set nome_pessoa = @name, status = @status " +
-                                 "where id_pessoa = @personId;" +
-                                 "update fornecedores set cnpj = @cnpj, tel_residencial = @resPhone, " +
-                                 "tel_celular = @cellPhone " +
-                                 "where id_fornecedor = @suplierId; COMMIT;";
+                string command = $"BEGIN; update {Refs.TABLE_ADRESS} set " +
+                                 $"rua = @street, numero = @number, bairro = @neighborhood," +
+                                 $"cidade = @city, uf = @uf, cep = @cep " +
+                                 $"where id_endereco = @adressId;" +
+                                 $"update {Refs.TABLE_PEOPLE} set nome_pessoa = @name, status = @status " +
+                                 $"where id_pessoa = @personId;" +
+                                 $"update {Refs.TABLE_SUPPLIERS} set cnpj = @cnpj, tel_residencial = @resPhone, " +
+                                 $"tel_celular = @cellPhone " +
+                                 $"where id_fornecedor = @suplierId; COMMIT;";
 
                 //Definindo objetos para inserção dos dados
                 MySqlCommand cmd = new MySqlCommand(command, conn) {
@@ -163,13 +163,13 @@ namespace Promig.Connection.Methods {
                 conn.Open();
 
                 //Definindo string de coneção
-                string command = "select f.id_fornecedor, p.id_pessoa, p.nome_pessoa, " +
-                                 "p.status, e.id_endereco, e.rua, e.numero, e.bairro, e.cidade, " +
-                                 "e.uf, e.cep, f.cnpj, f.tel_residencial, f.tel_celular " +
-                                 "from enderecos e, pessoas p, fornecedores f " +
-                                 "where e.id_endereco = p.id_endereco and " +
-                                 "p.id_pessoa = f.id_pessoa and " +
-                                 "f.id_fornecedor = @id";
+                string command = $"select f.id_fornecedor, p.id_pessoa, p.nome_pessoa, " +
+                                 $"p.status, e.id_endereco, e.rua, e.numero, e.bairro, e.cidade, " +
+                                 $"e.uf, e.cep, f.cnpj, f.tel_residencial, f.tel_celular " +
+                                 $"from {Refs.TABLE_ADRESS} e, {Refs.TABLE_PEOPLE} p, {Refs.TABLE_SUPPLIERS} f " +
+                                 $"where e.id_endereco = p.id_endereco and " +
+                                 $"p.id_pessoa = f.id_pessoa and " +
+                                 $"f.id_fornecedor = @id";
 
                 //Definindo comando e resultados
                 MySqlDataReader reader;
@@ -243,11 +243,11 @@ namespace Promig.Connection.Methods {
                 conn.Open();
 
                 //Definindo comando da consulta
-                string command = "select f.id_fornecedor, p.nome_pessoa, e.cidade, f.cnpj" +
-                                 " from pessoas p, fornecedores f, enderecos e" +
-                                 " where p.id_pessoa = f.id_pessoa and" +
-                                 " p.id_endereco = e.id_endereco and" +
-                                 " p.nome_pessoa LIKE @param;";
+                string command = $"select f.id_fornecedor, p.nome_pessoa, e.cidade, f.cnpj" +
+                                 $" from {Refs.TABLE_PEOPLE} p, {Refs.TABLE_SUPPLIERS} f, {Refs.TABLE_ADRESS} e" +
+                                 $" where p.id_pessoa = f.id_pessoa and" +
+                                 $" p.id_endereco = e.id_endereco and" +
+                                 $" p.nome_pessoa LIKE @param;";
 
                 //Definindo objetos para recuperação de dados
                 List<Supplier> results = new List<Supplier>();
@@ -300,12 +300,12 @@ namespace Promig.Connection.Methods {
                 conn.Open();
 
                 //Definindo comando da consulta
-                string command = "select f.id_fornecedor, p.nome_pessoa, e.cidade, f.cnpj" +
-                                 " from pessoas p, fornecedores f, enderecos e" +
-                                 " where p.id_pessoa = f.id_pessoa and" +
-                                 " p.id_endereco = e.id_endereco and" +
-                                 " p.status = @status and" +
-                                 " p.nome_pessoa LIKE @param;";
+                string command = $"select f.id_fornecedor, p.nome_pessoa, e.cidade, f.cnpj" +
+                                 $" from {Refs.TABLE_PEOPLE} p, {Refs.TABLE_SUPPLIERS} f, {Refs.TABLE_ADRESS} e" +
+                                 $" where p.id_pessoa = f.id_pessoa and" +
+                                 $" p.id_endereco = e.id_endereco and" +
+                                 $" p.status = @status and" +
+                                 $" p.nome_pessoa LIKE @param;";
 
                 //Definindo objetos para recuperação de dados
                 List<Supplier> results = new List<Supplier>();
@@ -360,12 +360,12 @@ namespace Promig.Connection.Methods {
                 conn.Open();
 
                 //Definindo comando da consulta
-                string command = "select f.id_fornecedor, p.nome_pessoa, e.cidade, f.cnpj" +
-                                 " from pessoas p, fornecedores f, enderecos e" +
-                                 " where p.id_pessoa = f.id_pessoa and" +
-                                 " p.id_endereco = e.id_endereco and" +
-                                 " p.status = @status and" +
-                                 " e.cidade LIKE @param;";
+                string command = $"select f.id_fornecedor, p.nome_pessoa, e.cidade, f.cnpj" +
+                                 $" from {Refs.TABLE_PEOPLE} p, {Refs.TABLE_SUPPLIERS} f, {Refs.TABLE_ADRESS} e" +
+                                 $" where p.id_pessoa = f.id_pessoa and" +
+                                 $" p.id_endereco = e.id_endereco and" +
+                                 $" p.status = @status and" +
+                                 $" e.cidade LIKE @param;";
 
                 //Definindo objetos para recuperação de dados
                 List<Supplier> results = new List<Supplier>();
@@ -420,12 +420,12 @@ namespace Promig.Connection.Methods {
                 conn.Open();
 
                 //Definindo comando da consulta
-                string command = "select f.id_fornecedor, p.nome_pessoa, e.cidade, f.cnpj" +
-                                 " from pessoas p, fornecedores f, enderecos e" +
-                                 " where p.id_pessoa = f.id_pessoa and" +
-                                 " p.id_endereco = e.id_endereco and" +
-                                 " p.status = @status and" +
-                                 " f.cnpj LIKE @param;";
+                string command = $"select f.id_fornecedor, p.nome_pessoa, e.cidade, f.cnpj" +
+                                 $" from {Refs.TABLE_PEOPLE} p, {Refs.TABLE_SUPPLIERS} f, {Refs.TABLE_ADRESS} e" +
+                                 $" where p.id_pessoa = f.id_pessoa and" +
+                                 $" p.id_endereco = e.id_endereco and" +
+                                 $" p.status = @status and" +
+                                 $" f.cnpj LIKE @param;";
 
                 //Definindo objetos para recuperação de dados
                 List<Supplier> results = new List<Supplier>();

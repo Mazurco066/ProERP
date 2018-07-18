@@ -15,13 +15,6 @@ namespace Promig.Connection {
         public static string DATABASE_USER = "promig_user";
         public static string DATABASE_PASSWORD = "promig_erp";
 
-        //Definindo nome das tabelas
-        public static string TABLE_USERS = "usuarios";
-        public static string TABLE_ADRESS = "enderecos";
-        public static string TABLE_PEOPLE = "pessoas";
-        public static string TABLE_EMPLOYES = "funcionarios";
-        public static string TABLE_LOGS = "log";
-
         //Método estático para retornar conexão com banco
         public static MySqlConnection GetConnection() {
 
