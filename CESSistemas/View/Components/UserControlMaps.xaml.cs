@@ -1,9 +1,5 @@
 ﻿using System.Windows.Controls;
-using System.Windows.Threading;
-using System.Threading;
 using System.Net;
-using System.Drawing;
-using System.IO;
 using Microsoft.Win32;
 using System.Xml.Linq;
 using System.Windows;
@@ -15,12 +11,9 @@ namespace Promig.View.Components {
 
         #region Fields
         private XDocument geoDoc;
-        private SaveFileDialog saveDialog;
         private string location;
         private int zoom;
         private string mapType;
-        private double lat;
-        private double lng;
         #endregion
 
         public UserControlMaps() {
@@ -28,6 +21,9 @@ namespace Promig.View.Components {
         }
 
         private void control_loaded(object sender, RoutedEventArgs e) {
+            zoom = 17;
+            mapType = "rooadmap";
+            location = "José Cristino de Oliveira Campos, 562 Jardim Selma, Mogi Guaçu-SP";
             ShowMap();
         }
 
@@ -45,11 +41,6 @@ namespace Promig.View.Components {
                 );
             }
         }
-
-        /*private void ShowGeoCodeData() {
-
-            var responseStatus = geoDoc...<status>
-        }*/
 
         private void ShowMap() {
             BitmapImage img = new BitmapImage();
