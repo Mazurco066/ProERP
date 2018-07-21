@@ -10,7 +10,7 @@
              Loaded="control_loaded"
              d:DesignHeight="450" d:DesignWidth="1306" Height="697" Background="White">
     <Grid>
-        <Image x:Name="mapImg" HorizontalAlignment="Left" Height="677" Margin="10,10,0,0" VerticalAlignment="Top" Width="1286"/>
+        <Image x:Name="mapImg" Stretch="Fill" HorizontalAlignment="Left" Height="677" Margin="10,10,0,0" VerticalAlignment="Top" Width="1286"/>
 
     </Grid>
 </UserControl>
