@@ -79,7 +79,7 @@ namespace Promig.View {
                     GridMain.Children.Add(usc);
                     break;
                 case "Estimate":
-                    usc = new UserControlEstimate();
+                    usc = new UserControlMaps();
                     GridMain.Children.Add(usc);
                     break;
                 case "Sair":

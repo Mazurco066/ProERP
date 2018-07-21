@@ -7,8 +7,10 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d"
+             Loaded="control_loaded"
              d:DesignHeight="450" d:DesignWidth="1306" Height="697" Background="White">
     <Grid>
-            
+        <Image x:Name="mapImg" HorizontalAlignment="Left" Height="677" Margin="10,10,0,0" VerticalAlignment="Top" Width="1286"/>
+
     </Grid>
 </UserControl>
