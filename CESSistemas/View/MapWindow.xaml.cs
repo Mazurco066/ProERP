@@ -14,6 +14,8 @@ namespace Promig.View {
         private string mapType;
         #endregion
 
+        #region Constructors
+
         public MapWindow() {
             //Inicializando componentes
             InitializeComponent();
@@ -33,6 +35,8 @@ namespace Promig.View {
             mapType = "rooadmap";
             this.location = location;
         }
+
+        #endregion
 
         #region Events
 
