@@ -57,6 +57,33 @@ namespace Promig.View.Components {
             RefreshGrid(txtSearch.Text);
         }
 
+        //Evento para exibir em mapa
+        private void btnShowInMap_Click(object sender, RoutedEventArgs e) {
+
+            //Verificando se ha um cliente selecionado para exibição
+            if (dgSuppliers.SelectedItems.Count > 0) {
+
+                //Recuperando dados do cliente selecionado
+                Supplier source = dgSuppliers.SelectedItem as Supplier;
+                Supplier supplier = dao.GetSupplierData(source.id);
+
+                //Construindo string de endereço employe
+                string location = $"{supplier.adress.street}, {supplier.adress.number} {supplier.adress.neighborhood}, {supplier.adress.city}-{supplier.adress.UF}";
+
+                //Enviando dados e iniciando exibição em mapa
+                MapWindow window = new MapWindow(location);
+                window.Show();
+            }
+            else {
+                MessageBox.Show(
+                    "Selecione um registro para visualizar no mapa!",
+                    "Aviso!",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning
+                );
+            }
+        }
+
         //Evento para atualizar grid manualmente
         private void btnRefresh_Click(object sender, RoutedEventArgs e) {
             RefreshGrid();

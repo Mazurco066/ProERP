@@ -87,6 +87,14 @@ namespace Promig.View.Components {
                 MapWindow window = new MapWindow(location);
                 window.Show();
             }
+            else {
+                MessageBox.Show(
+                    "Selecione um registro para visualizar no mapa!",
+                    "Aviso!",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning
+                );
+            }
         }
 
         //Evento para atualizar grid manualmente
