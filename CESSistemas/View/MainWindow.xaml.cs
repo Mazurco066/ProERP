@@ -21,6 +21,8 @@ namespace Promig.View {
 
         #endregion Header
 
+        #region Events
+
         // inicializar userControl com a tela de pagina principal
         private void initializeUserControl(){
             UserControl usc = null;
@@ -111,6 +113,10 @@ namespace Promig.View {
             }
         }
 
+        #endregion
+
+        #region Utils
+
         // desabilitar botoes
         private void esconderBotoes(){
             Employes.IsEnabled = false;
@@ -123,5 +129,7 @@ namespace Promig.View {
             BillsToReceive.Opacity = .50;
             btnAuditoria.Opacity = .50;
         }
+
+        #endregion
     }
 }

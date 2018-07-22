@@ -156,6 +156,9 @@
     <Compile Include="Utils\Crypt.cs" />
     <Compile Include="Utils\Log.cs" />
     <Compile Include="Utils\Util.cs" />
+    <Compile Include="View\MapWindow.xaml.cs">
+      <DependentUpon>MapWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\Components\UserControlEstimate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -205,6 +208,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="SplashScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MapWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

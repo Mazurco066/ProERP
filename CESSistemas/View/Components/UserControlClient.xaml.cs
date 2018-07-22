@@ -4,7 +4,8 @@ using System.Windows.Input;
 using Promig.Connection.Methods;
 using Promig.Exceptions;
 using Promig.Model;
-using Promig.Utils; 
+using Promig.Utils;
+using Promig.View;
 
 namespace Promig.View.Components {
     
@@ -67,6 +68,25 @@ namespace Promig.View.Components {
         //Evento ao pesquisar na caixa de pesquisa
         private void txtSearch_KeyDown(object sender, RoutedEventArgs e) {
             RefreshGrid(txtSearch.Text);
+        }
+
+        //Evento para exibir em mapa
+        private void btnShowInMap_Click(object sender, RoutedEventArgs e) {
+
+            //Verificando se ha um cliente selecionado para exibição
+            if (dgClients.SelectedItems.Count > 0) {
+
+                //Recuperando dados do cliente selecionado
+                Client source = dgClients.SelectedItem as Client;
+                Client client = dao.GetClientData(source.id);
+
+                //Construindo string de endereço padrão
+                string location = $"{client.adress.street}, {client.adress.number} {client.adress.neighborhood}, {client.adress.city}-{client.adress.UF}";
+
+                //Enviando dados e iniciando exibição em mapa
+                MapWindow window = new MapWindow(location);
+                window.Show();
+            }
         }
 
         //Evento para atualizar grid manualmente
