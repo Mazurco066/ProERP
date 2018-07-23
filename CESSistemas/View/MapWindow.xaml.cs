@@ -1,7 +1,9 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Net;
 using System.Xml.Linq;
 using System.Windows.Media.Imaging;
+using Promig.Utils;
 
 namespace Promig.View {
     
@@ -46,6 +48,16 @@ namespace Promig.View {
 
         private void btnVoltar_Click(object sender, RoutedEventArgs e) {
             Close();
+        }
+
+        private void control_Deactivated(object sender, EventArgs e) {
+            try {
+                Close();
+            }
+            catch (Exception ex) {
+                Log.logException(ex);
+                Log.logMessage(ex.Message);
+            }
         }
 
         #endregion

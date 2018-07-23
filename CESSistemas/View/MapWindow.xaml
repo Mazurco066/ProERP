@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Promig.View"
         mc:Ignorable="d"
-        Loaded="control_loaded"
+        Loaded="control_loaded" Deactivated="control_Deactivated"
         Title="Visualização em Mapa" Height="530" Width="700" WindowStartupLocation="CenterScreen" BorderThickness="3" BorderBrush="#FF3F51B5" WindowStyle="None" ResizeMode="NoResize">
     <Grid>
         <Button x:Name="btnVoltar" Click="btnVoltar_Click" Content="Voltar" HorizontalAlignment="Left" Margin="20,436,0,0" VerticalAlignment="Top" Width="268" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
