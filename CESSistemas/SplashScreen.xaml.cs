@@ -8,9 +8,9 @@ namespace Promig {
     public partial class SplashScreen : Window {
 
         private const int TEMP = 8000;
+
         public SplashScreen() {
             InitializeComponent();
-            //carregarprogressBar();
         }
 
         private delegate void ProgressBarDelegate();
@@ -30,7 +30,7 @@ namespace Promig {
         }   
 
         private void carregarprogressBar() {
-                criarConstrucao();
+            criarConstrucao();
             try {
                     Login janela = new Login();
                     janela.Show();

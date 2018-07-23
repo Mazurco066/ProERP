@@ -4,6 +4,7 @@ using Promig.Utils;
 using Geocoding;
 using Geocoding.Microsoft;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Promig.View {
     
@@ -47,6 +48,11 @@ namespace Promig.View {
         //Evento para o botão voltar da janela
         private void btnVoltar_Click(object sender, RoutedEventArgs e) {
             Close();
+        }
+
+        //Evento para imprimir visualização de mapa atual
+        private void btnPrint_Click(object sender, RoutedEventArgs e) {
+            
         }
 
         //Evento para fechar janela ao clicar fora

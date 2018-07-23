@@ -20,7 +20,8 @@
             Width="268" Height="60" 
             FontSize="20" BorderBrush="#FF3F51B5"/>
         <Button 
-            x:Name="btnPrint" 
+            x:Name="btnPrint"
+            Click="btnPrint_Click" 
             Content="Imprimir" 
             HorizontalAlignment="Left" 
             Margin="406,436,0,0" 
