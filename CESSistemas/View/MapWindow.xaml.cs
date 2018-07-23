@@ -4,7 +4,7 @@ using Promig.Utils;
 using Geocoding;
 using Geocoding.Microsoft;
 using System.Collections.Generic;
-using System.ComponentModel;
+
 
 namespace Promig.View {
     
@@ -52,7 +52,7 @@ namespace Promig.View {
 
         //Evento para imprimir visualização de mapa atual
         private void btnPrint_Click(object sender, RoutedEventArgs e) {
-            
+            PrintMap();
         }
 
         //Evento para fechar janela ao clicar fora
@@ -97,6 +97,10 @@ namespace Promig.View {
             //Visualizando coordenadas encontradas no mapa com zoom proprio
             bingMap.SetView(loc, zoom);    //Visualização em mapa
             bingMarker.Location = loc;     //Marcador de destino
+        }
+
+        private void PrintMap() {
+          
         }
 
         //Metodo para ver coordenadas previamente encontradas no metodo SetLocation()
