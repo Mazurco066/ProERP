@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Windows;
-using System.Net;
-using System.Xml.Linq;
-using System.Windows.Media.Imaging;
 using Promig.Utils;
+using Geocoding;
+using Geocoding.Microsoft;
+using System.Collections.Generic;
 
 namespace Promig.View {
     
     public partial class MapWindow : Window {
 
         #region Fields
-        private XDocument geoDoc;
         private string location;
-        private int zoom;
-        private string mapType;
+        private double zoom;
+        private Microsoft.Maps.MapControl.WPF.Location loc;
         #endregion
 
         #region Constructors
@@ -23,8 +22,7 @@ namespace Promig.View {
             InitializeComponent();
 
             //Definindo valores padrão
-            zoom = 18;
-            mapType = "rooadmap";
+            zoom = 17.0;
             location = "";
         }
 
@@ -33,8 +31,7 @@ namespace Promig.View {
             InitializeComponent();
 
             //Definindo valores padrão
-            zoom = 18;
-            mapType = "rooadmap";
+            zoom = 17.0;
             this.location = location;
         }
 
@@ -42,14 +39,17 @@ namespace Promig.View {
 
         #region Events
 
+        //Evento ao carregar janela a qual chamara metodo para setar localização
         private void control_loaded(object sender, RoutedEventArgs e) {
-            ShowMap();
+            SetLocation();
         }
 
+        //Evento para o botão voltar da janela
         private void btnVoltar_Click(object sender, RoutedEventArgs e) {
             Close();
         }
 
+        //Evento para fechar janela ao clicar fora
         private void control_Deactivated(object sender, EventArgs e) {
             try {
                 Close();
@@ -60,32 +60,42 @@ namespace Promig.View {
             }
         }
 
+        //Evento ao recentralizar o mapa na localização
+        private void btnRefresh_Click(object sender, EventArgs e) {
+            Refresh();
+        }
+
         #endregion
 
         #region MapsAPI
 
-        private void GetGeocodeData() {
-            string geocodeUrl = $"http://maps.googleapis.com/maps/api/geocode/xml?address={location}&sensor=false";
-            try {
-                geoDoc = XDocument.Load(geocodeUrl);
-            }
-            catch (WebException ex) {
-                MessageBox.Show(
-                    ex.Message,
-                    "Map App",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error
+        //Metodo para posicionar o mapa na localização passada por endereço
+        private void SetLocation() {
+
+            //Instanciando objeto para recuperar as cordenadas
+            IGeocoder geocoder = new BingMapsGeocoder(
+                "AsHgFB0MOC02SgIYNbIwV9WOuo94eLp3brN5PvlD9Vu-p9DSjVUYfUZZIS5jfOeb"
+            );
+            IEnumerable<Address> results = geocoder.Geocode(this.location);
+
+            //Recuperando primeiro endereco
+            loc = new Microsoft.Maps.MapControl.WPF.Location();
+            foreach (Address a in results) {
+                loc = new Microsoft.Maps.MapControl.WPF.Location(
+                    a.Coordinates.Latitude,
+                    a.Coordinates.Longitude
                 );
+                break;
             }
+
+            //Visualizando coordenadas encontradas no mapa com zoom proprio
+            bingMap.SetView(loc, zoom);    //Visualização em mapa
+            bingMarker.Location = loc;     //Marcador de destino
         }
 
-        private void ShowMap() {
-            BitmapImage img = new BitmapImage();
-            string mapURl = $"http://maps.googleapis.com/maps/api/staticmap?size=500x400&markers=size:mid%7Ccolor:red%7C{location}&zoom={zoom}&maptype={mapType}&sensor=false";
-            img.BeginInit();
-            img.UriSource = new System.Uri(mapURl);
-            img.EndInit();
-            mapImage.Source = img;
+        //Metodo para ver coordenadas previamente encontradas no metodo SetLocation()
+        private void Refresh() {
+            bingMap.SetView(loc, zoom);    //Visualização em mapa
         }
 
         #endregion

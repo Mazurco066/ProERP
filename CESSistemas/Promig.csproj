@@ -40,11 +40,17 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Geocoding, Version=3.6.0.0, Culture=neutral, PublicKeyToken=7c714700b88674c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Geocoding.net.3.6.1\lib\net40\Geocoding.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.1.3\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.4.0.1044, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.4.0.1044\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Maps.MapControl.WPF">
+      <HintPath>C:\Program Files (x86)\Bing Maps WPF Control\V1\Libraries\Microsoft.Maps.MapControl.WPF.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=6.10.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />

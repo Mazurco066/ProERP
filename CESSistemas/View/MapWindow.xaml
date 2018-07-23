@@ -4,12 +4,45 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Promig.View"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Loaded="control_loaded" Deactivated="control_Deactivated"
         Title="Visualização em Mapa" Height="530" Width="700" WindowStartupLocation="CenterScreen" BorderThickness="3" BorderBrush="#FF3F51B5" WindowStyle="None" ResizeMode="NoResize">
     <Grid>
-        <Button x:Name="btnVoltar" Click="btnVoltar_Click" Content="Voltar" HorizontalAlignment="Left" Margin="20,436,0,0" VerticalAlignment="Top" Width="268" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
-        <Image x:Name="mapImage" Stretch="Fill" HorizontalAlignment="Left" Height="328" Margin="20,84,0,0" VerticalAlignment="Top" Width="655"/>
-        <Label Content="Visualizaçao em Mapa" FontSize="40" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" Foreground="#FF3F51B5"/>
+        <Button 
+            x:Name="btnVoltar" 
+            Click="btnVoltar_Click" 
+            Content="Voltar" 
+            HorizontalAlignment="Left" 
+            Margin="20,436,0,0" 
+            VerticalAlignment="Top" 
+            Width="268" Height="60" 
+            FontSize="20" BorderBrush="#FF3F51B5"/>
+        <Button 
+            x:Name="btnPrint" 
+            Content="Imprimir" 
+            HorizontalAlignment="Left" 
+            Margin="406,436,0,0" 
+            VerticalAlignment="Top" 
+            Width="268" Height="60" 
+            FontSize="20" BorderBrush="#FF3F51B5"/>
+        <m:Map 
+            x:Name="bingMap" 
+            CredentialsProvider="AsHgFB0MOC02SgIYNbIwV9WOuo94eLp3brN5PvlD9Vu-p9DSjVUYfUZZIS5jfOeb" 
+            Margin="20,84,20,115">
+            <m:Pushpin
+                x:Name="bingMarker"
+                Visibility="Visible"/>
+        </m:Map>
+        <Label Content="Visualizaçao em Mapa" 
+               FontSize="40" 
+               HorizontalAlignment="Left" 
+               Margin="10,16,0,0" 
+               VerticalAlignment="Top" 
+               Foreground="#FF3F51B5"/>
+        <Button x:Name="btnRefresh" Click="btnRefresh_Click" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="623,40,20,0" Height="26" Background="{x:Null}">
+            <materialDesign:PackIcon Foreground="#FF3F51B5" Kind="Refresh" Width="20" Height="19" RenderTransformOrigin="0.45,2.842"/>
+        </Button>
     </Grid>
 </Window>
