@@ -1,17 +1,21 @@
-﻿using System.Windows;
+﻿using System;
+using System.Runtime.InteropServices;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Promig.Connection.Methods;
 using Promig.Exceptions;
 using Promig.Model;
 using Promig.Utils;
-using Promig.View;
 
 namespace Promig.View.Components {
     
     public partial class UserControlClient : UserControl {
 
         #region Header
+
+        [DllImport("wininet.dll")]
+        private extern static Boolean InternetGetConnectedState(out int Description, int ReservedValue);
 
         private Clients dao;
         private Logs logs;
@@ -75,6 +79,17 @@ namespace Promig.View.Components {
 
             //Verificando se ha um cliente selecionado para exibição
             if (dgClients.SelectedItems.Count > 0) {
+
+                //Verificando conexão com internet
+                if (!IsConnected()) {
+                    MessageBox.Show(
+                        "Você precisa estar conectado a internet para usar esse recurso!",
+                        "Erro de Conexão!",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error
+                    );                    
+                    return;
+                }
 
                 //Recuperando dados do cliente selecionado
                 Client source = dgClients.SelectedItem as Client;
@@ -491,6 +506,11 @@ namespace Promig.View.Components {
         #endregion
 
         #region Utils
+
+        public static Boolean IsConnected() {
+            int Description;
+            return InternetGetConnectedState(out Description, 0);
+        }
 
         private void SetDefaults() {
 
