@@ -15,16 +15,16 @@
             Click="btnVoltar_Click" 
             Content="Voltar" 
             HorizontalAlignment="Left" 
-            Margin="20,436,0,0" 
+            Margin="20,450,0,0" 
             VerticalAlignment="Top" 
             Width="268" Height="60" 
             FontSize="20" BorderBrush="#FF3F51B5"/>
         <Button 
             x:Name="btnPrint"
             Click="btnPrint_Click" 
-            Content="Imprimir" 
+            Content="Gerar Pdf" 
             HorizontalAlignment="Left" 
-            Margin="406,436,0,0" 
+            Margin="406,450,0,0" 
             VerticalAlignment="Top" 
             Width="268" Height="60" 
             FontSize="20" BorderBrush="#FF3F51B5"/>
@@ -41,7 +41,14 @@
                HorizontalAlignment="Left" 
                Margin="10,16,0,0" 
                VerticalAlignment="Top" 
-               Foreground="#FF3F51B5"/>
+               Foreground="#FF3F51B5" RenderTransformOrigin="0.458,0.508"/>
+        <Label x:Name="reportLabel"
+               Content="" 
+               FontSize="14" 
+               HorizontalAlignment="Left" 
+               Margin="20,414,0,0" 
+               VerticalAlignment="Top" 
+               Foreground="#FF3F51B5" Width="654"/>
         <Button x:Name="btnRefresh" Click="btnRefresh_Click" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="623,40,20,0" Height="26" Background="{x:Null}">
             <materialDesign:PackIcon Foreground="#FF3F51B5" Kind="Refresh" Width="20" Height="19" RenderTransformOrigin="0.45,2.842"/>
         </Button>
