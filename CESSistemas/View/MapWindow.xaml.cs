@@ -1,9 +1,13 @@
-﻿using System;
-using System.Windows;
-using Promig.Utils;
-using Geocoding;
+﻿using Geocoding;
 using Geocoding.Microsoft;
+using iTextSharp;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using Promig.Utils;
+using System;
+using System.Windows;
 using System.Collections.Generic;
+using System.IO;
 
 
 namespace Promig.View {
@@ -100,7 +104,24 @@ namespace Promig.View {
         }
 
         private void PrintMap() {
-          
+
+            //Criando um novo documento com margem 40
+            Document document = new Document(PageSize.A4);
+            document.SetMargins(40, 40, 40, 40);
+            document.AddCreationDate();
+
+            //Definindo o caminho que será salvo o arquivo PDF            
+            string rawPath = $"C:\\ProERP\\PDFMaps\\";
+
+            //Criando diretório para armazenar mapas se não existir
+            if (!Directory.Exists(rawPath)) Directory.CreateDirectory(rawPath);
+
+            //Configurando caminho do novo arquivo pdf a ser salvo
+            Directory.SetCurrentDirectory(rawPath);
+            string path = Path.Combine(Directory.GetCurrentDirectory(), $"{DateTime.Now.ToString("ddMMyyyyhhmmss")}roadmap.pdf");
+
+            //Criando arquivo em branco para testes
+            PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(path, FileMode.Create));
         }
 
         //Metodo para ver coordenadas previamente encontradas no metodo SetLocation()
