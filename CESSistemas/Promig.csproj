@@ -133,6 +133,9 @@
     <Compile Include="Utils\DateBr.cs" />
     <Compile Include="Utils\Validator.cs" />
     <Compile Include="Utils\WSAdress.cs" />
+    <Compile Include="View\Components\AboutUserControl.xaml.cs">
+      <DependentUpon>AboutUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Components\UserControlEstimate.xaml.cs">
       <DependentUpon>UserControlEstimate.xaml</DependentUpon>
     </Compile>
@@ -169,6 +172,10 @@
     <Compile Include="View\MapWindow.xaml.cs">
       <DependentUpon>MapWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\Components\AboutUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Components\UserControlEstimate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
