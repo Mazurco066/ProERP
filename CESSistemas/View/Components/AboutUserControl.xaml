@@ -13,10 +13,13 @@
         <Label Content="Sobre a Empresa" FontSize="40" Margin="39,34,948,595" Foreground="#FF3F51B5"/>
         <Label Content="Essa configuração e destinada para informações da localização da empresa que esta utilizando esse Software para fins de emissão de" FontSize="20" Margin="39,102,58,551" Foreground="#FF3F51A5"/>
         <Label Content="rotas e orçamentos levantados." FontSize="20" Margin="39,146,58,507" Foreground="#FF3F51A5"/>
+        <Button x:Name="btnRefresh" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="1207,195,39,0" Height="26" Background="{x:Null}" RenderTransformOrigin="0.788,1.137">
+            <materialDesign:PackIcon Foreground="#FF3F51B5" Kind="Refresh" Width="20" Height="19" RenderTransformOrigin="0.45,2.842"/>
+        </Button>
         <m:Map 
             x:Name="bingMap" 
             CredentialsProvider="AsHgFB0MOC02SgIYNbIwV9WOuo94eLp3brN5PvlD9Vu-p9DSjVUYfUZZIS5jfOeb" 
-            Margin="617,231,39,138">
+            Margin="614,229,39,149">
             <m:Pushpin
                 x:Name="bingMarker"
                 Visibility="Visible"/>
@@ -24,7 +27,7 @@
         <TextBox 
             x:Name="NameEdit" 
             HorizontalAlignment="Left" 
-            Width="338" 
+            Width="530" 
             Height="42" 
             Margin="39,231,0,0" 
             TextWrapping="Wrap" 
@@ -37,7 +40,7 @@
         <TextBox 
             x:Name="AdressEdit" 
             HorizontalAlignment="Left" 
-            Width="338"
+            Width="530"
             Height="44" 
             Margin="39,278,0,0" 
             TextWrapping="Wrap" 
@@ -51,10 +54,10 @@
             x:Name="NeighboorhoodEdit" 
             HorizontalAlignment="Left" 
             Height="44" 
-            Margin="399,278,0,0" 
+            Margin="231,374,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
-            Width="170" 
+            Width="338" 
             materialDesign:HintAssist.Hint="Bairro" 
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
@@ -64,7 +67,7 @@
             x:Name="CityEdit" 
             HorizontalAlignment="Left" 
             Height="44" 
-            Margin="39,327,0,0" 
+            Margin="231,329,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Width="338" 
@@ -76,7 +79,7 @@
         <ComboBox 
             x:Name="cbState" 
             HorizontalAlignment="Left"
-            Margin="399,331,0,0"
+            Margin="39,380,0,0"
             VerticalAlignment="Top" 
             Width="170" 
             materialDesign:HintAssist.Hint="Estado" 
@@ -116,10 +119,10 @@
             x:Name="NumberEdit"
             HorizontalAlignment="Left"
             Height="42"
-            Margin="39,378,0,0" 
+            Margin="39,427,0,0" 
             TextWrapping="Wrap"
             VerticalAlignment="Top"
-            Width="260"
+            Width="169"
             materialDesign:HintAssist.Hint="Número" 
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             FontFamily="champagne &amp; Limousines"
@@ -132,10 +135,10 @@
             IncludePromptInValue="False"
             HorizontalAlignment="Left"
             Height="44"
-            Margin="324,376,0,0" 
+            Margin="39,329,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
-            Width="245" 
+            Width="170" 
             materialDesign:HintAssist.Hint="CEP" 
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             FontFamily="champagne &amp; Limousines" 
@@ -148,7 +151,7 @@
             IncludePromptInValue="True"
             HorizontalAlignment="Left"
             Height="44" 
-            Margin="399,229,0,0" 
+            Margin="231,425,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top"
             Width="170"
@@ -157,7 +160,54 @@
             FontFamily="champagne &amp; Limousines"
             FontSize="14" Foreground="#FF0A0A0A" 
             MaxLength="30" TabIndex="4" HidePromptOnLeave="True"/>
-        <Button x:Name="btnSalvar" Content="Salvar" HorizontalAlignment="Left" Margin="480,627,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
-
+        <wpfTool:MaskedTextBox  
+            x:Name="phone1Edit"
+            Mask="(99) 9999-9999"
+            IncludeLiteralsInValue="False"
+            IncludePromptInValue="False"
+            HorizontalAlignment="Left"
+            Height="44"
+            Margin="419,425,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Width="150" 
+            materialDesign:HintAssist.Hint="Telefone Residencial" 
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            FontFamily="champagne &amp; Limousines" 
+            FontSize="14" Foreground="#FF0A0A0A" 
+            MaxLength="30" TabIndex="4" HidePromptOnLeave="True"/>
+        <Button x:Name="btnSalvar" HorizontalAlignment="Center" Content="Salvar"  Margin="0,627,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
+        <wpfTool:MaskedTextBox  
+            x:Name="phone1Edit2"
+            Mask="(99) 9999-9999"
+            IncludeLiteralsInValue="False"
+            IncludePromptInValue="False"
+            HorizontalAlignment="Left"
+            Height="44"
+            Margin="39,474,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Width="246" 
+            materialDesign:HintAssist.Hint="Telefone Residencial 2" 
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            FontFamily="champagne &amp; Limousines" 
+            FontSize="14" Foreground="#FF0A0A0A" 
+            MaxLength="30" TabIndex="4" HidePromptOnLeave="True"/>
+        <wpfTool:MaskedTextBox  
+            x:Name="phone1Edit3"
+            Mask="(99) 99999-9999"
+            IncludeLiteralsInValue="False"
+            IncludePromptInValue="False"
+            HorizontalAlignment="Left"
+            Height="44"
+            Margin="307,474,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Width="262" 
+            materialDesign:HintAssist.Hint="Telefone Celular" 
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            FontFamily="champagne &amp; Limousines" 
+            FontSize="14" Foreground="#FF0A0A0A" 
+            MaxLength="30" TabIndex="4" HidePromptOnLeave="True"/>
     </Grid>
 </UserControl>
