@@ -129,11 +129,11 @@
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\Employe.cs" />
     <Compile Include="Model\Json\CompanyModel.cs" />
-    <Compile Include="Model\Json\JsonModel.cs" />
     <Compile Include="Model\Log.cs" />
     <Compile Include="Model\Person.cs" />
     <Compile Include="Model\Supplier.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Utils\CompanyData.cs" />
     <Compile Include="Utils\Database.cs" />
     <Compile Include="Utils\DateBr.cs" />
     <Compile Include="Utils\Validator.cs" />

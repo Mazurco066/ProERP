@@ -1,20 +1,12 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
-using Promig.Model.Json;
+﻿using Promig.Model.Json;
+using Promig.Utils;
 using System.Windows.Controls;
 using System.Windows;
-using System.IO;
 
 
 namespace Promig.View.Components {
     
     public partial class UserControlAbout : UserControl {
-
-        #region Header
-        private string rawPath = "C:\\ProERP\\Preferences\\";
-        private string path = "C:\\ProERP\\Preferences\\preferences.json";
-        #endregion
 
         public UserControlAbout() {
             InitializeComponent();
@@ -25,43 +17,37 @@ namespace Promig.View.Components {
         private void control_loaded(object sender, RoutedEventArgs e) {
 
             //Verificando se ja existe um arquivo de preferencias
-            if (!Directory.Exists(rawPath)) Directory.CreateDirectory(rawPath);
-            Directory.SetCurrentDirectory(rawPath);
+            if (!CompanyData.PreferencesExists())
+                //Se não o arquivo é criado
+                CompanyData.CreatePreferences();
 
-            //Criando arquivo de preferencias JSON
-            CreateJson();
+            //Preenchendo dados da empresa
+            FillData(CompanyData.GetPreferencesData());
         }
 
         #endregion
 
-        #region Data-Methods
+        #region Utils
 
-        private void CreateJson() {
-
-            //Criando dados pré definidos da empresa
-            var model = new JsonModel {
-                Version = "1.0.0",
-                CompanyList = {
-                    new CompanyModel {
-                        name = "Promig Serralheria e Instalações Industriais",
-                        cnpj = "12345678912345",
-                        street = "rua",
-                        neighborhood = "bairro",
-                        number = "numero",
-                        city = "cidade",
-                        CEP = "cep",
-                        UF = "uf",
-                        phone1 = "19971818810",
-                        phone2 = "19992539978",
-                        phone3 = "1935691924"
-                    }
-                }
-            };
-
-            var serializerSettings = new JsonSerializerSettings();
-            serializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            var json = JsonConvert.SerializeObject(model, serializerSettings);
-            File.WriteAllText(path, json);
+        //Método para preencher campos com dados do modelo passado como parametro
+        private void FillData(CompanyModel model) {
+            NameEdit.Text = model.name;
+            cnpjEdit.Text = model.cnpj;
+            AdressEdit.Text = model.street;
+            NeighboorhoodEdit.Text = model.neighborhood;
+            NumberEdit.Text = model.number;
+            CityEdit.Text = model.city;
+            cepEdit.Text = model.CEP;
+            phone1Edit.Text = model.phone1;
+            phone1Edit2.Text = model.phone2;
+            phone1Edit3.Text = model.phone3;
+            //Recuperando Estado
+            int index = -1;
+            foreach (ComboBoxItem item in cbState.Items) {
+                index++;
+                if (item.Content.Equals(model.UF)) break;
+            }
+            cbState.SelectedIndex = index;
         }
 
         #endregion

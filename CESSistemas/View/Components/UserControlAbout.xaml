@@ -147,8 +147,8 @@
         <wpfTool:MaskedTextBox 
             x:Name="cnpjEdit"
             Mask="99,999,999/9999-99" 
-            IncludeLiteralsInValue="True"
-            IncludePromptInValue="True"
+            IncludeLiteralsInValue="false"
+            IncludePromptInValue="false"
             HorizontalAlignment="Left"
             Height="44" 
             Margin="231,425,0,0" 
@@ -162,7 +162,7 @@
             MaxLength="30" TabIndex="4" HidePromptOnLeave="True"/>
         <wpfTool:MaskedTextBox  
             x:Name="phone1Edit"
-            Mask="(99) 9999-9999"
+            Mask="(99) 99999-9999"
             IncludeLiteralsInValue="False"
             IncludePromptInValue="False"
             HorizontalAlignment="Left"
@@ -171,7 +171,7 @@
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Width="150" 
-            materialDesign:HintAssist.Hint="Telefone Residencial" 
+            materialDesign:HintAssist.Hint="Telefone 01" 
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF0A0A0A" 
@@ -179,7 +179,7 @@
         <Button x:Name="btnSalvar" HorizontalAlignment="Center" Content="Salvar"  Margin="0,627,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
         <wpfTool:MaskedTextBox  
             x:Name="phone1Edit2"
-            Mask="(99) 9999-9999"
+            Mask="(99) 99999-9999"
             IncludeLiteralsInValue="False"
             IncludePromptInValue="False"
             HorizontalAlignment="Left"
@@ -188,7 +188,7 @@
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Width="246" 
-            materialDesign:HintAssist.Hint="Telefone Residencial 2" 
+            materialDesign:HintAssist.Hint="Telefone 02" 
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF0A0A0A" 
@@ -204,7 +204,7 @@
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Width="262" 
-            materialDesign:HintAssist.Hint="Telefone Celular" 
+            materialDesign:HintAssist.Hint="Telefone 03" 
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF0A0A0A" 
