@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Promig.View.Components.AboutUserControl"
+﻿<UserControl x:Class="Promig.View.Components.UserControlAbout"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:Promig.View.Components"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
-             mc:Ignorable="d" 
+             mc:Ignorable="d" Loaded="control_loaded"
              d:DesignHeight="450" d:DesignWidth="1306" Height="697" Background="White">
     <Grid>
         <Label Content="Sobre a Empresa" FontSize="40" Margin="39,34,948,595" Foreground="#FF3F51B5"/>

@@ -34,7 +34,7 @@ namespace Promig.View {
         // botao de sobre a empresa
         private void btnSobre_Click(object sender, RoutedEventArgs e) {
             UserControl usc = null;
-            usc = new AboutUserControl();
+            usc = new UserControlAbout();
             GridMain.Children.Clear();
             GridMain.Children.Add(usc);
         }

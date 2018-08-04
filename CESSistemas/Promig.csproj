@@ -128,6 +128,8 @@
     <Compile Include="Model\Adress.cs" />
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\Employe.cs" />
+    <Compile Include="Model\Json\CompanyModel.cs" />
+    <Compile Include="Model\Json\JsonModel.cs" />
     <Compile Include="Model\Log.cs" />
     <Compile Include="Model\Person.cs" />
     <Compile Include="Model\Supplier.cs" />
@@ -136,8 +138,8 @@
     <Compile Include="Utils\DateBr.cs" />
     <Compile Include="Utils\Validator.cs" />
     <Compile Include="Utils\WSAdress.cs" />
-    <Compile Include="View\Components\AboutUserControl.xaml.cs">
-      <DependentUpon>AboutUserControl.xaml</DependentUpon>
+    <Compile Include="View\Components\UserControlAbout.xaml.cs">
+      <DependentUpon>UserControlAbout.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Components\UserControlEstimate.xaml.cs">
       <DependentUpon>UserControlEstimate.xaml</DependentUpon>
@@ -175,7 +177,7 @@
     <Compile Include="View\MapWindow.xaml.cs">
       <DependentUpon>MapWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\Components\AboutUserControl.xaml">
+    <Page Include="View\Components\UserControlAbout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
