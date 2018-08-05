@@ -13,7 +13,7 @@
         <Label Content="Sobre a Empresa" FontSize="40" Margin="39,34,948,595" Foreground="#FF3F51B5"/>
         <Label Content="Essa configuração e destinada para informações da localização da empresa que esta utilizando esse Software para fins de emissão de" FontSize="20" Margin="39,102,58,551" Foreground="#FF3F51A5"/>
         <Label Content="rotas e orçamentos levantados." FontSize="20" Margin="39,146,58,507" Foreground="#FF3F51A5"/>
-        <Button x:Name="btnRefresh" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="1207,195,39,0" Height="26" Background="{x:Null}" RenderTransformOrigin="0.788,1.137">
+        <Button x:Name="btnRefresh" Click="Refresh" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="1207,195,39,0" Height="26" Background="{x:Null}" RenderTransformOrigin="0.788,1.137">
             <materialDesign:PackIcon Foreground="#FF3F51B5" Kind="Refresh" Width="20" Height="19" RenderTransformOrigin="0.45,2.842"/>
         </Button>
         <m:Map 
@@ -118,6 +118,7 @@
         <TextBox 
             x:Name="NumberEdit"
             HorizontalAlignment="Left"
+            KeyDown="numberEdit_KeyDown"
             Height="42"
             Margin="39,427,0,0" 
             TextWrapping="Wrap"
@@ -131,6 +132,7 @@
         <wpfTool:MaskedTextBox  
             x:Name="cepEdit"
             Mask="99999-999"
+            PreviewKeyUp="cepEdit_PreviewKeyUp"
             IncludeLiteralsInValue="False"
             IncludePromptInValue="False"
             HorizontalAlignment="Left"
@@ -176,7 +178,7 @@
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF0A0A0A" 
             MaxLength="30" TabIndex="4" HidePromptOnLeave="True"/>
-        <Button x:Name="btnSalvar" HorizontalAlignment="Center" Content="Salvar"  Margin="0,627,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
+        <Button x:Name="btnSalvar" Click="btnSalvar_Click" HorizontalAlignment="Center" Content="Salvar"  Margin="0,627,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
         <wpfTool:MaskedTextBox  
             x:Name="phone1Edit2"
             Mask="(99) 99999-9999"

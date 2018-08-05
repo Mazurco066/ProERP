@@ -35,17 +35,17 @@ namespace Promig.Utils {
 
             //Criando dados pré definidos da empresa
             var model = new CompanyModel {
-                name = "Promig Serralheria e Instalações Industriais",
-                cnpj = "11111111111111",
-                street = "Rua Eustórgio Coelho",
-                neighborhood = "Parque do Estado II",
-                number = "82",
-                city = "Mogi Mirim",
-                CEP = "13807698",
-                UF = "SP",
-                phone1 = "19971818810",
-                phone2 = "19992539978",
-                phone3 = "1935691924"
+                name = Crypt.Encrypt("Promig Serralheria"),
+                cnpj = Crypt.Encrypt("11111111111111"),
+                street = Crypt.Encrypt("Rua Eustorgio Coelho"),
+                neighborhood = Crypt.Encrypt("Parque do Estado II"),
+                number = Crypt.Encrypt("82"),
+                city = Crypt.Encrypt("Mogi Mirim"),
+                CEP = Crypt.Encrypt("13807698"),
+                UF = Crypt.Encrypt("SP"),
+                phone1 = Crypt.Encrypt("19971818810"),
+                phone2 = Crypt.Encrypt("19992539978"),
+                phone3 = Crypt.Encrypt("1935691924")
             };
                 
             var serializerSettings = new JsonSerializerSettings();
@@ -54,9 +54,9 @@ namespace Promig.Utils {
             File.WriteAllText(path, json);
         }
 
-        public string GetFormatedAdress() {
+        public static string GetFormatedAdress() {
             //Procurando o arquivo json de preferencias pelo caminho de diretório
-            using (StreamReader r = new StreamReader("C:\\ProERP\\Preferences\\preferences.json")) {
+            using (StreamReader r = new StreamReader(path)) {
 
                 //Lendo arquivo json e fazendo o parse do mesmo
                 var json = r.ReadToEnd();
@@ -69,22 +69,22 @@ namespace Promig.Utils {
                 foreach (var item in jobj.Properties()) {
                     switch (item.Name) {
                         case "street":  //Propriedade Rua
-                            model.street = item.Value.ToString();
+                            model.street = Crypt.Decrypt(item.Value.ToString());
                             break;
                         case "neighborhood":    //Propriedade Bairro
-                            model.neighborhood = item.Value.ToString();
+                            model.neighborhood = Crypt.Decrypt(item.Value.ToString());
                             break;
                         case "number":  //Propriedade Número
-                            model.number = item.Value.ToString();
+                            model.number = Crypt.Decrypt(item.Value.ToString());
                             break;
                         case "city":    //Proprieade Cidade
-                            model.city = item.Value.ToString();
+                            model.city = Crypt.Decrypt(item.Value.ToString());
                             break;
                         case "cep:":   //Propriedade CEP
-                            model.CEP = item.Value.ToString();
+                            model.CEP = Crypt.Decrypt(item.Value.ToString());
                             break;
                         case "uf":  //Propriedade UF
-                            model.UF = item.Value.ToString();
+                            model.UF = Crypt.Decrypt(item.Value.ToString());
                             break;
                     }
                 }
@@ -97,7 +97,7 @@ namespace Promig.Utils {
         public static CompanyModel GetPreferencesData() {
 
             //Procurando o arquivo json de preferencias pelo caminho de diretório
-            using (StreamReader r = new StreamReader("C:\\ProERP\\Preferences\\preferences.json")) {
+            using (StreamReader r = new StreamReader(path)) {
                 
                 //Lendo arquivo json e fazendo o parse do mesmo
                 var json = r.ReadToEnd();
@@ -110,43 +110,98 @@ namespace Promig.Utils {
                 foreach (var item in jobj.Properties()) {
                     switch (item.Name) {
                         case "name":    //Proprieade Nome
-                            model.name = item.Value.ToString();
+                            model.name = Crypt.Decrypt(item.Value.ToString());
                             break;
                         case "cnpj":   //Propriedade Cnpj
-                            model.cnpj = item.Value.ToString();
+                            model.cnpj = Crypt.Decrypt(item.Value.ToString());
                             break;
                         case "street":  //Propriedade Rua
-                            model.street = item.Value.ToString();
+                            model.street = Crypt.Decrypt(item.Value.ToString());
                             break;
                         case "neighborhood":    //Propriedade Bairro
-                            model.neighborhood = item.Value.ToString();
+                            model.neighborhood = Crypt.Decrypt(item.Value.ToString());
                             break;
                         case "number":  //Propriedade Número
-                            model.number = item.Value.ToString();
+                            model.number = Crypt.Decrypt(item.Value.ToString());
                             break;
                         case "city":    //Proprieade Cidade
-                            model.city = item.Value.ToString();
+                            model.city = Crypt.Decrypt(item.Value.ToString());
                             break;
                         case "cep":   //Propriedade CEP
-                            model.CEP = item.Value.ToString();
+                            model.CEP = Crypt.Decrypt(item.Value.ToString());
                             break;
                         case "uf":  //Propriedade UF
-                            model.UF = item.Value.ToString();
+                            model.UF = Crypt.Decrypt(item.Value.ToString());
                             break;
                         case "phone1":    //Propriedade Telefone 1
-                            model.phone1 = item.Value.ToString();
+                            model.phone1 = Crypt.Decrypt(item.Value.ToString());
                             break;
                         case "phone2":  //Propriedade Telefone 2
-                            model.phone2 = item.Value.ToString();
+                            model.phone2 = Crypt.Decrypt(item.Value.ToString());
                             break;
                         case "phone3":  //Propriedade Telefone 3
-                            model.phone3 = item.Value.ToString();
+                            model.phone3 = Crypt.Decrypt(item.Value.ToString());
                             break;
                     }
                 }
 
                 //Retornando modelo preenchido
                 return model;
+            }
+        }
+
+        public static void UpdatePreferences(CompanyModel model) {
+
+            //Procurando o arquivo json de preferencias pelo caminho de diretório
+            using (StreamReader r = new StreamReader(path)) {
+
+                //Lendo arquivo json e fazendo o parse do mesmo
+                var json = r.ReadToEnd();
+                var jobj = JObject.Parse(json);
+
+                //Preenchendo os dados presentes no json no modelo definido para retorno
+                foreach (var item in jobj.Properties()) {
+                    switch (item.Name) {
+                        case "name":    //Proprieade Nome
+                            item.Value = Crypt.Encrypt(model.name);
+                            break;
+                        case "cnpj":   //Propriedade Cnpj
+                            item.Value = Crypt.Encrypt(model.cnpj);
+                            break;
+                        case "street":  //Propriedade Rua
+                            item.Value = Crypt.Encrypt(model.street);
+                            break;
+                        case "neighborhood":    //Propriedade Bairro
+                            item.Value = Crypt.Encrypt(model.neighborhood);
+                            break;
+                        case "number":  //Propriedade Número
+                            item.Value = Crypt.Encrypt(model.number);
+                            break;
+                        case "city":    //Proprieade Cidade
+                            item.Value = Crypt.Encrypt(model.city);
+                            break;
+                        case "cep":   //Propriedade CEP
+                            item.Value = Crypt.Encrypt(model.CEP);
+                            break;
+                        case "uf":  //Propriedade UF
+                            item.Value = Crypt.Encrypt(model.UF);
+                            break;
+                        case "phone1":    //Propriedade Telefone 1
+                            item.Value = Crypt.Encrypt(model.phone1);
+                            break;
+                        case "phone2":  //Propriedade Telefone 2
+                            item.Value = Crypt.Encrypt(model.phone2);
+                            break;
+                        case "phone3":  //Propriedade Telefone 3
+                            item.Value = Crypt.Encrypt(model.phone3);
+                            break;
+                    }
+                }
+
+                //Fechando o processo de leitura para iniciar gravação de dados
+                r.Close();  
+                var result = jobj.ToString();
+                File.WriteAllText(path, result);
             }
         }
 
