@@ -9,5 +9,127 @@
              d:DesignHeight="450" d:DesignWidth="1306" Height="697" Background="White">
 	<Grid>
         <Label Content="Contas a Pagar" FontSize="40" Margin="39,34,948,595" Foreground="#FF3F51B5"/>
+        <TextBox 
+            x:Name="pesquisar_txt" 
+            HorizontalAlignment="Left"
+            Width="583" 
+            Height="42" 
+            Margin="640,121,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            materialDesign:HintAssist.Hint="Pesquisar" 
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+            FontFamily="champagne &amp; Limousines" 
+            FontSize="14" Foreground="#FF060606" 
+            TabIndex="0" MaxLength="15"/>
+        <TextBlock
+            x:Name="descricao_txt" 
+            HorizontalAlignment="Left" 
+            Width="537" 
+            Height="309" 
+            Margin="39,241,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            materialDesign:HintAssist.Hint="Descrição"   
+            FontFamily="champagne &amp; Limousines" 
+            FontSize="14" Foreground="#FF060606"
+            Style="{DynamicResource MaterialDesignTitleTextBlock}">
+            Descrição
+        </TextBlock>
+        <TextBox 
+            x:Name="valorTotal_txt" 
+            HorizontalAlignment="Left" 
+            Height="44" 
+            Margin="406,119,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Width="170" 
+            materialDesign:HintAssist.Hint="Valor total" 
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+            FontFamily="champagne &amp; Limousines" 
+            FontSize="14" Foreground="#FF0A0A0A" 
+            MaxLength="50" TabIndex="3"/>
+        <DataGrid 
+            x:Name="dgUsuarios"
+            IsReadOnly="True"
+            SelectionMode="Single"
+            SelectionUnit="FullRow"
+            HorizontalAlignment="Left" 
+            Height="372" Margin="640,178,0,0" 
+            VerticalAlignment="Top" 
+            Width="636" 
+            AutoGenerateColumns="False" 
+            BorderBrush="{x:Null}" 
+            BorderThickness="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Código" FontSize="11" />
+                <DataGridTextColumn Header="Descrição" Width="300" FontSize="11" />
+                <DataGridTextColumn Header="Valor Total" Width="100" FontSize="11" />
+                <DataGridTextColumn Header="Data Vencimento" FontSize="11" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="btnAdicionar"  Content="Adicionar" HorizontalAlignment="Left" Margin="39,589,0,0" VerticalAlignment="Top" Width="268" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
+        <Button x:Name="btnEditar"  Content="Editar" HorizontalAlignment="Left" Margin="333,589,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
+        <Button x:Name="btnCancelar"  Content="Cancelar" HorizontalAlignment="Left" Margin="658,589,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
+        <Button x:Name="btnSalvar"  Content="Salvar" HorizontalAlignment="Left" Margin="980,589,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
+        <Button x:Name="btnShowInMap"  VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="1173,41,83,0" Height="26" Background="{x:Null}" Grid.Row="1"/>
+        <Button x:Name="btnRefresh"  VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="1223,137,33,0" Height="26" Background="{x:Null}" RenderTransformOrigin="-1.474,0.079">
+            <materialDesign:PackIcon Foreground="#FF3F51B5" Kind="Refresh" Width="20" Height="19" RenderTransformOrigin="0.45,2.842"/>
+        </Button>
+        <Button x:Name="btnMostrarDataGrid" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="1223,27,0,0" Height="26" Background="{x:Null}" HorizontalAlignment="Left" Width="50" Grid.Row="1" Visibility="Hidden">
+            <materialDesign:PackIcon Foreground="#FF3F51B5" Kind="EyeOff" Width="20" Height="19"/>
+        </Button>
+        <DatePicker 
+            Name="dataVencimento_txt" 
+            Style="{StaticResource MaterialDesignDatePicker}" 
+            materialDesign:HintAssist.Hint="Data de vencimento" 
+            FontFamily="champagne &amp; Limousines" 
+            FontSize="14" 
+            Foreground="#FF0A0A0A" 
+            HorizontalAlignment="Left"
+            Margin="222,178,0,0" 
+            VerticalAlignment="Top" 
+            Width="155" Height="38" RenderTransformOrigin="0.482,2.836"/>
+        <DatePicker 
+            x:Name="dataPagamento_txt" 
+            Style="{StaticResource MaterialDesignDatePicker}" 
+            materialDesign:HintAssist.Hint="Data do pagamento" 
+            FontFamily="champagne &amp; Limousines" 
+            FontSize="14" 
+            Foreground="#FF0A0A0A" 
+            HorizontalAlignment="Left"
+            Margin="39,178,0,0" 
+            VerticalAlignment="Top" 
+            Width="155" Height="38" RenderTransformOrigin="0.578,0.036"/>
+        <TextBox 
+            x:Name="fornecedor_txt" 
+            IsEnabled="False"
+            HorizontalAlignment="Left" 
+            Width="283"
+            Height="44" 
+            Margin="39,128,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            materialDesign:HintAssist.Hint="Fornecedor" 
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+            FontFamily="champagne &amp; Limousines" 
+            FontSize="14" Foreground="#FF0A0A0A" 
+            MaxLength="90" TabIndex="2"/>
+        <Button x:Name="btnSelect" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="327,146,929,0" Height="26" Background="{x:Null}" RenderTransformOrigin="-1.474,0.079">
+            <materialDesign:PackIcon Foreground="#FF3F51B5" Kind="Target" Width="20" Height="19" RenderTransformOrigin="0.45,2.842"/>
+        </Button>
+        <TextBox 
+            x:Name="valorIncial_txt" 
+            HorizontalAlignment="Left" 
+            Height="44" 
+            Margin="406,172,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Width="170" 
+            materialDesign:HintAssist.Hint="Valor inicial" 
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+            FontFamily="champagne &amp; Limousines" 
+            FontSize="14" Foreground="#FF0A0A0A" 
+            MaxLength="50" TabIndex="3"/>
 	</Grid>
 </UserControl>

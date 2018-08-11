@@ -10,5 +10,7 @@
         public static string TABLE_PEOPLE = "pessoas";
         public static string TABLE_SUPPLIERS = "fornecedores";
         public static string TABLE_USERS = "usuarios";
+        public static string TABLE_DEBITS = "debitos";
+        public static string TABLE_CREDITS = "creditos";
     }
 }

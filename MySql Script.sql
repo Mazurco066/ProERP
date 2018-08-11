@@ -66,6 +66,30 @@ create table if not exists usuarios(
 	CONSTRAINT FRK_ID_USUARIO FOREIGN KEY (id_funcionario) REFERENCES funcionarios(id_funcionario)
 );
 
+create table if not exists debitos(
+	id_debito int not null auto_increment,
+	id_fornecedor int not null, 
+    descricao text,
+    data_pagamento varchar(12),
+    data_vencimento varchar(12),
+    valor_total double,
+    valor_inicial double,
+    CONSTRAINT PRK_ID_DEBITO PRIMARY KEY (id_debito),
+	CONSTRAINT FRK_ID_DEBITO FOREIGN KEY (id_fornecedor) REFERENCES fornecedores(id_fornecedor)
+);
+
+create table if not exists creditos(
+	id_credito int not null auto_increment,
+	id_cliente int not null, 
+    descricao text ,
+    data_recebimento varchar(12),
+    data_vencimento varchar(12),
+    valor_total double,
+    valor_inicial double,
+    CONSTRAINT PRK_ID_CREDITO PRIMARY KEY (id_credito),
+	CONSTRAINT FRK_ID_CREDITO FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente)
+);
+
 create table if not exists log(
 	id_log int not null AUTO_INCREMENT,
 	id_funcionario int not null,
