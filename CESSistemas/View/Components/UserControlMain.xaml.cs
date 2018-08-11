@@ -6,6 +6,9 @@ namespace Promig.View.Components {
 
         #region constructors
 
+        /// <summary>
+        /// Construtor padrão
+        /// </summary>
         public UserControlMain() {
             InitializeComponent();
         }

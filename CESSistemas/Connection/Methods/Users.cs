@@ -14,7 +14,9 @@ namespace Promig.Connection.Methods {
         //Atributo de connexão
         private MySqlConnection conn;
 
-        //Construtor para recuperar conexão
+        /// <summary>
+        /// Construtor padrão
+        /// </summary>
         public Users() {
 
             //Recuperando conexão
@@ -23,9 +25,10 @@ namespace Promig.Connection.Methods {
 
         #endregion header
 
-        /**
-         * Método para efetuar login do usuário
-         */
+        /// <summary>
+        /// Método para validar login do usuário
+        /// </summary>
+        /// <param name="user"></param>
         public void ValidateLogin(User user) {
 
             try {
@@ -93,9 +96,11 @@ namespace Promig.Connection.Methods {
 
         }
 
-        /**
-         * Método para recuperar funcionário correpondente ao usuário
-         */
+        /// <summary>
+        /// Método para recuperar funcionário vinculado ao usuário
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public Employe GetAssiciatedEmploye(User user) {
 
             try {

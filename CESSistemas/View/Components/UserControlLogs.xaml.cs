@@ -12,7 +12,9 @@ namespace Promig.View.Components {
         //Definindo objeto de dados
         private Logs dao;
 
-        //Definindo construtor
+        /// <summary>
+        /// Construtor padrão
+        /// </summary>
         public UserControlLogs() {
             InitializeComponent();
             dao = new Logs();
@@ -22,24 +24,40 @@ namespace Promig.View.Components {
 
         #region Events
 
-        //Evento ao carregar
+        /// <summary>
+        /// Evento ao carregar controle
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void control_loaded(object sender, RoutedEventArgs e) {
             datePicker.Text = DateBr.GetDateBr();
         }
 
-        //Evento ao pressionae botão atualizar
+        /// <summary>
+        /// Evento ao clicar no botão de voltar a parametros padrão
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void refresh(object sender, RoutedEventArgs e) {
             datePicker.Text = DateBr.GetDateBr();
             txtSearch.Text = null;
             RefreshGrid();
         }
 
-        //Evento ao pesquisar ação
+        /// <summary>
+        /// Evento ao digitar no campo de pesquisa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void key_down(object sender, RoutedEventArgs e) {
             RefreshGrid();
         }
 
-        //Eventoaoalterar data foco
+        /// <summary>
+        /// Evento ao alterar data de foco
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void date_changed(object sender, RoutedEventArgs e) {
             RefreshGrid();
         }
@@ -48,6 +66,9 @@ namespace Promig.View.Components {
 
         #region Grid-Param
 
+        /// <summary>
+        /// Método para atualizar conteúdo da grid view
+        /// </summary>
         private void RefreshGrid() {
 
             //Recuperando data e texto a ser pesquisado

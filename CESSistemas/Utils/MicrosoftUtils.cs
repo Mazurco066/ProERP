@@ -1,19 +1,16 @@
 ﻿using Microsoft.Office.Interop.Excel;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Promig.Utils
 {
-   public class Util {
+   public class MicrosoftUtils {
 
-     // exportar para o exel uma datagrid
+     /// <summary>
+     /// Método para exportar dados de uma grid para o Excel
+     /// </summary>
+     /// <param name="dg"></param>
      public static void exportarExcel(DataGrid dg){
             Excel.Application excel = new Excel.Application();
             excel.Visible = true; 
@@ -36,7 +33,10 @@ namespace Promig.Utils
             }
      }
 
-        // estados
+        /// <summary>
+        /// Método que retorna todos estados brasileiros em formato de lista
+        /// </summary>
+        /// <returns></returns>
         public static List<string> ListaEstado() {
             List<string> listaEstado = new List<string>();
             string acre = "AC";

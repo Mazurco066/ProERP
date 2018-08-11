@@ -14,7 +14,9 @@ namespace Promig.View {
         private Users users;
         private Logs logs;
 
-        //Construtor
+        /// <summary>
+        /// Construtor padrão
+        /// </summary>
         public Login() {
             //Inicializando componentes
             InitializeComponent();
@@ -29,7 +31,11 @@ namespace Promig.View {
 
         #region Events
 
-        //Evento para o botão logar
+        /// <summary>
+        /// Evento ao clicar no botão de logar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLogon_Click(object sender, RoutedEventArgs e) {
 
             if (!IsValidFields()) {
@@ -86,7 +92,11 @@ namespace Promig.View {
             }
         }
 
-        //Evento para enter
+        /// <summary>
+        /// Evento ao pressionar botão enter para logar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtPassword_PreviewKeyUp(object sender, KeyEventArgs e) {
 
             if (e.Key == Key.Enter) {
@@ -146,18 +156,29 @@ namespace Promig.View {
             }
         }
 
-                //Evento para o botão sair
+                /// <summary>
+                /// Evento ao pressionar botão sair
+                /// </summary>
+                /// <param name="sender"></param>
+                /// <param name="e"></param>
                 private void btnExit_Click(object sender, RoutedEventArgs e) { App.Current.Shutdown(); }
 
         #endregion Events
 
         #region Utils
 
+        /// <summary>
+        /// Método para limpar campos
+        /// </summary>
         private void Clear() {
             txtUser.Text = "";
             txtPassword.Password = "";
         }
 
+        /// <summary>
+        /// Método para verificar se campos estão preenchidos
+        /// </summary>
+        /// <returns></returns>
         private bool IsValidFields() {
             return !(txtUser.Text.Equals("") ||
                      txtPassword.Password.Equals(""));

@@ -15,7 +15,10 @@ namespace Promig.Connection {
         public static string DATABASE_USER = "promig_user";
         public static string DATABASE_PASSWORD = "promig_erp";
 
-        //Método estático para retornar conexão com banco
+        /// <summary>
+        /// Método static para realizar conexão com banco
+        /// </summary>
+        /// <returns></returns>
         public static MySqlConnection GetConnection() {
 
             //Stringbuilder para criar string de conexão

@@ -21,6 +21,9 @@ namespace Promig.View {
 
         #region Constructors
 
+        /// <summary>
+        /// Construtor padrão sem argumentos
+        /// </summary>
         public MapWindow() {
             //Inicializando componentes
             InitializeComponent();
@@ -30,6 +33,10 @@ namespace Promig.View {
             location = "";
         }
 
+        /// <summary>
+        /// Construtor utilizado com argumentos
+        /// </summary>
+        /// <param name="location"></param>
         public MapWindow(string location) {
             //Inicializando componentes
             InitializeComponent();
@@ -43,22 +50,38 @@ namespace Promig.View {
 
         #region Events
 
-        //Evento ao carregar janela a qual chamara metodo para setar localização
+        /// <summary>
+        /// Evento ao carregar tela
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void control_loaded(object sender, RoutedEventArgs e) {
             SetLocation();
         }
 
-        //Evento para o botão voltar da janela
+        /// <summary>
+        /// Evento ao pressionar botão voltar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnVoltar_Click(object sender, RoutedEventArgs e) {
             Close();
         }
 
-        //Evento para imprimir visualização de mapa atual
+        /// <summary>
+        /// Evento para bitão de gerar pdf de mapa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnPrint_Click(object sender, RoutedEventArgs e) {
             PrintMap();
         }
 
-        //Evento para fechar janela ao clicar fora
+        /// <summary>
+        /// Evento para fechar a janela ao clicar fora
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void control_Deactivated(object sender, EventArgs e) {
             try {
                 Close();
@@ -69,7 +92,11 @@ namespace Promig.View {
             }
         }
 
-        //Evento ao recentralizar o mapa na localização
+        /// <summary>
+        /// Evento para o botão de recentralizar mapa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRefresh_Click(object sender, EventArgs e) {
             Refresh();
         }
@@ -78,7 +105,9 @@ namespace Promig.View {
 
         #region MapsAPI
 
-        //Metodo para posicionar o mapa na localização passada por endereço
+        /// <summary>
+        /// Método para visualizar localização passada como parametro no construtor
+        /// </summary>
         private void SetLocation() {
 
             //Instanciando objeto para recuperar as cordenadas
@@ -102,6 +131,9 @@ namespace Promig.View {
             bingMarker.Location = loc;     //Marcador de destino
         }
 
+        /// <summary>
+        /// Método para imprimir mapa em pdf
+        /// </summary>
         private void PrintMap() {
 
             //Criando um novo documento com margem 40
@@ -162,7 +194,9 @@ namespace Promig.View {
             Directory.SetCurrentDirectory(oldPath);
         }
 
-        //Metodo para ver coordenadas previamente encontradas no metodo SetLocation()
+        /// <summary>
+        /// Método para recentralizar mapa
+        /// </summary>
         private void Refresh() {
             bingMap.SetView(loc, zoom);    //Visualização em mapa
         }

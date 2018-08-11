@@ -19,6 +19,10 @@ namespace Promig.Utils {
 
         #region Utils
 
+        /// <summary>
+        /// Método para verificar existencia do arquivo de preferencias
+        /// </summary>
+        /// <returns></returns>
         public static bool PreferencesExists() {
 
             //Verificando se ja existe um arquivo de preferencias
@@ -31,6 +35,9 @@ namespace Promig.Utils {
             return true;
         }
 
+        /// <summary>
+        /// Método para criar arquivo de preferencias com valores pré-definidos
+        /// </summary>
         public static void CreatePreferences() {
 
             //Criando dados pré definidos da empresa
@@ -54,6 +61,10 @@ namespace Promig.Utils {
             File.WriteAllText(path, json);
         }
 
+        /// <summary>
+        /// Método para retornar endereço no formato correto para api de mapas
+        /// </summary>
+        /// <returns></returns>
         public static string GetFormatedAdress() {
             //Procurando o arquivo json de preferencias pelo caminho de diretório
             using (StreamReader r = new StreamReader(path)) {
@@ -94,6 +105,10 @@ namespace Promig.Utils {
             }
         }
 
+        /// <summary>
+        /// Métodopara tetornar dados do arquivo em estrutura de classe
+        /// </summary>
+        /// <returns></returns>
         public static CompanyModel GetPreferencesData() {
 
             //Procurando o arquivo json de preferencias pelo caminho de diretório
@@ -150,6 +165,10 @@ namespace Promig.Utils {
             }
         }
 
+        /// <summary>
+        /// Método para atualizar dados do arquivo de preferencias
+        /// </summary>
+        /// <param name="model"></param>
         public static void UpdatePreferences(CompanyModel model) {
 
             //Procurando o arquivo json de preferencias pelo caminho de diretório

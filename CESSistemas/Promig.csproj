@@ -173,7 +173,7 @@
     </Compile>
     <Compile Include="Utils\Crypt.cs" />
     <Compile Include="Utils\Log.cs" />
-    <Compile Include="Utils\Util.cs" />
+    <Compile Include="Utils\MicrosoftUtils.cs" />
     <Compile Include="View\MapWindow.xaml.cs">
       <DependentUpon>MapWindow.xaml</DependentUpon>
     </Compile>

@@ -22,7 +22,9 @@ namespace Promig.Connection.Methods {
         //Atributos de conexão
         private MySqlConnection conn;
 
-        //Construtor
+        /// <summary>
+        /// Construtor padrão
+        /// </summary>
         public Suppliers() {
 
             //Instanciando objeto de conexão
@@ -31,7 +33,10 @@ namespace Promig.Connection.Methods {
 
         #endregion header
 
-        //Método para inserir fornecedor no banco
+        /// <summary>
+        /// Método para inserir fornecedor no banco
+        /// </summary>
+        /// <param name="supplier"></param>
         public void AddSupplier(Supplier supplier) {
 
             try {
@@ -90,7 +95,10 @@ namespace Promig.Connection.Methods {
             }
         }
 
-        //Método para alterar fornecedor no banco
+        /// <summary>
+        /// Método para alterar fornecedor no banco
+        /// </summary>
+        /// <param name="supplier"></param>
         public void EditSupplier(Supplier supplier) {
 
             try {
@@ -154,7 +162,11 @@ namespace Promig.Connection.Methods {
             }
         }
 
-        //Método para recuperar dados de fornecedor específico
+        /// <summary>
+        /// Método para recuperar fornecedor com base no ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Supplier GetSupplierData(int id) {
 
             try {
@@ -234,7 +246,11 @@ namespace Promig.Connection.Methods {
 
         }
 
-        //Método para recuperar todos fornecedores
+        /// <summary>
+        /// Método para recuperar todos os fornecedores
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public List<Supplier> GetAllSuppliers(string param) {
 
             try {
@@ -291,7 +307,11 @@ namespace Promig.Connection.Methods {
 
         }
 
-        //Método para recuperar todos fornecedores ativos
+        /// <summary>
+        /// Método para recuperar todos os fornecedores ativos
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public List<Supplier> GetAllActiveSuppliers(string param) {
 
             try {
@@ -351,7 +371,11 @@ namespace Promig.Connection.Methods {
 
         }
 
-        //Método para recuperar todos clientes ativos
+        /// <summary>
+        /// Método para recuperar todos fornecedores ativos por cidade
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public List<Supplier> GetAllActiveSuppliersByCity(string param) {
 
             try {
@@ -411,7 +435,11 @@ namespace Promig.Connection.Methods {
 
         }
 
-        //Método para recuperar todos clientes ativos
+        /// <summary>
+        /// Método para recuperar todos fornecedores ativos por documento
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public List<Supplier> GetAllActiveSuppliersByDocument(string param) {
 
             try {

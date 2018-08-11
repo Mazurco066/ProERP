@@ -22,7 +22,9 @@ namespace Promig.Connection.Methods {
         //Atributo de connexão
         private MySqlConnection conn;
 
-        //Construtor para recuperar conexão
+        /// <summary>
+        /// Construtor padrão
+        /// </summary>
         public Logs() {
 
             //Recuperando conexão
@@ -33,6 +35,10 @@ namespace Promig.Connection.Methods {
 
         #region Data-Acess
 
+        /// <summary>
+        /// Método para registrar log no banco
+        /// </summary>
+        /// <param name="log"></param>
         public void Register(Log log) {
 
             try {
@@ -76,6 +82,11 @@ namespace Promig.Connection.Methods {
 
         }
 
+        /// <summary>
+        /// Método para recuperar todos os logs com base em uma data
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public List<Log> GetAllRegisters(string date) {
 
             try {
@@ -136,6 +147,12 @@ namespace Promig.Connection.Methods {
 
         }
 
+        /// <summary>
+        /// Método para recuperar todos os logs com base em uma data e um parametro de busca
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
         public List<Log> GetAllRegisters(string date, string action) {
 
             try {

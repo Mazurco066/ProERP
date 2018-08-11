@@ -2,9 +2,11 @@
 
     class Validator {
 
-        /**
-         * Validação de CPF
-         */
+        /// <summary>
+        /// Método para validar cpf
+        /// </summary>
+        /// <param name="cpf">CPF a ser validade</param>
+        /// <returns>se é valido ou não</returns>
         public static bool IsCpf(string cpf) {
 
             //Definindo critérios
@@ -40,9 +42,11 @@
             return cpf.EndsWith(digito);
         }
 
-        /**
-         * Validação de CNPJ
-         */
+        /// <summary>
+        /// Método para validar CNPJ
+        /// </summary>
+        /// <param name="cnpj">CNPJ a ser validado</param>
+        /// <returns>retorna se é valido ou não</returns>
         public static bool IsCnpj(string cnpj) {
 
             //Definindo critérios
@@ -82,9 +86,11 @@
 
         }
 
-        /**
-         * Validação de PIS
-         */
+        /// <summary>
+        /// Método para valid~ção de PIS
+        /// </summary>
+        /// <param name="pis">PIS a ser validado</param>
+        /// <returns>retorna se é valido ou nãp</returns>
         public static bool IsPis(string pis) {
 
             //Definindo critérios

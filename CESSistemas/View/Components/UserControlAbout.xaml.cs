@@ -21,6 +21,9 @@ namespace Promig.View.Components {
 
         #endregion
 
+        /// <summary>
+        /// Construtor padrão
+        /// </summary>
         public UserControlAbout() {
 
             //Inicializando componentes
@@ -33,7 +36,11 @@ namespace Promig.View.Components {
 
         #region Events
 
-        //Evento ao carregar controle
+        /// <summary>
+        /// Evento ao carregar a tela
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void control_loaded(object sender, RoutedEventArgs e) {
 
             //Verificando se ja existe um arquivo de preferencias
@@ -49,12 +56,20 @@ namespace Promig.View.Components {
             SetLocation();
         }
 
-        //Metodo para ver coordenadas previamente encontradas no metodo SetLocation()
+        /// <summary>
+        /// Método para atualizar visualização em mapa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Refresh(object sender, RoutedEventArgs e) {
             bingMap.SetView(loc, zoom);    //Visualização em mapa
         }
 
-        //Evento para bloquear números
+        /// <summary>
+        /// Evento ao digitar no campo número para bloquear caracteres
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void numberEdit_KeyDown(object sender, KeyEventArgs e) {
             KeyConverter kv = new KeyConverter();
             if ((char.IsNumber((string)kv.ConvertTo(e.Key, typeof(string)), 0) == false)) {
@@ -62,7 +77,11 @@ namespace Promig.View.Components {
             }
         }
 
-        //Evento de autopreencher cep
+        /// <summary>
+        /// Evento ao apertar enter na  caixa de texto do CEP
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cepEdit_PreviewKeyUp(object sender, KeyEventArgs e) {
             if (e.Key == Key.Enter) {
                 string cep = cepEdit.Text.Replace("-", "").Replace("_", "");
@@ -81,6 +100,11 @@ namespace Promig.View.Components {
             }
         }
 
+        /// <summary>
+        /// Evento ao apertar botão salvar preferencias
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSalvar_Click(object sender, RoutedEventArgs e) {
 
             //Verificando se há campos vazios
@@ -132,6 +156,9 @@ namespace Promig.View.Components {
 
         #region Map-Mathods
 
+        /// <summary>
+        /// Método para visualizar no mapa localização desejada
+        /// </summary>
         private void SetLocation() {
 
             //Instanciando objeto para recuperar as cordenadas
@@ -159,7 +186,10 @@ namespace Promig.View.Components {
 
         #region Utils
 
-        //Método para preencher campos com dados do modelo passado como parametro
+        /// <summary>
+        /// Método para autopreencher campos de texto
+        /// </summary>
+        /// <param name="model"></param>
         private void FillData(CompanyModel model) {
             NameEdit.Text = model.name;
             cnpjEdit.Text = model.cnpj;
@@ -180,7 +210,10 @@ namespace Promig.View.Components {
             cbState.SelectedIndex = index;
         }
 
-        //Método para verificar se campos estão pfeenchidos
+        /// <summary>
+        /// Método para verificar se os campos foram preenchidos
+        /// </summary>
+        /// <returns></returns>
         private bool IsFilledFields() {
             return !(
                 NameEdit.Text.Equals("") ||

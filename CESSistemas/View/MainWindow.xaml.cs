@@ -13,7 +13,9 @@ namespace Promig.View {
         public static string currentPermission;
         public static int currentId;
 
-        //Definindo construtor
+        /// <summary>
+        /// Construtor padrão
+        /// </summary>
         public MainWindow() {
             InitializeComponent();
             initializeUserControl();
@@ -23,7 +25,9 @@ namespace Promig.View {
 
         #region Events
 
-        // inicializar userControl com a tela de pagina principal
+        /// <summary>
+        /// Método para definir valores padrão ao iniciar componente
+        /// </summary>
         private void initializeUserControl(){
             UserControl usc = null;
             usc = new UserControlMain();
@@ -31,7 +35,11 @@ namespace Promig.View {
             GridMain.Children.Add(usc);
         }
 
-        // botao de sobre a empresa
+        /// <summary>
+        /// Evento ao clicar sobre o botão de preferencias
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSobre_Click(object sender, RoutedEventArgs e) {
             UserControl usc = null;
             usc = new UserControlAbout();
@@ -39,24 +47,42 @@ namespace Promig.View {
             GridMain.Children.Add(usc);
         }
 
-        // botao de logout
+        /// <summary>
+        /// Evento ao clicar no botão de logout
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLogout_Click(object sender, RoutedEventArgs e) {
             Login janela = new Login();
             janela.Show();
             Close();
         }
 
-        // abrir o menu
+        /// <summary>
+        /// Evento ao clicar no botão de abrir drawer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAbrirMenu_Click(object sender, RoutedEventArgs e) {
             btnAbrirMenu.Visibility = Visibility.Collapsed;
             btnFecharMenu.Visibility = Visibility.Visible;
         }
-        // fechar o menu
+
+        /// <summary>
+        /// Evento ao clicar no botão de fechar drawer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnFecharMenu_Click(object sender, RoutedEventArgs e) {
             btnAbrirMenu.Visibility = Visibility.Visible;
             btnFecharMenu.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// Evento ao selecionar alguma opcão do menu priincipal
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 
             //Limpando a view atual
@@ -101,7 +127,11 @@ namespace Promig.View {
             }
         }
 
-        //Evento ao clicar no botão de Logs
+        /// <summary>
+        /// Evento ao clicar no botão de logs
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAuditoria_Click(object sender, RoutedEventArgs e) {
             UserControl usc = null;
             GridMain.Children.Clear();
@@ -109,7 +139,11 @@ namespace Promig.View {
             GridMain.Children.Add(usc);
         }
 
-        // operacoes ao carregar o form
+        /// <summary>
+        /// Evento ao carregar tela
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             //Definindo nome do usuário ao abrir
             lblTitulo.Text = $"Bem vindo {currentUsername}!";
@@ -126,7 +160,9 @@ namespace Promig.View {
 
         #region Utils
 
-        // desabilitar botoes
+        /// <summary>
+        /// Método para desabilitar botões
+        /// </summary>
         private void esconderBotoes(){
             Employes.IsEnabled = false;
             BillsToPay.IsEnabled = false;

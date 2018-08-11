@@ -7,6 +7,10 @@ namespace Promig.Utils {
 
         public static StringBuilder log = new StringBuilder();
 
+        /// <summary>
+        /// Método para registrar log de erro em arquivo externo
+        /// </summary>
+        /// <param name="e"></param>
         public static void logException(Exception e){
 
             //Configurando diretorio atual para emissão de logs         
@@ -32,6 +36,10 @@ namespace Promig.Utils {
             Directory.SetCurrentDirectory(oldPath);
         }
 
+        /// <summary>
+        /// Método para registrar mensagem de erro em arquivo externo
+        /// </summary>
+        /// <param name="message"></param>
         public static void logMessage(string message){
 
             //Configurando diretorio atual para emissão de mensagem  

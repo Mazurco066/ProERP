@@ -27,6 +27,9 @@ namespace Promig.View.Components {
 
         #region Constructors
 
+        /// <summary>
+        /// Construtor de uso padrão
+        /// </summary>
         public UserControlSupplier() {
 
             //Iniciando os componentes
@@ -45,24 +48,40 @@ namespace Promig.View.Components {
 
         #region Events
 
-        //Evento ao carregar componente
+        /// <summary>
+        /// Evento ao carregar controle
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void control_loaded(object sender, RoutedEventArgs e) {
             SetDefaults();
             BlockFields();
             RefreshGrid();
         }
 
-        //Evento ao alternar parametro de pesquisa
+        /// <summary>
+        /// Evento ao alternar parametro de pesquisa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private void cbSearch_SelectionChanged(object sender, SelectionChangedEventArgs args) {
             RefreshGrid();
         }
 
-        //Evento ao pesquisar na caixa de pesquisa
+        /// <summary>
+        /// Eventoao digitar no campo de pesquisa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtSearch_KeyDown(object sender, RoutedEventArgs e) {
             RefreshGrid(txtSearch.Text);
         }
 
-        //Evento para exibir em mapa
+        /// <summary>
+        /// Evento aopressionar botão de visualização em mapa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnShowInMap_Click(object sender, RoutedEventArgs e) {
 
             //Verificando se ha um cliente selecionado para exibição
@@ -100,12 +119,20 @@ namespace Promig.View.Components {
             }
         }
 
-        //Evento para atualizar grid manualmente
+        /// <summary>
+        /// Evento ao pressionar botão de atualização do conteúdo da grid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRefresh_Click(object sender, RoutedEventArgs e) {
             RefreshGrid();
         }
 
-        //Evento de autopreencher cep
+        /// <summary>
+        /// Evento ao pressionar enter no campo de CEP
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cepEdit_PreviewKeyUp(object sender, KeyEventArgs e) {
             if (e.Key == Key.Enter) {
                 string cep = cepEdit.Text.Replace("-", "").Replace("_", "");
@@ -124,7 +151,11 @@ namespace Promig.View.Components {
             }
         }
 
-        //Evento ao clicar em algum funcionário
+        /// <summary>
+        /// Evento ao selecionar algum registro na grid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private void dgSuppliers_SelectionChanged(object sender, SelectionChangedEventArgs args) {
 
             //Verificando se ha seleção feita
@@ -164,7 +195,11 @@ namespace Promig.View.Components {
             }
         }
 
-        //Evento para bloquear números
+        /// <summary>
+        /// Evento para bloquear entrada de caracteres no campo de numero
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void numberEdit_KeyDown(object sender, KeyEventArgs e) {
             KeyConverter kv = new KeyConverter();
             if ((char.IsNumber((string)kv.ConvertTo(e.Key, typeof(string)), 0) == false)) {
@@ -172,7 +207,11 @@ namespace Promig.View.Components {
             }
         }
 
-        //Evento para botão adicionar
+        /// <summary>
+        /// Evento ao pressionar botão de adicionar registro
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAdicionar_Click(object sender, RoutedEventArgs e) {
             //Habilitando campos para inserção
             actionIndex = 1;
@@ -180,7 +219,11 @@ namespace Promig.View.Components {
             EnableFields();
         }
 
-        //Evento para botão editar
+        /// <summary>
+        /// Evento ao pressioar botão de alterar registro
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEditar_Click(object sender, RoutedEventArgs e) {
 
             //Verificando se ha funcionario selecionada
@@ -200,7 +243,11 @@ namespace Promig.View.Components {
             }
         }
 
-        //Evento para botão cancelar
+        /// <summary>
+        /// Evento ao pressionar botão cancelar edição
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancelar_Click(object sender, RoutedEventArgs e) {
 
             //Bloqueando campos e resetando transação
@@ -209,7 +256,11 @@ namespace Promig.View.Components {
             actionIndex = -1;
         }
 
-        //Evento para botão salvar
+        /// <summary>
+        /// Evento ao pressionar botão salvar registro
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSalvar_Click(object sender, RoutedEventArgs e) {
 
             //Verificando qual ação sera realizada
@@ -239,6 +290,9 @@ namespace Promig.View.Components {
 
         #region Data-Gathering
 
+        /// <summary>
+        /// Método para recuperar dados do registro e realizar interação com banco
+        /// </summary>
         private void AddSupplier() {
             if (IsValidFields()) {
                 string cnpj = cnpjEdit.Text.Replace(".", "").Replace("-", "").Replace("_", ".").Replace("/", "");
@@ -307,6 +361,9 @@ namespace Promig.View.Components {
             }
         }
 
+        /// <summary>
+        /// Método para recuperar dados do registro e fazer interação com banco
+        /// </summary>
         private void EditSupplier() {
 
             //Verificando se campos estão preenchidos
@@ -383,6 +440,9 @@ namespace Promig.View.Components {
 
         #region Grid-Param
 
+        /// <summary>
+        /// Método para atualizar conteúdo da grid
+        /// </summary>
         private void RefreshGrid() {
 
             //Limpando campo de pesquisa
@@ -420,6 +480,10 @@ namespace Promig.View.Components {
             }
         }
 
+        /// <summary>
+        /// Método para atualizar conteúdo da grid que recebe parametros de busca
+        /// </summary>
+        /// <param name="param">Conteúdo a ser buscado nos registros</param>
         private void RefreshGrid(string param) {
 
             try {
@@ -458,12 +522,18 @@ namespace Promig.View.Components {
 
         #region Utils
 
+        /// <summary>
+        /// Método ara verificar conexão com internet
+        /// </summary>
+        /// <returns></returns>
         public static Boolean IsConnected() {
             int Description;
             return InternetGetConnectedState(out Description, 0);
         }
 
-
+        /// <summary>
+        /// Método para definir valores padrão nos campos
+        /// </summary>
         private void SetDefaults() {
 
             //Definindo valor inicial de combobox
@@ -472,6 +542,10 @@ namespace Promig.View.Components {
             cbSearch.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Método para verificar se campos estao devidamente preenchidos
+        /// </summary>
+        /// <returns></returns>
         private bool IsValidFields() {
             string doc = cnpjEdit.Text.Replace(".", "").Replace("-", "").Replace("_", "").Replace("/", "").Replace(" ", "");
             string cep = cepEdit.Text.Replace("-", "").Replace("_", "").Replace(" ", "");
@@ -487,6 +561,9 @@ namespace Promig.View.Components {
             );
         }
 
+        /// <summary>
+        /// Método para limpar campos de texto
+        /// </summary>
         private void ClearFields() {
 
             //Comboboxes
@@ -505,6 +582,9 @@ namespace Promig.View.Components {
             phone2Edit.Text = null;
         }
 
+        /// <summary>
+        /// Método para habilitar campos
+        /// </summary>
         private void EnableFields() {
 
             //Comboboxes
@@ -527,6 +607,9 @@ namespace Promig.View.Components {
             btnSalvar.IsEnabled = true;
         }
 
+        /// <summary>
+        /// Método para bloquear campos
+        /// </summary>
         private void BlockFields() {
 
             //Comboboxes

@@ -22,7 +22,9 @@ namespace Promig.Connection.Methods {
         //Atributos de conexão
         private MySqlConnection conn;
 
-        //Construtor
+        /// <summary>
+        /// Construtor padrão
+        /// </summary>
         public Clients() {
 
             //Instanciando objeto de conexão
@@ -33,7 +35,10 @@ namespace Promig.Connection.Methods {
 
         #region data-acess
 
-        //Método para adicionar cliente
+        /// <summary>
+        /// Método para adicionar cliente no banco
+        /// </summary>
+        /// <param name="client"></param>
         public void AddClient(Client client) {
 
             try {
@@ -101,7 +106,10 @@ namespace Promig.Connection.Methods {
 
         }
 
-        //Método para alterar cliente
+        /// <summary>
+        /// Método para alterar cliente no banco
+        /// </summary>
+        /// <param name="client"></param>
         public void EditClient(Client client) {
 
             try {
@@ -173,7 +181,11 @@ namespace Promig.Connection.Methods {
 
         }
 
-        //Método para recuperar dados de cliente específico
+        /// <summary>
+        /// Método para recuperar cliente específico com base no ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Client GetClientData(int id) {
 
             try {
@@ -255,7 +267,11 @@ namespace Promig.Connection.Methods {
             }
         }
 
-        //Método para recuperar todos clientes
+        /// <summary>
+        /// Método para recuperar todos os clientes
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public List<Client> GetAllClients(string param) {
 
             try {
@@ -316,7 +332,11 @@ namespace Promig.Connection.Methods {
 
         }
 
-        //Método para recuperar todos clientes ativos
+        /// <summary>
+        /// Método para recuperar todos os clientes ativos
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public List<Client> GetAllActiveClients(string param) {
 
             try {
@@ -381,7 +401,11 @@ namespace Promig.Connection.Methods {
 
         }
 
-        //Método para recuperar todos clientes ativos
+        /// <summary>
+        /// Método para recuperar todos clientes ativos por cidade
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public List<Client> GetAllActiveClientsByCity(string param) {
 
             try {
@@ -446,7 +470,11 @@ namespace Promig.Connection.Methods {
 
         }
 
-        //Método para recuperar todos clientes ativos
+        /// <summary>
+        /// Método para recuperar todos clientes ativos por documento
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public List<Client> GetAllActiveClientsByDocument(string param) {
 
             try {

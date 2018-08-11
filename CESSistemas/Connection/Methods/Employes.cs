@@ -22,7 +22,9 @@ namespace Promig.Connection.Methods
         //Atributos de conexão
         private MySqlConnection conn;
 
-        //Construtor
+        /// <summary>
+        /// Construtor padrão
+        /// </summary>
         public Employes() {
 
             //Instanciando objeto de conexão
@@ -33,7 +35,10 @@ namespace Promig.Connection.Methods
 
         #region data-acess
 
-        //Método para adicionar funcionário
+        /// <summary>
+        /// Método para adicionar funcionário no banco
+        /// </summary>
+        /// <param name="emp"></param>
         public void AddEmploye(Employe emp) {
 
             try {
@@ -108,7 +113,10 @@ namespace Promig.Connection.Methods
             }
         }
 
-        //Método para editar funcionário
+        /// <summary>
+        /// Método para alterar funcionário no banco
+        /// </summary>
+        /// <param name="emp"></param>
         public void EditEmploye(Employe emp) {
 
             try {
@@ -186,7 +194,11 @@ namespace Promig.Connection.Methods
             }
         }
 
-        //Método para recuperar dados de funcionário específico
+        /// <summary>
+        /// Método para recuperar fornecedor especifico com base no ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Employe GetEmployeData(int id) {
 
             try {
@@ -305,7 +317,11 @@ namespace Promig.Connection.Methods
 
         }
 
-        //Método para recuperar todos clientes
+        /// <summary>
+        /// Método para recuperar todos funcionários
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public List<Employe> GetAllEmployes(string param) {
 
             try {
@@ -362,7 +378,11 @@ namespace Promig.Connection.Methods
 
         }
 
-        //Método para recuperar todos clientes ativos
+        /// <summary>
+        /// Método para recuperar todos funcionários ativos
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public List<Employe> GetAllActiveEmployes(string param) {
 
             try {
@@ -422,7 +442,11 @@ namespace Promig.Connection.Methods
 
         }
 
-        //Método para recuperar todos clientes ativos
+        /// <summary>
+        /// Método para recuperar todos funcionários ativos por cidade
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public List<Employe> GetAllActiveEmployesByCity(string param) {
 
             try {
@@ -482,7 +506,11 @@ namespace Promig.Connection.Methods
 
         }
 
-        //Método para recuperar todos clientes ativos
+        /// <summary>
+        /// Método para recuperar todos funcionários ativos por documento
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public List<Employe> GetAllActiveEmployesByDocument(string param) {
 
             try {

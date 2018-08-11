@@ -13,6 +13,11 @@ namespace Promig.Utils
      */
     class WSAdress {
 
+        /// <summary>
+        /// Método para recuperar endereço usando WebService dos correios
+        /// </summary>
+        /// <param name="cep">CEP a ser pesquisado</param>
+        /// <returns>retorna endereço do CEP encontrado</returns>
         public static Adress GetAdress(string cep) {
 
             try {
