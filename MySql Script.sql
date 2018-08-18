@@ -105,8 +105,8 @@ values('Rua José Cristino de Oliveira Camois', 562, 'Jd. Planalto', 'Mogi Guaç
 insert into pessoas(id_endereco, nome_pessoa, status)
 values(1, 'Gabriel Mazurco Ribeiro', true);
 update pessoas set id_endereco = 1 where id_pessoa = 1;
-insert into funcionarios(permissao, cpf, rg, data_admissao, id_pessoa, funcao)
-values('Admin','43662474883', '557606329', '14/03/2018', 1, 'Pika das Galaxias');
+insert into funcionarios(permissao, cpf, data_admissao, id_pessoa, funcao)
+values('Admin','43662474883', '14/03/2018', 1, 'Pika das Galaxias');
 insert into usuarios(login, password, id_funcionario)
 values('admin', 'eKkqAeJvo3t60TtipgWMjg==', 1);
 
