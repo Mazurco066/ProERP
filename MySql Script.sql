@@ -90,6 +90,27 @@ create table if not exists creditos(
 	CONSTRAINT FRK_ID_CREDITO FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente)
 );
 
+create table if not exists orcamentos(
+    no_documento int not null auto_increment,
+    id_cliente int not null,
+    cliente varchar(255) not null,
+    data_orcamento datetime,
+    caminho_imagem varchar(255),
+    descricao varchar(255),
+    condicao_pagto varchar(10),
+    execucao_dias varchar(10),
+    valor_total double not null,
+    descricao1 varchar(255),
+    descricao2 varchar(255),
+    descricao3 varchar(255),
+    descricao4 varchar(255),
+    descricao5 varchar(255),
+    descricao6 varchar(255),
+    descricao7 varchar(255),
+    constraint PRK_DOCNO primary key (no_documento),
+    constraint FRK_CLIENTE foreign key (id_cliente) references pessoas (id_pessoa)
+);
+
 create table if not exists log(
 	id_log int not null AUTO_INCREMENT,
 	id_funcionario int not null,

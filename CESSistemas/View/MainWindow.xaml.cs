@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Runtime.InteropServices;
+using System.Windows;
 using System.Windows.Controls;
 using Promig.View.Components;
 
@@ -8,7 +10,11 @@ namespace Promig.View {
 
         #region Header
 
-        //Definindo flags
+        // Importando ddll de conexão com internet
+        [DllImport("wininet.dll")]
+        private extern static Boolean InternetGetConnectedState(out int Description, int ReservedValue);
+
+        // Definindo flags
         public static string currentUsername;
         public static string currentPermission;
         public static int currentId;
@@ -30,9 +36,20 @@ namespace Promig.View {
         /// </summary>
         private void initializeUserControl(){
             UserControl usc = null;
-            usc = new UserControlMain();
-            GridMain.Children.Clear();
-            GridMain.Children.Add(usc);
+            if (IsConnected()) {
+                // Carregando tela de configurações 
+                usc = new UserControlMain();
+                GridMain.Children.Clear();
+                GridMain.Children.Add(usc);
+            } else {
+                // Retornando mensagem de aviso
+                MessageBox.Show(
+                    "Você precisa ter conexão com internet para acessar esse módulo",
+                    "Alerta",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning
+                );
+            }
         }
 
         /// <summary>
@@ -159,6 +176,16 @@ namespace Promig.View {
         #endregion
 
         #region Utils
+
+        /// <summary>
+        /// Método para verificar conexão com internet
+        /// </summary>
+        /// <returns></returns>
+        public static Boolean IsConnected()
+        {
+            int Description;
+            return InternetGetConnectedState(out Description, 0);
+        }
 
         /// <summary>
         /// Método para desabilitar botões

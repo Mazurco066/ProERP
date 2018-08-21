@@ -126,6 +126,8 @@ namespace Promig.View.Components {
                 model.phone1 = phone1Edit.Text;
                 model.phone2 = phone1Edit2.Text;
                 model.phone3 = phone1Edit3.Text;
+                model.email = EmailEdit.Text;
+                model.website = WebsiteEdit.Text;
 
                 //Chamando método de atualização de dados
                 CompanyData.UpdatePreferences(model);
@@ -201,6 +203,9 @@ namespace Promig.View.Components {
             phone1Edit.Text = model.phone1;
             phone1Edit2.Text = model.phone2;
             phone1Edit3.Text = model.phone3;
+            EmailEdit.Text = model.email;
+            WebsiteEdit.Text = model.website;
+
             //Recuperando Estado
             int index = -1;
             foreach (ComboBoxItem item in cbState.Items) {
@@ -216,15 +221,17 @@ namespace Promig.View.Components {
         /// <returns></returns>
         private bool IsFilledFields() {
             return !(
-                NameEdit.Text.Equals("") ||
-                cnpjEdit.Text.Equals("") ||
-                AdressEdit.Text.Equals("") ||
-                NeighboorhoodEdit.Text.Equals("") ||
-                NumberEdit.Text.Equals("") ||
-                cepEdit.Text.Equals("") ||
-                CityEdit.Text.Equals("") ||
-                phone1Edit.Text.Equals("") ||
-                phone1Edit2.Text.Equals("")
+                NameEdit.Text.Equals(string.Empty) ||
+                cnpjEdit.Text.Equals(string.Empty) ||
+                AdressEdit.Text.Equals(string.Empty) ||
+                NeighboorhoodEdit.Text.Equals(string.Empty) ||
+                NumberEdit.Text.Equals(string.Empty) ||
+                cepEdit.Text.Equals(string.Empty) ||
+                CityEdit.Text.Equals(string.Empty) ||
+                phone1Edit.Text.Equals(string.Empty) ||
+                phone1Edit2.Text.Equals(string.Empty) ||
+                EmailEdit.Text.Equals(string.Empty) ||
+                WebsiteEdit.Text.Equals(string.Empty)
             );
         }
 

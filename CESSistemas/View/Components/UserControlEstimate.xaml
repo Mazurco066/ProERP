@@ -4,10 +4,91 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Promig.View.Components"
-              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+			 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="1306" Height="697" Background="White">
+             d:DesignHeight="450" d:DesignWidth="1306" Height="697" Background="White" Loaded="UserControl_Loaded">
     <Grid>
+        <Border BorderBrush="#FF3F51B5" BorderThickness="1" HorizontalAlignment="Left" Height="144" Margin="891,13,0,0" VerticalAlignment="Top" Width="385"/>
         <Label Content="Orçamentos" FontSize="40" Margin="39,34,1015,595" Foreground="#FF3F51B5" Grid.RowSpan="2"/>
+        <Label x:Name="Label" Content="Logo:" HorizontalAlignment="Left" Margin="803,76,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.91,0.731" FontSize="14"/>
+        <Button x:Name="button" HorizontalAlignment="Left" Margin="830,67,0,0" VerticalAlignment="Top" Width="61" Background="{x:Null}" Height="46" BorderBrush="{x:Null}" Click="button_Click">
+            <materialDesign:PackIcon Foreground="Blue" Kind="Image" Width="32" Height="32" Cursor="Hand"/>
+        </Button>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="123" Margin="900,24,0,0" VerticalAlignment="Top" Width="366"/>
+        <ComboBox x:Name="cbCustomer" materialDesign:HintAssist.Hint="Cliente" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintComboBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A" HorizontalAlignment="Left" Margin="51,94,0,0" VerticalAlignment="Top" Width="285"/>
+        <DatePicker x:Name="dpEstimate"  materialDesign:HintAssist.Hint="Data" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintDatePicker}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A" HorizontalAlignment="Left" Margin="374,108,0,0" VerticalAlignment="Top" Width="360" Height="26"/>
+        <TextBox x:Name="txtDescription" materialDesign:HintAssist.Hint="Descrição" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A"  HorizontalAlignment="Left" Height="37" Margin="51,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="683"/>
+        <TextBox x:Name="txtDocNo" materialDesign:HintAssist.Hint="Número do Documento" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A" HorizontalAlignment="Left" Height="37" Margin="51,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="157"/>
+        <ComboBox x:Name="cbPagto" materialDesign:HintAssist.Hint="Condição de Pagamento" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintComboBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A" HorizontalAlignment="Left" Margin="231,181,0,0" VerticalAlignment="Top" Width="181" Height="40">
+            <ComboBoxItem Content="05 DDL"/>
+            <ComboBoxItem Content="10 DDL"/>
+            <ComboBoxItem Content="15 DDL"/>
+            <ComboBoxItem Content="20 DDL"/>
+            <ComboBoxItem Content="25 DDL"/>
+            <ComboBoxItem Content="30 DDL"/>
+            <ComboBoxItem Content="60 DDL"/>
+            <ComboBoxItem Content="90 DDL"/>
+        </ComboBox>
+        <ComboBox x:Name="cbDaysExecution" materialDesign:HintAssist.Hint="Execução em dias" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintComboBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A" HorizontalAlignment="Left" Margin="438,181,0,0" VerticalAlignment="Top" Width="132">
+            <ComboBoxItem Content="01 Dias"/>
+            <ComboBoxItem Content="02 Dias"/>
+            <ComboBoxItem Content="03 Dias"/>
+            <ComboBoxItem Content="04 Dias"/>
+            <ComboBoxItem Content="05 Dias"/>
+            <ComboBoxItem Content="06 Dias"/>
+            <ComboBoxItem Content="07 Dias"/>
+            <ComboBoxItem Content="08 Dias"/>
+            <ComboBoxItem Content="09 Dias"/>
+            <ComboBoxItem Content="10 Dias"/>
+            <ComboBoxItem Content="11 Dias"/>
+            <ComboBoxItem Content="12 Dias"/>
+            <ComboBoxItem Content="13 Dias"/>
+            <ComboBoxItem Content="14 Dias"/>
+            <ComboBoxItem Content="15 Dias"/>
+            <ComboBoxItem Content="16 Dias"/>
+            <ComboBoxItem Content="17 Dias"/>
+            <ComboBoxItem Content="18 Dias"/>
+            <ComboBoxItem Content="19 Dias"/>
+            <ComboBoxItem Content="20 Dias"/>
+            <ComboBoxItem Content="21 Dias"/>
+            <ComboBoxItem Content="22 Dias"/>
+            <ComboBoxItem Content="23 Dias"/>
+            <ComboBoxItem Content="24 Dias"/>
+            <ComboBoxItem Content="25 Dias"/>
+            <ComboBoxItem Content="26 Dias"/>
+            <ComboBoxItem Content="27 Dias"/>
+            <ComboBoxItem Content="28 Dias"/>
+            <ComboBoxItem Content="29 Dias"/>
+            <ComboBoxItem Content="30 Dias"/>
+            <ComboBoxItem Content="45 Dias"/>
+            <ComboBoxItem Content="60 Dias"/>
+            <ComboBoxItem Content="90 Dias"/>
+        </ComboBox>
+        <TextBox x:Name="txtValue" materialDesign:HintAssist.Hint="Valor total dos serviços" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A" HorizontalAlignment="Right" Height="40" Margin="0,181,572,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="146"/>
+        <TextBox x:Name="txtDescriptionService1" materialDesign:HintAssist.Hint="Descrição de Serviços 1" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" FontFamily="champagne &amp; Limousines" FontSize="12" Foreground="#FF0A0A0A" HorizontalAlignment="Left" Height="40" Margin="51,226,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="683"/>
+        <TextBox x:Name="txtDescriptionService2" materialDesign:HintAssist.Hint="Descrição de Serviços 2" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" FontFamily="champagne &amp; Limousines" FontSize="12" Foreground="#FF0A0A0A" HorizontalAlignment="Left" Height="40" Margin="51,271,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="683"/>
+        <TextBox x:Name="txtDescriptionService3" materialDesign:HintAssist.Hint="Descrição de Serviços 3" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" FontFamily="champagne &amp; Limousines" FontSize="12" Foreground="#FF0A0A0A" HorizontalAlignment="Left" Height="40" Margin="51,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="683"/>
+        <TextBox x:Name="txtDescriptionService4" materialDesign:HintAssist.Hint="Descrição de Serviços 4" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" FontFamily="champagne &amp; Limousines" FontSize="12" Foreground="#FF0A0A0A" HorizontalAlignment="Left" Height="40" Margin="51,361,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="683"/>
+        <TextBox x:Name="txtDescriptionService5" materialDesign:HintAssist.Hint="Descrição de Serviços 5" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" FontFamily="champagne &amp; Limousines" FontSize="12" Foreground="#FF0A0A0A" HorizontalAlignment="Left" Height="40" Margin="51,406,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="683"/>
+        <TextBox x:Name="txtDescriptionService6" materialDesign:HintAssist.Hint="Descrição de Serviços 6" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" FontFamily="champagne &amp; Limousines" FontSize="12" Foreground="#FF0A0A0A" HorizontalAlignment="Left" Height="40" Margin="51,451,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="683"/>
+        <TextBox x:Name="txtDescriptionService7" materialDesign:HintAssist.Hint="Descrição de Serviços 7" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" FontFamily="champagne &amp; Limousines" FontSize="12" Foreground="#FF0A0A0A" HorizontalAlignment="Left" Height="40" Margin="51,496,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="683"/>
+        <Button x:Name="btnAdicionar" Content="Adicionar" HorizontalAlignment="Left" Margin="46,566,0,0" VerticalAlignment="Top" Width="268" Height="60" FontSize="20" BorderBrush="#FF3F51B5" Click="btnAdicionar_Click"/>
+        <Button x:Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="340,566,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5" Click="btnEditar_Click"/>
+        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="661,566,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5" Click="btnCancelar_Click"/>
+        <Button x:Name="btnSalvar" Content="Salvar" HorizontalAlignment="Left" Margin="980,566,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5" Click="btnSalvar_Click"/>
+        <DataGrid x:Name="dgEstimate" IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow"  HorizontalAlignment="Left" Height="310" Margin="791,226,0,0" VerticalAlignment="Top" Width="485" AutoGenerateColumns="False" SelectionChanged="dgEstimate_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=DocNo}" ClipboardContentBinding="{x:Null}" Header="Número do documento"/>
+                <DataGridTextColumn Binding="{Binding Path=Customer}" ClipboardContentBinding="{x:Null}" Header="Cliente"/>
+                <DataGridTextColumn Binding="{Binding Path=Date, ConverterCulture=pt-BR, StringFormat=\{0:d\}}" ClipboardContentBinding="{x:Null}" Header="Data"/>
+                <DataGridTextColumn Binding="{Binding Path=PayCondition}" ClipboardContentBinding="{x:Null}" Header="Condição de pagamento"/>
+                <DataGridTextColumn Binding="{Binding Path=DaysExecution}" ClipboardContentBinding="{x:Null}" Header="Execução em dias"/>
+                <DataGridTextColumn Binding="{Binding Path=TotalValue,ConverterCulture=pt-BR}" ClipboardContentBinding="{x:Null}" Header="Valor Total"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="btnPdf" HorizontalAlignment="Left" Margin="1046,176,0,0" VerticalAlignment="Top" Width="58" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnPdf_Click">
+            <materialDesign:PackIcon Foreground="Blue" Kind="FilePdf" Width="34" Height="34" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
     </Grid>
 </UserControl>

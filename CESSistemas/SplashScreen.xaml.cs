@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Threading;
+using Promig.Utils;
 using Promig.View;
 
 namespace Promig {
@@ -32,10 +33,15 @@ namespace Promig {
         private void carregarprogressBar() {
             criarConstrucao();
             try {
-                    Login janela = new Login();
-                    janela.Show();
-                    this.Hide();
-                    Close();
+                // Criando arquivo de preferências
+                if (!CompanyData.PreferencesExists())
+                    CompanyData.CreatePreferences();
+
+                // Abrindo janela de login
+                Login janela = new Login();
+                janela.Show();
+                this.Hide();
+                Close();
             }
             catch (Exception a) {
                 MessageBox.Show("Erro", 

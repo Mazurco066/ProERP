@@ -50,9 +50,11 @@ namespace Promig.Utils {
                 city = Crypt.Encrypt("Mogi Mirim"),
                 CEP = Crypt.Encrypt("13807698"),
                 UF = Crypt.Encrypt("SP"),
-                phone1 = Crypt.Encrypt("19971818810"),
-                phone2 = Crypt.Encrypt("19992539978"),
-                phone3 = Crypt.Encrypt("1935691924")
+                phone1 = Crypt.Encrypt("(19)97181-8810"),
+                phone2 = Crypt.Encrypt("(19)99253-9978"),
+                phone3 = Crypt.Encrypt("(19)35691-924"),
+                email = Crypt.Encrypt("promig.me@gmail.com"),
+                website = Crypt.Encrypt("www.promig.com.br")
             };
                 
             var serializerSettings = new JsonSerializerSettings();
@@ -102,6 +104,44 @@ namespace Promig.Utils {
 
                 //Retornando endereco formatado do modelo recuperado
                 return $"{model.street}, {model.number} {model.neighborhood}, {model.city}-{model.UF}";
+            }
+        }
+
+        public static string GetPdfFooterData() {
+            //Procurando o arquivo json de preferencias pelo caminho de diretório
+            using (StreamReader r = new StreamReader(path)) {
+
+                //Lendo arquivo json e fazendo o parse do mesmo
+                var json = r.ReadToEnd();
+                var jobj = JObject.Parse(json);
+
+                //Instanciando um modelo vazio para preenchimento
+                CompanyModel model = new CompanyModel();
+
+                //Preenchendo os dados presentes no json no modelo definido
+                foreach (var item in jobj.Properties()) {
+                    switch (item.Name) {
+                        case "phone1":  //Propriedade Telefone 1
+                            model.phone1 = Crypt.Decrypt(item.Value.ToString());
+                            break;
+                        case "phone2":    //Propriedade Telefone 2
+                            model.phone2 = Crypt.Decrypt(item.Value.ToString());
+                            break;
+                        case "phone3":  //Propriedade Telefone 3
+                            model.phone3 = Crypt.Decrypt(item.Value.ToString());
+                            break;
+                        case "email":    //Proprieade Email
+                            model.email = Crypt.Decrypt(item.Value.ToString());
+                            break;
+                        case "website":   //Propriedade Website
+                            model.website = Crypt.Decrypt(item.Value.ToString());
+                            break;
+                    }
+                }
+
+                //Retornando endereco formatado do modelo recuperado
+                return $"Contato: Telefone1:{model.phone1} | Telefone2:{model.phone2} | Telefone3:{model.phone3} | " +
+                       $"Email:{model.email} | Website:{model.website}";
             }
         }
 
@@ -156,6 +196,12 @@ namespace Promig.Utils {
                             break;
                         case "phone3":  //Propriedade Telefone 3
                             model.phone3 = Crypt.Decrypt(item.Value.ToString());
+                            break;
+                        case "email": //Propriedade Email
+                            model.email = Crypt.Decrypt(item.Value.ToString());
+                            break;
+                        case "website": //Propriedade Website
+                            model.website = Crypt.Decrypt(item.Value.ToString());
                             break;
                     }
                 }
@@ -213,6 +259,12 @@ namespace Promig.Utils {
                             break;
                         case "phone3":  //Propriedade Telefone 3
                             item.Value = Crypt.Encrypt(model.phone3);
+                            break;
+                        case "email": //Propriedade Email
+                            item.Value = Crypt.Encrypt(model.email);
+                            break;
+                        case "website": //Propriedade Website
+                            item.Value = Crypt.Encrypt(model.website);
                             break;
                     }
                 }
