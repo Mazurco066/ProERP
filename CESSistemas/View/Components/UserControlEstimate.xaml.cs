@@ -44,19 +44,19 @@ namespace Promig.View.Components {
         public UserControlEstimate() {
             InitializeComponent();
 
-            FillComboBoxCustomer();
-            BlockFields();
+            //FillComboBoxCustomer();
+            //BlockFields();
             dao = new Estimates();
             logs = new Logs();
             aux = new Estimate();
             _employe = new Employe();
             _employe.id = MainWindow.currentId;
             txtDocNo.IsEnabled = false;
-            RefreshDataGrid();
+            //RefreshDataGrid();
         }
         #endregion
 
-        #region Block/Enable Fields
+        /*#region Block/Enable Fields
         private void EnableFields() {
 
             //Comboboxes
@@ -383,12 +383,7 @@ namespace Promig.View.Components {
 
                 txtDescription.Text = txtDescription.Text.Replace("\"", "");
                 txtDescriptionService1.Text = txtDescriptionService1.Text.Replace("\"", "");
-                txtDescriptionService2.Text = txtDescriptionService2.Text.Replace("\"", "");
-                txtDescriptionService3.Text = txtDescriptionService3.Text.Replace("\"", "");
-                txtDescriptionService4.Text = txtDescriptionService4.Text.Replace("\"", "");
-                txtDescriptionService5.Text = txtDescriptionService5.Text.Replace("\"", "");
-                txtDescriptionService6.Text = txtDescriptionService6.Text.Replace("\"", "");
-                txtDescriptionService7.Text = txtDescriptionService7.Text.Replace("\"", "");
+               
 
                 if (txtValue.Text != String.Empty)
                 {
@@ -499,12 +494,6 @@ namespace Promig.View.Components {
                 cbPagto.Text = aux.PayCondition;
                 txtValue.Text = aux.TotalValue.ToString();
                 txtDescriptionService1.Text = aux.Description1;
-                txtDescriptionService2.Text = aux.Description2;
-                txtDescriptionService3.Text = aux.Description3;
-                txtDescriptionService4.Text = aux.Description4;
-                txtDescriptionService5.Text = aux.Description5;
-                txtDescriptionService6.Text = aux.Description6;
-                txtDescriptionService7.Text = aux.Description7;
                 image.Source = (!string.IsNullOrEmpty(aux.ImgPath)) ? new BitmapImage(new System.Uri(aux.ImgPath)) : null;
                 imgPdf = aux.ImgPath;
 
@@ -594,30 +583,7 @@ namespace Promig.View.Components {
             {
                 lista.Add(txtDescriptionService1.Text);
             }
-            if (txtDescriptionService2.Text != string.Empty)
-            {
-                lista.Add(txtDescriptionService2.Text);
-            }
-            if (txtDescriptionService3.Text != string.Empty)
-            {
-                lista.Add(txtDescriptionService3.Text);
-            }
-            if (txtDescriptionService4.Text != string.Empty)
-            {
-                lista.Add(txtDescriptionService4.Text);
-            }
-            if (txtDescriptionService5.Text != string.Empty)
-            {
-                lista.Add(txtDescriptionService5.Text);
-            }
-            if (txtDescriptionService6.Text != string.Empty)
-            {
-                lista.Add(txtDescriptionService6.Text);
-            }
-            if (txtDescriptionService7.Text != string.Empty)
-            {
-                lista.Add(txtDescriptionService7.Text);
-            }
+            
             int cont = 1;
             foreach (String item in lista)
             {
@@ -647,5 +613,6 @@ namespace Promig.View.Components {
             btnPdf.IsEnabled = false;
         }
         #endregion
+        */
     }
 }
