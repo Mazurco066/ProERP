@@ -143,7 +143,7 @@ namespace Promig.View {
 
             //Definindo o caminho que será salvo o arquivo PDF
             string oldPath = Directory.GetCurrentDirectory();
-            string rawPath = $"C:\\ProERP\\PDFMaps\\";
+            string rawPath = $"C:\\ProERP\\Generated-Documents\\PDF-Maps\\";
             if (!Directory.Exists(rawPath)) Directory.CreateDirectory(rawPath);
             Directory.SetCurrentDirectory(rawPath);
 

@@ -80,7 +80,7 @@ namespace Promig.Connection.Methods
                 cmd.Parameters.Add(new MySqlParameter("@admission", emp.admission));
                 cmd.Parameters.Add(new MySqlParameter("@job", emp.job));
 
-                //Caso funsionário possuir usuário
+                //Caso funcionário possuir usuário
                 if (emp.user != null) {
                     cmd.Parameters.Add(new MySqlParameter("@username", emp.user.GetLogin()));
                     cmd.Parameters.Add(new MySqlParameter("@password", emp.user.GetEncryptedCode()));

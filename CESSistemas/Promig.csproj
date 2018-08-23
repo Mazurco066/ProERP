@@ -127,6 +127,7 @@
     <Compile Include="Exceptions\NegatedAccessException.cs" />
     <Compile Include="Exceptions\SqlCustomException.cs" />
     <Compile Include="Model\Adress.cs" />
+    <Compile Include="Model\CbModel\Customer.cs" />
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\Employe.cs" />
     <Compile Include="Model\Estimate.cs" />

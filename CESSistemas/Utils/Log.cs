@@ -15,7 +15,7 @@ namespace Promig.Utils {
 
             //Configurando diretorio atual para emissão de logs         
             string oldPath = Directory.GetCurrentDirectory();
-            string rawPath = $"C:\\ProERP\\ErrorLogs\\";
+            string rawPath = $"C:\\ProERP\\Config\\Error-Logs\\";
             if (!Directory.Exists(rawPath)) Directory.CreateDirectory(rawPath);
             Directory.SetCurrentDirectory(rawPath);
 
@@ -44,7 +44,7 @@ namespace Promig.Utils {
 
             //Configurando diretorio atual para emissão de mensagem  
             string oldPath = Directory.GetCurrentDirectory();
-            string rawPath = $"C:\\ProERP\\ErrorLogs\\";
+            string rawPath = $"C:\\ProERP\\Config\\Error-Logs\\";
             if (!Directory.Exists(rawPath)) Directory.CreateDirectory(rawPath);
             Directory.SetCurrentDirectory(rawPath);
 

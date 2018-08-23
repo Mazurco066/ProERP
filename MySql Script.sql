@@ -93,7 +93,6 @@ create table if not exists creditos(
 create table if not exists orcamentos(
     no_documento int not null auto_increment,
     id_cliente int not null,
-    cliente varchar(255) not null,
     data_orcamento varchar(12),
     caminho_imagem varchar(255),
     descricao varchar(255),
@@ -118,7 +117,7 @@ create table if not exists log(
 	CONSTRAINT FRK_ID_FUNCIONARIO_LOG FOREIGN KEY (id_funcionario) REFERENCES funcionarios(id_funcionario)
 );
 
-/* inserindo dados para teste FUNCIONARIO 01 */
+/* inserindo dados para teste FUNCIONARIO 01 - Dados iniciais do sistema */
 insert into enderecos(rua, numero, bairro, cidade, uf, cep)
 values('Rua José Cristino de Oliveira Camois', 562, 'Jd. Planalto', 'Mogi Guaçu', 'SP', '13843054');
 insert into pessoas(id_endereco, nome_pessoa, status)
@@ -136,7 +135,30 @@ select * from funcionarios;
 select * from clientes;
 select * from fornecedores;
 select * from usuarios;
+select * from debitos;
+select * from creditos;
+select * from orcamentos;
+select * from servicos;
 select * from log;
 
 /* Se precisar... comando para deletar banco de dados */
 drop database if exists promig;
+
+/* Criação de procedures */
+delimiter $$
+create procedure AddOrcamento (
+	id_cliente int,
+    data_orcamento varchar(12),
+    caminho_imagem varchar(255),
+    descricao varchar(255),
+    condicao_pagto varchar(10),
+    execucao_dias varchar(10),
+    valor_total double,
+    OUT lis int
+) begin
+	insert into orcamentos (id_cliente, data_orcamento, caminho_imagem, descricao, condicao_pagto, execucao_dias, valor_total) 
+    values (id_cliente, data_orcamento, caminho_imagem, descricao, condicao_pagto, execucao_dias, valor_total);
+    set lis = last_insert_id();
+    insert into servicos (no_orcamento, descricao)
+    values (lis, 'Teste');
+end $$

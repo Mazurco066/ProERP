@@ -11,11 +11,10 @@ namespace Promig.Utils {
 
         #region Header
 
-        private static string rawPath = "C:\\ProERP\\Preferences\\";
-        private static string path = "C:\\ProERP\\Preferences\\preferences.json";
+        private static string rawPath = "C:\\ProERP\\Config\\";
+        private static string path = "C:\\ProERP\\Config\\preferences.json";
 
         #endregion
-
 
         #region Utils
 

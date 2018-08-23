@@ -7,7 +7,7 @@
 			 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="1306" Height="697" Background="White" >
+             d:DesignHeight="450" Loaded="control_loaded" d:DesignWidth="1306" Height="697" Background="White" >
     <Grid>
         <Border 
             BorderBrush="#FF3F51B5" 
@@ -28,7 +28,7 @@
             VerticalAlignment="Top" 
             RenderTransformOrigin="1.91,0.731" 
             FontSize="14"/>
-        <Button x:Name="button" HorizontalAlignment="Left" Margin="820,19,0,0" VerticalAlignment="Top" Background="{x:Null}" Height="26" BorderBrush="{x:Null}" >
+        <Button x:Name="btnLogo" Click="btnLogo_Click" HorizontalAlignment="Left" Margin="820,19,0,0" VerticalAlignment="Top" Background="{x:Null}" Height="26" BorderBrush="{x:Null}" >
             <materialDesign:PackIcon Foreground="Blue" Kind="Image" Width="20" Height="19" Cursor="Hand"/>
         </Button>
         <Image 
@@ -37,7 +37,7 @@
             Height="123" Width="366"
             Margin="900,24,0,0" VerticalAlignment="Top" />
         <ComboBox 
-            x:Name="cbCustomer" 
+            x:Name="cbCustomer"
             materialDesign:HintAssist.Hint="Cliente" 
             Style="{StaticResource ResourceKey=MaterialDesignFloatingHintComboBox}" 
             FontFamily="champagne &amp; Limousines" 
