@@ -36,7 +36,6 @@ namespace Promig.View.Components {
 
         #endregion
 
-
         #region Constructor
         /// <summary>
         /// Construtor padrão

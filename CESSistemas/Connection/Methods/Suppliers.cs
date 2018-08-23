@@ -189,7 +189,6 @@ namespace Promig.Connection.Methods {
                     CommandType = CommandType.Text
                 };
 
-
                 //Definindo parametros
                 cmd.Parameters.Add(new MySqlParameter("@id", id));
 

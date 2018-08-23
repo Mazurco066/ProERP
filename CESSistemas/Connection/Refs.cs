@@ -13,5 +13,6 @@
         public static string TABLE_DEBITS = "debitos";
         public static string TABLE_CREDITS = "creditos";
         public static string TABLE_ESTIMATES = "orcamentos";
+        public static string TABLE_SERVICES = "servicos";
     }
 }
