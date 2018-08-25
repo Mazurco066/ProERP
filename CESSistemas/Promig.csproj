@@ -134,6 +134,7 @@
     <Compile Include="Model\Json\CompanyModel.cs" />
     <Compile Include="Model\Log.cs" />
     <Compile Include="Model\Person.cs" />
+    <Compile Include="Model\Service.cs" />
     <Compile Include="Model\Supplier.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Utils\CompanyData.cs" />

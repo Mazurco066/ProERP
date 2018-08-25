@@ -10,6 +10,7 @@
              d:DesignHeight="450" Loaded="control_loaded" d:DesignWidth="1306" Height="697" Background="White" >
     <Grid>
         <Border 
+            x:Name="imgContainer"
             BorderBrush="#FF3F51B5" 
             BorderThickness="1" 
             HorizontalAlignment="Left" 
@@ -176,10 +177,10 @@
             Margin="46,277,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" />
-        <Button x:Name="btnPlus" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="684,291,572,0" Height="26" Background="{x:Null}">
+        <Button x:Name="btnPlus" Click="btnAddService_Click" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="684,291,572,0" Height="26" Background="{x:Null}">
             <materialDesign:PackIcon Foreground="#FF3F51B5" Kind="Plus" Width="20" Height="19" RenderTransformOrigin="0.45,2.842"/>
         </Button>
-        <Button x:Name="btnMinus" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="684,322,572,0" Height="26" Background="{x:Null}">
+        <Button x:Name="btnMinus" Click="btnRemoveService_Click" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="684,322,572,0" Height="26" Background="{x:Null}">
             <materialDesign:PackIcon Foreground="#FF3F51B5" Kind="Minus" Width="20" Height="19" RenderTransformOrigin="0.45,2.842"/>
         </Button>
         <DataGrid 
@@ -192,13 +193,13 @@
             VerticalAlignment="Top"  
             AutoGenerateColumns="False" Margin="46,338,0,0" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Serviços Inclusos"/>
+                <DataGridTextColumn Header="Serviços Inclusos" Binding="{Binding Task}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnAdicionar" Content="Adicionar" HorizontalAlignment="Left" Margin="46,566,0,0" VerticalAlignment="Top" Width="268" Height="60" FontSize="20" BorderBrush="#FF3F51B5" />
-        <Button x:Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="340,566,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5" />
-        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="661,566,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5" />
-        <Button x:Name="btnSalvar" Content="Salvar" HorizontalAlignment="Left" Margin="980,566,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5" />
+        <Button x:Name="btnAdicionar" Click="btnAdd_Click" Content="Adicionar" HorizontalAlignment="Left" Margin="46,566,0,0" VerticalAlignment="Top" Width="268" Height="60" FontSize="20" BorderBrush="#FF3F51B5" />
+        <Button x:Name="btnEditar" Click="btnEdit_Click" Content="Editar" HorizontalAlignment="Left" Margin="340,566,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5" />
+        <Button x:Name="btnCancelar" Click="btnCancel_Click" Content="Cancelar" HorizontalAlignment="Left" Margin="661,566,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5" />
+        <Button x:Name="btnSalvar" Click="btnSave_Click" Content="Salvar" HorizontalAlignment="Left" Margin="980,566,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5" />
         <DataGrid 
             x:Name="dgEstimate" 
             IsReadOnly="True" 
@@ -227,10 +228,10 @@
             Margin="764,181,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" />
-        <Button x:Name="btnPdf" HorizontalAlignment="Left" Margin="1169,195,0,0" VerticalAlignment="Top" Height="26" Background="{x:Null}" BorderBrush="{x:Null}" >
+        <Button x:Name="btnPdf" Click="btnGeneratePdf" HorizontalAlignment="Left" Margin="1169,195,0,0" VerticalAlignment="Top" Height="26" Background="{x:Null}" BorderBrush="{x:Null}" >
             <materialDesign:PackIcon Foreground="Blue" Kind="FilePdf" Width="20" Height="19" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Button>
-        <Button x:Name="btnRefresh" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="1226,195,30,0" Height="26" Background="{x:Null}">
+        <Button x:Name="btnRefresh" Click="btnRefresh_Click" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="1226,195,30,0" Height="26" Background="{x:Null}">
             <materialDesign:PackIcon Foreground="#FF3F51B5" Kind="Refresh" Width="20" Height="19" RenderTransformOrigin="0.45,2.842"/>
         </Button>
     </Grid>

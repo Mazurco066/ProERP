@@ -19,20 +19,19 @@ namespace Promig.Model
         
         public int docNo;
         public int idCustomer;
-        public string customer;
         public string date;
         public string imgPath;
         public string description;
         public string payCondition;
         public string daysExecution;
         public double totalValue;
-        public List<string> services { get; set; }
+        public List<Service> services { get; set; }
 
         #endregion
 
         #region Constructor
 
-        public Estimate() { services = new List<string>(); }
+        public Estimate() { services = new List<Service>(); }
 
         #endregion
     }
