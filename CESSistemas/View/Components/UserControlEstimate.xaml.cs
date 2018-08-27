@@ -200,24 +200,7 @@ namespace Promig.View.Components {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnAddService_Click(object sender, System.Windows.RoutedEventArgs e) {
-            if (!txtDesc.Text.Equals(string.Empty)) {
-
-                // Adicionando serviço na lista e atualizando
-                aux.services.Add(new Service(txtDesc.Text));
-                dgServices.ItemsSource = null;
-                dgServices.ItemsSource = aux.services;
-
-                // Limpando campo para inserção de outro serviço
-                txtDesc.Text = string.Empty;
-
-            } else {
-                MessageBox.Show(
-                    "Descrição do serviço vazia!",
-                    "Validação",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Warning
-                );
-            }
+            
         }
 
         /// <summary>
@@ -384,7 +367,6 @@ namespace Promig.View.Components {
             txtDocNo.Text = string.Empty;
             txtDescription.Text = string.Empty;
             txtValue.Text = string.Empty;
-            txtDesc.Text = string.Empty;
 
             // Grids
             dgServices.ItemsSource = null;
@@ -406,7 +388,6 @@ namespace Promig.View.Components {
             txtDocNo.IsEnabled = false;
             txtDescription.IsEnabled = false;
             txtValue.IsEnabled = false;
-            txtDesc.IsEnabled = false;
 
             // Buttons
             btnPlus.IsEnabled = false;
@@ -433,7 +414,6 @@ namespace Promig.View.Components {
             dpEstimate.IsEnabled = true;
             txtDescription.IsEnabled = true;
             txtValue.IsEnabled = true;
-            txtDesc.IsEnabled = true;
 
             // Buttons
             btnPlus.IsEnabled = true;

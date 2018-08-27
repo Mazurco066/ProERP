@@ -44,7 +44,6 @@
 				<TextBlock Text="" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
 				<materialDesign:PopupBox HorizontalAlignment="Right" Margin="10" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Foreground="#FFFBF7F7">
 					<StackPanel Width="150">
-						<Button Content="Materiais"/>
                         <Button x:Name="btnSobre" Content="Sobre" Click="btnSobre_Click"/>
                         <Button x:Name="btnAuditoria" Content="Auditoria" Click="btnAuditoria_Click"/>
                         <Separator/>
@@ -64,28 +63,22 @@
 					</Button>
 				</Grid>
 				<ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="#FF546E7A" SelectionChanged="ListView_SelectionChanged">
-					<ListViewItem x:Name="Main" Height="60">
-						<StackPanel Orientation="Horizontal">
-							<materialDesign:PackIcon Kind="ViewDashboard" Width="25" Height="25" Margin="10" VerticalAlignment="Center" Foreground="#FFF7FAFB"/>
-							<TextBlock Text="Página Principal" VerticalAlignment="Center" Margin="20 10" Foreground="#FFFBFCFD"/>
-						</StackPanel>
-					</ListViewItem>
-					<ListViewItem x:Name="Client" Height="60">
+                    <ListViewItem x:Name="Main" Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ViewDashboard" Width="25" Height="25" Margin="10" VerticalAlignment="Center" Foreground="#FFF7FAFB"/>
+                            <TextBlock Text="Página Principal" VerticalAlignment="Center" Margin="20 10" Foreground="#FFFBFCFD"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem x:Name="Client" Height="60">
 						<StackPanel Orientation="Horizontal">
 							<materialDesign:PackIcon Kind="AccountBox" Width="25" Height="25" Margin="10" VerticalAlignment="Center" Foreground="#FFF7FAFB"/>
 							<TextBlock Text="Clientes" VerticalAlignment="Center" Margin="20 10" Foreground="#FFF9FAFB"/>
 						</StackPanel>
 					</ListViewItem>
-					<ListViewItem x:Name="Employes" Height="60">
-						<StackPanel Orientation="Horizontal">
-							<materialDesign:PackIcon Kind="AccountCardDetails" Width="25" Height="25" Margin="10" VerticalAlignment="Center" Foreground="#FFF7FAFB"/>
-							<TextBlock Text="Funcionários" VerticalAlignment="Center" Margin="20 10" Foreground="#FFF9FAFB"/>
-						</StackPanel>
-					</ListViewItem>
-                    <ListViewItem x:Name="Services" Height="60">
+                    <ListViewItem x:Name="Employes" Height="60">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Screwdriver" Width="25" Height="25" Margin="10" VerticalAlignment="Center" Foreground="#FFF7FAFB"/>
-                            <TextBlock Text="Serviços" VerticalAlignment="Center" Margin="20 10" Foreground="#FFF9FAFB"/>
+                            <materialDesign:PackIcon Kind="AccountCardDetails" Width="25" Height="25" Margin="10" VerticalAlignment="Center" Foreground="#FFF7FAFB"/>
+                            <TextBlock Text="Funcionários" VerticalAlignment="Center" Margin="20 10" Foreground="#FFF9FAFB"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem x:Name="Supplier" Height="60">
@@ -94,6 +87,12 @@
 							<TextBlock Text="Fornecedores" VerticalAlignment="Center" Margin="20 10" Foreground="#FFF7FAFB"/>
 						</StackPanel>
 					</ListViewItem>
+                    <ListViewItem x:Name="Services" Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Screwdriver" Width="25" Height="25" Margin="10" VerticalAlignment="Center" Foreground="#FFF7FAFB"/>
+                            <TextBlock Text="Serviços" VerticalAlignment="Center" Margin="20 10" Foreground="#FFF9FAFB"/>
+                        </StackPanel>
+                    </ListViewItem>
 					<ListViewItem x:Name="BillsToPay" Height="60">
 						<StackPanel Orientation="Horizontal">
 							<materialDesign:PackIcon Kind="CashMultiple" Width="25" Height="25" Margin="10" VerticalAlignment="Center" Foreground="#FFF7FAFB"/>

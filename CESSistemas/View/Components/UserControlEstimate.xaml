@@ -8,7 +8,7 @@
              xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="450" Loaded="control_loaded" d:DesignWidth="1306" Height="697" Background="White" >
-    <Grid>
+    <Grid RenderTransformOrigin="0.521,0.473">
         <Border 
             x:Name="imgContainer"
             BorderBrush="#FF3F51B5" 
@@ -160,27 +160,10 @@
             Margin="0,181,572,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" />
-        <Label 
-            Content="Serviços" 
-            FontSize="30" 
-            Margin="39,231,1015,420" 
-            Foreground="#FF3F51B5"/>
-        <TextBox 
-            x:Name="txtDesc" 
-            materialDesign:HintAssist.Hint="Descrição do Serviço" 
-            Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" 
-            FontFamily="champagne &amp; Limousines" 
-            FontSize="12" 
-            Foreground="#FF0A0A0A" 
-            HorizontalAlignment="Left" 
-            Height="40" Width="628"
-            Margin="46,277,0,0" 
-            TextWrapping="Wrap" 
-            VerticalAlignment="Top" />
-        <Button x:Name="btnPlus" Click="btnAddService_Click" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="684,291,572,0" Height="26" Background="{x:Null}">
+        <Button x:Name="btnPlus" Click="btnAddService_Click" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="329,231,927,0" Height="26" Background="{x:Null}">
             <materialDesign:PackIcon Foreground="#FF3F51B5" Kind="Plus" Width="20" Height="19" RenderTransformOrigin="0.45,2.842"/>
         </Button>
-        <Button x:Name="btnMinus" Click="btnRemoveService_Click" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="684,322,572,0" Height="26" Background="{x:Null}">
+        <Button x:Name="btnMinus" Click="btnRemoveService_Click" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="329,262,927,0" Height="26" Background="{x:Null}">
             <materialDesign:PackIcon Foreground="#FF3F51B5" Kind="Minus" Width="20" Height="19" RenderTransformOrigin="0.45,2.842"/>
         </Button>
         <DataGrid 
@@ -189,9 +172,9 @@
             SelectionMode="Single" 
             SelectionUnit="FullRow"  
             HorizontalAlignment="Left" 
-            Height="198" Width="628"
+            Height="305" Width="268"
             VerticalAlignment="Top"  
-            AutoGenerateColumns="False" Margin="46,338,0,0" >
+            AutoGenerateColumns="False" Margin="46,231,0,0" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Serviços Inclusos" Binding="{Binding Task}"/>
             </DataGrid.Columns>

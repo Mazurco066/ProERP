@@ -110,6 +110,14 @@ create table if not exists servicos(
     constraint PRK_ID_SERVICO primary key (id_servico)
 );
 
+create table orcamento_servicos(
+	id_orcamento int not null,
+    id_servico int not null,
+    quantidade int not null,
+    constraint FRK_ID_ORCAMENTO foreign key (id_orcamento) references orcamentos (no_documento),
+    constraint FRK_ID_SERVICO foreign key (id_servico) references servicos (id_servico)
+);
+
 create table if not exists log(
 	id_log int not null AUTO_INCREMENT,
 	id_funcionario int not null,
@@ -145,22 +153,3 @@ select * from log;
 
 /* Se precisar... comando para deletar banco de dados */
 drop database if exists promig;
-
-/* Criação de procedures */
-delimiter $$
-create procedure AddOrcamento (
-	id_cliente int,
-    data_orcamento varchar(12),
-    caminho_imagem varchar(255),
-    descricao varchar(255),
-    condicao_pagto varchar(10),
-    execucao_dias varchar(10),
-    valor_total double,
-    OUT lis int
-) begin
-	insert into orcamentos (id_cliente, data_orcamento, caminho_imagem, descricao, condicao_pagto, execucao_dias, valor_total) 
-    values (id_cliente, data_orcamento, caminho_imagem, descricao, condicao_pagto, execucao_dias, valor_total);
-    set lis = last_insert_id();
-    insert into servicos (no_orcamento, descricao)
-    values (lis, 'Teste');
-end $$
