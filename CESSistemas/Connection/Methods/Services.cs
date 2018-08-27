@@ -199,7 +199,8 @@ namespace Promig.Connection.Methods {
 
                 // Definição do comando sql
                 string command = $"SELECT * FROM {Refs.TABLE_SERVICES} " +
-                                 $"WHERE descricao LIKE @param";
+                                 $"WHERE descricao LIKE @param " +
+                                 $"order by descricao";
 
                 // Definindo comando e resultados
                 List<Service> services = new List<Service>();

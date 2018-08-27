@@ -1,7 +1,10 @@
 ﻿using Promig.Connection.Methods;
+using Promig.Exceptions;
 using Promig.Model;
+using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Promig.View.Components {
     
@@ -13,7 +16,6 @@ namespace Promig.View.Components {
         private Logs logs;
         private Service aux;
         private Employe _employe;
-        private bool deletable;
         private int actionIndex;
 
         #endregion
@@ -31,7 +33,6 @@ namespace Promig.View.Components {
             aux = null;
             _employe = new Employe();
             _employe.id = MainWindow.currentId;
-            deletable = false;
             actionIndex = -1;
         }
 
@@ -46,7 +47,19 @@ namespace Promig.View.Components {
         /// <param name="e"></param>
         private void control_loaded(object sender, RoutedEventArgs e) {
             BlockFields();
-            //RefreshGrid();
+            RefreshGrid();
+        }
+
+        /// <summary>
+        /// Evento ao digitar em um campo numerico
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ValueEdit_KeyDown(object sender, KeyEventArgs e) {
+            KeyConverter kv = new KeyConverter();
+            if ((char.IsNumber((string)kv.ConvertTo(e.Key, typeof(string)), 0) == false) && e.Key.Equals(Key.OemPeriod)) {
+                e.Handled = true;
+            }
         }
 
         /// <summary>
@@ -55,7 +68,7 @@ namespace Promig.View.Components {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnRefresh_Click(object sender, System.Windows.RoutedEventArgs e) {
-
+            RefreshGrid();
         }
 
         /// <summary>
@@ -67,6 +80,7 @@ namespace Promig.View.Components {
             actionIndex = 1;
             ClearFields();
             EnableFields();
+            btnDelete.IsEnabled = false;
         }
 
         /// <summary>
@@ -88,19 +102,26 @@ namespace Promig.View.Components {
             }
         }
 
+        private void btnDelete_Click(object sender, System.Windows.RoutedEventArgs e) {
+                actionIndex = 3;
+                ClearFields();
+                MessageBox.Show(
+                    "Salve as alterações para confirmar a exclusão!",
+                    "Alerta",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information
+                );
+        }
+
         /// <summary>
         /// Evento ao clicar em cancelar
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnCancel_Click(object sender, System.Windows.RoutedEventArgs e) {
-            if (deletable) {
-                
-            } else {
                 BlockFields();
                 ClearFields();
-                actionIndex = -1;
-            }
+                actionIndex = -1;         
         }
 
         /// <summary>
@@ -116,6 +137,9 @@ namespace Promig.View.Components {
                 case 2:
                     EditService();
                     break;
+                case 3:
+                    DeleteService();
+                    break;
                 default:
                     MessageBox.Show(
                             "Nenhuma Operação Selecionada!",
@@ -127,34 +151,81 @@ namespace Promig.View.Components {
             }
         }
 
+        /// <summary>
+        /// Evento ao selecionar serviço da grid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void dgServices_SelectionChanged(object sender, SelectionChangedEventArgs args) {
+            if (dgServices.SelectedItems.Count > 0) {
+
+                // Recuperação do serviço selecionado
+                aux = dgServices.SelectedItem as Service;
+
+                // Preenchimento dos campos
+                DescriptionEdit.Text = aux.Task;
+                ValueEdit.Text = aux.Value.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Evento ao digitar no campo de  pesquisa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SearchEdit_KeyDown(object sender, RoutedEventArgs e) {
+            RefreshGrid(SearchEdit.Text);
+        }
+
         #endregion
 
         #region Data-Gathering
 
+        /// <summary>
+        /// Metodo para coletar dados e adicionar serviço
+        /// </summary>
         private void AddService() {
             if (IsFilledFields()) {
 
-                // Recuperando dados
-                Service service = new Service();
-                service.Task = DescriptionEdit.Text;
-                service.Value = double.Parse(ValueEdit.Text);
+                try {
 
-                // Inserindo serviço no banco
-                dao.AddService(service);
+                    // Recuperando dados
+                    Service service = new Service();
+                    service.Task = DescriptionEdit.Text;
+                    service.Value = double.Parse(ValueEdit.Text);
 
-                // Registro de log - Inserção
-                Model.Log added = new Model.Log();
-                added.employe = _employe;
-                added.action = $"Serviço: {service.Task} foi cadastrado no sistema!";
-                logs.Register(added);
+                    // Inserindo serviço no banco
+                    dao.AddService(service);
 
-                // Atualizando grid e limpando campos de texto
-                //RefreshGrid();
-                ClearFields();
-                BlockFields();
-                actionIndex = -1;
-                aux = null;
+                    // Registro de log - Inserção
+                    Model.Log added = new Model.Log();
+                    added.employe = _employe;
+                    added.action = $"Serviço: {service.Task} foi cadastrado no sistema!";
+                    logs.Register(added);
 
+                    // Atualizando grid e limpando campos de texto
+                    RefreshGrid();
+                    ClearFields();
+                    BlockFields();
+                    actionIndex = -1;
+                    aux = null;
+
+                } catch (DatabaseInsertException err) {
+                    MessageBox.Show(
+                        err.Message,
+                        "Erro",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error
+                    );
+                } catch (Exception err) {
+                    MessageBox.Show(
+                        err.Message,
+                        "Erro",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error
+                    );
+                }
+                
             } else {
                 MessageBox.Show(
                     "Há Campos Vazios",
@@ -165,35 +236,144 @@ namespace Promig.View.Components {
             }
         }
 
+        /// <summary>
+        /// Metodo para coletar dados e Editar Serviço
+        /// </summary>
         private void EditService() {
             if (IsFilledFields()) {
 
-                // Recuperando dados
-                aux.Task = DescriptionEdit.Text;
-                aux.Value = double.Parse(ValueEdit.Text);
+                try {
 
-                // Inserindo serviço no banco
-                dao.EditService(aux);
+                    // Recuperando dados
+                    aux.Task = DescriptionEdit.Text;
+                    aux.Value = double.Parse(ValueEdit.Text);
 
-                // Registro de log - Edição
-                Model.Log edited = new Model.Log();
-                edited.employe = _employe;
-                edited.action = $"Serviço: {aux.Task} foi alterado no sistema!";
-                logs.Register(edited);
+                    // Inserindo serviço no banco
+                    dao.EditService(aux);
 
-                // Atualizando grid e limpando campos de texto
-                //RefreshGrid();
-                ClearFields();
-                BlockFields();
-                actionIndex = -1;
-                aux = null;
+                    // Registro de log - Edição
+                    Model.Log edited = new Model.Log();
+                    edited.employe = _employe;
+                    edited.action = $"Serviço: {aux.Task} foi alterado no sistema!";
+                    logs.Register(edited);
 
-            } else {
+                    // Atualizando grid e limpando campos de texto
+                    RefreshGrid();
+                    ClearFields();
+                    BlockFields();
+                    actionIndex = -1;
+                    aux = null;
+
+                } catch (DatabaseEditException err) {
+                    MessageBox.Show(
+                        err.Message,
+                        "Erro",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error
+                    );
+                } catch (Exception err) {
+                    MessageBox.Show(
+                        err.Message,
+                        "Erro",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error
+                    );
+                }
+
+        } else {
                 MessageBox.Show(
                     "Há Campos Vazios",
                     "Erro de Prenchimento de Formulário",
                     MessageBoxButton.OK,
                     MessageBoxImage.Warning
+                );
+            }
+        }
+
+        /// <summary>
+        /// Metodo para coletar dados e deletar serviço
+        /// </summary>
+        private void DeleteService() {
+
+            try {
+
+                // Remoção do serviço
+                dao.DeleteService(aux);
+
+                // Registro de log - Edição
+                Model.Log deleted = new Model.Log();
+                deleted.employe = _employe;
+                deleted.action = $"Serviço: {aux.Task} foi removido no sistema!";
+                logs.Register(deleted);
+
+                // Atualizando grid e limpando campos de texto
+                RefreshGrid();
+                ClearFields();
+                BlockFields();
+                actionIndex = -1;
+                aux = null;
+
+            } catch (DatabaseDeleteException err) {
+                MessageBox.Show(
+                    err.Message,
+                    "Erro",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
+            } catch (Exception err) {
+                MessageBox.Show(
+                    err.Message,
+                    "Erro",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
+            }
+        }
+
+        #endregion
+
+        #region Grid-Data
+
+        /// <summary>
+        /// Metodo para atualizar dados da grid
+        /// </summary>
+        private void RefreshGrid() {
+
+            // Removendo valor do campo de texto
+            SearchEdit.Text = string.Empty;
+
+            try {
+
+                // Adicionando nova fonte de dados
+                dgServices.ItemsSource = dao.GetAllServices(SearchEdit.Text);
+
+            } catch (DatabaseAccessException err) {
+                MessageBox.Show(
+                    err.Message,
+                    "Erro",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
+            }
+        }
+
+        /// <summary>
+        /// Metodo para atualizar grid 
+        /// </summary>
+        /// <param name="param">parâmetro de busca</param>
+        private void RefreshGrid(string param) {
+
+            try {
+
+                // Adicionando nova fonte de dados
+                dgServices.ItemsSource = dao.GetAllServices(param);
+
+            } catch (DatabaseAccessException err) {
+                MessageBox.Show(
+                    err.Message,
+                    "Erro",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
                 );
             }
         }
@@ -219,6 +399,7 @@ namespace Promig.View.Components {
         private void BlockFields() {
 
             // Buttons
+            btnDelete.IsEnabled = false;
             btnCancelar.IsEnabled = false;
             btnSalvar.IsEnabled = false;
 
@@ -233,6 +414,7 @@ namespace Promig.View.Components {
         private void EnableFields() {
 
             // Buttons
+            btnDelete.IsEnabled = true;
             btnCancelar.IsEnabled = true;
             btnSalvar.IsEnabled = true;
 

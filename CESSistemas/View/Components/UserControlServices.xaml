@@ -21,9 +21,10 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF060606" 
-            TabIndex="0" MaxLength="60"/>
+            TabIndex="0" MaxLength="255"/>
         <TextBox 
             x:Name="ValueEdit" 
+            KeyDown="ValueEdit_KeyDown"
             HorizontalAlignment="Left" 
             Width="190" 
             Height="42" 
@@ -34,9 +35,10 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF060606" 
-            TabIndex="0" MaxLength="60"/>
+            TabIndex="0" MaxLength="7"/>
         <DataGrid 
             x:Name="dgServices"
+            SelectionChanged="dgServices_SelectionChanged"
             IsReadOnly="True"
             SelectionMode="Single"
             SelectionUnit="FullRow"
@@ -56,15 +58,16 @@
                 </TransformGroup>
             </DataGrid.RenderTransform>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Código" Binding="{Binding id}" FontSize="11" />
-                <DataGridTextColumn Header="Nome" Width="1000" Binding="{Binding name}"  FontSize="11" />
-                <DataGridTextColumn Header="Valor Unitário" Binding="{Binding cpf}"  FontSize="11" />
+                <DataGridTextColumn Header="Código" Binding="{Binding Id}" FontSize="11" />
+                <DataGridTextColumn Header="Nome" Width="1000" Binding="{Binding Task}"  FontSize="11" />
+                <DataGridTextColumn Header="Valor Unitário" Binding="{Binding Value}"  FontSize="11" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnAdicionar" Click="btnAdd_Click" Content="Adicionar" HorizontalAlignment="Left" Margin="46,567,0,0" VerticalAlignment="Top" Width="268" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
-        <Button x:Name="btnEditar" Click="btnEdit_Click" Content="Editar" HorizontalAlignment="Left" Margin="340,567,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
-        <Button x:Name="btnCancelar" Click="btnCancel_Click" Content="Cancelar" HorizontalAlignment="Left" Margin="661,567,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
-        <Button x:Name="btnSalvar" Click="btnSave_Click" Content="Salvar" HorizontalAlignment="Left" Margin="980,567,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
+        <Button x:Name="btnAdicionar" Click="btnAdd_Click" Content="Adicionar" HorizontalAlignment="Left" Margin="46,567,0,0" VerticalAlignment="Top" Width="231" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
+        <Button x:Name="btnEditar" Click="btnEdit_Click" Content="Editar" HorizontalAlignment="Left" Margin="298,567,0,0" VerticalAlignment="Top" Width="231" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
+        <Button x:Name="btnDelete" Click="btnDelete_Click" Content="Excluir" HorizontalAlignment="Left" Margin="549,567,0,0" VerticalAlignment="Top" Width="231" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
+        <Button x:Name="btnSalvar" Click="btnSave_Click" Content="Salvar" HorizontalAlignment="Left" Margin="1045,567,0,0" VerticalAlignment="Top" Width="231" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
+        <Button x:Name="btnCancelar" Click="btnCancel_Click" Content="Cancelar" HorizontalAlignment="Left" Margin="799,567,0,0" VerticalAlignment="Top" Width="231" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
         <Label 
             Content="Pesquisa de Registros" 
             FontSize="30" 
