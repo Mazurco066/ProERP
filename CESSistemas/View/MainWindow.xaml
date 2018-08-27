@@ -82,7 +82,13 @@
 							<TextBlock Text="Funcionários" VerticalAlignment="Center" Margin="20 10" Foreground="#FFF9FAFB"/>
 						</StackPanel>
 					</ListViewItem>
-					<ListViewItem x:Name="Supplier" Height="60">
+                    <ListViewItem x:Name="Services" Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Screwdriver" Width="25" Height="25" Margin="10" VerticalAlignment="Center" Foreground="#FFF7FAFB"/>
+                            <TextBlock Text="Serviços" VerticalAlignment="Center" Margin="20 10" Foreground="#FFF9FAFB"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem x:Name="Supplier" Height="60">
 						<StackPanel Orientation="Horizontal">
 							<materialDesign:PackIcon Kind="Truck" Width="25" Height="25" Margin="10" VerticalAlignment="Center" Foreground="#FFF7FAFB"/>
 							<TextBlock Text="Fornecedores" VerticalAlignment="Center" Margin="20 10" Foreground="#FFF7FAFB"/>

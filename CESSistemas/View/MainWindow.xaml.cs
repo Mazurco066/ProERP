@@ -120,6 +120,10 @@ namespace Promig.View {
                     usc = new UserControlEmployes();
                     GridMain.Children.Add(usc);
                     break;
+                case "Services":
+                    usc = new UserControlServices();
+                    GridMain.Children.Add(usc);
+                    break;
                 case "Supplier":
                     usc = new UserControlSupplier();
                     GridMain.Children.Add(usc);

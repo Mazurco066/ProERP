@@ -104,8 +104,10 @@ create table if not exists orcamentos(
 );
 
 create table if not exists servicos(
-	no_orcamento int not null,
-	descricao varchar(255)
+	id_servico int not null auto_increment,
+	descricao varchar(255),
+    valor_unitario double,
+    constraint PRK_ID_SERVICO primary key (id_servico)
 );
 
 create table if not exists log(

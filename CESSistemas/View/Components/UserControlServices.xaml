@@ -1,0 +1,90 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Promig.View.Components"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="Promig.View.Components.UserControlServices"
+             mc:Ignorable="d" Loaded="control_loaded"
+             d:DesignHeight="450" d:DesignWidth="1306" Height="697" Background="White">
+    <Grid>
+        <Label Content="Serviços" FontSize="40" Margin="39,34,1015,595" Foreground="#FF3F51B5" Grid.RowSpan="2"/>
+        <TextBox 
+            x:Name="DescriptionEdit" 
+            HorizontalAlignment="Left" 
+            Width="1035" 
+            Height="42" 
+            Margin="46,107,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            materialDesign:HintAssist.Hint="Descrição do Serviço" 
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+            FontFamily="champagne &amp; Limousines" 
+            FontSize="14" Foreground="#FF060606" 
+            TabIndex="0" MaxLength="60"/>
+        <TextBox 
+            x:Name="ValueEdit" 
+            HorizontalAlignment="Left" 
+            Width="190" 
+            Height="42" 
+            Margin="1086,107,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            materialDesign:HintAssist.Hint="Valor Unitário" 
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+            FontFamily="champagne &amp; Limousines" 
+            FontSize="14" Foreground="#FF060606" 
+            TabIndex="0" MaxLength="60"/>
+        <DataGrid 
+            x:Name="dgServices"
+            IsReadOnly="True"
+            SelectionMode="Single"
+            SelectionUnit="FullRow"
+            HorizontalAlignment="Left" 
+            Height="245" Margin="47,291,0,0" 
+            VerticalAlignment="Top" 
+            Width="1229" 
+            AutoGenerateColumns="False" 
+            BorderBrush="{x:Null}" 
+            BorderThickness="1" RenderTransformOrigin="0.5,0.5">
+            <DataGrid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="0.135"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="0.748"/>
+                </TransformGroup>
+            </DataGrid.RenderTransform>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Código" Binding="{Binding id}" FontSize="11" />
+                <DataGridTextColumn Header="Nome" Width="1000" Binding="{Binding name}"  FontSize="11" />
+                <DataGridTextColumn Header="Valor Unitário" Binding="{Binding cpf}"  FontSize="11" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="btnAdicionar" Click="btnAdd_Click" Content="Adicionar" HorizontalAlignment="Left" Margin="46,567,0,0" VerticalAlignment="Top" Width="268" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
+        <Button x:Name="btnEditar" Click="btnEdit_Click" Content="Editar" HorizontalAlignment="Left" Margin="340,567,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
+        <Button x:Name="btnCancelar" Click="btnCancel_Click" Content="Cancelar" HorizontalAlignment="Left" Margin="661,567,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
+        <Button x:Name="btnSalvar" Click="btnSave_Click" Content="Salvar" HorizontalAlignment="Left" Margin="980,567,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
+        <Label 
+            Content="Pesquisa de Registros" 
+            FontSize="30" 
+            Margin="39,180,943,466" 
+            Foreground="#FF3F51B5"/>
+        <TextBox 
+            x:Name="SearchEdit" 
+            HorizontalAlignment="Left" 
+            Width="1180" 
+            Height="42" 
+            Margin="46,236,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            materialDesign:HintAssist.Hint="Pesquisar Serviço" 
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+            FontFamily="champagne &amp; Limousines" 
+            FontSize="14" Foreground="#FF060606" 
+            TabIndex="0" MaxLength="60"/>
+        <Button x:Name="btnRefresh" Click="btnRefresh_Click" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="1226,252,30,0" Height="26" Background="{x:Null}">
+            <materialDesign:PackIcon Foreground="#FF3F51B5" Kind="Refresh" Width="20" Height="19" RenderTransformOrigin="0.45,2.842"/>
+        </Button>
+    </Grid>
+</UserControl>

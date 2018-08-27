@@ -118,10 +118,12 @@
     <Compile Include="Connection\Methods\Employes.cs" />
     <Compile Include="Connection\Methods\Estimates.cs" />
     <Compile Include="Connection\Methods\Logs.cs" />
+    <Compile Include="Connection\Methods\Services.cs" />
     <Compile Include="Connection\Methods\Suppliers.cs" />
     <Compile Include="Connection\Methods\Users.cs" />
     <Compile Include="Connection\Refs.cs" />
     <Compile Include="Exceptions\DatabaseAccessException.cs" />
+    <Compile Include="Exceptions\DatabaseDeleteException.cs" />
     <Compile Include="Exceptions\DatabaseEditException.cs" />
     <Compile Include="Exceptions\DatabaseInsertException.cs" />
     <Compile Include="Exceptions\NegatedAccessException.cs" />
@@ -150,6 +152,9 @@
     </Compile>
     <Compile Include="View\Components\UserControlLogs.xaml.cs">
       <DependentUpon>UserControlLogs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Components\UserControlServices.xaml.cs">
+      <DependentUpon>UserControlServices.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -190,6 +195,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Components\UserControlLogs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Components\UserControlServices.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
