@@ -25,14 +25,13 @@ namespace Promig.Model
         public string payCondition;
         public string daysExecution;
         public double totalValue;
-        public List<Service> services { get; set; }
         private List<ItemEstimate> items;
 
         #endregion
 
         #region Constructor
 
-        public Estimate() { services = new List<Service>(); }
+        public Estimate() { items = new List<ItemEstimate>(); }
 
         #endregion
 

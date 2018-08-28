@@ -77,6 +77,27 @@ namespace Promig.View.Components {
                 cbServices.DisplayMemberPath = "description";
                 cbServices.SelectedValuePath = "id";
 
+                Estimate estimate = new Estimate();
+                estimate.description = "batata doce";
+                estimate.date = "28/08/2018";
+                estimate.idCustomer = 1;
+                estimate.payCondition = "10DDL";
+                estimate.daysExecution = "5";
+                estimate.totalValue = 350;
+                ItemEstimate item = new ItemEstimate();
+                item.Amount = 1;
+                item.Service.Id = 4;
+                item.Service.Task = "Teste";
+                item.Service.Value = 50;
+                ItemEstimate item2 = new ItemEstimate();
+                item2.Amount = 2;
+                item2.Service.Id = 2;
+                item2.Service.Task = "Teste";
+                item2.Service.Value = 50;
+                estimate.Items.Add(item);
+                estimate.Items.Add(item2);
+                dao.AddEstimate(estimate);
+
             } catch (DatabaseAccessException err) {
                 MessageBox.Show(
                     err.Message,
@@ -222,9 +243,9 @@ namespace Promig.View.Components {
             if (dgServices.SelectedItems.Count > 0) {
 
                 // Removendo item selecionado da lista de serviços e atualizando
-                aux.services.Remove(dgServices.SelectedItem as Service);
-                dgServices.ItemsSource = null;
-                dgServices.ItemsSource = aux.services;
+                //aux.services.Remove(dgServices.SelectedItem as Service);
+                //dgServices.ItemsSource = null;
+                //dgServices.ItemsSource = aux.services;
 
             } else {
                 MessageBox.Show(
@@ -436,7 +457,7 @@ namespace Promig.View.Components {
 
             // Grids
             dgServices.IsEnabled = true;
-            dgServices.ItemsSource = aux.services;
+            //dgServices.ItemsSource = aux.services;
         }
 
         #endregion

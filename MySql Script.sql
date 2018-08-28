@@ -103,6 +103,11 @@ create table if not exists orcamentos(
     constraint FRK_CLIENTE foreign key (id_cliente) references pessoas (id_pessoa)
 );
 
+drop table orcamento_servicos;
+drop table orcamentos;
+drop table servicos;
+
+
 create table if not exists servicos(
 	id_servico int not null auto_increment,
 	descricao varchar(255),
@@ -150,6 +155,14 @@ select * from creditos;
 select * from orcamentos;
 select * from servicos;
 select * from log;
+
+select o.no_documento, o.descricao, s.id_servico, s.descricao, s.valor_unitario 
+from orcamentos o, servicos s, orcamento_servicos os
+where o.no_documento = os.id_orcamento
+and s.id_servico = os.id_servico
+group by o.no_documento;
+
+select * from orcamento_servicos;
 
 /* Se precisar... comando para deletar banco de dados */
 drop database if exists promig;

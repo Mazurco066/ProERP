@@ -36,13 +36,10 @@ namespace Promig.Connection.Methods {
         public void AddItem(ItemEstimate item) {
             try {
 
-                // Abertura de conexão com banco
-                conn.Open();
-
                 // Definindo comando de inserção
-                string command = $"INSERT INTO {Refs.TABLE_ESTIMATE_SERVICES}" +
+                string command = $"INSERT INTO orcamento_servicos" +
                                  $"(id_orcamento, id_servico, quantidade) " +
-                                 $"VALUES(last_insert_id(), @id_service, @amount)";
+                                 $"VALUES(last_insert_id(), @id_service, @amount);";
 
                 // Definição do comando instanciado
                 MySqlCommand cmd = new MySqlCommand(command, conn) {
@@ -50,7 +47,7 @@ namespace Promig.Connection.Methods {
                 };
 
                 // Definição dos valores dos parametros
-                cmd.Parameters.Add(new MySqlParameter("@id_servico", item.Service.Id));
+                cmd.Parameters.Add(new MySqlParameter("@id_service", item.Service.Id));
                 cmd.Parameters.Add(new MySqlParameter("@amount", item.Amount));
 
                 // Preparando comando com os parametros
@@ -59,11 +56,8 @@ namespace Promig.Connection.Methods {
                 // Executando inserção
                 cmd.ExecuteNonQuery();
 
-                // Fechando conexão com banco
-                conn.Close();
-
             } catch (MySqlException) {
-                conn.Close();
+
             }
         }
 

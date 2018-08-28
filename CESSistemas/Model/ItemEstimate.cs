@@ -11,7 +11,7 @@
 
         #region Constructors
 
-        public ItemEstimate() { }
+        public ItemEstimate() { service = new Service(); }
         public ItemEstimate(Service service, int amount) {
             this.service = service;
             this.amount = amount;

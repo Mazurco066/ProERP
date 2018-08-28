@@ -24,11 +24,15 @@ namespace Promig.Connection.Methods {
 
         //Atributos de conexão
         private MySqlConnection conn;
+        private ItemEstimates items;
 
         /// <summary>
         /// Construtor padrão
         /// </summary>
-        public Estimates() { conn = ConnectionFactory.GetConnection(); }
+        public Estimates() {
+            conn = ConnectionFactory.GetConnection();
+            items = new ItemEstimates();
+        }
 
         #endregion header
 
@@ -46,16 +50,11 @@ namespace Promig.Connection.Methods {
                 conn.Open();
 
                 // Definição do comando de inserção
-                string command = $"INSERT INTO {Refs.TABLE_ESTIMATES} " +
-                                 $"(id_cliente, data_orcamento, caminho_imagem " +
+                string command = $"INSERT INTO {Refs.TABLE_ESTIMATES}" +
+                                 $"(id_cliente, data_orcamento, caminho_imagem, " +
                                  $"descricao, condicao_pagto, execucao_dias, valor_total) " +
-                                 $"VALUES(@id_cli, @estimate_date, @img_path, @description " +
+                                 $"VALUES(@id_cli, @estimate_date, @img_path, @description, " +
                                  $"@payment, @days, @total_value);";
-                foreach (ItemEstimate item in estimate.Items) {
-                    command += $"INSERT INTO {Refs.TABLE_ESTIMATE_SERVICES}" +
-                               $"(id_orcamento, id_servico, quantidade) " +
-                               $"VALUES(last_insert_id(), {item.Service.Id}, @qtd);";
-                }
 
                 // Definição do comando instanciado
                 MySqlCommand cmd = new MySqlCommand(command, conn) {
@@ -63,17 +62,24 @@ namespace Promig.Connection.Methods {
                 };
 
                 // Definição dos valores dos parametros
-                cmd.Parameters.Add(new MySqlParameter("@id_cliente", estimate.idCustomer));
+                cmd.Parameters.Add(new MySqlParameter("@id_cli", estimate.idCustomer));
                 cmd.Parameters.Add(new MySqlParameter("@estimate_date", estimate.date));
                 cmd.Parameters.Add(new MySqlParameter("@img_path", estimate.imgPath));
-                cmd.Parameters.Add(new MySqlParameter("@descripton", estimate.description));
+                cmd.Parameters.Add(new MySqlParameter("@description", estimate.description));
                 cmd.Parameters.Add(new MySqlParameter("@payment", estimate.payCondition));
+                cmd.Parameters.Add(new MySqlParameter("@days", estimate.daysExecution));
+                cmd.Parameters.Add(new MySqlParameter("@total_value", estimate.totalValue));
 
                 // Preparando comando com os parametros
                 cmd.Prepare();
 
                 // Executando inserção
                 cmd.ExecuteNonQuery();
+
+                // Adição dos items do orçamento
+                foreach (ItemEstimate item in estimate.Items) {
+                    items.AddItem(item);
+                }
 
                 // Fechando conexão com banco
                 conn.Close();
@@ -86,9 +92,10 @@ namespace Promig.Connection.Methods {
                     MessageBoxImage.Information
                 );
 
-            } catch (MySqlException) {
+            } catch (MySqlException err) {
 
                 // Fechando conexão com banco e disparando exceção
+                MessageBox.Show(err.Message);
                 conn.Close();
                 throw new DatabaseInsertException();
             }
