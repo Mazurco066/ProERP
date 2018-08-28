@@ -2,17 +2,24 @@
 
     class Service {
 
+        #region Attributtes
+
         private int id;
         private string task;
         private double value;
 
-        public Service() {
+        #endregion
 
-        }
+        #region Constructors
 
+        public Service() { }
         public Service(string task) {
             this.task = task;
         }
+
+        #endregion
+
+        #region Getter-Setter
 
         public int Id {
             get { return id; }
@@ -28,5 +35,7 @@
             get { return value; }
             set { this.value = value; }
         }
+
+        #endregion
     }
 }

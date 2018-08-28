@@ -27,8 +27,8 @@ namespace Promig.View.Components {
 
         private string imgDirectoryPath;
         private int actionIndex = -1;
-        private bool canDelete = false;
         private Estimates dao;
+        private Services services;
         private Estimate aux;
         private Employe _employe;
         private Logs logs;
@@ -48,6 +48,7 @@ namespace Promig.View.Components {
             // Inicializando objetos
             aux = null;
             dao = new Estimates();
+            services = new Services();
             logs = new Logs();
             _employe = new Employe();
             _employe.id = MainWindow.currentId;
@@ -64,10 +65,26 @@ namespace Promig.View.Components {
         /// <param name="e"></param>
         private void control_loaded(object sender, RoutedEventArgs e) {
 
-            // Alimentando items do combo box de clientes
-            cbCustomer.ItemsSource = dao.NameCustomerList();
-            cbCustomer.DisplayMemberPath = "name";
-            cbCustomer.SelectedValuePath = "id";
+            try {
+
+                // Alimentando items do combo box de clientes
+                cbCustomer.ItemsSource = dao.NameCustomerList();
+                cbCustomer.DisplayMemberPath = "name";
+                cbCustomer.SelectedValuePath = "id";
+
+                // Alimentando items do combo box de serviços
+                cbServices.ItemsSource = services.ComboBoxSource();
+                cbServices.DisplayMemberPath = "description";
+                cbServices.SelectedValuePath = "id";
+
+            } catch (DatabaseAccessException err) {
+                MessageBox.Show(
+                    err.Message,
+                    "Erro",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
+            }
 
             // Definindo configurações iniciais da tela
             SetDefaults();
@@ -114,7 +131,6 @@ namespace Promig.View.Components {
         /// <param name="e"></param>
         private void btnAdd_Click(object sender, System.Windows.RoutedEventArgs e) {
             actionIndex = 1;
-            canDelete = false;
             btnCancelar.Content = "Cancelar";
             aux = new Estimate();
             ClearFields();
@@ -129,7 +145,6 @@ namespace Promig.View.Components {
         private void btnEdit_Click(object sender, System.Windows.RoutedEventArgs e) {
             if (dgEstimate.SelectedItems.Count > 0) {            
                 actionIndex = 2;
-                canDelete = true;
                 btnCancelar.Content = "Excluir";
                 EnableFields();
             } else {
@@ -148,14 +163,9 @@ namespace Promig.View.Components {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnCancel_Click(object sender, System.Windows.RoutedEventArgs e) {
-            if (canDelete) {
-
-            } else {
                 BlockFields();
                 ClearFields();
-                btnCancelar.Content = "Cancerlar";
-                actionIndex = -1;
-            }
+                actionIndex = -1;  
         }
 
         /// <summary>
@@ -354,13 +364,11 @@ namespace Promig.View.Components {
         /// </summary>
         private void ClearFields() {
 
-            // Booleana
-            canDelete = false;
-
             // Combo Boxes
             cbCustomer.SelectedIndex = 0;
             cbPagto.SelectedIndex = 0;
             cbDaysExecution.SelectedIndex = 0;
+            cbServices.SelectedItem = 0;
 
             // Text Inputs
             dpEstimate.Text = string.Empty;
@@ -382,12 +390,14 @@ namespace Promig.View.Components {
             cbCustomer.IsEnabled = false;
             cbPagto.IsEnabled = false;
             cbDaysExecution.IsEnabled = false;
+            cbServices.IsEnabled = false;
 
             // Text Inputs
             dpEstimate.IsEnabled = false;
             txtDocNo.IsEnabled = false;
             txtDescription.IsEnabled = false;
             txtValue.IsEnabled = false;
+            txtAmount.IsEnabled = false;
 
             // Buttons
             btnPlus.IsEnabled = false;
@@ -409,11 +419,13 @@ namespace Promig.View.Components {
             cbCustomer.IsEnabled = true;
             cbPagto.IsEnabled = true;
             cbDaysExecution.IsEnabled = true;
+            cbServices.IsEnabled = true;
 
             // Text Inputs
             dpEstimate.IsEnabled = true;
             txtDescription.IsEnabled = true;
             txtValue.IsEnabled = true;
+            txtAmount.IsEnabled = true;
 
             // Buttons
             btnPlus.IsEnabled = true;

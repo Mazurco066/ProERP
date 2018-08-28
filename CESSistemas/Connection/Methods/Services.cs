@@ -235,6 +235,49 @@ namespace Promig.Connection.Methods {
             }
         }
 
+        /// <summary>
+        /// Método para retornar lista com valores para uso em combo box
+        /// </summary>
+        /// <returns></returns>
+        public List<Model.CbModel.Action> ComboBoxSource() {
+            try {
+
+                // Abertura de conexão com banco de dados
+                conn.Open();
+
+                // Definição do comando sql
+                string command = $"SELECT * FROM {Refs.TABLE_SERVICES} " +
+                                 $"order by descricao";
+
+                // Definindo comando e resultados
+                List<Model.CbModel.Action> services = new List<Model.CbModel.Action>();
+                MySqlDataReader reader;
+                MySqlCommand cmd = new MySqlCommand(command, conn) {
+                    CommandType = CommandType.Text
+                };
+
+                // Preparo do comando para sua execução
+                cmd.Prepare();
+
+                // Realização da consulta
+                reader = cmd.ExecuteReader();
+                while (reader.Read()) {
+                    Model.CbModel.Action service = new Model.CbModel.Action();
+                    service.id = (int)reader["id_servico"];
+                    service.description = reader["descricao"].ToString();
+                    services.Add(service);
+                }
+
+                // Retorno dos dados encontrados
+                conn.Close();
+                return services;
+
+            } catch (MySqlException) {
+                conn.Close();
+                throw new DatabaseAccessException();
+            }
+        }
+
         #endregion
     }
 }

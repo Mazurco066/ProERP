@@ -117,6 +117,7 @@
     <Compile Include="Connection\Methods\Clients.cs" />
     <Compile Include="Connection\Methods\Employes.cs" />
     <Compile Include="Connection\Methods\Estimates.cs" />
+    <Compile Include="Connection\Methods\ItemEstimates.cs" />
     <Compile Include="Connection\Methods\Logs.cs" />
     <Compile Include="Connection\Methods\Services.cs" />
     <Compile Include="Connection\Methods\Suppliers.cs" />
@@ -130,9 +131,11 @@
     <Compile Include="Exceptions\SqlCustomException.cs" />
     <Compile Include="Model\Adress.cs" />
     <Compile Include="Model\CbModel\Customer.cs" />
+    <Compile Include="Model\CbModel\Action.cs" />
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\Employe.cs" />
     <Compile Include="Model\Estimate.cs" />
+    <Compile Include="Model\ItemEstimate.cs" />
     <Compile Include="Model\Json\CompanyModel.cs" />
     <Compile Include="Model\Log.cs" />
     <Compile Include="Model\Person.cs" />
