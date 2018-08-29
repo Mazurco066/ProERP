@@ -199,7 +199,10 @@
             VerticalAlignment="Top"  
             AutoGenerateColumns="False" Margin="46,294,0,0" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Serviços Inclusos" Binding="{Binding Task}"/>
+                <DataGridTextColumn Header="Serviços Inclusos" Binding="{Binding Service.Task}"/>
+                <DataGridTextColumn Header="Valor Unitário" Binding="{Binding Service.Value}"/>
+                <DataGridTextColumn Header="Quantidade" Binding="{Binding Amount}"/>
+                <DataGridTextColumn Header="SubTotal" />
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btnAdicionar" Click="btnAdd_Click" Content="Adicionar" HorizontalAlignment="Left" Margin="46,566,0,0" VerticalAlignment="Top" Width="268" Height="60" FontSize="20" BorderBrush="#FF3F51B5" />
