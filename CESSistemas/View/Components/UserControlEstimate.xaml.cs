@@ -145,7 +145,6 @@ namespace Promig.View.Components {
         private void btnEdit_Click(object sender, System.Windows.RoutedEventArgs e) {
             if (dgEstimate.SelectedItems.Count > 0) {            
                 actionIndex = 2;
-                btnCancelar.Content = "Excluir";
                 EnableFields();
             } else {
                 MessageBox.Show(
@@ -229,11 +228,12 @@ namespace Promig.View.Components {
             if (dgServices.SelectedItems.Count > 0) {
 
                 // Removendo item selecionado da lista de serviços e atualizando
-                //aux.services.Remove(dgServices.SelectedItem as Service);
-                //dgServices.ItemsSource = null;
-                //dgServices.ItemsSource = aux.services;
+                aux.Items.Remove(dgServices.SelectedItem as ItemEstimate);
+                dgServices.ItemsSource = null;
+                dgServices.ItemsSource = aux.Items;
 
             } else {
+
                 MessageBox.Show(
                     "Selecione a tarefa a ser removida de lista",
                     "Validação",
@@ -268,7 +268,8 @@ namespace Promig.View.Components {
                 aux.description = txtDescription.Text;
                 aux.payCondition = cbPagto.Text;
                 aux.daysExecution = cbDaysExecution.Text;
-                aux.totalValue = double.Parse(txtValue.Text);
+                aux.totalValue = 0;
+                foreach (ItemEstimate item in aux.Items) aux.totalValue += item.SubTotal;
 
                 // Inserindo registro no banco
                 dao.AddEstimate(aux);
@@ -297,7 +298,7 @@ namespace Promig.View.Components {
         }
 
         /// <summary>
-        /// Método para coletar dados ao adicionar novo orçamento
+        /// Método para coletar dados ao editar novo orçamento
         /// </summary>
         private void EditEstimate() {
             if (IsFilledFields()) {
@@ -336,6 +337,13 @@ namespace Promig.View.Components {
             }
         }
 
+        /// <summary>
+        /// Metodo para coletar dados e deletar orçamento existente
+        /// </summary>
+        private void DeleteEstimate() {
+
+        }
+
         #endregion
 
         #region Utils
@@ -350,7 +358,8 @@ namespace Promig.View.Components {
                 txtDescription.Text.Equals(string.Empty) ||
                 cbPagto.SelectedIndex < 0 ||
                 cbDaysExecution.SelectedIndex < 0 ||
-                txtValue.Text.Equals(string.Empty)
+                txtValue.Text.Equals(string.Empty) ||
+                aux.Items.Count <= 0
             );
         }
 
@@ -363,6 +372,7 @@ namespace Promig.View.Components {
             cbCustomer.SelectedIndex = 0;
             cbDaysExecution.SelectedIndex = 0;
             cbPagto.SelectedIndex = 0;
+            cbServices.SelectedItem = 0;
             dpEstimate.Text = DateBr.GetDateBr();
         }
 
@@ -382,10 +392,10 @@ namespace Promig.View.Components {
             txtDocNo.Text = string.Empty;
             txtDescription.Text = string.Empty;
             txtValue.Text = string.Empty;
+            txtAmount.Text = string.Empty;
 
             // Grids
             dgServices.ItemsSource = null;
-            btnCancelar.Content = "Cancelar";
         }
 
         /// <summary>
@@ -443,7 +453,6 @@ namespace Promig.View.Components {
 
             // Grids
             dgServices.IsEnabled = true;
-            //dgServices.ItemsSource = aux.services;
         }
 
         #endregion

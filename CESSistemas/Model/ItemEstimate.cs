@@ -31,6 +31,11 @@
             set { amount = value; }
         }
 
+        public double SubTotal {
+            get { return amount * service.Value; }
+            private set { this.amount = (int)value; }
+        }
+
         #endregion
     }
 }
