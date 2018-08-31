@@ -219,9 +219,9 @@
             Margin="764,231,0,0" 
             VerticalAlignment="Top"  >
             <DataGrid.Columns>
-                <DataGridTextColumn Width="120" Header="No. Documento"/>
+                <DataGridTextColumn Width="120" Binding="{Binding docNo}" Header="No. Documento"/>
                 <DataGridTextColumn Width="150" Header="Cliente"/>
-                <DataGridTextColumn Width="100" Header="Data"/>
+                <DataGridTextColumn Width="100" Binding="{Binding date}" Header="Data"/>
                 <DataGridTextColumn Width="115" Header="Valor Total"/>
             </DataGrid.Columns>
         </DataGrid>

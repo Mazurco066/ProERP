@@ -89,7 +89,7 @@ namespace Promig.View.Components {
             // Definindo configurações iniciais da tela
             SetDefaults();
             BlockFields();
-            //RefreshGrid();
+            RefreshGrid();
         }
 
         /// <summary>
@@ -342,6 +342,26 @@ namespace Promig.View.Components {
         /// </summary>
         private void DeleteEstimate() {
 
+        }
+
+        #endregion
+
+        #region Grid-Param
+
+        private void RefreshGrid() {
+
+            try {
+
+                dgEstimate.ItemsSource = dao.GetAllEstimates("");
+
+            } catch (DatabaseAccessException err) {
+                MessageBox.Show(
+                    err.Message,
+                    "Erro",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
+            }
         }
 
         #endregion

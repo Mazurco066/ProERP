@@ -173,12 +173,14 @@ namespace Promig.Connection.Methods {
                 conn.Open();
 
                 // Definição do comando de consulta
-                string command = $"SELECT e.no_documento, p.nome_pessoa, e.data_orcamento  " +
+                string command = $"SELECT e.no_documento, p.nome_pessoa, e.data_orcamento " +
                                  $"FROM {Refs.TABLE_ESTIMATES} e, {Refs.TABLE_CLIENTS} c, {Refs.TABLE_PEOPLE} p " +
                                  $"WHERE e.id_cliente = c.id_cliente" +
-                                 $"AND c.id_pessoa = p.id_pessoa";
+                                 $"AND c.id_pessoa = p.id_pessoa;";
 
                 // Definição do comando instanciado
+                List<Estimate> results = new List<Estimate>();
+                MySqlDataReader reader;
                 MySqlCommand cmd = new MySqlCommand(command, conn) {
                     CommandType = CommandType.Text
                 };
@@ -186,17 +188,23 @@ namespace Promig.Connection.Methods {
                 // Preparando comando com os parametros
                 cmd.Prepare();
 
-                // Executando inserção
-                cmd.ExecuteNonQuery();
+                // Realizando busca no banco
+                reader = cmd.ExecuteReader();
+
+                // Verificando resultados
+                while (reader.Read()) {
+                    Estimate estimate = new Estimate();
+                    results.Add(estimate);
+                }
 
                 // Fechamento da conexão
                 conn.Close();
+                return results;
 
             } catch (MySqlException) {
                 conn.Close();
+                throw new DatabaseAccessException();
             }
-
-            return new List<Estimate>();
         }
 
         /// <summary>
