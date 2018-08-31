@@ -39,7 +39,7 @@ namespace Promig.Connection.Methods {
             try {
 
                 // Definindo comando de inserção
-                string command = $"INSERT INTO orcamento_servicos" +
+                string command = $"INSERT INTO {Refs.TABLE_ESTIMATE_SERVICES}" +
                                  $"(id_orcamento, id_servico, quantidade) " +
                                  $"VALUES(last_insert_id(), @id_service, @amount);";
 
@@ -73,9 +73,9 @@ namespace Promig.Connection.Methods {
             try {
 
                 // Definindo comando de inserção
-                string command = $"INSERT INTO orcamento_servicos" +
+                string command = $"UPDATE {Refs.TABLE_ESTIMATE_SERVICES} SET " +
                                  $"(id_orcamento, id_servico, quantidade) " +
-                                 $"VALUES(last_insert_id(), @id_service, @amount);";
+                                 $"VALUES(@id_estimate, @id_service, @amount);";
 
                 // Definição do comando instanciado
                 MySqlCommand cmd = new MySqlCommand(command, conn) {
@@ -83,8 +83,40 @@ namespace Promig.Connection.Methods {
                 };
 
                 // Definição dos valores dos parametros
+                cmd.Parameters.Add(new MySqlParameter("@id_estimate", id));
                 cmd.Parameters.Add(new MySqlParameter("@id_service", item.Service.Id));
                 cmd.Parameters.Add(new MySqlParameter("@amount", item.Amount));
+
+                // Preparando comando com os parametros
+                cmd.Prepare();
+
+                // Executando inserção
+                cmd.ExecuteNonQuery();
+
+            } catch (MySqlException err) {
+                Utils.Log.logException(err);
+                Utils.Log.logMessage(err.Message);
+            }   
+        }
+
+        /// <summary>
+        /// Metodo para deletar todos items de um orçamento
+        /// </summary>
+        /// <param name="id"></param>
+        public void DeleteAllItems(int id) {
+            try {
+
+                // Definindo comando de inserção
+                string command = $"DELETE FROM {Refs.TABLE_ESTIMATE_SERVICES} " +
+                                 $"WHERE id_orcamento = @id_estimate;";
+
+                // Definição do comando instanciado
+                MySqlCommand cmd = new MySqlCommand(command, conn) {
+                    CommandType = CommandType.Text
+                };
+
+                // Definição dos valores dos parametros
+                cmd.Parameters.Add(new MySqlParameter("@id_estimate", id));
 
                 // Preparando comando com os parametros
                 cmd.Prepare();
