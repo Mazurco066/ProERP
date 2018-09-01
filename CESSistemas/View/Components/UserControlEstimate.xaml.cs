@@ -238,13 +238,21 @@ namespace Promig.View.Components {
         /// <param name="e"></param>
         private void btnAddService_Click(object sender, System.Windows.RoutedEventArgs e) {
             if (cbServices.SelectedIndex != -1 && !txtAmount.Text.Equals(string.Empty)) {
+
+                // Instanciando item
                 ItemEstimate item = new ItemEstimate();
                 item.Service = services.GetServiceData((int)cbServices.SelectedValue);
                 item.Amount = int.Parse(txtAmount.Text);
+
+                // Adicionando item
                 aux.Items.Add(item);
                 dgServices.ItemsSource = null;
                 dgServices.ItemsSource = aux.Items;
-                txtValue.Text = aux.TotalValue.ToString();
+                txtValue.Text = aux.TotalValue.ToString();                        
+
+                // Limpando campos
+                cbServices.SelectedIndex = 0;
+                txtAmount.Text = string.Empty;
             }
         }
 
@@ -601,7 +609,7 @@ namespace Promig.View.Components {
             doc.Add(p16);
             int cont = 1;
             foreach (ItemEstimate item in aux.Items) {
-                Paragraph p17 = new Paragraph($"Descrição {cont}: {item.Service.Task} SUBTOTAL: R${item.SubTotal}", new Font(Font.NORMAL, 10));
+                Paragraph p17 = new Paragraph($"Descrição {cont}: {item.Service.Task} - SUBTOTAL: R${item.SubTotal}", new Font(Font.NORMAL, 10));
                 doc.Add(p17);
                 cont++;
             }
