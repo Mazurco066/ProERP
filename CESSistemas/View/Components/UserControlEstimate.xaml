@@ -60,7 +60,8 @@
             VerticalAlignment="Top" 
             Width="360" Height="26"/>
         <TextBox 
-            x:Name="txtDescription" 
+            x:Name="txtDescription"
+            MaxLength="255"
             materialDesign:HintAssist.Hint="Descrição" 
             Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
@@ -173,6 +174,8 @@
             Width="585"/>
         <TextBox 
             x:Name="txtAmount" 
+            KeyDown="txtAmount_KeyDown"
+            MaxLength="3"
             materialDesign:HintAssist.Hint="Qtd" 
             Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
@@ -205,12 +208,15 @@
                 <DataGridTextColumn Header="SubTotal" Binding="{Binding SubTotal}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnAdicionar" Click="btnAdd_Click" Content="Adicionar" HorizontalAlignment="Left" Margin="46,566,0,0" VerticalAlignment="Top" Width="268" Height="60" FontSize="20" BorderBrush="#FF3F51B5" />
-        <Button x:Name="btnEditar" Click="btnEdit_Click" Content="Editar" HorizontalAlignment="Left" Margin="340,566,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5" />
-        <Button x:Name="btnCancelar" Click="btnCancel_Click" Content="Cancelar" HorizontalAlignment="Left" Margin="661,566,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5" />
-        <Button x:Name="btnSalvar" Click="btnSave_Click" Content="Salvar" HorizontalAlignment="Left" Margin="980,566,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5" />
+        <Button x:Name="btnAdicionar" Click="btnAdd_Click" Content="Adicionar" HorizontalAlignment="Left" Margin="46,567,0,0" VerticalAlignment="Top" Width="231" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
+        <Button x:Name="btnEditar" Click="btnEdit_Click" Content="Editar" HorizontalAlignment="Left" Margin="298,567,0,0" VerticalAlignment="Top" Width="231" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
+        <Button x:Name="btnDelete" Click="btnDelete_Click" Content="Excluir" HorizontalAlignment="Left" Margin="549,567,0,0" VerticalAlignment="Top" Width="231" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
+        <Button x:Name="btnSalvar" Click="btnSave_Click" Content="Salvar" HorizontalAlignment="Left" Margin="1045,567,0,0" VerticalAlignment="Top" Width="231" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
+        <Button x:Name="btnCancelar" Click="btnCancel_Click" Content="Cancelar" HorizontalAlignment="Left" Margin="799,567,0,0" VerticalAlignment="Top" Width="231" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
         <DataGrid 
-            x:Name="dgEstimate" 
+            x:Name="dgEstimate"
+            SelectionChanged="dgEstimate_SelectionChanged"
+            AutoGenerateColumns="False"
             IsReadOnly="True" 
             SelectionMode="Single" 
             SelectionUnit="FullRow"  
@@ -219,14 +225,15 @@
             Margin="764,231,0,0" 
             VerticalAlignment="Top"  >
             <DataGrid.Columns>
-                <DataGridTextColumn Width="120" Binding="{Binding docNo}" Header="No. Documento"/>
-                <DataGridTextColumn Width="150" Header="Cliente"/>
-                <DataGridTextColumn Width="100" Binding="{Binding date}" Header="Data"/>
-                <DataGridTextColumn Width="115" Header="Valor Total"/>
+                <DataGridTextColumn Width="120" Binding="{Binding DocNo}" Header="No. Documento"/>
+                <DataGridTextColumn Width="150" Binding="{Binding NameCustomer}"  Header="Cliente"/>
+                <DataGridTextColumn Width="150" Binding="{Binding Description}"  Header="Descrição"/>
+                <DataGridTextColumn Width="100" Binding="{Binding Date}" Header="Data"/>
             </DataGrid.Columns>
         </DataGrid>
         <TextBox 
-            x:Name="txtSearch" 
+            x:Name="txtSearch"
+            KeyDown="txtSearch_KeyDown"
             materialDesign:HintAssist.Hint="Pesquise Aqui" 
             Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 

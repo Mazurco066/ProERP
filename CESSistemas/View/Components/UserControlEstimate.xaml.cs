@@ -18,6 +18,7 @@ using System.Data;
 using Promig.Connection;
 using System.IO;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Promig.View.Components {
 
@@ -26,6 +27,8 @@ namespace Promig.View.Components {
         #region Header
 
         private string imgDirectoryPath;
+        private string estimateDirectoryPath;
+        private string logoPath;
         private int actionIndex = -1;
         private Estimates dao;
         private Services services;
@@ -44,6 +47,8 @@ namespace Promig.View.Components {
 
             // Inicializando path's
             imgDirectoryPath = "C:\\ProERP\\Config\\Internal-Data\\";
+            estimateDirectoryPath = "C:\\ProERP\\Generated-Documents\\Orçamentos\\";
+            logoPath = string.Empty;
 
             // Inicializando objetos
             aux = null;
@@ -121,6 +126,7 @@ namespace Promig.View.Components {
                 string destPath = $"{imgDirectoryPath}{DateTime.Now.ToString("ddMMyyyyhhmmss")}.jpg";
                 File.Copy(choosenImgPath, destPath);
                 image.Source = new BitmapImage(new Uri(destPath));
+                logoPath = destPath;
             }
         }
 
@@ -135,6 +141,8 @@ namespace Promig.View.Components {
             aux = new Estimate();
             ClearFields();
             EnableFields();
+            btnDelete.IsEnabled = false;
+            btnPdf.IsEnabled = false;
         }
 
         /// <summary>
@@ -168,6 +176,22 @@ namespace Promig.View.Components {
         }
 
         /// <summary>
+        /// Evento do botão deletar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDelete_Click(object sender, System.Windows.RoutedEventArgs e) {
+            actionIndex = 3;
+            ClearFields();
+            MessageBox.Show(
+                "Salve as alterações para confirmar a exclusão!",
+                "Alerta",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information
+            );
+        }
+
+        /// <summary>
         /// Evento do botão salvar orçamento
         /// </summary>
         /// <param name="sender"></param>
@@ -180,6 +204,9 @@ namespace Promig.View.Components {
                     break;
                 case 2:
                     EditEstimate();
+                    break;
+                case 3:
+                    DeleteEstimate();
                     break;
                 default:
                     MessageBox.Show(
@@ -199,7 +226,8 @@ namespace Promig.View.Components {
         /// <param name="e"></param>
         private void btnGeneratePdf(object sender, System.Windows.RoutedEventArgs e) {
             if (dgEstimate.SelectedItems.Count > 0) {
-
+                ExportPdf();
+                btnPdf.IsEnabled = false;
             }
         }
 
@@ -216,6 +244,7 @@ namespace Promig.View.Components {
                 aux.Items.Add(item);
                 dgServices.ItemsSource = null;
                 dgServices.ItemsSource = aux.Items;
+                txtValue.Text = aux.TotalValue.ToString();
             }
         }
 
@@ -231,6 +260,7 @@ namespace Promig.View.Components {
                 aux.Items.Remove(dgServices.SelectedItem as ItemEstimate);
                 dgServices.ItemsSource = null;
                 dgServices.ItemsSource = aux.Items;
+                txtValue.Text = aux.TotalValue.ToString();
 
             } else {
 
@@ -249,7 +279,93 @@ namespace Promig.View.Components {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnRefresh_Click(object sender, System.Windows.RoutedEventArgs e) {
+            RefreshGrid();
+        }
 
+        /// <summary>
+        /// Evento ao digitar no campo de  pesquisa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtSearch_KeyDown(object sender, RoutedEventArgs e) {
+            RefreshGrid(txtSearch.Text);
+        }
+
+        /// <summary>
+        /// Evento ao selecionar algum registro na grid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void dgEstimate_SelectionChanged(object sender, SelectionChangedEventArgs args) {
+            if (dgEstimate.SelectedItems.Count > 0) {
+                try {
+
+                    //Recuperando dados do cliente selecionado
+                    Estimate source = dgEstimate.SelectedItem as Estimate;
+                    aux = dao.GetEstimateData(source.DocNo);
+                    logoPath = aux.ImgPath;
+
+                    //Preenchendo campos (Textboxes)
+                    txtDescription.Text = aux.Description;
+                    txtDocNo.Text = aux.DocNo.ToString();
+                    dpEstimate.Text = aux.Date;
+                    txtValue.Text = aux.TotalValue.ToString();
+
+                    // Preenchendo campos (Comboboxes)
+                    int index = -1;
+                    foreach (Customer item in cbCustomer.Items) {
+                        index++;
+                        if (item.name.Equals(aux.NameCustomer)) break;
+                    }
+                    cbCustomer.SelectedIndex = index;
+
+                    index = -1;
+                    foreach (ComboBoxItem item in cbDaysExecution.Items) {
+                        index++;
+                        if (item.Content.Equals(aux.DaysExecution)) break;
+                    }
+                    cbDaysExecution.SelectedIndex = index;
+
+                    index = -1;
+                    foreach (ComboBoxItem item in cbPagto.Items) {
+                        index++;
+                        if (item.Content.Equals(aux.PayCondition)) break;
+                    }
+                    cbPagto.SelectedIndex = index;
+
+                    // Preenchendo imagem
+                    image.Source = new BitmapImage(new Uri(aux.ImgPath));
+
+                    // Preenchendo lista de itens
+                    dgServices.ItemsSource = aux.Items;
+
+                    //Definindo ação como nula
+                    actionIndex = -1;
+                    
+                } catch (DatabaseAccessException err) {
+                    MessageBox.Show(
+                        err.Message,
+                        "Erro",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error
+                    );
+                }
+
+                //Desabiilitando campos e preenchendo com dados
+                BlockFields();
+            }
+        }
+
+        /// <summary>
+        /// Evento ao digitar em um campo numerico
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtAmount_KeyDown(object sender, KeyEventArgs e) {
+            KeyConverter kv = new KeyConverter();
+            if ((char.IsNumber((string)kv.ConvertTo(e.Key, typeof(string)), 0) == false)) {
+                e.Handled = true;
+            }
         }
 
         #endregion
@@ -263,13 +379,12 @@ namespace Promig.View.Components {
             if (IsFilledFields()) {
 
                 // Recuperando dados do orçamento
-                aux.idCustomer = (int)cbCustomer.SelectedValue;
-                aux.date = dpEstimate.Text;
-                aux.description = txtDescription.Text;
-                aux.payCondition = cbPagto.Text;
-                aux.daysExecution = cbDaysExecution.Text;
-                aux.totalValue = 0;
-                foreach (ItemEstimate item in aux.Items) aux.totalValue += item.SubTotal;
+                aux.IdCustomer = (int)cbCustomer.SelectedValue;
+                aux.Date = dpEstimate.Text;
+                aux.Description = txtDescription.Text;
+                aux.PayCondition = cbPagto.Text;
+                aux.DaysExecution = cbDaysExecution.Text;
+                aux.ImgPath = logoPath;
 
                 // Inserindo registro no banco
                 dao.AddEstimate(aux);
@@ -281,7 +396,7 @@ namespace Promig.View.Components {
                 logs.Register(added);
 
                 // Atualizando grid e limpando campos
-                //RefreshGrid();
+                RefreshGrid();
                 ClearFields();
                 BlockFields();
                 actionIndex = -1;
@@ -304,12 +419,12 @@ namespace Promig.View.Components {
             if (IsFilledFields()) {
 
                 // Recuperando dados do orçamento
-                aux.idCustomer = (int)cbCustomer.SelectedValue;
-                aux.date = dpEstimate.Text;
-                aux.description = txtDescription.Text;
-                aux.payCondition = cbPagto.Text;
-                aux.daysExecution = cbDaysExecution.Text;
-                aux.totalValue = double.Parse(txtValue.Text);
+                aux.IdCustomer = (int)cbCustomer.SelectedValue;
+                aux.Date = dpEstimate.Text;
+                aux.Description = txtDescription.Text;
+                aux.PayCondition = cbPagto.Text;
+                aux.DaysExecution = cbDaysExecution.Text;
+                aux.ImgPath = logoPath;
 
                 // Inserindo registro no banco
                 dao.EditEstimate(aux);
@@ -321,7 +436,7 @@ namespace Promig.View.Components {
                 logs.Register(edited);
 
                 // Atualizando grid e limpando campos
-                //RefreshGrid();
+                RefreshGrid();
                 ClearFields();
                 BlockFields();
                 actionIndex = -1;
@@ -338,21 +453,60 @@ namespace Promig.View.Components {
         }
 
         /// <summary>
-        /// Metodo para coletar dados e deletar orçamento existente
+        /// Método para coletar dados e deletar orçamento
         /// </summary>
         private void DeleteEstimate() {
+            try {
 
+                // Remoção do serviço
+                dao.DeleteEstimate(aux.DocNo);
+
+                // Registro de log - Edição
+                Model.Log deleted = new Model.Log();
+                deleted.employe = _employe;
+                deleted.action = $"Orçamento: {aux.Description} foi removido no sistema!";
+                logs.Register(deleted);
+
+                // Atualizando grid e limpando campos de texto
+                RefreshGrid();
+                ClearFields();
+                BlockFields();
+                actionIndex = -1;
+                aux = null;
+
+            } catch (DatabaseDeleteException err) {
+                MessageBox.Show(
+                    err.Message,
+                    "Erro",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
+            } catch (Exception err) {
+                MessageBox.Show(
+                    err.Message,
+                    "Erro",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
+            }
         }
 
         #endregion
 
         #region Grid-Param
 
+        /// <summary>
+        /// Método para limpar campo de busca e atualizar grid
+        /// </summary>
         private void RefreshGrid() {
+
+            // Limpando campo de busca
+            txtSearch.Text = string.Empty;
 
             try {
 
-                dgEstimate.ItemsSource = dao.GetAllEstimates("");
+                // Recuperando todos orçamentos em modo de exibição
+                dgEstimate.ItemsSource = dao.GetAllEstimates(txtSearch.Text);
 
             } catch (DatabaseAccessException err) {
                 MessageBox.Show(
@@ -364,6 +518,119 @@ namespace Promig.View.Components {
             }
         }
 
+        /// <summary>
+        /// Método para atualizar grid com base em consulta
+        /// </summary>
+        /// <param name="param"></param>
+        private void RefreshGrid(string param) {
+            try { dgEstimate.ItemsSource = dao.GetAllEstimates(param); } 
+            catch (DatabaseAccessException err) {
+                MessageBox.Show(
+                    err.Message,
+                    "Erro",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
+            }
+        }
+
+        #endregion
+
+        #region PDF
+
+        /// <summary>
+        /// Método para exportar para pdf
+        /// </summary>
+        private void ExportPdf() {
+
+            // Definição das margens do documento
+            Document doc = new Document(PageSize.A4);
+            doc.SetMargins(40, 40, 40, 80);
+            doc.AddCreationDate();
+
+            // Criação do diiretório se não existir
+            if (!Directory.Exists(estimateDirectoryPath)) Directory.CreateDirectory(estimateDirectoryPath);
+            string oldPath = Directory.GetCurrentDirectory();
+            Directory.SetCurrentDirectory(estimateDirectoryPath);
+
+            //Configurando arquivo a ser salvo
+            string path = Path.Combine(Directory.GetCurrentDirectory(), $"Orçamento-{DateTime.Now.ToString("ddMMyyyyhhmmss")}.pdf");
+
+            // Definição de escrita do documento
+            PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(path, FileMode.Create));
+            writer.CompressionLevel = PdfStream.NO_COMPRESSION;
+
+            // Adicionando paragráfos
+            var img = iTextSharp.text.Image.GetInstance(aux.ImgPath);
+            doc.Open();
+            doc.Add(img);
+            Paragraph p1 = new Paragraph("PROPOSTA COMERCIAL", new Font(Font.NORMAL, 14, (int)System.Drawing.FontStyle.Bold));
+            doc.Add(p1);
+            Paragraph p2 = new Paragraph($"Cliente: {aux.NameCustomer}", new Font(Font.NORMAL, 12));
+            doc.Add(p2);
+            Paragraph p3 = new Paragraph($"Data: {aux.Date}", new Font(Font.NORMAL, 12));
+            doc.Add(p3);
+            Paragraph p4 = new Paragraph("\n");
+            doc.Add(p4);
+            Paragraph p5 = new Paragraph(aux.Description, new Font(Font.NORMAL, 12));
+            doc.Add(p5);
+            Paragraph p6 = new Paragraph("\n");
+            doc.Add(p6);
+            Paragraph p7 = new Paragraph("Inclusos encargos com mão de obra, material e equipamentos para execução dos serviços," +
+            "encargos trabalhistas e impostos municipais, estaduais e federais." +
+            "Obs: Itens não relacionados nesse documento orçamentário e escopo dos serviços e materiais " +
+            "serão faturados como aditivos.", new Font(Font.NORMAL, 12));
+            doc.Add(p7);
+            Paragraph p8 = new Paragraph("\n");
+            doc.Add(p8);
+            Paragraph p9 = new Paragraph($"Número do Documento: {aux.DocNo}", new Font(Font.NORMAL, 12));
+            doc.Add(p9);
+            Paragraph p10 = new Paragraph("\n");
+            doc.Add(p10);
+            Paragraph p11 = new Paragraph($"Condição de Pagamento: {aux.PayCondition}", new Font(Font.NORMAL, 12));
+            doc.Add(p11);
+            Paragraph p12 = new Paragraph($"Execução em até: {aux.DaysExecution}", new Font(Font.NORMAL, 12));
+            doc.Add(p12);
+            Paragraph p13 = new Paragraph($"Valor Total dos serviços R${aux.TotalValue}", new Font(Font.NORMAL, 12));
+            doc.Add(p13);
+            Paragraph p14 = new Paragraph("\n");
+            doc.Add(p14);
+            Paragraph p15 = new Paragraph("DESCRIÇÃO DOS SERVIÇOS", new Font(Font.NORMAL, 14, (int)System.Drawing.FontStyle.Bold));
+            doc.Add(p15);
+            Paragraph p16 = new Paragraph("\n");
+            doc.Add(p16);
+            int cont = 1;
+            foreach (ItemEstimate item in aux.Items) {
+                Paragraph p17 = new Paragraph($"Descrição {cont}: {item.Service.Task} SUBTOTAL: R${item.SubTotal}", new Font(Font.NORMAL, 10));
+                doc.Add(p17);
+                cont++;
+            }
+            Paragraph p18 = new Paragraph("\n");
+            doc.Add(p18);
+            Paragraph p19 = new Paragraph("\n");
+            doc.Add(p19);
+            Paragraph p20 = new Paragraph("\n");
+            doc.Add(p20);
+            Model.Json.CompanyModel data = CompanyData.GetPreferencesData();
+            Paragraph p21 = new Paragraph($"Atenciosamente: {data.name}", new Font(Font.NORMAL, 9, (int)System.Drawing.FontStyle.Bold));
+            doc.Add(p21);
+            Paragraph p22 = new Paragraph(CompanyData.GetPdfFooterData(), new Font(Font.NORMAL, 8));
+            doc.Add(p22);
+
+            // Processando documento
+            doc.Close();
+            System.Diagnostics.Process.Start(path);
+            btnPdf.IsEnabled = true;
+
+            // Mensagem de sucesso
+            MessageBox.Show(
+                "PDF fo orçamento gerado",
+                "Sucesso",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information
+            );
+
+        }
         #endregion
 
         #region Utils
@@ -379,7 +646,8 @@ namespace Promig.View.Components {
                 cbPagto.SelectedIndex < 0 ||
                 cbDaysExecution.SelectedIndex < 0 ||
                 txtValue.Text.Equals(string.Empty) ||
-                aux.Items.Count <= 0
+                aux.Items.Count <= 0 ||
+                logoPath.Equals(string.Empty)
             );
         }
 
@@ -416,6 +684,8 @@ namespace Promig.View.Components {
 
             // Grids
             dgServices.ItemsSource = null;
+            image.Source = null;
+            logoPath = string.Empty;
         }
 
         /// <summary>
@@ -442,6 +712,8 @@ namespace Promig.View.Components {
             btnCancelar.IsEnabled = false;
             btnSalvar.IsEnabled = false;
             btnLogo.IsEnabled = false;
+            btnDelete.IsEnabled = false;
+            btnPdf.IsEnabled = false;
 
             // Grids
             dgServices.IsEnabled = false;
@@ -470,6 +742,8 @@ namespace Promig.View.Components {
             btnCancelar.IsEnabled = true;
             btnSalvar.IsEnabled = true;
             btnLogo.IsEnabled = true;
+            btnDelete.IsEnabled = true;
+            btnPdf.IsEnabled = true;
 
             // Grids
             dgServices.IsEnabled = true;

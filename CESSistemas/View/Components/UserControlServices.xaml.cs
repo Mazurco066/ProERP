@@ -102,6 +102,11 @@ namespace Promig.View.Components {
             }
         }
 
+        /// <summary>
+        /// Evento do botão deletar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDelete_Click(object sender, System.Windows.RoutedEventArgs e) {
                 actionIndex = 3;
                 ClearFields();

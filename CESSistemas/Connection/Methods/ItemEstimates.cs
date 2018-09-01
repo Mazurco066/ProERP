@@ -4,6 +4,7 @@ using Promig.Connection;
 using Promig.Model;
 using Promig.Model.CbModel;
 using Promig.Utils;
+using System.Collections.Generic;
 
 namespace Promig.Connection.Methods {
 
@@ -72,8 +73,8 @@ namespace Promig.Connection.Methods {
         public void EditItem(ItemEstimate item, int id) {
             try {
 
-                // Definindo comando de inserção
-                string command = $"UPDATE {Refs.TABLE_ESTIMATE_SERVICES} SET " +
+                // Definindo comando de alteração
+                string command = $"INSERT INTO {Refs.TABLE_ESTIMATE_SERVICES}" +
                                  $"(id_orcamento, id_servico, quantidade) " +
                                  $"VALUES(@id_estimate, @id_service, @amount);";
 
@@ -100,13 +101,65 @@ namespace Promig.Connection.Methods {
         }
 
         /// <summary>
+        /// Método para retornar todos items de um orçamento
+        /// </summary>
+        /// <param name="doc_no"></param>
+        /// <returns></returns>
+        public List<ItemEstimate> GetAllItems(int doc_no) {
+            try {
+
+                // Definição do comando de consulta
+                string command = $"SELECT s.id_servico, s.descricao, s.valor_unitario, os.quantidade " +
+                                 $"FROM {Refs.TABLE_ESTIMATE_SERVICES} os, {Refs.TABLE_SERVICES} s " +
+                                 $"WHERE os.id_servico = s.id_servico " +
+                                 $"AND os.id_orcamento = @docNo;";
+
+                // Definição do comando instanciado
+                List<ItemEstimate> results = new List<ItemEstimate>();
+                MySqlDataReader reader;
+                MySqlCommand cmd = new MySqlCommand(command, conn) {
+                    CommandType = CommandType.Text
+                };
+
+                // Adição de parametros na consulta
+                cmd.Parameters.Add(new MySqlParameter("@docNo", doc_no));
+
+                // Preparo do comando
+                cmd.Prepare();
+
+                // Realização da consulta
+                reader = cmd.ExecuteReader();
+                while (reader.Read()) {
+                    ItemEstimate item = new ItemEstimate();
+                    item.Service = new Service(
+                        (int)reader["id_servico"],
+                        reader["descricao"].ToString(),
+                        (double)reader["valor_unitario"]
+                    );
+                    item.Amount = (int)reader["quantidade"];
+                    results.Add(item);
+                }
+
+                // Retornando lista de itens
+                return results;
+
+            } catch (MySqlException err) {
+
+                // Registrando logs de erro
+                Utils.Log.logException(err);
+                Utils.Log.logMessage(err.Message);
+                return new List<ItemEstimate>();
+            }
+        }
+
+        /// <summary>
         /// Metodo para deletar todos items de um orçamento
         /// </summary>
         /// <param name="id"></param>
         public void DeleteAllItems(int id) {
             try {
 
-                // Definindo comando de inserção
+                // Definindo comando de delete
                 string command = $"DELETE FROM {Refs.TABLE_ESTIMATE_SERVICES} " +
                                  $"WHERE id_orcamento = @id_estimate;";
 

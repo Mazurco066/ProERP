@@ -13,8 +13,11 @@
         #region Constructors
 
         public Service() { }
-        public Service(string task) {
+        public Service(string task) { this.task = task; }
+        public Service(int id, string task, double value) {
+            this.id = id;
             this.task = task;
+            this.value = value;
         }
 
         #endregion

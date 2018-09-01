@@ -62,13 +62,13 @@ namespace Promig.Connection.Methods {
                 };
 
                 // Definição dos valores dos parametros
-                cmd.Parameters.Add(new MySqlParameter("@id_cli", estimate.idCustomer));
-                cmd.Parameters.Add(new MySqlParameter("@estimate_date", estimate.date));
-                cmd.Parameters.Add(new MySqlParameter("@img_path", estimate.imgPath));
-                cmd.Parameters.Add(new MySqlParameter("@description", estimate.description));
-                cmd.Parameters.Add(new MySqlParameter("@payment", estimate.payCondition));
-                cmd.Parameters.Add(new MySqlParameter("@days", estimate.daysExecution));
-                cmd.Parameters.Add(new MySqlParameter("@total_value", estimate.totalValue));
+                cmd.Parameters.Add(new MySqlParameter("@id_cli", estimate.IdCustomer));
+                cmd.Parameters.Add(new MySqlParameter("@estimate_date", estimate.Date));
+                cmd.Parameters.Add(new MySqlParameter("@img_path", estimate.ImgPath));
+                cmd.Parameters.Add(new MySqlParameter("@description", estimate.Description));
+                cmd.Parameters.Add(new MySqlParameter("@payment", estimate.PayCondition));
+                cmd.Parameters.Add(new MySqlParameter("@days", estimate.DaysExecution));
+                cmd.Parameters.Add(new MySqlParameter("@total_value", estimate.TotalValue));
 
                 // Preparando comando com os parametros
                 cmd.Prepare();
@@ -113,7 +113,7 @@ namespace Promig.Connection.Methods {
                 conn.Open();
 
                 // Definição do comando de edição
-                string command = $"UPDATE {Refs.TABLE_ESTIMATES}SET " +
+                string command = $"UPDATE {Refs.TABLE_ESTIMATES} SET " +
                                  $"id_cliente = @id_cli, data_orcamento = @estimate_date, " +
                                  $"caminho_imagem = @img_path, descricao = @description, " +
                                  $"condicao_pagto = @payment, execucao_dias = @days, " +
@@ -126,17 +126,17 @@ namespace Promig.Connection.Methods {
                 };
 
                 // Definição dos valores dos parametros
-                cmd.Parameters.Add(new MySqlParameter("@id_doc", estimate.docNo));
-                cmd.Parameters.Add(new MySqlParameter("@id_cli", estimate.idCustomer));
-                cmd.Parameters.Add(new MySqlParameter("@estimate_date", estimate.date));
-                cmd.Parameters.Add(new MySqlParameter("@img_path", estimate.imgPath));
-                cmd.Parameters.Add(new MySqlParameter("@description", estimate.description));
-                cmd.Parameters.Add(new MySqlParameter("@payment", estimate.payCondition));
-                cmd.Parameters.Add(new MySqlParameter("@days", estimate.daysExecution));
-                cmd.Parameters.Add(new MySqlParameter("@total_value", estimate.totalValue));
+                cmd.Parameters.Add(new MySqlParameter("@id_doc", estimate.DocNo));
+                cmd.Parameters.Add(new MySqlParameter("@id_cli", estimate.IdCustomer));
+                cmd.Parameters.Add(new MySqlParameter("@estimate_date", estimate.Date));
+                cmd.Parameters.Add(new MySqlParameter("@img_path", estimate.ImgPath));
+                cmd.Parameters.Add(new MySqlParameter("@description", estimate.Description));
+                cmd.Parameters.Add(new MySqlParameter("@payment", estimate.PayCondition));
+                cmd.Parameters.Add(new MySqlParameter("@days", estimate.DaysExecution));
+                cmd.Parameters.Add(new MySqlParameter("@total_value", estimate.TotalValue));
 
                 // Remoção de todos os items atuais do orçamento
-                items.DeleteAllItems(estimate.docNo);
+                items.DeleteAllItems(estimate.DocNo);
 
                 // Preparando comando com os parametros
                 cmd.Prepare();
@@ -146,8 +146,16 @@ namespace Promig.Connection.Methods {
 
                 // Adição dos items do orçamento
                 foreach (ItemEstimate item in estimate.Items) {
-                    items.AddItem(item);
+                    items.EditItem(item, estimate.DocNo);
                 }
+
+                // Mensagem de sucesso
+                MessageBox.Show(
+                    "Orçamento Alterado!",
+                    "Sucesso",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information
+                );
 
                 // Fechamento da conexão
                 conn.Close();
@@ -157,6 +165,110 @@ namespace Promig.Connection.Methods {
                 // Fechando conexão com banco de disparando exceção
                 conn.Close();
                 throw new DatabaseEditException();
+            }
+        }
+
+        public void DeleteEstimate(int doc_no) {
+            try {
+
+                // Abertura da conexão com banco
+                conn.Open();
+
+                // Definição do comando de exclusão
+                string command = $"DELETE FROM {Refs.TABLE_ESTIMATES} " +
+                                 $"WHERE no_documento = @noDoc;";
+
+                // Definição do comando instanciado
+                MySqlCommand cmd = new MySqlCommand(command, conn) {
+                    CommandType = CommandType.Text
+                };
+
+                // Definição dos parametros do comando
+                cmd.Parameters.Add(new MySqlParameter("@noDoc", doc_no));
+
+                // Remoção de todos os items referentes ao orçamento
+                items.DeleteAllItems(doc_no);
+
+                // Preparando comando com os parametros
+                cmd.Prepare();
+
+                // Executando inserção
+                cmd.ExecuteNonQuery();
+
+                // Mensagem de sucesso
+                MessageBox.Show(
+                    "Orçamento Deletado!",
+                    "Sucesso",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information
+                );
+
+                // Fechamento da conexão com banco
+                conn.Close();
+
+            } catch (MySqlException) {
+
+                // Fechamento da conexão
+                conn.Close();
+                throw new DatabaseDeleteException();
+            }
+        }
+
+        public Estimate GetEstimateData(int doc_no) {
+            try {
+
+                // Abertura da conexão com banco
+                conn.Open();
+
+                // Definição do comando sql
+                string command = $"SELECT o.no_documento, o.descricao, p.nome_pessoa, o.data_orcamento, " +
+                                 $"o.caminho_imagem, o.condicao_pagto, o.id_cliente, o.execucao_dias, o.valor_total " +
+                                 $"FROM {Refs.TABLE_ESTIMATES} o, {Refs.TABLE_CLIENTS} c, {Refs.TABLE_PEOPLE} p " +
+                                 $"WHERE o.id_cliente = c.id_cliente " +
+                                 $"AND c.id_pessoa = p.id_pessoa " +
+                                 $"AND o.no_documento = @docNo;";
+
+                // Definição do comando instanciado
+                Estimate result = new Estimate();
+                MySqlDataReader reader;
+                MySqlCommand cmd = new MySqlCommand(command, conn) {
+                    CommandType = CommandType.Text
+                };
+
+                // Adicionando parametros a busca
+                cmd.Parameters.Add(new MySqlParameter("@docNo", doc_no));
+
+                // Preparando comando com os parametros
+                cmd.Prepare();
+
+                // Realizando busca no banco
+                reader = cmd.ExecuteReader();
+
+                // Recuperando dados do orçamento
+                while (reader.Read()) {
+                    result.DocNo = (int)reader["no_documento"];
+                    result.IdCustomer = (int)reader["id_cliente"];
+                    result.NameCustomer = reader["nome_pessoa"].ToString();
+                    result.ImgPath = reader["caminho_imagem"].ToString();
+                    result.Description = reader["descricao"].ToString();
+                    result.PayCondition = reader["condicao_pagto"].ToString();
+                    result.DaysExecution = reader["execucao_dias"].ToString();
+                    result.Date = reader["data_orcamento"].ToString();
+                    result.TotalValue = (double)reader["valor_total"];
+                } reader.Close();
+
+                // Recuperando serviços do orçamento
+                result.Items = items.GetAllItems(doc_no);
+
+                // Fechamento da conexão e retorno
+                conn.Close();
+                return result;
+
+            } catch (MySqlException) {
+
+                // Fechando conexão com banco de disparando exceção
+                conn.Close();
+                throw new DatabaseAccessException();
             }
         }
 
@@ -173,10 +285,13 @@ namespace Promig.Connection.Methods {
                 conn.Open();
 
                 // Definição do comando de consulta
-                string command = $"SELECT e.no_documento, p.nome_pessoa, e.data_orcamento " +
-                                 $"FROM {Refs.TABLE_ESTIMATES} e, {Refs.TABLE_CLIENTS} c, {Refs.TABLE_PEOPLE} p " +
-                                 $"WHERE e.id_cliente = c.id_cliente" +
-                                 $"AND c.id_pessoa = p.id_pessoa;";
+                string command = $"SELECT o.no_documento, o.descricao, p.nome_pessoa, o.data_orcamento " +
+                                 $"FROM {Refs.TABLE_ESTIMATES} o, {Refs.TABLE_CLIENTS} c, {Refs.TABLE_PEOPLE} p " +
+                                 $"WHERE o.id_cliente = c.id_cliente " +
+                                 $"AND c.id_pessoa = p.id_pessoa " +
+                                 $"AND (p.nome_pessoa LIKE @paramSearch " +
+                                 $"OR o.descricao LIKE @paramSearch " +
+                                 $"OR o.data_orcamento LIKE @paramSearch);";
 
                 // Definição do comando instanciado
                 List<Estimate> results = new List<Estimate>();
@@ -184,6 +299,9 @@ namespace Promig.Connection.Methods {
                 MySqlCommand cmd = new MySqlCommand(command, conn) {
                     CommandType = CommandType.Text
                 };
+
+                // Adicionando parametros a busca
+                cmd.Parameters.Add(new MySqlParameter("@paramSearch", $"%{param}%"));
 
                 // Preparando comando com os parametros
                 cmd.Prepare();
@@ -194,6 +312,10 @@ namespace Promig.Connection.Methods {
                 // Verificando resultados
                 while (reader.Read()) {
                     Estimate estimate = new Estimate();
+                    estimate.DocNo = (int)reader["no_documento"];
+                    estimate.NameCustomer = reader["nome_pessoa"].ToString();
+                    estimate.Description = reader["descricao"].ToString();
+                    estimate.Date = reader["data_orcamento"].ToString();
                     results.Add(estimate);
                 }
 
@@ -202,6 +324,8 @@ namespace Promig.Connection.Methods {
                 return results;
 
             } catch (MySqlException) {
+
+                // Fechando conexão com banco de disparando exceção
                 conn.Close();
                 throw new DatabaseAccessException();
             }
