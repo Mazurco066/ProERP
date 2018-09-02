@@ -741,7 +741,6 @@ namespace Promig.View.Components {
             // Text Inputs
             dpEstimate.IsEnabled = true;
             txtDescription.IsEnabled = true;
-            txtValue.IsEnabled = true;
             txtAmount.IsEnabled = true;
 
             // Buttons
