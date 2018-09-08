@@ -28,7 +28,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF060606" 
-            TabIndex="0" MaxLength="15" Grid.Row="1"/>
+            TabIndex="12" MaxLength="15" Grid.Row="1"/>
         <TextBox 
             x:Name="NameEdit" 
             HorizontalAlignment="Left" 
@@ -41,7 +41,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF060606" 
-            TabIndex="0" MaxLength="60" Grid.Row="1"/>
+            TabIndex="1" MaxLength="60" Grid.Row="1"/>
         <TextBox 
             x:Name="AdressEdit" 
             HorizontalAlignment="Left" 
@@ -54,7 +54,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF0A0A0A" 
-            MaxLength="90" TabIndex="2" Grid.Row="1"/>
+            MaxLength="90" TabIndex="3" Grid.Row="1"/>
         <TextBox 
             x:Name="NeighboorhoodEdit" 
             HorizontalAlignment="Left" 
@@ -67,7 +67,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF0A0A0A" 
-            MaxLength="50" TabIndex="3" Grid.Row="1"/>
+            MaxLength="50" TabIndex="4" Grid.Row="1"/>
         <TextBox 
             x:Name="CityEdit" 
             HorizontalAlignment="Left" 
@@ -80,7 +80,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF0A0A0A" 
-            MaxLength="50" TabIndex="4" Grid.Row="1"/>
+            MaxLength="50" TabIndex="5" Grid.Row="1"/>
         <ComboBox 
             x:Name="cbState" 
             HorizontalAlignment="Left"
@@ -91,7 +91,7 @@
             Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
             FontFamily="champagne &amp; Limousines"
             FontSize="14" Foreground="#FF0A0A0A" 
-            TabIndex="5" Grid.Row="1">
+            TabIndex="6" Grid.Row="1">
             <ComboBoxItem Content="AC"/>
             <ComboBoxItem Content="AL"/>
             <ComboBoxItem Content="AP"/>
@@ -150,7 +150,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF0A0A0A" 
-            MaxLength="30" TabIndex="4" Grid.Row="1" HidePromptOnLeave="True"/>
+            MaxLength="30" TabIndex="8" Grid.Row="1" HidePromptOnLeave="True"/>
         <wpfTool:MaskedTextBox 
             x:Name="cnpjEdit"
             Mask="99,999,999/9999-99" 
@@ -166,8 +166,8 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines"
             FontSize="14" Foreground="#FF0A0A0A" 
-            MaxLength="30" TabIndex="4" Grid.Row="1" HidePromptOnLeave="True"/>
-        <ComboBox x:Name="cbActive" HorizontalAlignment="Left" Margin="46,24,0,0" VerticalAlignment="Top" Width="245" materialDesign:HintAssist.Hint="Ativo" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintComboBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A" TabIndex="8" Grid.Row="1">
+            MaxLength="30" TabIndex="2" Grid.Row="1" HidePromptOnLeave="True"/>
+        <ComboBox x:Name="cbActive" HorizontalAlignment="Left" Margin="46,24,0,0" VerticalAlignment="Top" Width="245" materialDesign:HintAssist.Hint="Ativo" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintComboBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A" TabIndex="0" Grid.Row="1">
             <ComboBoxItem Content="Ativo"/>
             <ComboBoxItem Content="Desativado"/>
         </ComboBox>
@@ -215,7 +215,7 @@
             FontFamily="champagne &amp; Limousines" 
             FontSize="14"
             Foreground="#FF0A0A0A" 
-            TabIndex="8" 
+            TabIndex="11" 
             Grid.Row="1" 
             VerticalAlignment="Top"
             Width="142">
@@ -239,7 +239,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF0A0A0A" 
-            MaxLength="30" TabIndex="4" Grid.Row="1" HidePromptOnLeave="True"/>
+            MaxLength="30" TabIndex="9" Grid.Row="1" HidePromptOnLeave="True"/>
         <wpfTool:MaskedTextBox  
             x:Name="phone2Edit"
             Mask="(99) 99999-9999"
@@ -255,6 +255,6 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF0A0A0A" 
-            MaxLength="30" TabIndex="4" Grid.Row="1" HidePromptOnLeave="True"/>
+            MaxLength="30" TabIndex="10" Grid.Row="1" HidePromptOnLeave="True"/>
     </Grid>
 </UserControl>

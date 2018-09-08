@@ -49,7 +49,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF060606" 
-            TabIndex="0" MaxLength="60" RenderTransformOrigin="0.962,0.845"/>
+            TabIndex="1" MaxLength="60" RenderTransformOrigin="0.962,0.845"/>
         <TextBox 
             x:Name="WebsiteEdit" 
             HorizontalAlignment="Left" 
@@ -62,7 +62,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF060606" 
-            TabIndex="0" MaxLength="60" RenderTransformOrigin="0.962,0.845"/>
+            TabIndex="2" MaxLength="60" RenderTransformOrigin="0.962,0.845"/>
         <TextBox 
             x:Name="AdressEdit" 
             HorizontalAlignment="Left" 
@@ -75,7 +75,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF0A0A0A" 
-            MaxLength="90" TabIndex="2"/>
+            MaxLength="90" TabIndex="3"/>
         <TextBox 
             x:Name="NeighboorhoodEdit" 
             HorizontalAlignment="Left" 
@@ -88,7 +88,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF0A0A0A" 
-            MaxLength="50" TabIndex="3"/>
+            MaxLength="50" TabIndex="7"/>
         <TextBox 
             x:Name="CityEdit" 
             HorizontalAlignment="Left" 
@@ -101,7 +101,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF0A0A0A" 
-            MaxLength="50" TabIndex="4"/>
+            MaxLength="50" TabIndex="5"/>
         <ComboBox 
             x:Name="cbState" 
             HorizontalAlignment="Left"
@@ -112,7 +112,7 @@
             Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
             FontFamily="champagne &amp; Limousines"
             FontSize="14" Foreground="#FF0A0A0A" 
-            TabIndex="5">
+            TabIndex="6">
             <ComboBoxItem Content="AC"/>
             <ComboBoxItem Content="AL"/>
             <ComboBoxItem Content="AP"/>
@@ -154,7 +154,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             FontFamily="champagne &amp; Limousines"
             FontSize="14" Foreground="#FF0A0A0A" 
-            MaxLength="4" TabIndex="7"/>
+            MaxLength="8" TabIndex="7"/>
         <wpfTool:MaskedTextBox  
             x:Name="cepEdit"
             Mask="99999-999"
@@ -187,7 +187,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines"
             FontSize="14" Foreground="#FF0A0A0A" 
-            MaxLength="30" TabIndex="4" HidePromptOnLeave="True"/>
+            MaxLength="30" TabIndex="9" HidePromptOnLeave="True"/>
         <wpfTool:MaskedTextBox  
             x:Name="phone1Edit"
             Mask="(99) 99999-9999"
@@ -203,7 +203,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF0A0A0A" 
-            MaxLength="30" TabIndex="4" HidePromptOnLeave="True"/>
+            MaxLength="30" TabIndex="10" HidePromptOnLeave="True"/>
         <Button x:Name="btnSalvar" Click="btnSalvar_Click" HorizontalAlignment="Center" Content="Salvar"  Margin="0,627,0,0" VerticalAlignment="Top" Width="296" Height="60" FontSize="20" BorderBrush="#FF3F51B5"/>
         <wpfTool:MaskedTextBox  
             x:Name="phone1Edit2"
@@ -220,7 +220,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF0A0A0A" 
-            MaxLength="30" TabIndex="4" HidePromptOnLeave="True"/>
+            MaxLength="30" TabIndex="11" HidePromptOnLeave="True"/>
         <wpfTool:MaskedTextBox  
             x:Name="phone1Edit3"
             Mask="(99) 99999-9999"
@@ -236,6 +236,6 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF0A0A0A" 
-            MaxLength="30" TabIndex="4" HidePromptOnLeave="True"/>
+            MaxLength="30" TabIndex="12" HidePromptOnLeave="True"/>
     </Grid>
 </UserControl>

@@ -20,6 +20,7 @@
             HorizontalAlignment="Left"
             Margin="30,31,0,0" 
             VerticalAlignment="Top" 
+			TabIndex="0"
             Width="135" Height="26"/>
         <TextBox 
             x:Name="txtSearch" 
@@ -34,7 +35,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF060606" 
-            TabIndex="0" MaxLength="15"/>
+            TabIndex="1" MaxLength="15"/>
         <Button x:Name="btnRefresh" Click="refresh" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="1216,31,40,0" Height="26" Background="{x:Null}">
             <materialDesign:PackIcon Foreground="#FF3F51B5" Kind="Refresh" Width="20" Height="19" RenderTransformOrigin="0.45,2.842"/>
         </Button>

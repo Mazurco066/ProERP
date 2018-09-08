@@ -35,7 +35,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF060606" 
-            TabIndex="0" MaxLength="7"/>
+            TabIndex="1" MaxLength="7"/>
         <DataGrid 
             x:Name="dgServices"
             SelectionChanged="dgServices_SelectionChanged"
@@ -85,7 +85,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF060606" 
-            TabIndex="0" MaxLength="60"/>
+            TabIndex="2" MaxLength="60"/>
         <Button x:Name="btnRefresh" Click="btnRefresh_Click" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="1226,252,30,0" Height="26" Background="{x:Null}">
             <materialDesign:PackIcon Foreground="#FF3F51B5" Kind="Refresh" Width="20" Height="19" RenderTransformOrigin="0.45,2.842"/>
         </Button>

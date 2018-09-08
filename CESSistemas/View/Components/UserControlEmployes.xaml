@@ -28,7 +28,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF060606" 
-            TabIndex="0" MaxLength="15" Grid.Row="1"/>
+            TabIndex="15" MaxLength="15" Grid.Row="1"/>
         <TextBox 
             x:Name="NameEdit" 
             HorizontalAlignment="Left" 
@@ -41,7 +41,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF060606" 
-            TabIndex="0" MaxLength="60" Grid.Row="1"/>
+            TabIndex="2" MaxLength="60" Grid.Row="1"/>
         <TextBox 
             x:Name="RoleEdit" 
             HorizontalAlignment="Left" 
@@ -54,7 +54,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF060606" 
-            TabIndex="0" MaxLength="60" Grid.Row="1"/>
+            TabIndex="11" MaxLength="60" Grid.Row="1"/>
         <TextBox 
             x:Name="AdressEdit" 
             HorizontalAlignment="Left" 
@@ -67,7 +67,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF0A0A0A" 
-            MaxLength="90" TabIndex="2" Grid.Row="1"/>
+            MaxLength="90" TabIndex="4" Grid.Row="1"/>
         <TextBox 
             x:Name="NeighboorhoodEdit" 
             HorizontalAlignment="Left" 
@@ -80,7 +80,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF0A0A0A" 
-            MaxLength="50" TabIndex="3" Grid.Row="1"/>
+            MaxLength="50" TabIndex="5" Grid.Row="1"/>
         <TextBox 
             x:Name="CityEdit" 
             HorizontalAlignment="Left" 
@@ -93,7 +93,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF0A0A0A" 
-            MaxLength="50" TabIndex="4" Grid.Row="1"/>
+            MaxLength="50" TabIndex="6" Grid.Row="1"/>
         <ComboBox 
             x:Name="cbState" 
             HorizontalAlignment="Left"
@@ -104,7 +104,7 @@
             Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
             FontFamily="champagne &amp; Limousines"
             FontSize="14" Foreground="#FF0A0A0A" 
-            TabIndex="5" Grid.Row="1">
+            TabIndex="7" Grid.Row="1">
             <ComboBoxItem Content="AC"/>
             <ComboBoxItem Content="AL"/>
             <ComboBoxItem Content="AP"/>
@@ -146,7 +146,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             FontFamily="champagne &amp; Limousines"
             FontSize="14" Foreground="#FF0A0A0A" 
-            MaxLength="4" TabIndex="7" Grid.Row="1"/>
+            MaxLength="4" TabIndex="8" Grid.Row="1"/>
         <wpfTool:MaskedTextBox  
             x:Name="cepEdit"
             Mask="99999-999"
@@ -163,7 +163,7 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             FontFamily="champagne &amp; Limousines" 
             FontSize="14" Foreground="#FF0A0A0A" 
-            MaxLength="30" TabIndex="4" Grid.Row="1" HidePromptOnLeave="True"/>
+            MaxLength="30" TabIndex="9" Grid.Row="1" HidePromptOnLeave="True"/>
         <wpfTool:MaskedTextBox 
             x:Name="cpfEdit"
             Mask="999,999,999-99" 
@@ -179,13 +179,13 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines"
             FontSize="14" Foreground="#FF0A0A0A" 
-            MaxLength="30" TabIndex="4" Grid.Row="1" HidePromptOnLeave="True"/>
-        <ComboBox x:Name="cbHasUser" SelectionChanged="cbHasUser_SelectionChanged" HorizontalAlignment="Left" Margin="46,24,0,0" VerticalAlignment="Top" Width="250" materialDesign:HintAssist.Hint="Tipo" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintComboBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A" TabIndex="8" Grid.Row="1">
+            MaxLength="30" TabIndex="3" Grid.Row="1" HidePromptOnLeave="True"/>
+        <ComboBox x:Name="cbHasUser" SelectionChanged="cbHasUser_SelectionChanged" HorizontalAlignment="Left" Margin="46,24,0,0" VerticalAlignment="Top" Width="250" materialDesign:HintAssist.Hint="Tipo" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintComboBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A" TabIndex="0" Grid.Row="1">
             <ComboBoxItem Content="Admin"/>
             <ComboBoxItem Content="Usuário"/>
             <ComboBoxItem Content="Sem Usuário"/>
         </ComboBox>
-        <ComboBox x:Name="cbActive" HorizontalAlignment="Left" Margin="326,24,0,0" VerticalAlignment="Top" Width="245" materialDesign:HintAssist.Hint="Ativo" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintComboBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A" TabIndex="8" Grid.Row="1">
+        <ComboBox x:Name="cbActive" HorizontalAlignment="Left" Margin="326,24,0,0" VerticalAlignment="Top" Width="245" materialDesign:HintAssist.Hint="Ativo" Style="{StaticResource ResourceKey=MaterialDesignFloatingHintComboBox}" FontFamily="champagne &amp; Limousines" FontSize="14" Foreground="#FF0A0A0A" TabIndex="1" Grid.Row="1">
             <ComboBoxItem Content="Ativo"/>
             <ComboBoxItem Content="Desativado"/>
         </ComboBox>
@@ -236,7 +236,7 @@
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                 FontFamily="champagne &amp; Limousines" 
                 FontSize="14" Foreground="#FF0A0A0A" 
-                MaxLength="30" TabIndex="4"/>
+                MaxLength="30" TabIndex="12"/>
             <PasswordBox 
                 x:Name="passwordEdit"
                 materialDesign:HintAssist.Hint="Senha" 
@@ -244,6 +244,7 @@
                 FontFamily="champagne &amp; Limousines" 
                 FontSize="14" 
                 Foreground="#FF0A0A0A"
+				TabIndex="13"
                 MaxLength="30" Margin="10,49,10,20" />
         </Grid>
         <DatePicker 
@@ -257,6 +258,7 @@
             Margin="421,237,0,0" 
             Grid.Row="1" 
             VerticalAlignment="Top" 
+			TabIndex="10"
             Width="155" Height="26"/>
         <ComboBox 
             Name="cbSearch"
@@ -268,7 +270,7 @@
             FontFamily="champagne &amp; Limousines" 
             FontSize="14"
             Foreground="#FF0A0A0A" 
-            TabIndex="8" 
+            TabIndex="14" 
             Grid.Row="1" 
             VerticalAlignment="Top"
             Width="142">

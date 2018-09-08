@@ -46,6 +46,7 @@
             Foreground="#FF0A0A0A" 
             HorizontalAlignment="Left" 
             Margin="51,94,0,0" 
+			TabIndex="0"
             VerticalAlignment="Top" 
             Width="285"/>
         <DatePicker 
@@ -58,6 +59,7 @@
             HorizontalAlignment="Left" 
             Margin="374,108,0,0" 
             VerticalAlignment="Top" 
+			TabIndex="1"
             Width="360" Height="26"/>
         <TextBox 
             x:Name="txtDescription"
@@ -70,7 +72,8 @@
             HorizontalAlignment="Left" 
             Height="37" Width="683"
             Margin="51,139,0,0" 
-            TextWrapping="Wrap" 
+            TextWrapping="Wrap"
+			TabIndex="2"
             VerticalAlignment="Top" />
         <TextBox 
             x:Name="txtDocNo" 
@@ -82,6 +85,7 @@
             HorizontalAlignment="Left" 
             Height="37" Width="157"
             Margin="51,184,0,0" 
+			TabIndex="3"
             TextWrapping="Wrap" 
             VerticalAlignment="Top" />
         <ComboBox 
@@ -93,6 +97,7 @@
             Foreground="#FF0A0A0A" 
             HorizontalAlignment="Left" 
             Margin="231,181,0,0" 
+			TabIndex="4"
             VerticalAlignment="Top" 
             Width="181" Height="40">
             <ComboBoxItem Content="05 DDL"/>
@@ -113,6 +118,7 @@
             Foreground="#FF0A0A0A" 
             HorizontalAlignment="Left" 
             Margin="438,181,0,0" 
+			TabIndex="5"
             VerticalAlignment="Top" 
             Width="132">
             <ComboBoxItem Content="01 Dias"/>
@@ -160,6 +166,7 @@
             Height="40" Width="146"
             Margin="0,181,572,0" 
             TextWrapping="Wrap" 
+			TabIndex="6"
             VerticalAlignment="Top" />
         <ComboBox 
             x:Name="cbServices"
@@ -171,6 +178,7 @@
             HorizontalAlignment="Left" 
             Margin="51,231,0,0" 
             VerticalAlignment="Top" 
+			TabIndex="7"
             Width="585"/>
         <TextBox 
             x:Name="txtAmount" 
@@ -185,6 +193,7 @@
             Height="37" Width="83"
             Margin="651,234,0,0" 
             TextWrapping="Wrap" 
+			TabIndex="8"
             VerticalAlignment="Top" />
         <Button x:Name="btnPlus" Click="btnAddService_Click" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="684,294,572,0" Height="26" Background="{x:Null}">
             <materialDesign:PackIcon Foreground="#FF3F51B5" Kind="Plus" Width="20" Height="19" RenderTransformOrigin="0.45,2.842"/>
@@ -243,6 +252,7 @@
             Height="40" Width="400"
             Margin="764,181,0,0" 
             TextWrapping="Wrap" 
+			TabIndex="9"
             VerticalAlignment="Top" />
         <Button x:Name="btnPdf" Click="btnGeneratePdf" HorizontalAlignment="Left" Margin="1169,195,0,0" VerticalAlignment="Top" Height="26" Background="{x:Null}" BorderBrush="{x:Null}" >
             <materialDesign:PackIcon Foreground="Blue" Kind="FilePdf" Width="20" Height="19" VerticalAlignment="Center" HorizontalAlignment="Center"/>

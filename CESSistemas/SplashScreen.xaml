@@ -16,6 +16,7 @@
 
 			<ProgressBar x:Name="PB" HorizontalAlignment="Left" Height="12" Margin="0,276,-5,0" VerticalAlignment="Top" Width="848" Background="#FFF9FCFD" BorderBrush="#FF5088DF" Foreground="#FF5088DF" Visibility="Visible" Grid.ColumnSpan="2"/>
 			<Image x:Name="image" HorizontalAlignment="Left" Height="198" Margin="308,24,0,0" VerticalAlignment="Top" Width="210" Source="Images/logo.png"/>
+			<Label x:Name="lblVersion" Content="Versão: " HorizontalAlignment="Left" Margin="368,222,0,0" VerticalAlignment="Top" FontWeight="SemiBold" FontSize="10" Foreground="#DDFFFFFF"/>
 		</Grid>
 	</Border>
 </Window>

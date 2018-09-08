@@ -3,6 +3,8 @@ using System.Windows;
 using System.Windows.Threading;
 using Promig.Utils;
 using Promig.View;
+using Promig.Properties;
+using System.Diagnostics;
 
 namespace Promig {
     
@@ -12,6 +14,7 @@ namespace Promig {
 
         public SplashScreen() {
             InitializeComponent();
+            lblVersion.Content += getVersionApp();
         }
 
         private delegate void ProgressBarDelegate();
@@ -54,6 +57,13 @@ namespace Promig {
 
         private void Window_Activated(object sender, EventArgs e) {
             carregarprogressBar();
+        }
+
+        private string getVersionApp(){
+            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+            string version = fvi.FileVersion;
+            return version;
         }
     }
 }
