@@ -1,17 +1,7 @@
 ﻿using Promig.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Promig.Connection.Methods;
 using MySql.Data.MySqlClient;
 using Promig.Model;
@@ -115,6 +105,11 @@ namespace Promig.View.AuxComponents {
         #endregion
 
         #region Events
+
+        private void control_loaded(object sender, RoutedEventArgs e) {
+            cbSearch.SelectedIndex = 0;
+            RefreshGrid();
+        }
 
         private void cbSearch_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             RefreshGrid();

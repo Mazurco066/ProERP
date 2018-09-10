@@ -314,6 +314,24 @@ namespace Promig.View.Components {
 
         #region Events
 
+        private void control_loaded(object sender, RoutedEventArgs e) {
+            RefreshGrid();
+        }
+
+        private void valorTotal_txt_KeyDown(object sender, KeyEventArgs e) {
+            KeyConverter kv = new KeyConverter();
+            if ((char.IsNumber((string)kv.ConvertTo(e.Key, typeof(string)), 0) == false)) {
+                e.Handled = true;
+            }
+        }
+
+        private void valorIncial_txt_KeyDown(object sender, KeyEventArgs e) {
+            KeyConverter kv = new KeyConverter();
+            if ((char.IsNumber((string)kv.ConvertTo(e.Key, typeof(string)), 0) == false)) {
+                e.Handled = true;
+            }
+        }
+
         private void btnRefresh_Click(object sender, RoutedEventArgs e) {
             RefreshGrid();
         }

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Promig.View.Components"
 			 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d" 
+             mc:Ignorable="d" Loaded="control_loaded"
              d:DesignHeight="450" d:DesignWidth="1306" Height="697" Background="White">
     <Grid>
         <Label Content="Contas a Receber" FontSize="40" Margin="39,34,948,595" Foreground="#FF3F51B5"/>
@@ -23,7 +23,8 @@
             FontSize="14" Foreground="#FF060606" 
             TabIndex="5" MaxLength="15" KeyDown="pesquisar_txt_KeyDown"/>
 		<TextBox 
-            x:Name="valorTotal_txt" 
+            x:Name="valorTotal_txt"
+            KeyDown="valorTotal_txt_KeyDown"
             HorizontalAlignment="Left" 
             Height="44" 
             Margin="406,119,0,0" 
@@ -108,6 +109,7 @@
         </Button>
         <TextBox 
             x:Name="valorIncial_txt" 
+            KeyDown="valorIncial_txt_KeyDown"
             HorizontalAlignment="Left" 
             Height="44" 
             Margin="406,172,0,0" 

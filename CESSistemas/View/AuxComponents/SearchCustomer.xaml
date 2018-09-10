@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Promig.View.AuxComponents"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="Promig.View.AuxComponents.SearchCustomer"
-        mc:Ignorable="d"
+        mc:Ignorable="d" Loaded="control_loaded"
         Title="Clientes" Height="462" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 	<Grid>
 
@@ -13,7 +13,7 @@
 		x:Name="txtSearch" 
 		KeyDown="txtSearch_KeyDown"
 		HorizontalAlignment="Left"
-		Width="369" 
+		Width="391" 
 		Height="42" 
 		Margin="235,8,0,0" 
 		TextWrapping="Wrap" 
@@ -45,7 +45,7 @@
 				<DataGridTextColumn Header="Telefone" Width="100" Binding="{Binding residenceNumber}"  FontSize="11" />
 			</DataGrid.Columns>
 		</DataGrid>
-		<Button x:Name="btnRefresh" Click="btnRefresh_Click" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="604,29,109,0" Height="26" Background="{x:Null}">
+		<Button x:Name="btnRefresh" Click="btnRefresh_Click" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="631,29,82,0" Height="26" Background="{x:Null}">
 			<materialDesign:PackIcon Foreground="#FF3F51B5" Kind="Refresh" Width="39" Height="19" RenderTransformOrigin="0.45,2.842"/>
 		</Button>
 		<ComboBox 
