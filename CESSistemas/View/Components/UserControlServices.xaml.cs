@@ -56,10 +56,13 @@ namespace Promig.View.Components {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void ValueEdit_KeyDown(object sender, KeyEventArgs e) {
+            bool handled = true; ;
             KeyConverter kv = new KeyConverter();
-            if ((char.IsNumber((string)kv.ConvertTo(e.Key, typeof(string)), 0) == false) && e.Key.Equals(Key.OemPeriod)) {
-                e.Handled = true;
-            }
+            if ((string.Compare((string)kv.ConvertTo(e.Key, typeof(string)), "OemComma") == 0)) {
+                if (!ValueEdit.Text.Contains(",")) handled = false;
+            } else if ((char.IsNumber((string)kv.ConvertTo(e.Key, typeof(string)), 0)))
+                handled = false;
+            e.Handled = handled;
         }
 
         /// <summary>

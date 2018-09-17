@@ -328,17 +328,23 @@ namespace Promig.View.Components {
         }
 
         private void valorTotal_txt_KeyDown(object sender, KeyEventArgs e) {
+            bool handled = true; ;
             KeyConverter kv = new KeyConverter();
-            if ((char.IsNumber((string)kv.ConvertTo(e.Key, typeof(string)), 0) == false)) {
-                e.Handled = true;
-            }
+            if ((string.Compare((string)kv.ConvertTo(e.Key, typeof(string)), "OemComma") == 0)) {
+                if (!valorTotal_txt.Text.Contains(",")) handled = false;
+            } else if ((char.IsNumber((string)kv.ConvertTo(e.Key, typeof(string)), 0)))
+                handled = false;
+            e.Handled = handled;
         }
 
         private void valorIncial_txt_KeyDown(object sender, KeyEventArgs e) {
+            bool handled = true; ;
             KeyConverter kv = new KeyConverter();
-            if ((char.IsNumber((string)kv.ConvertTo(e.Key, typeof(string)), 0) == false)) {
-                e.Handled = true;
-            }
+            if ((string.Compare((string)kv.ConvertTo(e.Key, typeof(string)), "OemComma") == 0)) {
+                if (!valorIncial_txt.Text.Contains(",")) handled = false;
+            } else if ((char.IsNumber((string)kv.ConvertTo(e.Key, typeof(string)), 0)))
+                handled = false; 
+            e.Handled = handled;
         }
 
         private void btnAdicionar_Click(object sender, RoutedEventArgs e) {
