@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="Promig.View.Components.UserControlMain"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Promig.View.Components"
@@ -8,6 +9,21 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1306" Height="697" Background="White">
 	<Grid>
-        <Label Content="Página Inicial" FontSize="40" Margin="39,34,1015,595" Foreground="#FF3F51B5" Grid.RowSpan="2"/>
-    </Grid>
+		<Label Content="Página Inicial" FontSize="40" Margin="39,34,1015,595" Foreground="#FF3F51B5" Grid.RowSpan="2"/>
+		<GroupBox x:Name="groupBox" Header="Notícias&#xD;&#xA;" HorizontalAlignment="Left" Height="558" Margin="454,34,0,0" VerticalAlignment="Top" Width="824">
+			<ListBox x:Name="lsFeed" HorizontalAlignment="Left" Height="474" Margin="0,10,0,0" VerticalAlignment="Top" Width="805" ScrollViewer.HorizontalScrollBarVisibility="Auto" FontSize="11"/>
+		</GroupBox>
+		<Button x:Name="btnCarregar" Content="Atualizar Notícias" HorizontalAlignment="Left" Margin="1075,616,0,0" VerticalAlignment="Top" Width="183" Height="48" Click="btnCarregar_Click"/>
+		<Button x:Name="btnLimpar" Content="Limpar Notícias" HorizontalAlignment="Left" Margin="869,616,0,0" VerticalAlignment="Top" Width="183" Height="48" Click="btnLimpar_Click"/>
+		<Image x:Name="image" HorizontalAlignment="Left" Height="174" Margin="45,350,0,0" VerticalAlignment="Top" Width="393" gif:AnimationBehavior.SourceUri="/Promig;component/Images/Business-Gif.gif"/>
+		<Label x:Name="label" Content="ProERP a tecnologia ideal" HorizontalAlignment="Left" Margin="118,308,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="SemiBold"/>
+		<Label x:Name="label_Copy" Content="para o gerenciamento do" HorizontalAlignment="Left" Margin="118,531,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="SemiBold"/>
+		<Label x:Name="label_Copy1" Content="seu negócio" HorizontalAlignment="Left" Margin="172,555,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="SemiBold"/>
+		<StackPanel x:Name="stWifiOn" HorizontalAlignment="Left" Margin="403,32,0,0" VerticalAlignment="Top" Width="43" Height="44" Visibility="Hidden">
+			<materialDesign:PackIcon Kind="Wifi" Foreground="#3F51B5" Height="46" Width="37" Margin="2,0,0,0"/>
+		</StackPanel>
+		<StackPanel x:Name="stWifiOf" HorizontalAlignment="Left" Margin="403,32,0,0" VerticalAlignment="Top" Width="43" Height="44" Visibility="Hidden" >
+			<materialDesign:PackIcon Kind="WifiOff" Foreground="#3F51B5" Height="46" Width="37" Margin="2,0,0,0"/>
+		</StackPanel>
+	</Grid>
 </UserControl>
