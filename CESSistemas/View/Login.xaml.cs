@@ -163,6 +163,15 @@ namespace Promig.View {
                 /// <param name="e"></param>
                 private void btnExit_Click(object sender, RoutedEventArgs e) { App.Current.Shutdown(); }
 
+        private void Window_KeyDown(object sender, KeyEventArgs e) {
+            if (e.Key == Key.Tab) {
+                txtUser.Focus();
+            }
+            else {
+                return;
+            }
+        }
+
         #endregion Events
 
         #region Utils
@@ -185,5 +194,6 @@ namespace Promig.View {
         }
 
         #endregion Utils
+
     }
 }

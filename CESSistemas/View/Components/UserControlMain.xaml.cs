@@ -9,7 +9,7 @@ using static System.Console;
 using System.Net.NetworkInformation;
 
 namespace Promig.View.Components {
-    
+
     public partial class UserControlMain : UserControl {
 
         #region constructors
@@ -93,6 +93,24 @@ namespace Promig.View.Components {
             ShowFeed();
         }
 
+        private void lsFeed_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            try {
+                if (lsFeed.SelectedItems.Count > 0) {
+                    int i = lsFeed.SelectedIndex;
+                    int s, m;
+                    s = lsFeed.Items[i].ToString().IndexOf("https");
+                    m = lsFeed.Items[i].ToString().IndexOf("ghtml");
+                    string link = lsFeed.Items[i].ToString().Substring(s, m + 1 - (s - 4));
+                    System.Diagnostics.Process.Start(link);
+                }
+            }
+            catch (Exception ex) {
+                MessageBox.Show("Pagina da web não encontrada!" + "\n" + ex.Message, "Erro",
+                                MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
         #endregion
+
     }
 }

@@ -11,7 +11,7 @@
 	<Grid>
 		<Label Content="Página Inicial" FontSize="40" Margin="39,34,1015,595" Foreground="#FF3F51B5" Grid.RowSpan="2"/>
 		<GroupBox x:Name="groupBox" Header="Notícias&#xD;&#xA;" HorizontalAlignment="Left" Height="558" Margin="454,34,0,0" VerticalAlignment="Top" Width="824">
-			<ListBox x:Name="lsFeed" HorizontalAlignment="Left" Height="474" Margin="0,10,0,0" VerticalAlignment="Top" Width="805" ScrollViewer.HorizontalScrollBarVisibility="Auto" FontSize="11"/>
+			<ListBox x:Name="lsFeed" HorizontalAlignment="Left" Height="474" Margin="0,10,0,0" VerticalAlignment="Top" Width="805" ScrollViewer.HorizontalScrollBarVisibility="Auto" FontSize="11" SelectionChanged="lsFeed_SelectionChanged"/>
 		</GroupBox>
 		<Button x:Name="btnCarregar" Content="Atualizar Notícias" HorizontalAlignment="Left" Margin="1075,616,0,0" VerticalAlignment="Top" Width="183" Height="48" Click="btnCarregar_Click"/>
 		<Button x:Name="btnLimpar" Content="Limpar Notícias" HorizontalAlignment="Left" Margin="869,616,0,0" VerticalAlignment="Top" Width="183" Height="48" Click="btnLimpar_Click"/>

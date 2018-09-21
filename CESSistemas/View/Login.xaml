@@ -6,7 +6,7 @@
 		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Promig.View"
         mc:Ignorable="d"
-        Title="Login" Height="500" Width="350" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize">
+        Title="Login" Height="500" Width="350" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" KeyDown="Window_KeyDown">
 	<Grid Margin="2" Background="#FF3F51B5">
 		<Rectangle VerticalAlignment="Top" Height="280" Fill="#FF1A2561"/>
 		<Rectangle Width="280" Height="240" VerticalAlignment="Bottom" Margin="0,80" RadiusY="10" RadiusX="10" Fill="#e5eff1">
