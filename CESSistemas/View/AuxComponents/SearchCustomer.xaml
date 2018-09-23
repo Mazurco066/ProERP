@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Promig.View.AuxComponents"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="Promig.View.AuxComponents.SearchCustomer"
-        mc:Ignorable="d" Loaded="control_loaded"
+        mc:Ignorable="d" Loaded="control_loaded" Deactivated="control_Deactivated"
         Title="Clientes" Height="462" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 	<Grid>
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿using System.Net.NetworkInformation;
 using System.Windows;
 using System.Windows.Controls;
 using Promig.View.Components;
@@ -10,9 +9,6 @@ namespace Promig.View {
 
         #region Header
 
-        // Importando ddll de conexão com internet
-        [DllImport("wininet.dll")]
-        private extern static Boolean InternetGetConnectedState(out int Description, int ReservedValue);
 
         // Definindo flags
         public static string currentUsername;
@@ -36,7 +32,7 @@ namespace Promig.View {
         /// </summary>
         private void initializeUserControl(){
             UserControl usc = null;
-            if (IsConnected()) {
+            if (isNetWorkConnection()) {
                 // Carregando tela de configurações 
                 usc = new UserControlMain();
                 GridMain.Children.Clear();
@@ -185,10 +181,12 @@ namespace Promig.View {
         /// Método para verificar conexão com internet
         /// </summary>
         /// <returns></returns>
-        public static Boolean IsConnected()
-        {
-            int Description;
-            return InternetGetConnectedState(out Description, 0);
+        private bool isNetWorkConnection() {
+            if (NetworkInterface.GetIsNetworkAvailable()) {
+                return true;
+            } else {
+                return false;
+            }
         }
 
         /// <summary>

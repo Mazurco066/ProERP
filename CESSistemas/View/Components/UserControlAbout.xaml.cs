@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using System.Windows;
 using System.Collections.Generic;
 using System.Windows.Input;
-
+using System.Net.NetworkInformation;
 
 namespace Promig.View.Components {
     
@@ -52,8 +52,13 @@ namespace Promig.View.Components {
             FillData(CompanyData.GetPreferencesData());
 
             //Visualizando localização da empresa em mapa
-            location = CompanyData.GetFormatedAdress();
-            SetLocation();
+            if (isNetWorkConnection()) {
+                location = CompanyData.GetFormatedAdress();
+                SetLocation();
+            } else {
+                MessageBox.Show("Sem conexão com a internet para atualizar mapa!", "Alerta!",
+                                    MessageBoxButton.OK, MessageBoxImage.Warning);
+            }   
         }
 
         /// <summary>
@@ -133,8 +138,13 @@ namespace Promig.View.Components {
                 CompanyData.UpdatePreferences(model);
 
                 //Atualizando informações do mapa
-                location = CompanyData.GetFormatedAdress();
-                SetLocation();
+                if (isNetWorkConnection()) {
+                    location = CompanyData.GetFormatedAdress();
+                    SetLocation();
+                } else {
+                    MessageBox.Show("Sem conexão com a internet para atualizar mapa!", "Alerta!",
+                                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
 
                 //Retornando mensagem de sucesso
                 MessageBox.Show(
@@ -233,6 +243,18 @@ namespace Promig.View.Components {
                 EmailEdit.Text.Equals(string.Empty) ||
                 WebsiteEdit.Text.Equals(string.Empty)
             );
+        }
+
+        /// <summary>
+        /// Método para verificar conexão com internet
+        /// </summary>
+        /// <returns></returns>
+        private bool isNetWorkConnection() {
+            if (NetworkInterface.GetIsNetworkAvailable()) {
+                return true;
+            } else {
+                return false;
+            }
         }
 
         #endregion

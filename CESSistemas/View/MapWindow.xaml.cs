@@ -8,6 +8,7 @@ using System.Windows;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Media.Imaging;
+using System.Net.NetworkInformation;
 
 namespace Promig.View {
     
@@ -74,7 +75,9 @@ namespace Promig.View {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnPrint_Click(object sender, RoutedEventArgs e) {
-            PrintMap();
+            if (isNetWorkConnection()) PrintMap();
+            else MessageBox.Show("Sem conexão com a internet para imprimir mapa!", "Alerta!",
+                                    MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         /// <summary>
@@ -98,7 +101,9 @@ namespace Promig.View {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnRefresh_Click(object sender, EventArgs e) {
-            Refresh();
+            if (isNetWorkConnection()) Refresh();
+            else MessageBox.Show("Sem conexão com a internet para restaurar mapa!", "Alerta!",
+                                    MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         #endregion
@@ -199,6 +204,22 @@ namespace Promig.View {
         /// </summary>
         private void Refresh() {
             bingMap.SetView(loc, zoom);    //Visualização em mapa
+        }
+
+        #endregion
+
+        #region Utils
+
+        /// <summary>
+        /// Método para verificar conexão com internet
+        /// </summary>
+        /// <returns></returns>
+        private bool isNetWorkConnection() {
+            if (NetworkInterface.GetIsNetworkAvailable()) {
+                return true;
+            } else {
+                return false;
+            }
         }
 
         #endregion

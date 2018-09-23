@@ -1,5 +1,4 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿using System.Net.NetworkInformation;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -13,9 +12,6 @@ namespace Promig.View.Components {
     public partial class UserControlSupplier : UserControl {
 
         #region Header
-
-        [DllImport("wininet.dll")]
-        private extern static Boolean InternetGetConnectedState(out int Description, int ReservedValue);
 
         private Suppliers dao;
         private Logs logs;
@@ -88,7 +84,7 @@ namespace Promig.View.Components {
             if (dgSuppliers.SelectedItems.Count > 0) {
 
                 //Verificando conexão com internet
-                if (!IsConnected()) {
+                if (!isNetWorkConnection()) {
                     MessageBox.Show(
                         "Você precisa estar conectado a internet para usar esse recurso!",
                         "Erro de Conexão!",
@@ -523,12 +519,15 @@ namespace Promig.View.Components {
         #region Utils
 
         /// <summary>
-        /// Método ara verificar conexão com internet
+        /// Método para verificar conexão com internet
         /// </summary>
         /// <returns></returns>
-        public static Boolean IsConnected() {
-            int Description;
-            return InternetGetConnectedState(out Description, 0);
+        private bool isNetWorkConnection() {
+            if (NetworkInterface.GetIsNetworkAvailable()) {
+                return true;
+            } else {
+                return false;
+            }
         }
 
         /// <summary>

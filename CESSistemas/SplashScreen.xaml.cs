@@ -40,6 +40,10 @@ namespace Promig {
                 if (!CompanyData.PreferencesExists())
                     CompanyData.CreatePreferences();
 
+                // Criando banco de dados
+                Database.Create();
+                Database.Tables.Create();
+
                 // Abrindo janela de login
                 Login janela = new Login();
                 janela.Show();

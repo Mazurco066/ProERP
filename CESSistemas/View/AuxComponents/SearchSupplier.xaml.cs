@@ -6,6 +6,7 @@ using Promig.Connection.Methods;
 using MySql.Data.MySqlClient;
 using Promig.Model;
 using Promig.View.Components;
+using System;
 
 namespace Promig.View.AuxComponents {
     /// <summary>
@@ -162,6 +163,16 @@ namespace Promig.View.AuxComponents {
         private void btnVoltar_Click(object sender, RoutedEventArgs e) {
             window.fornecedor_txt.Text = string.Empty;
             this.Close();
+        }
+
+        private void control_Deactivated(object sender, EventArgs e) {
+            try {
+                window.fornecedor_txt.Text = string.Empty;
+                Close();
+            } catch (Exception ex) {
+                Promig.Utils.Log.logException(ex);
+                Promig.Utils.Log.logMessage(ex.Message);
+            }
         }
 
         #endregion
