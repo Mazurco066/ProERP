@@ -168,6 +168,7 @@
     <Compile Include="Utils\CompanyData.cs" />
     <Compile Include="Utils\Database.cs" />
     <Compile Include="Utils\DateBr.cs" />
+    <Compile Include="Utils\PdfModel.cs" />
     <Compile Include="Utils\Validator.cs" />
     <Compile Include="Utils\WSAdress.cs" />
     <Compile Include="View\AuxComponents\SearchCustomer.xaml.cs">

@@ -1,13 +1,9 @@
 ﻿using Geocoding;
 using Geocoding.Microsoft;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
 using Promig.Utils;
 using System;
 using System.Windows;
 using System.Collections.Generic;
-using System.IO;
-using System.Windows.Media.Imaging;
 using System.Net.NetworkInformation;
 
 namespace Promig.View {
@@ -140,63 +136,8 @@ namespace Promig.View {
         /// Método para imprimir mapa em pdf
         /// </summary>
         private void PrintMap() {
-
-            //Criando um novo documento com margem 40
-            Document document = new Document(PageSize.A4);
-            document.SetMargins(40, 40, 40, 40);
-            document.AddCreationDate();
-
-            //Definindo o caminho que será salvo o arquivo PDF
-            string oldPath = Directory.GetCurrentDirectory();
-            string rawPath = $"C:\\ProERP\\Generated-Documents\\PDF-Maps\\";
-            if (!Directory.Exists(rawPath)) Directory.CreateDirectory(rawPath);
-            Directory.SetCurrentDirectory(rawPath);
-
-            //Configurando arquivo a ser salvo
-            string path = Path.Combine(Directory.GetCurrentDirectory(), $"{DateTime.Now.ToString("ddMMyyyyhhmmss")}roadmap.pdf");
-
-            //Criando arquivo em branco para testes
-            PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(path, FileMode.Create));
-            writer.CompressionLevel = PdfStream.NO_COMPRESSION;
-
-            //Editando o documento
-            document.Open();
-
-            //Recuperando imagem do mapa
-            string mapURl = $"https://dev.virtualearth.net/REST/v1/Imagery/Map/Road/{loc.Latitude.ToString().Replace(',', '.')},{loc.Longitude.ToString().Replace(',', '.')}/15?mapSize=700,700&pp={loc.Latitude.ToString().Replace(',', '.')},{loc.Longitude.ToString().Replace(',', '.')};21;Destino&key=AsHgFB0MOC02SgIYNbIwV9WOuo94eLp3brN5PvlD9Vu-p9DSjVUYfUZZIS5jfOeb";
-            BitmapImage src = new BitmapImage();
-            Uri uri = new Uri(mapURl);
-            src.BeginInit();
-            src.UriSource = uri;
-            src.EndInit();
-
-            var width = Convert.ToInt32(Math.Round(document.PageSize.Width - 40));
-            var height = Convert.ToInt32(Math.Round(((float)src.Height / (float)src.Width) * (width)));
-
-            //Adicionando conteudo
-            Paragraph title = new Paragraph("Visualização em Mapa", new Font(Font.NORMAL, 20));
-            title.Alignment = Element.ALIGN_CENTER;
-            Paragraph adress = new Paragraph($"\n{location}\n\n", new Font(Font.NORMAL, 14));
-            adress.Alignment = Element.ALIGN_CENTER;
-            Paragraph footer = new Paragraph($"\n\n\nEmitido dia {DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss")} - ProERP", new Font(Font.NORMAL, 12));
-            footer.Alignment = Element.ALIGN_CENTER;
-
-            Image image = Image.GetInstance(uri);
-            image.Alignment = Element.ALIGN_CENTER;
-            image.SetDpi(600, 600);
-            image.ScaleToFit(width, height);
-
-            document.Add(title);
-            document.Add(adress);
-            document.Add(image);
-            document.Add(footer);
-
-            //Finalizando Edições
-            document.Close();
-
-            //Sinalizando usuario sobre criação do arquivo e restaurando diretorio
-            reportLabel.Content = $"Arquivo PDF do mapa salvo no diretorio {path}";
-            Directory.SetCurrentDirectory(oldPath);
+            // Exportando mapa para arquivo pdf
+            reportLabel.Content = PdfModel.ExportMapPdf(location, loc);
         }
 
         /// <summary>
