@@ -86,6 +86,10 @@ namespace Promig.Model
             }
             set { totalValue = value; }
         }
+        public double TotalValue2{
+           get{ return totalValue; }
+           set{ totalValue = value; }
+        }
 
         public List<ItemEstimate> Items {
             get { return items; }

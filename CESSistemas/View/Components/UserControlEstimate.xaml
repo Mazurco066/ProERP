@@ -242,7 +242,6 @@
         </DataGrid>
         <TextBox 
             x:Name="txtSearch"
-            KeyDown="txtSearch_KeyDown"
             materialDesign:HintAssist.Hint="Pesquise Aqui" 
             Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" 
             FontFamily="champagne &amp; Limousines" 

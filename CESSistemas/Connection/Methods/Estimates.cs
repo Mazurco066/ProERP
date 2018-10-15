@@ -6,6 +6,7 @@ using Promig.Connection;
 using Promig.Exceptions;
 using Promig.Model;
 using Promig.Model.CbModel;
+using Promig.View.Components;
 
 namespace Promig.Connection.Methods {
 
@@ -277,7 +278,7 @@ namespace Promig.Connection.Methods {
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public List<Estimate> GetAllEstimates(string param) {
+        public List<Estimate> GetAllEstimates(string param, UserControlSalesOrder window) {
 
             try {
 
@@ -285,7 +286,7 @@ namespace Promig.Connection.Methods {
                 conn.Open();
 
                 // Definição do comando de consulta
-                string command = $"SELECT o.no_documento, o.descricao, p.nome_pessoa, o.data_orcamento " +
+                string command = $"SELECT o.no_documento, o.descricao, p.nome_pessoa, o.data_orcamento, o.valor_total " +
                                  $"FROM {Refs.TABLE_ESTIMATES} o, {Refs.TABLE_CLIENTS} c, {Refs.TABLE_PEOPLE} p " +
                                  $"WHERE o.id_cliente = c.id_cliente " +
                                  $"AND c.id_pessoa = p.id_pessoa " +
@@ -316,6 +317,9 @@ namespace Promig.Connection.Methods {
                     estimate.NameCustomer = reader["nome_pessoa"].ToString();
                     estimate.Description = reader["descricao"].ToString();
                     estimate.Date = reader["data_orcamento"].ToString();
+                    if(window != null){
+                        estimate.TotalValue2 = (double)reader["valor_total"];
+                    }
                     results.Add(estimate);
                 }
 
@@ -324,6 +328,60 @@ namespace Promig.Connection.Methods {
                 return results;
 
             } catch (MySqlException) {
+
+                // Fechando conexão com banco de disparando exceção
+                conn.Close();
+                throw new DatabaseAccessException();
+            }
+        }
+
+        public List<Estimate> GetAllEstimatesSaleOrder(int param) {
+
+            try {
+
+                // Abertura da conexão com o banco
+                conn.Open();
+
+                // Definição do comando de consulta
+                string command = $"SELECT o.no_documento, o.descricao, p.nome_pessoa, o.data_orcamento, o.valor_total " +
+                                 $"FROM {Refs.TABLE_ESTIMATES} o, {Refs.TABLE_PEOPLE} p, {Refs.TABLE_CLIENTS} c " +
+                                 $"WHERE o.id_cliente = c.id_cliente " +
+                                 $"AND c.id_pessoa = p.id_pessoa " +
+                                 $"AND o.no_documento = @param";
+
+                // Definição do comando instanciado
+                List<Estimate> results = new List<Estimate>();
+                MySqlDataReader reader;
+                MySqlCommand cmd = new MySqlCommand(command, conn) {
+                    CommandType = CommandType.Text
+                };
+
+                // Adicionando parametros a busca
+                cmd.Parameters.Add(new MySqlParameter("@param", param));
+
+                // Preparando comando com os parametros
+                cmd.Prepare();
+
+                // Realizando busca no banco
+                reader = cmd.ExecuteReader();
+
+                // Verificando resultados
+                while (reader.Read()) {
+                    Estimate estimate = new Estimate();
+                    estimate.DocNo = (int)reader["no_documento"];
+                    estimate.NameCustomer = reader["nome_pessoa"].ToString();
+                    estimate.Description = reader["descricao"].ToString();
+                    estimate.Date = reader["data_orcamento"].ToString();
+                    estimate.TotalValue2 = (double)reader["valor_total"];
+                    results.Add(estimate);
+                }
+
+                // Fechamento da conexão
+                conn.Close();
+                return results;
+
+            }
+            catch (MySqlException) {
 
                 // Fechando conexão com banco de disparando exceção
                 conn.Close();

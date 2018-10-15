@@ -139,6 +139,7 @@
     <Compile Include="Connection\Methods\Estimates.cs" />
     <Compile Include="Connection\Methods\ItemEstimates.cs" />
     <Compile Include="Connection\Methods\Logs.cs" />
+    <Compile Include="Connection\Methods\SaleOrders.cs" />
     <Compile Include="Connection\Methods\Services.cs" />
     <Compile Include="Connection\Methods\Suppliers.cs" />
     <Compile Include="Connection\Methods\Users.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Model\Json\CompanyModel.cs" />
     <Compile Include="Model\Log.cs" />
     <Compile Include="Model\Person.cs" />
+    <Compile Include="Model\SaleOrder.cs" />
     <Compile Include="Model\Service.cs" />
     <Compile Include="Model\Supplier.cs" />
     <Compile Include="Model\User.cs" />
@@ -174,8 +176,14 @@
     <Compile Include="View\AuxComponents\SearchCustomer.xaml.cs">
       <DependentUpon>SearchCustomer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\AuxComponents\SearchSaleOrder .xaml.cs">
+      <DependentUpon>SearchSaleOrder .xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AuxComponents\SearchSupplier.xaml.cs">
       <DependentUpon>SearchSupplier.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Components\UserControlSalesOrder.xaml.cs">
+      <DependentUpon>UserControlSalesOrder.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Components\UserControlAbout.xaml.cs">
       <DependentUpon>UserControlAbout.xaml</DependentUpon>
@@ -223,7 +231,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AuxComponents\SearchSaleOrder .xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\AuxComponents\SearchSupplier.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Components\UserControlSalesOrder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

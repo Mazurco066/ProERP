@@ -136,6 +136,10 @@ namespace Promig.View {
                     usc = new UserControlEstimate();
                     GridMain.Children.Add(usc);
                     break;
+                case "Order":
+                    usc = new UserControlSalesOrder();
+                    GridMain.Children.Add(usc);
+                    break;
                 case "Sair":
                     System.Environment.Exit(0);
                     break;

@@ -503,7 +503,7 @@ namespace Promig.View.Components {
             try {
 
                 // Recuperando todos orçamentos em modo de exibição
-                dgEstimate.ItemsSource = dao.GetAllEstimates(txtSearch.Text);
+                dgEstimate.ItemsSource = dao.GetAllEstimates(txtSearch.Text, null);
 
             } catch (DatabaseAccessException err) {
                 MessageBox.Show(
@@ -520,7 +520,7 @@ namespace Promig.View.Components {
         /// </summary>
         /// <param name="param"></param>
         private void RefreshGrid(string param) {
-            try { dgEstimate.ItemsSource = dao.GetAllEstimates(param); } 
+            try { dgEstimate.ItemsSource = dao.GetAllEstimates(param, null); } 
             catch (DatabaseAccessException err) {
                 MessageBox.Show(
                     err.Message,
@@ -671,5 +671,6 @@ namespace Promig.View.Components {
         }
 
         #endregion
+
     }
 }

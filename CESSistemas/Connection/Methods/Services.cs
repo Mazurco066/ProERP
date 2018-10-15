@@ -278,6 +278,43 @@ namespace Promig.Connection.Methods {
             }
         }
 
+        public List<string> GetTaskService(int id){
+            try {
+
+                conn.Open();
+                string command = $"select s.descricao from {Refs.TABLE_SERVICES} s, {Refs.TABLE_ESTIMATE_SERVICES} o " +
+                                 $"where o.id_orcamento = @param and o.id_servico = s.id_servico";
+
+                List<string> result = new List<string>();
+                MySqlDataReader reader;
+                MySqlCommand cmd = new MySqlCommand(command, conn) {
+                    CommandType = CommandType.Text
+                };
+
+                cmd.Parameters.Add(new MySqlParameter("@param", id));
+
+                // Preparando comando com os parametros
+                cmd.Prepare();
+
+                // Realizando busca no banco
+                reader = cmd.ExecuteReader();
+
+                while(reader.Read()){
+                    result.Add(reader["descricao"].ToString());
+                }
+                reader.Close();
+                return result;
+
+            }
+            catch (DatabaseAccessException) {
+                conn.Close();
+                throw;
+            }
+            finally{
+                conn.Close();
+            }
+        }
+
         #endregion
     }
 }
