@@ -6,7 +6,8 @@
 		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Promig.View.AuxComponents"
         mc:Ignorable="d" Loaded="control_loaded" Deactivated="control_Deactivated"
-        Title="Fornecedores" Height="462" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Fornecedores" Height="462" Width="800" WindowStartupLocation="CenterScreen"
+        BorderThickness="3" BorderBrush="#FF3F51B5" WindowStyle="None" ResizeMode="NoResize">
 	<Grid x:Name="___if_dgSuppliers_SelectedItems_Count___0_____if_dgSuppliers_SelectedItems_Count___0___Sem_Nome_">
 		<Button x:Name="btnRefresh" Click="btnRefresh_Click" VerticalAlignment="Top" BorderBrush="{x:Null}" Margin="644,29,76,0" Height="26" Background="{x:Null}">
 			<materialDesign:PackIcon Foreground="#FF3F51B5" Kind="Refresh" Width="31" Height="19" RenderTransformOrigin="0.45,2.842"/>

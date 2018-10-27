@@ -114,7 +114,7 @@
                     <ListViewItem x:Name="Order" Height="60">
                         <StackPanel Orientation="Horizontal" Cursor="Hand">
                             <materialDesign:PackIcon Kind="Archive" Width="25" Height="25" Margin="10" VerticalAlignment="Center" Foreground="#FFF7FAFB"/>
-                            <TextBlock Text="Orçamentos" VerticalAlignment="Center" Margin="20 10" Foreground="#FFF9FAFB"/>
+                            <TextBlock Text="Pedidos" VerticalAlignment="Center" Margin="20 10" Foreground="#FFF9FAFB"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem x:Name="Sair" Height="60">

@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Promig.View.AuxComponents"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="Promig.View.AuxComponents.SearchCustomer"
         mc:Ignorable="d" Loaded="control_loaded" Deactivated="control_Deactivated"
-        Title="Clientes" Height="462" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Clientes" Height="462" Width="800" WindowStartupLocation="CenterScreen"
+        BorderThickness="3" BorderBrush="#FF3F51B5" WindowStyle="None" ResizeMode="NoResize" >
 	<Grid>
 
 		<TextBox 
