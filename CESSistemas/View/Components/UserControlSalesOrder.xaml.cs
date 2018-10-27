@@ -46,6 +46,7 @@ namespace Promig.View.Components {
             dao3 = new Services();
             logs = new Logs();
             _employe = new Employe();
+            _employe.id = MainWindow.currentId;
         }
 
         #endregion
@@ -227,6 +228,16 @@ namespace Promig.View.Components {
             }
         }
 
+        private void DiscountEdit_KeyDown(object sender, KeyEventArgs e) {
+            bool handled = true; ;
+            KeyConverter kv = new KeyConverter();
+            if ((string.Compare((string)kv.ConvertTo(e.Key, typeof(string)), "OemComma") == 0)) {
+                if (!txtDiscount.Text.Contains(",")) handled = false;
+            } else if ((char.IsNumber((string)kv.ConvertTo(e.Key, typeof(string)), 0)))
+                handled = false;
+            e.Handled = handled;
+        }
+
         private void btnEditar_Click(object sender, RoutedEventArgs e) {
             actionIndex = 2;
             EnableFields();
@@ -255,25 +266,39 @@ namespace Promig.View.Components {
 
         private void AddSaleOrder() {
             if (Validate()) {
-                Estimate est = dgSaleOrder.SelectedItem as Estimate;
-                aux.No_estimate = est.DocNo;
-                aux.Date_realization = dpSaleOrder.Text;
-                aux.Situation = cbStuation.Text;
-                aux.Discount = double.Parse(txtDiscount.Text);
-                aux.TotalDiscount = double.Parse(txtTotalValueDiscount.Text);
 
-                dao.AddSaleOrder(aux);
+                try {
 
-                Model.Log added = new Model.Log();
-                added.employe = _employe;
-                added.action = $"Pedido de venda para o cliente {txtCliente.Text} foi inserido!";
-                logs.Register(added);
+                    Estimate est = dgSaleOrder.SelectedItem as Estimate;
+                    aux.No_estimate = est.DocNo;
+                    aux.Date_realization = dpSaleOrder.Text;
+                    aux.Situation = cbStuation.Text;
+                    aux.Discount = double.Parse(txtDiscount.Text);
+                    aux.TotalDiscount = double.Parse(txtTotalValueDiscount.Text);
 
-                RefreshGrid();
-                ClearFields();
-                BlockFields();
-                actionIndex = -1;
-                aux = null;
+                    dao.AddSaleOrder(aux);
+
+                    Model.Log added = new Model.Log();
+                    added.employe = _employe;
+                    added.action = $"Pedido de venda para o cliente {txtCliente.Text} foi inserido!";
+                    logs.Register(added);
+
+                    RefreshGrid();
+                    ClearFields();
+                    BlockFields();
+                    actionIndex = -1;
+                    aux = null;
+
+                }
+                catch (Exception err) {
+                    MessageBox.Show(
+                        "Erro", 
+                        err.Message, 
+                        MessageBoxButton.OK, 
+                        MessageBoxImage.Error
+                    );
+                }
+                
             }
             else {
                 MessageBox.Show("Campos vazios!", "Atenção", MessageBoxButton.OK, MessageBoxImage.Warning);

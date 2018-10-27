@@ -114,6 +114,7 @@
 	  VerticalAlignment="Top" IsEnabled="False" />
 		<TextBox 
 	  x:Name="txtDiscount" 
+      KeyDown="DiscountEdit_KeyDown"
 	  materialDesign:HintAssist.Hint="Desconto R$" 
 	  Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" 
 	  FontFamily="champagne &amp; Limousines" 
